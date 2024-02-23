@@ -9,5 +9,4 @@ const authOptions:NextAuthOptions = {
     }),
   ],
 };
-
 export { authOptions };
