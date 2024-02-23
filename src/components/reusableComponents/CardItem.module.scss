@@ -1,0 +1,79 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/globals.scss";
+
+.CardStyle {
+  margin-top: 20px;
+  padding: 10px !important;
+
+  .HeaderContent {
+    .CardHeaderTitleStyle {
+      font-weight: 700;
+      font-size: 24px;
+      color: $main;
+      cursor: pointer;
+    }
+
+    .CardHeaderDateStyle {
+      font-weight: 400;
+      font-size: 16px;
+      color: $secondary;
+    }
+
+    .CardHeaderRightStyle {
+      float: right;
+    }
+  }
+
+  .BodyContent {
+    margin-top: 10px !important;
+
+    .BodyLeftContentStyle,
+    .SmallBodyLeftContentStyle {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      /* after x line show ... */
+      -webkit-box-orient: vertical;
+
+      h1 {
+        display: none;
+      }
+      
+      @include tablet-or-less {
+        padding-right: 35px !important;
+      }
+    }
+
+    .SmallBodyLeftContentStyle {
+      @include desktop {
+        padding-right: 50px !important;
+      }
+    }
+
+    .BodyRightContentStyle {
+      width: 100px;
+      height: 75px;
+      position: relative;
+      float: right !important;
+    }
+
+    .BodyRightContentStyle,
+    .BodyLeftContentStyle,
+    .SmallBodyLeftContentStyle {
+      cursor: pointer;
+    }
+  }
+
+  .TopicListStyle {
+    margin-top: 16px;
+
+    .TopicChipStyle {
+      margin-top: 5px;
+      margin-left: 5px;
+    }
+  }
+
+
+}

@@ -1,0 +1,1 @@
+Geliştirme tamamlanmadan önce içerik oluştururken localdeki kullandığım uygulamaları kullanacağım.

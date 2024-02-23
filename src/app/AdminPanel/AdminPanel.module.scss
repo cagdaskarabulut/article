@@ -1,0 +1,31 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/globals.scss";
+
+.ImageContainerStyle{
+  width: 100%;  
+  position: relative; 
+  height: 40vh; 
+  @include tablet-or-less{
+    height: 25vh; 
+  }
+}
+
+.DividerStyle {
+  width: 100%;
+  padding-top: 10px; 
+  padding-bottom: 10px;
+}
+
+.TextFieldStyle {
+  width: 100%;
+  :global {
+    .MuiOutlinedInput-notchedOutline{
+      border-color: red !important;  
+    }
+    .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: red !important;  
+    }
+  }
+  
+}

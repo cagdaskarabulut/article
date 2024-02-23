@@ -1,0 +1,12 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/globals.scss";
+
+.ArticleImageContainerStyle{
+  width: 100%;  
+  position: relative; 
+  height: 40vh; 
+  @include tablet-or-less{
+    height: 25vh; 
+  }
+}
