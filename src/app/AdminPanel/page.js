@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // import { useQuill } from "react-quilljs";
 const { useQuill } = require("react-quilljs");
 // import dynamic from "next/dynamic";
@@ -6,8 +6,8 @@ const { useQuill } = require("react-quilljs");
 import React, { useEffect, useState } from "react";
 import TopicList from "../../components/TopicList";
 import TextField from "@mui/material/TextField";
-import Divider from '@mui/material/Divider';
-import { useRouter } from 'next/navigation'
+import Divider from "@mui/material/Divider";
+import { useRouter } from "next/navigation";
 
 import {
   getStringWithCommaSeperatedFromList,
@@ -50,23 +50,22 @@ const AdminPanel = () => {
     useState("");
   const [isAuthorizedUser, setIsAuthorizedUser] = useState(false);
 
-// useRouter
+  const router = useRouter();
+  useEffect(() => {
+    fetch("/api/whoAmI/email")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data.email: ",data.email);
+        console.log("process.env.NEXT_PUBLIC_ADMIN_USER: ",process.env.NEXT_PUBLIC_ADMIN_USER);
+        setIsAuthorizedUser(false);
+        if (data.email !== process.env.NEXT_PUBLIC_ADMIN_USER) {
+          router.push("/api/auth/signin", { scroll: false });
+        } else {
+          setIsAuthorizedUser(true);
+        }
+      });
+  }, []);
 
- 
-const router = useRouter();
-    useEffect(() => {
-      fetch("/api/whoAmI")
-        .then((res) => res.json())
-        .then((data) => {
-          setIsAuthorizedUser(false);
-          if(data.name !== process.env.NEXT_PUBLIC_ADMIN_USER ){
-            router.push('/api/auth/signin', { scroll: false })
-          } else {
-            setIsAuthorizedUser(true);
-          }
-        })
-    }, []);
-  
   async function handleGenerateImageWithRobot() {
     setIsLoading(true);
     setAttributes(undefined);
@@ -119,7 +118,9 @@ const router = useRouter();
   function handleTitleChange(value) {
     setTitle(value);
     setUrl(replaceStringForUrlFormat(value));
-    setGenerateImageByRobotText(`Generate image of "${value}" (use white background. do not use any character on image)`);
+    setGenerateImageByRobotText(
+      `Generate image of "${value}" (use white background. do not use any character on image)`
+    );
   }
 
   async function handleGenerateTextFieldsWithRobot() {
@@ -191,12 +192,11 @@ const router = useRouter();
       setShowError(true);
       setErrorMessage("Title is required");
       return;
-    } 
-    else if (!titleImageUrl){
+    } else if (!titleImageUrl) {
       setShowError(true);
       setErrorMessage("Resim eklenmesi zorunludur");
       return;
-    } 
+    }
     try {
       fetch("/api/article/article_add", {
         method: "POST",
@@ -239,162 +239,164 @@ const router = useRouter();
 
   return (
     <>
-
-    {isAuthorizedUser && (
-      <>
-      <LoadingFullPage isLoading={isLoading} />
-      <Container maxWidth="md">
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={12}>
-            <h1>Yeni Sayfa Girişi</h1>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              className={styles.TextFieldStyle}
-              id="standard-basic"
-              label="Title"
-              value={title}
-              onChange={(event) => handleTitleChange(event.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Button
-              variant="contained"
-              type="submit"
-              onClick={async () => handleGenerateTextFieldsWithRobot()}
-              disabled={process.env.IS_LOCAL == "false"}
-            >
-              Robot ile metinleri doldur
-            </Button>
-          </Grid>
-          <Divider className={styles.DividerStyle}/>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              multiline
-              style={{ width: "100%" }}
-              id="standard-basic"
-              label="Robot'un ne konuda resim üretmesini istersiniz?"
-              value={generateImageByRobotText}
-              onChange={(event) =>
-                setGenerateImageByRobotText(event.target.value)
-              }
-              disabled={process.env.IS_LOCAL == "false"}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Button
-              variant="contained"
-              type="submit"
-              onClick={async () => handleGenerateImageWithRobot()}
-              disabled={process.env.IS_LOCAL == "false"}
-            >
-              Robot ile resim üret
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            {imagePath && (
-              <>
-              <h3 className={styles.subTitleStyle}>Üretilen Resim</h3>
-              <div className={styles.ImageContainerStyle}>
-                <Image src={imagePath} fill={true} objectFit="contain" />
-              </div>
-              </>
-            )}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            {imagePath}
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <S3UploadForm
-              titleImageUrl={titleImageUrl}
-              setTitleImageUrl={setTitleImageUrl}
-              setIsLoading={setIsLoading}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <span style={{color: "red"}}>*** Robot tarafından üretilen resmi; önce bilgisayarınıza indirip sonra siteye upload etmeniz gerekmektedir.</span>
-          </Grid>
-
-          <Divider className={styles.DividerStyle}/>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              className={styles.TextFieldStyle}
-              id="standard-basic"
-              label="Meta Keys"
-              value={metaKeys}
-              onChange={(event) => setMetaKeys(event.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TopicList topicList={topicList} setTopicList={setTopicList} />
-          </Grid>
-          <Divider className={styles.DividerStyle}/>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              className={styles.TextFieldStyle}
-              id="standard-basic"
-              label="Url"
-              value={url}
-              onChange={(event) => setUrl(event.target.value)}
-            />
-          </Grid>
-          
-          <Grid item xs={12} sm={6}>
-            <TextField
-              className={styles.TextFieldStyle}
-              id="standard-basic"
-              label="Description"
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-            />
-          </Grid>
-          <Divider className={styles.DividerStyle}/>
-          <Grid item xs={12} sm={6}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={isManuelPage}
-                  onChange={handleIsManuelChange}
-                  inputProps={{ "aria-label": "controlled" }}
+      {isAuthorizedUser && (
+        <>
+          <LoadingFullPage isLoading={isLoading} />
+          <Container maxWidth="md">
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                <h1>Yeni Sayfa Girişi</h1>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  className={styles.TextFieldStyle}
+                  id="standard-basic"
+                  label="Title"
+                  value={title}
+                  onChange={(event) => handleTitleChange(event.target.value)}
                 />
-              }
-              label="Is Manually Created"
-            />
-          </Grid>
-          <Divider className={styles.DividerStyle}/>
-          <Grid item xs={12} sm={12}>
-            <MyGrid
-              isOneFullContent
-              leftContent={
-                <MyQuillEditor
-                  quill={quill}
-                  quillRef={quillRef}
-                  activeStyle={{
-                    width: "100%",
-                    height: "75vh",
-                    marginTop: "4px",
-                  }}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  onClick={async () => handleGenerateTextFieldsWithRobot()}
+                  disabled={process.env.IS_LOCAL == "false"}
+                >
+                  Robot ile metinleri doldur
+                </Button>
+              </Grid>
+              <Divider className={styles.DividerStyle} />
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  multiline
+                  style={{ width: "100%" }}
+                  id="standard-basic"
+                  label="Robot'un ne konuda resim üretmesini istersiniz?"
+                  value={generateImageByRobotText}
+                  onChange={(event) =>
+                    setGenerateImageByRobotText(event.target.value)
+                  }
+                  disabled={process.env.IS_LOCAL == "false"}
                 />
-              }
-            />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <div style={{ paddingTop: "30px", paddingBottom: "60px" }}>
-              <Button
-                variant="contained"
-                type="submit"
-                onClick={() => onSubmit()}
-                color="success"
-              >
-                Save
-              </Button>
-            </div>
-          </Grid>
-        </Grid>
-      </Container>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  onClick={async () => handleGenerateImageWithRobot()}
+                  disabled={process.env.IS_LOCAL == "false"}
+                >
+                  Robot ile resim üret
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                {imagePath && (
+                  <>
+                    <h3 className={styles.subTitleStyle}>Üretilen Resim</h3>
+                    <div className={styles.ImageContainerStyle}>
+                      <Image src={imagePath} fill={true} objectFit="contain" />
+                    </div>
+                  </>
+                )}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                {imagePath}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <S3UploadForm
+                  titleImageUrl={titleImageUrl}
+                  setTitleImageUrl={setTitleImageUrl}
+                  setIsLoading={setIsLoading}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <span style={{ color: "red" }}>
+                  *** Robot tarafından üretilen resmi; önce bilgisayarınıza
+                  indirip sonra siteye upload etmeniz gerekmektedir.
+                </span>
+              </Grid>
 
-      <Errors />
-      </>
+              <Divider className={styles.DividerStyle} />
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  className={styles.TextFieldStyle}
+                  id="standard-basic"
+                  label="Meta Keys"
+                  value={metaKeys}
+                  onChange={(event) => setMetaKeys(event.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TopicList topicList={topicList} setTopicList={setTopicList} />
+              </Grid>
+              <Divider className={styles.DividerStyle} />
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  className={styles.TextFieldStyle}
+                  id="standard-basic"
+                  label="Url"
+                  value={url}
+                  onChange={(event) => setUrl(event.target.value)}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  className={styles.TextFieldStyle}
+                  id="standard-basic"
+                  label="Description"
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                />
+              </Grid>
+              <Divider className={styles.DividerStyle} />
+              <Grid item xs={12} sm={6}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isManuelPage}
+                      onChange={handleIsManuelChange}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                  }
+                  label="Is Manually Created"
+                />
+              </Grid>
+              <Divider className={styles.DividerStyle} />
+              <Grid item xs={12} sm={12}>
+                <MyGrid
+                  isOneFullContent
+                  leftContent={
+                    <MyQuillEditor
+                      quill={quill}
+                      quillRef={quillRef}
+                      activeStyle={{
+                        width: "100%",
+                        height: "75vh",
+                        marginTop: "4px",
+                      }}
+                    />
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <div style={{ paddingTop: "30px", paddingBottom: "60px" }}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    onClick={() => onSubmit()}
+                    color="success"
+                  >
+                    Save
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
+          </Container>
+
+          <Errors />
+        </>
       )}
     </>
   );

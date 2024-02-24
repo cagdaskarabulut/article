@@ -45,11 +45,12 @@ export async function getStaticPaths() {
 export async function getStaticProps(ctx) {
   try {
     const article = ctx.params?.article;
-    const myArticle = await fetch(process.env.URL + "/api/article/" + article)
+    let myArticle = await fetch(process.env.URL + "/api/article/" + article)
       .then((res) => res.json())
       .then((data) => {
         return data?.article_list?.rows[0];
       });
+      myArticle = myArticle === undefined ? null : myArticle;
     return {
       props: {
         myArticle,

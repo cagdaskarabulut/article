@@ -38,11 +38,11 @@ export default function Header({ middleContent }) {
   const [session, setSession] = useState("");
 
   useEffect(() => {
-    // fetch("/api/whoAmI")
+    // fetch("/api//name")
     //   .then((res) => res.json())
     //   .then((data) => setName(data.name));
 
-    fetch("/api/whoAmISession")
+    fetch("/api/whoAmI/session")
       .then((res) => res.json())
       .then((data) => {
         setSession(data);

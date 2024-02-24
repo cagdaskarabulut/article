@@ -5,7 +5,7 @@ export default function APITestPage() {
   const [name, setName] = useState<string>();
 
   useEffect(() => {
-    fetch("/api/whoAmI")
+    fetch("/api/whoAmI/name")
       .then((res) => res.json())
       .then((data) => setName(data.name));
   }, []);

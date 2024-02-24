@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 
 export default async function APIFromServer() {
-  const resp = await fetch(process.env.URL + "/api/whoAmI", {
+  const resp = await fetch(process.env.URL + "/api/whoAmI/name", {
     method: "GET",
     headers: headers(),
   }).then((res) => res.json());
