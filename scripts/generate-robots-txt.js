@@ -107,7 +107,7 @@ function generateRobotsTxtAndSitemapXml() {
   if (isLocal == "false") {
     let dynamicRobotsTxtFields = "";
     let dynamicSitemapFields = addStaticValuesIntoSitemapList();
-    fetch(process.env.URL + "/api/list_url", {
+    fetch(process.env.URL + "/api/article/list_url", {
       method: "GET",
     })
       .then((res) => res.json())
