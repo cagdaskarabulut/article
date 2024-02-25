@@ -35,21 +35,21 @@ const ArticlePagePanel = ({ article }) => {
       <>
         <div className={styles.PanelContainerStyle}>
           <div className={styles.HomePageInfoStyle}>
-            <h1>{article.title}</h1>
+            <h1>{article?.title}</h1>
             <span className={styles.CardHeaderDateStyle}>
-              {format(article.create_date, "dd/MM/yyyy")}
-              {/* {article.create_date} */}
+              {format(article?.create_date, "dd/MM/yyyy")}
+              {/* {article?.create_date} */}
             </span>
 
             {/* //TODO medium daki like ve yorum alanına benzer bir tool geliştir, tarihi de bu tool içerisine alabilirsin   
-            <br/><span className={styles.CardHeaderDateStyle}>{article.like_number}</span> 
+            <br/><span className={styles.CardHeaderDateStyle}>{article?.like_number}</span> 
             */}
 
             <br />
             {/* <Image
-              src={article.title_image}
-              alt={"img_" + article.url}
-              key={"img_" + article.url}
+              src={article?.title_image}
+              alt={"img_" + article?.url}
+              key={"img_" + article?.url}
               width={100}
               height={100}
               objectFit="contain"
@@ -57,17 +57,17 @@ const ArticlePagePanel = ({ article }) => {
             
             <div className={styles.ArticleImageContainerStyle}
             >
-              {article.title_image && (
+              {article?.title_image && (
                 <Image
-                src={article.title_image}
-                alt={"img_" + article.url}
+                src={article?.title_image}
+                alt={"img_" + article?.url}
                 fill={true}
                 objectFit="contain"
               />)
               }
               
             </div>
-            <div dangerouslySetInnerHTML={{ __html: article.body }}></div>
+            <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
           </div>
         </div>
       </>
@@ -80,7 +80,7 @@ const ArticlePagePanel = ({ article }) => {
         <div className={styles.HeaderStyle}>
           <Header />
         </div>
-        <Container maxWidth="md" className={styles.ContentStyle}>
+        <Container maxWidth="lg" className={styles.ContentStyle}>
           <MyGrid leftContent={<ContentField />} isOneFullContent />
         </Container>
         <FooterPanel />

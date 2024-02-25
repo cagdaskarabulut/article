@@ -71,7 +71,7 @@ const UploadForm = ({
           <br />
           <h3 className={styles.subTitleStyle}>Yüklenen Resim</h3>
           <div className={styles.ArticleImageContainerStyle}>
-            <Image src={titleImageUrl} fill={true} objectFit="contain" />
+            <Image src={titleImageUrl} fill={true} objectFit="contain" alt={"img_" + titleImageUrl}/>
           </div>
         </>
       )}

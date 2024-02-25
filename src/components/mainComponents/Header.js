@@ -3,6 +3,7 @@ import styles from "./Header.module.scss";
 import { useRouter } from "next/navigation";
 import {
   Autocomplete,
+  Button,
   Chip,
   Container,
   Grid,
@@ -31,6 +32,7 @@ export default function Header({ middleContent }) {
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isShowSearchBox, setIsShowSearchBox] = useState(false);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -38,10 +40,7 @@ export default function Header({ middleContent }) {
   const [session, setSession] = useState("");
 
   useEffect(() => {
-    // fetch("/api//name")
-    //   .then((res) => res.json())
-    //   .then((data) => setName(data.name));
-
+    setIsAuthChecked(false);
     fetch("/api/whoAmI/session")
       .then((res) => res.json())
       .then((data) => {
@@ -49,8 +48,8 @@ export default function Header({ middleContent }) {
         setUserName(data?.name?.user?.name);
         setUserEmail(data?.name?.user?.userEmail);
         setUserImage(data?.name?.user?.userImage);
+        setIsAuthChecked(true);
       });
-    // .then((data) => setUser(data));
   }, []);
 
   useEffect(() => {
@@ -85,7 +84,6 @@ export default function Header({ middleContent }) {
   return (
     <div className={styles.PanelContainerStyle}>
       <Container className={styles.header}>
-        {/* maxWidth={100} */}
         <MyGrid
           forHeader={true}
           leftContent={
@@ -96,6 +94,7 @@ export default function Header({ middleContent }) {
                   width={isMobile ? 48 : 64}
                   height={isMobile ? 48 : 64}
                   onClick={() => goHomePage()}
+                  alt="newszipped-logo"
                 />
               </h1>
             </>
@@ -105,71 +104,27 @@ export default function Header({ middleContent }) {
               {middleContent}
             </div>
           }
-          rightContent={
+          rightContent={isAuthChecked ? 
             <>
               <div className={styles.SearchBoxStyle}>
                 {userName && (
-                  <>
-                  {userName}<br />
-                    <button onClick={() => signOut()}>Sign out</button>
-                  </>
+                  <div style={{ fontWeight: "400"}}>
+                  <span >{userName}</span>
+                  <br />
+                    {/* <button onClick={() => signOut()}>Sign out</button> */}
+                    <Button style={{float:"right", marginTop:"10px"}} variant="contained" color="primary" onClick={() => signOut()}>Sign out</Button>
+
+                  </div>
                 )}
                 {!userName && (
                   <>
-                  Not Logged In<br />
-                    <button onClick={() => signIn()}>Sign in</button>
+                    <Button variant="contained" color="success" onClick={() => signIn()}>Sign in</Button>
                   </>
                 )}
-
-                {/* <IconButton
-                  className={styles.SearchBoxIconStyle}
-                  aria-label="delete"
-                  size="large"
-                  style={{
-                    display: isShowSearchBox ? "none" : "",
-                  }}
-                >
-                  <SearchIcon
-                    fontSize="inherit"
-                    onClick={() => setIsShowSearchBox(true)}
-                  />
-                </IconButton> */}
-
-                {/* <Autocomplete
-                  style={{
-                    opacity: !isShowSearchBox ? 0 : 1,
-                    transition: "opacity .3s ease-in-out",
-                    animation: "ease-in-out",
-                    display: !isShowSearchBox ? "none" : "",
-                    height: "35px",
-                    marginTop: "10px",
-                  }}
-                  id="free-solo-demo"
-                  freeSolo
-                  onChange={(event, newValue) => selectAction(event, newValue)}
-                  multiple={false}
-                  fullWidth={true}
-                  clearOnBlur={true}
-                  options={pageList?.map((option) => option)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Search"
-                      size="small"
-                      fullWidth
-                      InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <SearchIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  )}
-                /> */}
               </div>
             </>
+            : 
+            <></>
           }
         />
 

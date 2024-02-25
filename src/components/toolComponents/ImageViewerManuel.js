@@ -9,7 +9,7 @@ const ImageViewerManuel = ({ imageName, imagePath, onClickAction, isSmallSize })
         {/* <img src={imagePath} alt={imageName} key={"img_" + imageName} width={240} onClick={onClickAction}/> */}
         <div className={isSmallSize ? styles.smallSize : styles.standartSize}>
           <Image
-          src={imagePath} alt={imageName} key={"img_" + imageName}  onClick={onClickAction}
+          src={imagePath} alt={"img_" + imageName} key={"img_" + imageName}  onClick={onClickAction}
             layout='fill'
             objectFit='contain'
           />

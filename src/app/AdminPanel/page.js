@@ -295,7 +295,7 @@ const AdminPanel = () => {
                   <>
                     <h3 className={styles.subTitleStyle}>Üretilen Resim</h3>
                     <div className={styles.ImageContainerStyle}>
-                      <Image src={imagePath} fill={true} objectFit="contain" />
+                      <Image src={imagePath} fill={true} objectFit="contain" alt={"img_" + imagePath} />
                     </div>
                   </>
                 )}
