@@ -39,7 +39,7 @@ const AdminPanel = () => {
   const [titleImageUrl, setTitleImageUrl] = useState("");
   const { quill, quillRef } = useQuill();
   const [topicList, setTopicList] = useState([]);
-  const [isManuelPage, setIsManuelPage] = useState(true);
+  const [isManuelPage, setIsManuelPage] = useState(false);
   const [description, setDescription] = useState("");
   const [metaKeys, setMetaKeys] = useState("");
   const [generateImageByRobotText, setGenerateImageByRobotText] = useState("");
@@ -52,11 +52,9 @@ const AdminPanel = () => {
 
   const router = useRouter();
   useEffect(() => {
-    fetch("/api/whoAmI/email")
+    fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        console.log("data.email: ",data.email);
-        console.log("process.env.NEXT_PUBLIC_ADMIN_USER: ",process.env.NEXT_PUBLIC_ADMIN_USER);
         setIsAuthorizedUser(false);
         if (data.email !== process.env.NEXT_PUBLIC_ADMIN_USER) {
           router.push("/api/auth/signin", { scroll: false });
@@ -94,7 +92,7 @@ const AdminPanel = () => {
   }
 
   const handleIsManuelChange = (event) => {
-    setIsManuelPage(event.target.checked);
+    setIsManuelPage(event?.target?.checked);
   };
 
   const Errors = () => {
@@ -198,7 +196,7 @@ const AdminPanel = () => {
       return;
     }
     try {
-      fetch("/api/article/article_add", {
+      fetch("/api/article/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -221,7 +219,7 @@ const AdminPanel = () => {
           setTitle("");
           setTopicList("");
           quill.setText("");
-          setIsManuelPage("");
+          setIsManuelPage(false);
           setDescription("");
           setMetaKeys("");
           setIsMessageOpen(true);

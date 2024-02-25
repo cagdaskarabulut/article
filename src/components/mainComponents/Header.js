@@ -41,7 +41,7 @@ export default function Header({ middleContent }) {
 
   useEffect(() => {
     setIsAuthChecked(false);
-    fetch("/api/whoAmI/session")
+    fetch("/api/auth/whoAmI/session")
       .then((res) => res.json())
       .then((data) => {
         setSession(data);
