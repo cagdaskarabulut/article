@@ -3,6 +3,10 @@ const OpenAI = require("openai");
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+export const config = {
+  maxDuration: 200,
+};
+
 export default async function handler(req, res) {
   try {
     const body = req.body && JSON.parse(req.body);
