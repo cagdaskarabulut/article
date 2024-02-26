@@ -16,7 +16,7 @@ const response = await openai.chat.completions.create({
   messages: [
     {
       role: "system",
-      content: "You have an enjoyable narrative and you are a writer who is knowledgeable about everything. Please answer my questions with long and detailed explanations, such as an article, in at least 1000 words."
+      content: "You have an enjoyable narrative and you are a writer who is knowledgeable about everything. Please answer my questions as English and with long and detailed explanations, such as an article, in at least 1000 words."
     },
     {
       role: "user",

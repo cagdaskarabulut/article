@@ -16,7 +16,7 @@ const response = await openai.chat.completions.create({
   messages: [
     {
       role: "system",
-      content: "You have an google metatags and google trends expert."
+      content: "You have an google metatags and google trends expert.Return results as english."
     },
     {
       role: "user",
