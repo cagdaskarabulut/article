@@ -129,8 +129,8 @@ function generateRobotsTxtAndSitemapXml() {
         let sitemapXml = generateFinalSitemapXmlFile(dynamicSitemapFields);
 
         //-create physical files
-        writeFileSync("public/robots.txt", robotsTxt);
-        writeFileSync("public/sitemap.xml", sitemapXml);
+        fs.writeFileSync("public/robots.txt", robotsTxt);
+        fs.writeFileSync("public/sitemap.xml", sitemapXml);
       });
   }
 }
