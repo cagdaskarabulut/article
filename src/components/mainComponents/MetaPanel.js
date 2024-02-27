@@ -20,7 +20,8 @@ const MetaPanel = ({
 
   let currentFullPathUrl = siteUrl + router.asPath;
   let imageFullPathUrl = siteUrl + imagePath;
-  let iconHref = iconPath ? iconPath : siteUrl + "/images/favicon.ico";
+  // let iconHref = iconPath ? iconPath : siteUrl + "/favicon.ico";
+  let iconHref = "https://karabulut-storage.s3.amazonaws.com/newszipped/favicon.ico";
   return (
     <Head>
 
