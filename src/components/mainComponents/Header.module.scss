@@ -36,6 +36,11 @@
       justify-content: end;
       float: right;
 
+      @include tablet-or-less {
+        margin-right: 0px !important;
+        padding-right: 32px !important;
+      }
+
       .SearchBoxIconStyle {
         font-size: 24px !important;
         height: 35px !important;

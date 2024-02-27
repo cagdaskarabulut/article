@@ -109,7 +109,7 @@ export default function Header({ middleContent }) {
               <div className={styles.SearchBoxStyle}>
                 {userName && (
                   <div style={{ fontWeight: "400"}}>
-                  <span >{userName}</span>
+                  <span style={{float:"right"}}>{userName}</span>
                   <br />
                     {/* <button onClick={() => signOut()}>Sign out</button> */}
                     <Button style={{float:"right", marginTop:"10px"}} variant="contained" color="primary" onClick={() => signOut()}>Sign out</Button>
@@ -118,7 +118,7 @@ export default function Header({ middleContent }) {
                 )}
                 {!userName && (
                   <>
-                    <Button variant="contained" color="success" onClick={() => signIn()}>Sign in</Button>
+                    <Button style={{float:"right", marginTop:"10px"}} variant="contained" color="success" onClick={() => signIn()}>Sign in</Button>
                   </>
                 )}
               </div>
