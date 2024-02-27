@@ -3,8 +3,6 @@ import ArticlePagePanel from "../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../components/reusableComponents/ScrollToTopButton";
 
 export default function ArticlePage({ myArticle }) {
-  // export default function ArticlePage({ params }) {
-  // const { article } = params;
   return (
     <>
       <MetaPanel
