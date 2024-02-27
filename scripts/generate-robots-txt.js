@@ -135,4 +135,4 @@ function generateRobotsTxtAndSitemapXml() {
   }
 }
 
-export default generateRobotsTxtAndSitemapXml;
+module.exports = generateRobotsTxtAndSitemapXml;
