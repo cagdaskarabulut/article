@@ -1,4 +1,4 @@
-// const generateRobotsTxtAndSitemapXml = require("./scripts/generate-robots-txt");
+const generateRobotsTxtAndSitemapXml = require("./scripts/generate-robots-txt");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -28,7 +28,7 @@ module.exports = {
   webpack(config, { isServer }) {
     config.resolve.fallback = { fs: false };
     if (isServer) {
-      // generateRobotsTxtAndSitemapXml();
+      generateRobotsTxtAndSitemapXml();
     }
     return config;
   },
