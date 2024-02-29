@@ -20,6 +20,7 @@ const HomePagePanel = () => {
   const [isLoadingLeftField, setLoadingLeftField] = useState(true);
   const [isLoadingRightField, setLoadingRightField] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMobileChecked, setIsMobileChecked] = useState(false);
   const [topRatedArticleList, setTopRatedArticleList] = useState([]);
   const [latestArticleList, setLatestArticleList] = useState([]);
 
@@ -27,8 +28,10 @@ const HomePagePanel = () => {
   useEffect(() => {
     if (innerWidth === null) {
       setIsMobile(false);
+      setIsMobileChecked(true);
     } else {
       setIsMobile(innerWidth < MOBILE_SCREEN_SIZE ? true : false);
+      setIsMobileChecked(true);
     }
   }, [innerWidth]);
 
@@ -123,6 +126,8 @@ const HomePagePanel = () => {
     <>
       {/* <Loading isLoading={false}/> */}
       <div className={styles.ContainerPageContainerStyle}>
+      {isMobileChecked && (
+        <>
         <div className={styles.HeaderStyle}>
           <Header />
         </div>
@@ -136,12 +141,15 @@ const HomePagePanel = () => {
             </Container>
           )}
           {isMobile && (
-            <MyGrid leftContent={<LeftField />} rightContent={<RightField />} />
+            // <MyGrid leftContent={<LeftField />} rightContent={<RightField />} />
+            <MyGrid leftContent={<LeftField />} middleContent={<RightField />} />
           )}
         </div>
         <FooterPanel />
 
         <Analytics />
+        </>
+        )}
       </div>
     </>
   );

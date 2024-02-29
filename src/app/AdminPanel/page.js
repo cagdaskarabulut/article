@@ -192,6 +192,7 @@ const AdminPanel = () => {
       return;
     } else if (!titleImageUrl) {
       setShowError(true);
+      isLoading(false);
       setErrorMessage("Resim eklenmesi zorunludur");
       return;
     }
@@ -200,7 +201,7 @@ const AdminPanel = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          url: replaceStringForUrlFormat(url),
+          url: (replaceStringForUrlFormat(url)+ '-' +(Math.floor(Math.random() * 1000000000000))),
           title: title,
           topics: getStringWithCommaSeperatedFromList(topicList),
           create_date: new Date(),
