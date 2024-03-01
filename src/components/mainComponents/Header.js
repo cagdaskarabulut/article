@@ -6,6 +6,11 @@ import {
   Button,
   Chip,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Grid,
   IconButton,
   InputAdornment,
@@ -38,6 +43,20 @@ export default function Header({ middleContent }) {
   const [userEmail, setUserEmail] = useState("");
   const [userImage, setUserImage] = useState("");
   const [session, setSession] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
+
+  const LoginWithGithub = () => {
+    signIn();
+    setOpenDialog(false);
+  };
 
   useEffect(() => {
     setIsAuthChecked(false);
@@ -104,27 +123,59 @@ export default function Header({ middleContent }) {
               {middleContent}
             </div>
           }
-          rightContent={isAuthChecked ? 
-            <>
-              <div className={styles.SearchBoxStyle}>
-                {userName && (
-                  <div style={{ fontWeight: "400"}}>
-                  <span style={{float:"right"}}>{userName}</span>
-                  <br />
-                    {/* <button onClick={() => signOut()}>Sign out</button> */}
-                    <Button style={{float:"right", marginTop:"10px"}} variant="contained" color="primary" onClick={() => signOut()}>Sign out</Button>
-
-                  </div>
-                )}
-                {!userName && (
-                  <>
-                    <Button style={{float:"right", marginTop:"10px"}} variant="contained" color="success" onClick={() => signIn()}>Sign in</Button>
-                  </>
-                )}
-              </div>
-            </>
-            : 
-            <></>
+          rightContent={
+            isAuthChecked ? (
+              <>
+                <div className={styles.SearchBoxStyle}>
+                  {userName && (
+                    <div style={{ fontWeight: "400" }}>
+                      <span style={{ float: "right" }}>{userName}</span>
+                      <br />
+                      <Button
+                        style={{ float: "right", marginTop: "10px" }}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => signOut()}
+                      >
+                        Sign out
+                      </Button>
+                    </div>
+                  )}
+                  {!userName && (
+                    <>
+                      <Button
+                        style={{ float: "right", marginTop: "10px" }}
+                        variant="contained"
+                        color="success"
+                        onClick={handleClickOpen}
+                      >
+                        Sign in
+                      </Button>
+                      <Dialog
+                        open={openDialog}
+                        onClose={handleClose}
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                      >
+                        <DialogContent>
+                        <h3 style={{textAlign:"center"}}>Welcome</h3>
+                         <Button
+                            style={{ marginTop: "10px" }}
+                            variant="contained"
+                            color="success"
+                            onClick={() => LoginWithGithub()}
+                          >
+                            Sign in with Github
+                          </Button>
+                        </DialogContent>
+                      </Dialog>
+                    </>
+                  )}
+                </div>
+              </>
+            ) : (
+              <></>
+            )
           }
         />
 
