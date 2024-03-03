@@ -45,15 +45,11 @@ export default function Header({ middleContent }) {
   const [session, setSession] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpenDialog(true);
-  };
-
   const handleClose = () => {
     setOpenDialog(false);
   };
 
-  const LoginWithGithub = () => {
+  const LoginAction = () => {
     signIn();
     setOpenDialog(false);
   };
@@ -147,11 +143,13 @@ export default function Header({ middleContent }) {
                         style={{ float: "right", marginTop: "10px" }}
                         variant="contained"
                         color="success"
-                        onClick={handleClickOpen}
+                        // onClick={handleClickOpen}
+                        onClick={() => signIn()}
                       >
                         Sign in
                       </Button>
-                      <Dialog
+                      
+                      {/* <Dialog
                         open={openDialog}
                         onClose={handleClose}
                         aria-labelledby="alert-dialog-title"
@@ -163,12 +161,12 @@ export default function Header({ middleContent }) {
                             style={{ marginTop: "10px" }}
                             variant="contained"
                             color="success"
-                            onClick={() => LoginWithGithub()}
+                            onClick={() => LoginAction()}
                           >
                             Sign in with Github
                           </Button>
                         </DialogContent>
-                      </Dialog>
+                      </Dialog> */}
                     </>
                   )}
                 </div>
