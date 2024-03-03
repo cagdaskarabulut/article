@@ -1,8 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import YandexProvider from "next-auth/providers/yandex";
-import DiscordProvider from "next-auth/providers/discord";
-import FacebookProvider from "next-auth/providers/facebook";
+// import DiscordProvider from "next-auth/providers/discord";
+// import FacebookProvider from "next-auth/providers/facebook";
 // import LinkedinProvider from "next-auth/providers/linkedin";
 // import GoogleProvider from "next-auth/providers/google";
 // import AppleProvider from "next-auth/providers/apple";
@@ -19,14 +19,14 @@ const authOptions:NextAuthOptions = {
       clientId: process.env.YANDEX_ID!,
       clientSecret: process.env.YANDEX_SECRET!,
     }),
-    DiscordProvider({
-      clientId: process.env.DISCORD_ID!,
-      clientSecret: process.env.DISCORD_SECRET!,
-    }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_ID!,
-      clientSecret: process.env.FACEBOOK_SECRET!,
-    })
+    // DiscordProvider({
+    //   clientId: process.env.DISCORD_ID!,
+    //   clientSecret: process.env.DISCORD_SECRET!,
+    // }),
+    // FacebookProvider({
+    //   clientId: process.env.FACEBOOK_ID!,
+    //   clientSecret: process.env.FACEBOOK_SECRET!,
+    // })
   ],
   // pages: {
   //   signIn: '/auth/signin',
