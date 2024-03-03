@@ -8,6 +8,7 @@ import TopicList from "../../components/TopicList";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import { useRouter } from "next/navigation";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 import {
   getStringWithCommaSeperatedFromList,
@@ -20,7 +21,13 @@ import {
   Container,
   FormControlLabel,
   Grid,
+  IconButton,
   Switch,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import MyGrid from "../../components/toolComponents/MyGrid";
 import Image from "next/image";
@@ -30,6 +37,7 @@ import styles from "./AdminPanel.module.scss";
 import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
 
 const AdminPanel = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -49,8 +57,14 @@ const AdminPanel = () => {
   const [selectedOldPathForCopyFrom, setSelectedOldPathForCopyFrom] =
     useState("");
   const [isAuthorizedUser, setIsAuthorizedUser] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [newTopicName, setNewTopicName] = useState("");
+  const [isRefreshingTopicList, setIsRefreshingTopicList] = useState(true);
 
-  const router = useRouter();
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
+
   useEffect(() => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
@@ -184,6 +198,35 @@ const AdminPanel = () => {
     }
   }
 
+  const AddTopicAction = async () => {
+    setIsLoading(true);
+    if (!newTopicName) {
+      setShowError(true);
+      setErrorMessage("Title is required");
+      return;
+    }
+    try {
+      fetch("/api/topic/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: newTopicName,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setNewTopicName("");
+          setIsRefreshingTopicList(true);
+          setTopicList(null);
+          setOpenDialog(false);
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setErrorMessage("Title is required");
+      setIsLoading(false);
+    }
+  };
+
   const onSubmit = async () => {
     setIsLoading(true);
     if (!title) {
@@ -201,7 +244,10 @@ const AdminPanel = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          url: (replaceStringForUrlFormat(url)+ '-' +(Math.floor(Math.random() * 1000000000000))),
+          url:
+            replaceStringForUrlFormat(url) +
+            "-" +
+            Math.floor(Math.random() * 1000000000000),
           title: title,
           topics: getStringWithCommaSeperatedFromList(topicList),
           create_date: new Date(),
@@ -294,7 +340,12 @@ const AdminPanel = () => {
                   <>
                     <h3 className={styles.subTitleStyle}>Üretilen Resim</h3>
                     <div className={styles.ImageContainerStyle}>
-                      <Image src={imagePath} fill={true} objectFit="contain" alt={"img_" + imagePath} />
+                      <Image
+                        src={imagePath}
+                        fill={true}
+                        objectFit="contain"
+                        alt={"img_" + imagePath}
+                      />
                     </div>
                   </>
                 )}
@@ -326,8 +377,19 @@ const AdminPanel = () => {
                   onChange={(event) => setMetaKeys(event.target.value)}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TopicList topicList={topicList} setTopicList={setTopicList} />
+              <Grid item xs={10} sm={5}>
+                <TopicList topicList={topicList} setTopicList={setTopicList} 
+                isRefreshingTopicList={isRefreshingTopicList}
+                setIsRefreshingTopicList={setIsRefreshingTopicList} />
+              </Grid>
+              <Grid item xs={2} sm={1}>
+                <IconButton
+                  aria-label="delete"
+                  size="large"
+                  onClick={() => setOpenDialog(true)}
+                >
+                  <AddCircleIcon fontSize="inherit" color="primary" />
+                </IconButton>
               </Grid>
               <Divider className={styles.DividerStyle} />
               <Grid item xs={12} sm={6}>
@@ -393,6 +455,36 @@ const AdminPanel = () => {
               </Grid>
             </Grid>
           </Container>
+
+          <Dialog
+            open={openDialog}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <h3 style={{ textAlign: "center" }}>Create Topic</h3>
+              <div style={{ width: "400px" }}>
+                <div style={{ width: "90%",float: "left" }}>
+                  <TextField
+                    className={styles.TextFieldStyle}
+                    label="Enter new topic name"
+                    value={newTopicName}
+                    onChange={(event) => setNewTopicName(event.target.value)}
+                  />
+                </div>
+                <div style={{ width: "10%",float: "right" }}>
+                  <IconButton
+                    aria-label="delete"
+                    size="large"
+                    onClick={() => AddTopicAction(true)}
+                  >
+                    <AddCircleIcon fontSize="inherit" color="success" />
+                  </IconButton>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
 
           <Errors />
         </>

@@ -12,7 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 
-const TopicList = ({ topicList, setTopicList }) => {
+const TopicList = ({ topicList, setTopicList, isRefreshingTopicList, setIsRefreshingTopicList }) => {
   const [allTopicList, setAllTopicList] = useState([]);
   // const timestamp = Date.now(); // This would be the timestamp you want to format
 
@@ -22,7 +22,17 @@ const TopicList = ({ topicList, setTopicList }) => {
       .then((data) => {
         setAllTopicList(data?.topic_list.rows);
       });
+      setIsRefreshingTopicList(false);
   }, []);
+
+  useEffect(() => {
+    fetch("/api/topic/list")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllTopicList(data?.topic_list.rows);
+      });
+      setIsRefreshingTopicList(false);
+  }, [isRefreshingTopicList,setIsRefreshingTopicList,topicList]);
 
   return (
     <div>
