@@ -65,7 +65,7 @@ const HomePagePanel = () => {
       <>
         <div className={styles.PanelContainerStyle}>
           <div className={styles.HomePageInfoStyle}>
-            <h1>Top Rated</h1>
+            <h1>Latest</h1>
             {isLoadingLeftField && <LoadingSkeletonCard isLoading />}
             {!isLoadingLeftField && (
               <>
@@ -97,7 +97,7 @@ const HomePagePanel = () => {
       <>
         <div className={styles.PanelContainerStyle}>
           <div className={styles.HomePageInfoStyle}>
-            <h1>Latest</h1>
+            <h1>Top Rated</h1>
             {isLoadingRightField && <LoadingSkeletonCard isLoading />}
             {!isLoadingRightField && (
               <>
