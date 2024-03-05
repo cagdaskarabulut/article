@@ -32,34 +32,39 @@
       min-height: 65px !important;
     }
   }
-  
-  .ContentStyle{
+
+  .ContentStyle {
     margin-top: 40px;
   }
-  
+
 }
 
 .HomePageInfoStyle {
   color: $main;
+
   h1 {
     color: $secondary;
   }
 
-  .ArticleImageContainerStyle{
-    width: 100%;  
-    position: relative; 
-    height: 40vh; 
-    @include tablet-or-less{
-      height: 25vh; 
+  .ArticleImageContainerStyle {
+    width: 100%;
+    position: relative;
+    height: 40vh;
+
+    @include tablet-or-less {
+      height: 25vh;
     }
   }
-
 }
 
 .PanelContainerStyle {
   background-color: white !important;
   border-radius: 5px;
-  margin-left: 30px; 
-  margin-right: 30px; 
-  // padding-top: 50px;
+  margin-left: 30px;
+  margin-right: 30px;
+
+  @include tablet-or-less {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }

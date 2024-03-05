@@ -1,0 +1,26 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/colors.scss";
+@import "../../styles/globals.scss";
+
+.HomePageInfoStyle {
+  color: $main;
+  h1 {
+    color: $secondary;
+  }
+
+  .ArticleImageContainerStyle{
+    width: 100%;  
+    position: relative; 
+    height: 40vh; 
+    @include tablet-or-less{
+      height: 25vh; 
+    }
+  }
+}
+
+.PanelContainerStyle {
+  background-color: white !important;
+  border-radius: 5px;
+  margin-left: 30px; 
+  margin-right: 30px; 
+}

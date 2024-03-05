@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import styles from "./ArticlePagePanel.module.scss";
 import Header from "../mainComponents/Header";
@@ -9,17 +9,38 @@ import FooterPanel from "../mainComponents/FooterPanel";
 import MyGrid from "../toolComponents/MyGrid";
 import { Analytics } from "@vercel/analytics/react";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Button, Container, Link, Skeleton, TextField } from "@mui/material";
+import {
+  Backdrop,
+  Button,
+  Chip,
+  CircularProgress,
+  Container,
+  Link,
+  Skeleton,
+  TextField,
+} from "@mui/material";
 import ArticleIcon from "@mui/icons-material/Article";
 import CardItem from "../reusableComponents/CardItem";
 import LoadingSkeletonCard from "../reusableComponents/LoadingSkeletonCard";
 import LoadingSkeletonArticle from "../reusableComponents/LoadingSkeletonArticle";
 import Image from "next/image";
 import { format } from "date-fns";
+import ArticleHeader from "./ArticleHeader";
 
 const ArticlePagePanel = ({ article }) => {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/article/increase_view_number", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: article.url,
+      }),
+    })
+      .then((res) => res.json());
+  }, []);
 
   //_ Update when page resolution changes
   useEffect(() => {
@@ -34,41 +55,23 @@ const ArticlePagePanel = ({ article }) => {
     return (
       <>
         <div className={styles.PanelContainerStyle}>
+        <Container maxWidth="lg">
           <div className={styles.HomePageInfoStyle}>
-            <h1>{article?.title}</h1>
-            <span className={styles.CardHeaderDateStyle}>
-              {format(article?.create_date, "dd/MM/yyyy")}
-              {/* {article?.create_date} */}
-            </span>
-
-            {/* //TODO medium daki like ve yorum alanına benzer bir tool geliştir, tarihi de bu tool içerisine alabilirsin   
-            <br/><span className={styles.CardHeaderDateStyle}>{article?.like_number}</span> 
-            */}
-
+            <ArticleHeader article={article} />
             <br />
-            {/* <Image
-              src={article?.title_image}
-              alt={"img_" + article?.url}
-              key={"img_" + article?.url}
-              width={100}
-              height={100}
-              objectFit="contain"
-            /> */}
-            
-            <div className={styles.ArticleImageContainerStyle}
-            >
+            <div className={styles.ArticleImageContainerStyle}>
               {article?.title_image && (
                 <Image
-                src={article?.title_image}
-                alt={"img_" + article?.url}
-                fill={true}
-                objectFit="contain"
-              />)
-              }
-              
+                  src={article?.title_image}
+                  alt={"img_" + article?.url}
+                  fill={true}
+                  objectFit="contain"
+                />
+              )}
             </div>
             <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
           </div>
+          </Container>
         </div>
       </>
     );

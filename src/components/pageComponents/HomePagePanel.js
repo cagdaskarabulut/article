@@ -38,6 +38,7 @@ const HomePagePanel = () => {
   useEffect(() => {
     setLoadingLeftField(true);
     setLoadingRightField(true);
+    //TODO seçilen dropdown a göre liste çekilecek
     fetch("api/article/list_order_by_toprated")
       .then((res) => res.json())
       .then((data) => {
@@ -50,6 +51,12 @@ const HomePagePanel = () => {
         setLatestArticleList(data?.article_list);
         setLoadingRightField(false);
       });
+      // fetch("api/article/list_order_by_most_viewed")
+      // .then((res) => res.json())
+      // .then((data) => {
+      //   setTopRatedArticleList(data?.article_list);
+      //   setLoadingLeftField(false);
+      // });
   }, []);
 
   const LeftField = () => {
@@ -63,7 +70,7 @@ const HomePagePanel = () => {
             {!isLoadingLeftField && (
               <>
                 <LoadingSkeletonCard isLoading={false} />
-                {topRatedArticleList?.rows?.map((item) => (
+                {latestArticleList?.rows?.map((item) => (
                   <>
                   <CardItem
                     url={item?.url}
@@ -95,7 +102,7 @@ const HomePagePanel = () => {
             {!isLoadingRightField && (
               <>
                 <LoadingSkeletonCard isLoading={false} />
-                {latestArticleList?.rows?.map((item) => (
+                {topRatedArticleList?.rows?.map((item) => (
                   <>
                     <CardItem
                       url={item?.url}
