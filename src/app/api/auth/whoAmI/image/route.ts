@@ -6,5 +6,5 @@ import { authOptions } from "../../options";
 export async function GET() {
   const session = await getServerSession(authOptions);
 
-  return NextResponse.json({ image: session?.user?.image ?? "Not Logged In" });
+  return NextResponse.json({ image: session?.user?.image ?? undefined });
 }

@@ -133,8 +133,6 @@ export default function Header({ middleContent }) {
                       >
                         Sign in
                       </Button>
-                      
-                      
                     </>
                   )}
                 </div>

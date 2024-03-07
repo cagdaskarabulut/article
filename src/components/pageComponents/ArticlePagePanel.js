@@ -36,7 +36,7 @@ const ArticlePagePanel = ({ article }) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        url: article.url,
+        url: article?.url,
       }),
     })
       .then((res) => res.json());

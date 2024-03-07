@@ -251,13 +251,11 @@ const AdminPanel = () => {
           title: title,
           topics: getStringWithCommaSeperatedFromList(topicList),
           create_date: new Date(),
-          like_number: 0,
           title_image: titleImageUrl,
           body: quill.container.firstChild.innerHTML,
           is_manuel_page: isManuelPage,
           description: description,
           meta_keys: metaKeys,
-          view_number: 0,
         }),
       })
         .then((res) => res.json())

@@ -6,7 +6,7 @@ export default async function ServerActionPage() {
   const whoAmI = async () => {
     "use server";
     const session = await getServerSession();
-    return session?.user?.name || "Not Logged In";
+    return session?.user?.name || undefined;
   };
   return (
     <div>
