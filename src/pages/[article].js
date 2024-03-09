@@ -12,6 +12,7 @@ export default function ArticlePage({ myArticle }) {
         imagePath="/images/icon.ico"
         imageAlt={myArticle?.url}
       /> */}
+      
       <ArticlePagePanel article={myArticle} />
       <ScrollToTopButton showBelow={250} />
       <style jsx global>{`
