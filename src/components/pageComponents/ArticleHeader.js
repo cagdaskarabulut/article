@@ -50,7 +50,9 @@ const ArticleHeader = ({ article }) => {
         fetch("/api/article/article_likeCountByUser/"+article?.url+"/likeCountByUser/"+data?.email)
           .then((res2) => res2.json())
           .then((data2) => {
-            let result = data2.likeCount.rows[0].count!=="0";
+            let result = parseInt(data2.likeCount.rows[0].count , 10 ) >0;
+            console.log(parseInt(data2.likeCount.rows[0].count , 10 ));
+            console.log(result);
             setIsLiked(result);
           });
       });
