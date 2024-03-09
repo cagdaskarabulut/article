@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 import { sql } from '@vercel/postgres';
 import type { NextApiRequest, NextApiResponse } from 'next';
  
