@@ -39,7 +39,7 @@ const ArticleHeader = ({ article }) => {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isLiked, setIsLiked] = useState(false);
-  const [like_number, setLike_number] = useState(article.like_number); 
+  const [like_number, setLike_number] = useState(article?.like_number == undefined ? 0 : article?.like_number); 
 
   useEffect(() => {
     setIsAuthChecked(false);
