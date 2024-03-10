@@ -235,7 +235,7 @@ const AdminPanel = () => {
       return;
     } else if (!titleImageUrl) {
       setShowError(true);
-      isLoading(false);
+      setIsLoading(false);
       setErrorMessage("Resim eklenmesi zorunludur");
       return;
     }

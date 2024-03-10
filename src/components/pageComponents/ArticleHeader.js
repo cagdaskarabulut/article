@@ -36,9 +36,10 @@ const ArticleHeader = ({ article }) => {
   const router = useRouter();
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isLiked, setIsLiked] = useState(false);
+  const [like_number, setLike_number] = useState(article.like_number); 
 
   useEffect(() => {
     setIsAuthChecked(false);
@@ -108,7 +109,8 @@ const ArticleHeader = ({ article }) => {
                     <ThumbUpIcon fontSize="inherit" />
                   </IconButton>
                   <span style={{marginLeft:"5px"}}>
-                    {article?.like_number}
+                    {/* {article?.like_number} */}
+                    {like_number}
                   </span>
 
                   </div>
@@ -159,7 +161,35 @@ const ArticleHeader = ({ article }) => {
     if(!userEmail){
       console.log("geldi");
       router.push("/api/auth/signin", { scroll: false });
-    } else {
+    } 
+    else if (isLiked){
+      setIsLiked(false);
+            setLike_number(parseInt(like_number , 10 )-1);
+            //_ DELETE LIKE
+            try {
+              fetch("/api/article/delete_like", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  url: article?.url,
+                  user_email: userEmail,
+                }),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  setIsLiked(false);
+                  setLike_number(parseInt(like_number , 10 )-1);
+                  // setIsLoading(false);
+                  console.log(data);
+                });
+            } catch (error) {
+              // setErrorMessage("Like action failed");
+              // setIsLoading(false);
+              console.log(error);
+            }
+    }
+    else {
+      //_ ADD LIKE
       try {
         fetch("/api/article/add_like", {
           method: "POST",
@@ -172,6 +202,7 @@ const ArticleHeader = ({ article }) => {
           .then((res) => res.json())
           .then((data) => {
             setIsLiked(true);
+            setLike_number(parseInt(like_number , 10 )+1);
             // setIsLoading(false);
           });
       } catch (error) {
