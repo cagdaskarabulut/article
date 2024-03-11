@@ -52,8 +52,6 @@ const ArticleHeader = ({ article }) => {
           .then((res2) => res2.json())
           .then((data2) => {
             let result = parseInt(data2.likeCount.rows[0].count , 10 ) >0;
-            console.log(parseInt(data2.likeCount.rows[0].count , 10 ));
-            console.log(result);
             setIsLiked(result);
           });
       });
@@ -159,7 +157,6 @@ const ArticleHeader = ({ article }) => {
   const likeAction = async () => {
     // setIsLoading(true);
     if(!userEmail){
-      console.log("geldi");
       router.push("/api/auth/signin", { scroll: false });
     } 
     else if (isLiked){
@@ -180,7 +177,6 @@ const ArticleHeader = ({ article }) => {
                   setIsLiked(false);
                   setLike_number(parseInt(like_number , 10 )-1);
                   // setIsLoading(false);
-                  console.log(data);
                 });
             } catch (error) {
               // setErrorMessage("Like action failed");

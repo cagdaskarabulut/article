@@ -6,8 +6,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { url } = req?.query;
   const { user } = req?.query;
-  console.log(url,user);
-  
    const likeCount = await sql`SELECT count(id) FROM public.newszipped_article_like where url=${url?.toString()} and user_email=${user?.toString()};`;
    //  let is_liked = false;
   //  if( likeCount.rows.count > 0){

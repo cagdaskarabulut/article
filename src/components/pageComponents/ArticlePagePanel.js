@@ -32,14 +32,24 @@ const ArticlePagePanel = ({ article }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    fetch("/api/article/increase_view_number", {
+    fetch("/api/article/add_view", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         url: article?.url,
       }),
     })
-      .then((res) => res.json());
+      .then((res) => res.json())
+      .then((data) => {
+            fetch("/api/article/increase_view_number", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                url: article?.url,
+              }),
+            })
+              .then((res) => res.json());
+      });
   }, []);
 
   //_ Update when page resolution changes
