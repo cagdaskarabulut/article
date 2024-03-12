@@ -93,7 +93,7 @@ const MetaPanel = ({
       <meta name="yandex-verification" content="482b1df21423a716" /> */}
 
       <meta name="language" content="devEnglish" />
-      <meta name="author" content="gedadh" />
+      <meta name="author" content="cagdas karabulut" />
       <meta name="revisit-after" content="7 days" />
       <meta
         name="viewport"

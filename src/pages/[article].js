@@ -1,3 +1,4 @@
+import Head from "next/head";
 import MetaPanel from "../components/mainComponents/MetaPanel";
 import ArticlePagePanel from "../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../components/reusableComponents/ScrollToTopButton";
@@ -5,14 +6,13 @@ import ScrollToTopButton from "../components/reusableComponents/ScrollToTopButto
 export default function ArticlePage({ myArticle }) {
   return (
     <>
-      {/* <MetaPanel
+      <MetaPanel
         title={myArticle?.title}
         descriptionContent={myArticle?.description}
         keywordsContent={myArticle?.meta_keys}
         imagePath="/images/icon.ico"
         imageAlt={myArticle?.url}
-      /> */}
-      
+      />
       <ArticlePagePanel article={myArticle} />
       <ScrollToTopButton showBelow={250} />
       <style jsx global>{`
