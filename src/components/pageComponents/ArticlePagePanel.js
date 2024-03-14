@@ -52,7 +52,7 @@ const ArticlePagePanel = ({ article }) => {
       });
   }, []);
 
-  //_ Update when page resolution changes
+  //_ Update when page resolution change
   useEffect(() => {
     if (innerWidth === null) {
       setIsMobile(false);
