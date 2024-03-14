@@ -39,7 +39,8 @@ const ArticleHeader = ({ article }) => {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isLiked, setIsLiked] = useState(false);
-  const [like_number, setLike_number] = useState(article?.like_number == undefined ? 0 : article?.like_number); 
+  const [like_number, setLike_number] = useState(0); 
+  const [watch_number, setWatch_number] = useState(0); 
 
   useEffect(() => {
     setIsAuthChecked(false);
@@ -51,10 +52,20 @@ const ArticleHeader = ({ article }) => {
         fetch("/api/article/article_likeCountByUser/"+article?.url+"/likeCountByUser/"+data?.email)
           .then((res2) => res2.json())
           .then((data2) => {
-            let result = parseInt(data2.likeCount.rows[0].count , 10 ) >0;
+            let likeCount = parseInt(data2.likeCount.rows[0].count , 10 );
+            setLike_number(likeCount);
+            let result = likeCount >0;
             setIsLiked(result);
           });
       });
+
+      fetch("/api/article/article_watchCountByUrl/"+article?.url)
+        .then((res2) => res2.json())
+        .then((data2) => {
+          let watchCount = parseInt(data2.watchCount.rows[0].count , 10 );
+          setWatch_number(watchCount);
+        });
+
   }, []);
 
   //_ Update when page resolution changes
@@ -123,7 +134,7 @@ const ArticleHeader = ({ article }) => {
                     <VisibilityIcon fontSize="inherit" />
                   </IconButton>
                   <span style={{marginLeft:"5px"}}>
-                    {article?.view_number}
+                    {watch_number}
                   </span>
                   </div>
 
