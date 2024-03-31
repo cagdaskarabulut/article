@@ -428,6 +428,7 @@ const AdminPanel = () => {
                   isOneFullContent
                   leftContent={
                     <MyQuillEditor
+                      showInsertHtmlButton
                       quill={quill}
                       quillRef={quillRef}
                       activeStyle={{

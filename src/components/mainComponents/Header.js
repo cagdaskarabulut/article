@@ -2,14 +2,7 @@
 import styles from "./Header.module.scss";
 import { useRouter } from "next/navigation";
 import {
-  Autocomplete,
-  Button,
-  Chip,
   Container,
-  Grid,
-  IconButton,
-  InputAdornment,
-  TextField,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { wait } from "../../utils/CommonUtils";
@@ -21,13 +14,14 @@ import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
+import SearchBar from "../reusableComponents/SearchBar";
 
 const permanentMarker = Permanent_Marker({
   subsets: ["latin"],
   weight: ["400"],
 });
 
-export default function Header({ middleContent }) {
+export default function Header() {
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
@@ -101,45 +95,43 @@ export default function Header({ middleContent }) {
           }
           middleContent={
             <div style={{ height: "35px", marginTop: "15px" }}>
-              {middleContent}
+              {/* {middleContent} */}
+              <SearchBar />
             </div>
           }
           rightContent={
-            isAuthChecked ? (
-              <>
-                <div className={styles.SearchBoxStyle}>
+            <div className={styles.SearchBoxStyle}>
+              {!isAuthChecked && <CircularProgress />}
+
+              {isAuthChecked ? (
+                <>
                   {userName && (
                     <div style={{ fontWeight: "400" }}>
                       <span style={{ float: "right" }}>{userName}</span>
                       <br />
-                      <Button
-                        style={{ float: "right", marginTop: "10px" }}
-                        variant="contained"
-                        color="primary"
+                      <button
+                        className={styles.redButtonStyle}
                         onClick={() => signOut()}
                       >
                         Sign out
-                      </Button>
+                      </button>
                     </div>
                   )}
                   {!userName && (
                     <>
-                      <Button
-                        style={{ float: "right", marginTop: "10px" }}
-                        variant="contained"
-                        color="success"
-                        // onClick={handleClickOpen}
+                      <button
+                        className={styles.blueButtonStyle}
                         onClick={() => signIn()}
                       >
                         Sign in
-                      </Button>
+                      </button>
                     </>
                   )}
-                </div>
-              </>
-            ) : (
-              <></>
-            )
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
           }
         />
 

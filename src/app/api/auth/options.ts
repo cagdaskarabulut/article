@@ -4,7 +4,7 @@ import YandexProvider from "next-auth/providers/yandex";
 // import DiscordProvider from "next-auth/providers/discord";
 // import FacebookProvider from "next-auth/providers/facebook";
 // import LinkedinProvider from "next-auth/providers/linkedin";
-// import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider from "next-auth/providers/google";
 // import AppleProvider from "next-auth/providers/apple";
 // import EmailProvider from "next-auth/providers/email";
 // import MediumProvider from "next-auth/providers/medium";
@@ -18,6 +18,10 @@ const authOptions:NextAuthOptions = {
     YandexProvider({
       clientId: process.env.YANDEX_ID!,
       clientSecret: process.env.YANDEX_SECRET!,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
     }),
     // DiscordProvider({
     //   clientId: process.env.DISCORD_ID!,

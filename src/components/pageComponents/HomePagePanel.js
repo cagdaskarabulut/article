@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import styles from "./HomePagePanel.module.scss";
 import Header from "../mainComponents/Header";
@@ -14,6 +14,7 @@ import ArticleIcon from "@mui/icons-material/Article";
 import CardItem from "../reusableComponents/CardItem";
 import LoadingSkeletonCard from "../reusableComponents/LoadingSkeletonCard";
 import LoadingSkeletonArticle from "../reusableComponents/LoadingSkeletonArticle";
+import LoadMore from "./LoadMore";
 
 const HomePagePanel = () => {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
@@ -39,24 +40,26 @@ const HomePagePanel = () => {
     setLoadingLeftField(true);
     setLoadingRightField(true);
     //TODO seçilen dropdown a göre liste çekilecek
-    fetch("api/article/list_order_by_toprated")
+    // fetch("api/article/list_order_by_toprated")
+    fetch("api/article/list_filter?page=1&size=5&order=like_number")
       .then((res) => res.json())
       .then((data) => {
         setTopRatedArticleList(data?.article_list);
         setLoadingLeftField(false);
       });
-    fetch("/api/article/list_order_by_latest")
+    // fetch("/api/article/list_order_by_latest")
+    fetch("api/article/list_filter?page=1&size=5&order=create_date")
       .then((res) => res.json())
       .then((data) => {
         setLatestArticleList(data?.article_list);
         setLoadingRightField(false);
       });
-      // fetch("api/article/list_order_by_most_viewed")
-      // .then((res) => res.json())
-      // .then((data) => {
-      //   setTopRatedArticleList(data?.article_list);
-      //   setLoadingLeftField(false);
-      // });
+    // fetch("api/article/list_order_by_most_viewed")
+    // .then((res) => res.json())
+    // .then((data) => {
+    //   setTopRatedArticleList(data?.article_list);
+    //   setLoadingLeftField(false);
+    // });
   }, []);
 
   const LeftField = () => {
@@ -72,19 +75,20 @@ const HomePagePanel = () => {
                 <LoadingSkeletonCard isLoading={false} />
                 {latestArticleList?.rows?.map((item) => (
                   <>
-                  <CardItem
-                    url={item?.url}
-                    title={item?.title}
-                    topics={item?.topics.split(",")}
-                    create_date={item?.create_date}
-                    like_number={item?.like_number}
-                    body={item?.description}
-                    title_image={item?.title_image}
-                    is_manuel_page={item?.is_manuel_page}
-                  />
-                 </>
+                    <CardItem
+                      key={"CardItem_Id_HomePagePanel1" + item?.url}
+                      url={item?.url}
+                      title={item?.title}
+                      topics={item?.topics.split(",")}
+                      create_date={item?.create_date}
+                      like_number={item?.like_number}
+                      body={item?.description}
+                      title_image={item?.title_image}
+                      is_manuel_page={item?.is_manuel_page}
+                    />
+                  </>
                 ))}
-               </>
+              </>
             )}
           </div>
         </div>
@@ -105,6 +109,7 @@ const HomePagePanel = () => {
                 {topRatedArticleList?.rows?.map((item) => (
                   <>
                     <CardItem
+                      key={"CardItem_Id_HomePagePanel2" + item?.url}
                       url={item?.url}
                       title={item?.title}
                       topics={item?.topics.split(",")}
@@ -133,31 +138,34 @@ const HomePagePanel = () => {
     <>
       {/* <Loading isLoading={false}/> */}
       <div className={styles.ContainerPageContainerStyle}>
-      {isMobileChecked && (
-        <>
-        <div className={styles.HeaderStyle}>
-          <Header />
-        </div>
-        <div className={styles.ContentStyle}>
-          {!isMobile && (
-            <Container maxWidth="lg">
-              <MyGrid
-                leftContent={<LeftField />}
-                rightContent={<RightField />}
-              />
-            </Container>
-          )}
-          {isMobile && (
-            // <MyGrid leftContent={<LeftField />} rightContent={<RightField />} />
-            <MyGrid leftContent={<LeftField />} middleContent={<RightField />} />
-          )}
-        </div>
-        <FooterPanel />
+        {isMobileChecked && (
+          <>
+            <div className={styles.HeaderStyle}>
+              <Header />
+            </div>
+            <div className={styles.ContentStyle}>
+              {!isMobile && (
+                <Container maxWidth="lg">
+                  <MyGrid
+                    leftContent={<LeftField />}
+                    rightContent={<RightField />}
+                  />
+                </Container>
+              )}
+              {isMobile && (
+                <MyGrid
+                  leftContent={<LeftField />}
+                  middleContent={<RightField />}
+                />
+              )}
+            </div>
+            <FooterPanel />
 
-        <Analytics />
-        </>
+            <Analytics />
+          </>
         )}
       </div>
+      <LoadMore />
     </>
   );
   // }

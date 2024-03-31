@@ -22,7 +22,6 @@ import {
   TextField,
 } from "@mui/material";
 import ArticleIcon from "@mui/icons-material/Article";
-import CardItem from "../reusableComponents/CardItem";
 import LoadingSkeletonCard from "../reusableComponents/LoadingSkeletonCard";
 import LoadingSkeletonArticle from "../reusableComponents/LoadingSkeletonArticle";
 import Image from "next/image";
@@ -125,8 +124,9 @@ const ArticleHeader = ({ article }) => {
                 size="medium"
                 style={{ padding: "0px" }}
                 color={"default"}
+                href={"#commentsContentId"}
               >
-                <MessageIcon fontSize="inherit" />
+                <MessageIcon fontSize="inherit"/>
               </IconButton>
               <span style={{ marginLeft: "5px" }}>
                 {article?.comment_number}
@@ -155,12 +155,11 @@ const ArticleHeader = ({ article }) => {
               middleContent={
                 <div style={{ alignItems: "center" }}>
                   {article?.topics?.split(",")?.map((topic) => (
-                    <Chip
+                    topic && <button
+                      key={"ContentField"+article?.title}
                       className={styles.TopicChipStyle}
-                      label={topic}
-                      size="small"
                       onClick={() => console.log("chip tıklandı")}
-                    />
+                    >{topic}</button>
                   ))}
                 </div>
               }

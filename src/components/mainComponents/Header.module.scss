@@ -1,6 +1,7 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/colors.scss";
 @import "../../styles/globals.scss";
+@import "../../styles/buttons.scss";
 
 .PanelContainerStyle {
   top: 0 !important;
@@ -11,7 +12,6 @@
   
 
   .header {
-    height: 75px !important;
     justify-content: center;
     font-family: permanentMarker !important;
 
@@ -30,8 +30,9 @@
     }
 
     .SearchBoxStyle {
-      padding-right: 16px !important;
+      // padding-right: 16px !important;
       margin-right: 30px !important;
+      margin-top: 5px !important;
       // width: 200px !important;
       justify-content: end;
       float: right;
@@ -86,4 +87,16 @@
 
     }
   }
+}
+
+.blueButtonStyle{
+  min-width: 100px !important;
+  float: right !important; 
+  margin-top: 10px !important; 
+}
+
+.redButtonStyle{
+  min-width: 100px !important;
+  float: right !important; 
+  margin-top: 10px !important; 
 }

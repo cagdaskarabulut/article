@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
@@ -10,7 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
-import { Backdrop, CircularProgress } from '@mui/material';
+import { Backdrop, CircularProgress } from "@mui/material";
 
 const CardItem = ({
   url,
@@ -41,6 +42,8 @@ const CardItem = ({
     return (
       <>
         <span
+          key={"span1_" + url}
+          id={"span1_" + url}
           className={styles.CardHeaderTitleStyle}
           onClick={() => goToArticlePageAction()}
         >
@@ -48,6 +51,8 @@ const CardItem = ({
         </span>
         <br />
         <span
+          key={"span2_" + url}
+          id={"span2_" + url}
           className={styles.CardHeaderDateStyle}
           onClick={() => goToArticlePageAction()}
         >
@@ -60,10 +65,17 @@ const CardItem = ({
   const HeaderRightContent = (e) => {
     return (
       <div className={styles.CardHeaderRightStyle}>
-        <IconButton aria-label="share" onClick={copylink}>
+        <IconButton
+          key={"iconButton1_" + url}
+          id={"iconButton1_" + url}
+          aria-label="share"
+          onClick={copylink}
+        >
           <ShareIcon />
         </IconButton>
         <MyAlert
+          key={"MyAlert1_" + url}
+          id={"MyAlert1_" + url}
           text="The url path has been copied to your clipboard."
           isOpen={isCopyLinkMessageOpen}
           setIsOpen={setIsCopyLinkMessageOpen}
@@ -76,6 +88,8 @@ const CardItem = ({
     return (
       <>
         <div
+          key={"div1_" + url}
+          id={"div1_" + url}
           className={
             isSmallCardStyle
               ? styles.SmallBodyLeftContentStyle
@@ -91,25 +105,20 @@ const CardItem = ({
   const BodyRightContent = () => {
     return (
       <>
-        <div className={styles.BodyRightContentStyle}>
+        <div
+          key={"div2_" + url}
+          id={"div2_" + url}
+          className={styles.BodyRightContentStyle}
+        >
           {title_image && (
-            // <Image
-            //   onClick={() => goToArticlePageAction()}
-            //   src={title_image}
-            //   key={"image_" + url}
-            //   objectFit="contain"
-            //   width={100}
-            //   height={100}
-            //   style={{ float: "right" }}
-            // />
-
             <Image
+              key={"image_" + url}
+              id={"image_" + url}
+              alt={"img_" + url}
               onClick={() => goToArticlePageAction()}
               src={title_image}
-              key={"image_" + url}
-              layout={"fill"}
-              objectFit={"contain"}
-              style={{ float: "right" }}
+              fill
+              style={{ float: "right", objectFit: "contain" }}
             />
           )}
         </div>
@@ -118,8 +127,17 @@ const CardItem = ({
   };
 
   return (
-    <Card elevation={3} className={styles.CardStyle}>
-      <div className={styles.HeaderContent}>
+    <Card
+      elevation={3}
+      className={styles.CardStyle}
+      id={"card" + url}
+      key={"card" + url}
+    >
+      <div
+        className={styles.HeaderContent}
+        key={"div3_" + url}
+        id={"div3_" + url}
+      >
         <MyGrid
           leftContent={<HeaderLeftContent />}
           rightContent={<HeaderRightContent />}
@@ -127,7 +145,11 @@ const CardItem = ({
           isRightContentSmall
         ></MyGrid>
       </div>
-      <div className={styles.BodyContent}>
+      <div
+        className={styles.BodyContent}
+        key={"div4_" + url}
+        id={"div4_" + url}
+      >
         <MyGrid
           leftContent={<BodyLeftContent />}
           rightContent={<BodyRightContent />}
@@ -135,21 +157,38 @@ const CardItem = ({
           isRightContentSmall
         ></MyGrid>
       </div>
-      <div className={styles.TopicListStyle}>
-        {topics?.map((topic) => (
-          <Chip
-            className={styles.TopicChipStyle}
-            label={topic}
-            size="small"
-            onClick={() => console.log("chip tıklandı")}
-          />
-        ))}
-        <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={isLoading}
+      <div
+        className={styles.TopicListStyle}
+        key={"div5_" + url}
+        id={"div5_" + url}
       >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+        {topics?.map(
+          (topic) =>
+            topic && (
+              <button
+                key={"ChipCardItem" + topic}
+                className={styles.TopicChipStyle}
+                // onClick={() => router.push("/?search="+topic)}
+                onClick={async () => {
+                  router.push("/?search="+topic)
+                }}
+              >
+                {topic}
+              </button>
+            )
+        )}
+        <Backdrop
+          key={"Backdrop1_" + url}
+          id={"Backdrop1_" + url}
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={isLoading}
+        >
+          <CircularProgress
+            key={"CircularProgress1_" + url}
+            id={"CircularProgress1_" + url}
+            color="inherit"
+          />
+        </Backdrop>
       </div>
     </Card>
   );

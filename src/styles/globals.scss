@@ -24,6 +24,7 @@
   border-radius: 25px; 
   margin: 10px;
   padding: 20px;
+  padding-right: 0px;
   @include tablet-or-less {
     background-color: $background;
   }
@@ -31,9 +32,18 @@
 
 .TopicListStyle {
   margin-top: 16px;
+}
 
-  .TopicChipStyle {
-    margin-top: 5px;
-    margin-left: 5px;
-  }
+.TopicChipStyle {
+  padding: 2px 10px 2px 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  border: none;
+  margin-left: 5px;
+}
+
+.TopicChipStyle:hover {
+  cursor: pointer;
+  background-color: #f3f3f3;
+  border: none;
 }

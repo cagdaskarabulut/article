@@ -1,0 +1,64 @@
+@import "./colors.scss";
+@import "./mixins.scss";
+
+.whiteGreenButtonStyle, .greenButtonStyle, .redButtonStyle, .blueButtonStyle{
+  border-width: 1px ;
+  border-style: solid ;
+  padding: 5px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.whiteGreenButtonStyle:hover, .greenButtonStyle:hover, .redButtonStyle:hover, .blueButtonStyle:hover {
+  cursor: pointer;
+}
+
+.whiteGreenButtonStyle {
+  color: $main;
+  background-color: #e6f4e7 ;
+  border-color: #2F7D31 ;
+}
+
+.whiteGreenButtonStyle:hover{
+  color: white ;
+  background-color: #2F7D31 ;
+  border-color: #2F7D31 ;
+}
+
+.greenButtonStyle {
+  color: white ;
+  background-color: #2F7D31 ;
+  border-color: #e6f4e7 ;
+}
+
+.blueButtonStyle {
+  color: white ;
+  background-color: $blue ;
+  border-color: $blue ;
+}
+
+.greenButtonStyle:hover {
+  color: white ;
+  background-color: #2F7D31 ;
+  border-color: #2F7D31 ;
+}
+
+.redButtonStyle {
+  color: white ;
+  background-color: $orangeDark ;
+  border-color: white ;
+}
+
+.redButtonStyle:hover {
+  color: white ;
+  background-color: $orangeDarkHover ;
+  border-color: $orangeDarkHover ;
+}
+
+.blueButtonStyle:hover {
+  color: white ;
+  background-color: $blueSecondary ;
+  border-color: $blueSecondary ;
+
+}

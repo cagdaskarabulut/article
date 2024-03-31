@@ -28,5 +28,5 @@ export const getStringWithCommaSeperatedFromList = (myStringList) => {
       result = result + "," + activeName;
     }
   }
-  return result;
+  return ","+result+",";
 };

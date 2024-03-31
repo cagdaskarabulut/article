@@ -8,24 +8,13 @@ import useWindowSize from "@rooks/use-window-size";
 import FooterPanel from "../mainComponents/FooterPanel";
 import MyGrid from "../toolComponents/MyGrid";
 import { Analytics } from "@vercel/analytics/react";
-import Autocomplete from "@mui/material/Autocomplete";
 import {
-  Backdrop,
-  Button,
-  Chip,
-  CircularProgress,
   Container,
-  Link,
-  Skeleton,
-  TextField,
 } from "@mui/material";
-import ArticleIcon from "@mui/icons-material/Article";
-import CardItem from "../reusableComponents/CardItem";
-import LoadingSkeletonCard from "../reusableComponents/LoadingSkeletonCard";
-import LoadingSkeletonArticle from "../reusableComponents/LoadingSkeletonArticle";
 import Image from "next/image";
 import { format } from "date-fns";
 import ArticleHeader from "./ArticleHeader";
+import Comments from "./Comments";
 
 const ArticlePagePanel = ({ article }) => {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
@@ -41,14 +30,13 @@ const ArticlePagePanel = ({ article }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-            fetch("/api/article/increase_view_number", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                url: article?.url,
-              }),
-            })
-              .then((res) => res.json());
+        fetch("/api/article/increase_view_number", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            url: article?.url,
+          }),
+        }).then((res) => res.json());
       });
   }, []);
 
@@ -65,25 +53,37 @@ const ArticlePagePanel = ({ article }) => {
     return (
       <>
         <div className={styles.PanelContainerStyle}>
-        <Container maxWidth="lg">
-          <div className={styles.HomePageInfoStyle}>
-            <ArticleHeader article={article} />
-            <br />
-            <div className={styles.ArticleImageContainerStyle}>
-              {article?.title_image && (
-                <Image
-                  src={article?.title_image}
-                  alt={"img_" + article?.url}
-                  fill={true}
-                  objectFit="contain"
-                />
-              )}
+          <Container maxWidth="lg">
+            <div className={styles.HomePageInfoStyle}>
+              <ArticleHeader article={article} />
+              <br />
+              <div className={styles.ArticleImageContainerStyle}>
+                {article?.title_image && (
+                  <Image
+                    src={article?.title_image}
+                    alt={"img_" + article?.url}
+                    fill={true}
+                    objectFit="contain"
+                  />
+                )}
+              </div>
+              <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
-          </div>
           </Container>
         </div>
       </>
+    );
+  };
+
+  const CommentField = () => {
+    return (
+      <div className={styles.PanelContainerStyle}>
+        <Container maxWidth="lg">
+          <div className={styles.HomePageInfoStyle}>
+            <Comments article={article} />
+          </div>
+        </Container>
+      </div>
     );
   };
 
@@ -95,6 +95,7 @@ const ArticlePagePanel = ({ article }) => {
         </div>
         <Container maxWidth="lg" className={styles.ContentStyle}>
           <MyGrid leftContent={<ContentField />} isOneFullContent />
+          <MyGrid leftContent={<CommentField />} isOneFullContent />
         </Container>
         <FooterPanel />
 

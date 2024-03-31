@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 
 import {
@@ -12,7 +12,16 @@ import {
   TextField,
 } from "@mui/material";
 
-const TopicList = ({ topicList, setTopicList, isRefreshingTopicList, setIsRefreshingTopicList }) => {
+const TopicList = ({
+  label,
+  topicList,
+  setTopicList,
+  isRefreshingTopicList,
+  setIsRefreshingTopicList,
+  isSingleSelection,
+  activeStyle,
+  activeInputStyle,
+}) => {
   const [allTopicList, setAllTopicList] = useState([]);
   // const timestamp = Date.now(); // This would be the timestamp you want to format
 
@@ -22,7 +31,7 @@ const TopicList = ({ topicList, setTopicList, isRefreshingTopicList, setIsRefres
       .then((data) => {
         setAllTopicList(data?.topic_list.rows);
       });
-      setIsRefreshingTopicList(false);
+    setIsRefreshingTopicList(false);
   }, []);
 
   useEffect(() => {
@@ -31,21 +40,42 @@ const TopicList = ({ topicList, setTopicList, isRefreshingTopicList, setIsRefres
       .then((data) => {
         setAllTopicList(data?.topic_list.rows);
       });
-      setIsRefreshingTopicList(false);
-  }, [isRefreshingTopicList,setIsRefreshingTopicList,topicList]);
+    setIsRefreshingTopicList(false);
+  }, [isRefreshingTopicList, setIsRefreshingTopicList, topicList]);
 
   return (
     <div>
-      <Autocomplete
-        multiple
-        id="tags-standard"
-        options={allTopicList}
-        getOptionLabel={(option) => option?.name}
-        onChange={(event, newValue) => {
-          setTopicList(newValue);
-        }}
-        renderInput={(params) => <TextField {...params} placeholder="Topics" />}
-      />
+      {isSingleSelection && (
+        <Autocomplete
+        freeSolo
+        disableClearable
+          style={activeStyle}
+          id="tags-standard"
+          options={allTopicList}
+          getOptionLabel={(option) => option?.name}
+          onChange={(event, newValue) => {
+            setTopicList(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} style={activeInputStyle} label={label} />
+          )}
+        />
+      )}
+      {!isSingleSelection && (
+        <Autocomplete
+          multiple
+          style={activeStyle}
+          id="tags-standard"
+          options={allTopicList}
+          getOptionLabel={(option) => option?.name}
+          onChange={(event, newValue) => {
+            setTopicList(newValue);
+          }}
+          renderInput={(params) => (
+            <TextField {...params} style={activeInputStyle} label={label} />
+          )}
+        />
+      )}
     </div>
   );
 };
