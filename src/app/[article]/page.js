@@ -2,7 +2,7 @@ import MetaPanel from "../../components/mainComponents/MetaPanel";
 import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopButton";
 
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 async function getArticle(article) {
   const res = await fetch(process.env.URL + "/api/article/" + article);
