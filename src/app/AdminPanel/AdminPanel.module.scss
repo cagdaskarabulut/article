@@ -1,6 +1,7 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/colors.scss";
-@import "../../styles/globals.scss";
+@import "../../styles/common.scss";
+// @import "../../app/globals.scss";
 
 .ImageContainerStyle{
   width: 100%;  
@@ -27,5 +28,8 @@
       border-color: red !important;  
     }
   }
-  
 }
+
+// .subTitleStyle{
+//   color: $fontTitle;
+// }

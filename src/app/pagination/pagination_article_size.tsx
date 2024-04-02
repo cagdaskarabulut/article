@@ -23,14 +23,14 @@ export async function fetchArticleSize(
   if (search) {
     
     responseSize = await fetch(
-      `http://localhost:3000/api/article/list_filter_size?&search=${search}`
+      `${process.env.URL}/api/article/list_filter_size?&search=${search}`
     );
     const dataSize = await responseSize.json();
     listSize = dataSize?.article_list_size?.rows[0]?.count;
   } else {
     
     responseSize = await fetch(
-      `http://localhost:3000/api/article/list_filter_size?&order=${orderby}`
+      `${process.env.URL}/api/article/list_filter_size?&order=${orderby}`
     );
     const dataSize = await responseSize.json();
     listSize = dataSize?.article_list_size?.rows[0].count;

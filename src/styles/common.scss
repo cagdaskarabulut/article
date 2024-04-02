@@ -1,19 +1,5 @@
-@import "./colors.scss";
-@import "./mixins.scss";
-
-.backgroundColorStyle {
-  background-color: $background;
-}
-.logoStyle{
-  color: $blue;
-}
-
-.titleStyle{
-  color: $fontTitle;
-  text-align: center;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
+@import "../styles/colors.scss";
+@import "../styles/mixins.scss";
 
 .subTitleStyle{
   color: $fontTitle;
@@ -28,10 +14,6 @@
   @include tablet-or-less {
     background-color: $background;
   }
-}
-
-.TopicListStyle {
-  margin-top: 16px;
 }
 
 .TopicChipStyle {

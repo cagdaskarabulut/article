@@ -1,3 +1,5 @@
+import "../../src/app/globals.scss"
+
 export const metadata = {
   title: 'NewsZipped - Read Articles and News on Various Topics',
   siteName: 'NewsZipped',

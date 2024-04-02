@@ -22,7 +22,7 @@ export async function fetchArticle(
   const pageSize = page * size;
   if (search) {
     responseSize = await fetch(
-      `http://localhost:3000/api/article/list_filter_size?&search=${search}`
+      `${process.env.URL}/api/article/list_filter_size?&search=${search}`
     );
 
     const dataSize = await responseSize.json();
@@ -30,18 +30,18 @@ export async function fetchArticle(
 
     if (listSize >= pageSize) {
       response = await fetch(
-        `http://localhost:3000/api/article/list_filter?page=${page}&size=${size}&search=${search}`
+        `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&search=${search}`
       );
       data = await response.json();
     } else if(page == 1){
       response = await fetch(
-        `http://localhost:3000/api/article/list_filter?page=0&size=${listSize}&search=${search}`
+        `${process.env.URL}/api/article/list_filter?page=0&size=${listSize}&search=${search}`
       );
       data = await response.json();
     } else if (listSize % size > 0){
       let lastPageSize = listSize % size;
       response = await fetch(
-        `http://localhost:3000/api/article/list_filter?page=${page}&size=${size}&search=${search}&lastPageSize=${lastPageSize}`
+        `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&search=${search}&lastPageSize=${lastPageSize}`
       );
       data = await response.json();
     } else {
@@ -49,25 +49,25 @@ export async function fetchArticle(
     }
   } else {
     responseSize = await fetch(
-      `http://localhost:3000/api/article/list_filter_size?&order=${orderby}`
+      `${process.env.URL}/api/article/list_filter_size?&order=${orderby}`
     );
     const dataSize = await responseSize.json();
     let listSize = dataSize?.article_list_size?.rows[0].count;
 
     if (listSize > pageSize) {
       response = await fetch(
-        `http://localhost:3000/api/article/list_filter?page=${page}&size=${size}&order=${orderby}`
+        `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&order=${orderby}`
       );
       data = await response.json();
     } else if(page == 1){
       response = await fetch(
-        `http://localhost:3000/api/article/list_filter?page=0&size=${listSize}&order=${orderby}`
+        `${process.env.URL}/api/article/list_filter?page=0&size=${listSize}&order=${orderby}`
       );
       data = await response.json();
     } else if (listSize % size > 0){
       let lastPageSize = listSize % size;
       response = await fetch(
-        `http://localhost:3000/api/article/list_filter?page=${page}&size=${size}&order=${orderby}&lastPageSize=${lastPageSize}`
+        `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&order=${orderby}&lastPageSize=${lastPageSize}`
       );
       data = await response.json();
     } else {

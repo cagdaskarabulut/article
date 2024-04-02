@@ -1,6 +1,7 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/colors.scss";
-@import "../../styles/globals.scss";
+@import "../../styles/common.scss";
+// @import "../../app/globals.scss";
 
 .ArticleImageContainerStyle{
   width: 100%;  
@@ -10,3 +11,7 @@
     height: 25vh; 
   }
 }
+
+// .subTitleStyle{
+//   color: $fontTitle;
+// }

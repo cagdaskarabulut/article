@@ -1,3 +1,10 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/colors.scss";
-@import "../../styles/globals.scss";
+// @import "../../app/globals.scss";
+
+.titleStyle{
+  color: $fontTitle;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
