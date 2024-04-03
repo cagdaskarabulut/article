@@ -5,7 +5,6 @@ import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopButton";
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 
-
 async function getArticle(article) {
   const res = await fetch(process.env.URL + "/api/article/" + article);
   return res.json();
