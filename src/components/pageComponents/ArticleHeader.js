@@ -101,7 +101,6 @@ const ArticleHeader = ({ article }) => {
                 <ThumbUpIcon fontSize="inherit" />
               </IconButton>
               <span style={{ marginLeft: "5px" }}>
-                {/* {article?.like_number} */}
                 {like_number}
               </span>
             </div>
@@ -155,11 +154,15 @@ const ArticleHeader = ({ article }) => {
               middleContent={
                 <div style={{ alignItems: "center" }}>
                   {article?.topics?.split(",")?.map((topic) => (
-                    topic && <button
-                      key={"ContentField"+article?.title}
+                    topic && 
+                    <button
+                      key={"ContentField" + article?.title}
                       className={styles.TopicChipStyle}
-                      onClick={() => console.log("chip tıklandı")}
-                    >{topic}</button>
+                      onClick={() => router.push("/?search="+topic)}
+                    >
+                      {topic}
+                    </button>
+                    
                   ))}
                 </div>
               }

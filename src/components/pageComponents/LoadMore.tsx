@@ -30,7 +30,7 @@ function LoadMore({orderType,search,totalListSize}) {
      
     if (inView && !isFinished) {
       setIsLoading(true);
-      const delay = 500;
+      const delay = 200;
       const timeoutId = setTimeout(() => {
 
         if(totalListSize<(page*rowForPage)){

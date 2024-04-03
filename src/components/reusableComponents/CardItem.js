@@ -168,10 +168,7 @@ const CardItem = ({
               <button
                 key={"ChipCardItem" + topic}
                 className={styles.TopicChipStyle}
-                // onClick={() => router.push("/?search="+topic)}
-                onClick={async () => {
-                  router.push("/?search="+topic)
-                }}
+                onClick={() => router.push("/?search="+topic)}
               >
                 {topic}
               </button>

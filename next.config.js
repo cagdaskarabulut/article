@@ -2,6 +2,7 @@ const generateRobotsTxtAndSitemapXml = require("./scripts/generate-robots-txt");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   experimental: {
     instrumentationHook: true,
   },
@@ -18,8 +19,7 @@ const nextConfig = {
 module.exports = nextConfig;
 
 module.exports = {
-  // reactStrictMode: false,
-  // webpack5: true,
+  reactStrictMode: false,
   webpack5: true,
   images: {
     domains: ["127.0.0.1","localhost","newszipped.com","https://newszipped-new.vercel.app"],
