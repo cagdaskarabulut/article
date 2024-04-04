@@ -7,6 +7,8 @@ import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopButton";
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 
+// export const dynamicParams = false;
+
 async function getArticle(article) {
   const res = await fetch(process.env.URL + "/api/article/" + article);
   return res.json();
@@ -19,7 +21,6 @@ export async function generateStaticParams() {
   return articleUrlList?.article_url_list?.rows.map((p) => ({
     article: p.url,
   }));
-  // return [{ article: ("http://localhost:3000/how-can-i-be-a-python-developer") }]
 }
 
 export default async function ArticlePage({ params }) {
@@ -43,4 +44,5 @@ export default async function ArticlePage({ params }) {
   } else {
     return <NotFoundPage />;
   }
+  // return <><h1>{article}</h1></>;
 }
