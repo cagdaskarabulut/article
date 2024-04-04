@@ -21,13 +21,20 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx", "src/app/api/auth/[...nextauth]/route.ts", "src/pages/api/article/[url].js", "src/pages/api/article/[is_liked_by_user].js", "src/app/[article]/page.js", "src/app/[article]/page.js"],
+    "**/*.tsx",
+    "src/app/api/auth/[...nextauth]/route.ts",
+    "src/pages/api/article/[url].js",
+    "src/pages/api/article/[is_liked_by_user].js",
+    "src/app/[article]/page.js",
+    "src/app/[article]/page.js"
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import { sql } from '@vercel/postgres';
 import type { NextApiRequest, NextApiResponse } from 'next';
  
