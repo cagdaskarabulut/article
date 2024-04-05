@@ -100,9 +100,7 @@ const ArticleHeader = ({ article }) => {
               >
                 <ThumbUpIcon fontSize="inherit" />
               </IconButton>
-              <span style={{ marginLeft: "5px" }}>
-                {like_number}
-              </span>
+              <span style={{ marginLeft: "5px" }}>{like_number}</span>
             </div>
 
             <div style={{ float: "right", marginLeft: "25px" }}>
@@ -125,7 +123,7 @@ const ArticleHeader = ({ article }) => {
                 color={"default"}
                 href={"#commentsContentId"}
               >
-                <MessageIcon fontSize="inherit"/>
+                <MessageIcon fontSize="inherit" />
               </IconButton>
               <span style={{ marginLeft: "5px" }}>
                 {article?.comment_number}
@@ -144,43 +142,85 @@ const ArticleHeader = ({ article }) => {
 
           <Divider />
           <div className={styles.HeaderActionsContainerStyle}>
-            <MyGrid
-              leftContent={
-                <span className={styles.CardHeaderDateStyle}>
-                  {article?.create_date &&
-                    format(article?.create_date, "dd/MM/yyyy")}
-                </span>
-              }
-              middleContent={
-                <div style={{ alignItems: "center" }}>
-                  {article?.topics?.split(",")?.map((topic) => (
-                    topic && 
-                    <button
-                      key={"ContentField" + article?.title}
-                      className={styles.TopicChipStyle}
-                      onClick={() => router.push("/?search="+topic)}
-                    >
-                      {topic}
-                    </button>
+            {isMobile && (
+              <>
+                <MyGrid
+                isOneFullContent
+                  leftContent={
+                    <>
+                    <span className={styles.CardHeaderDateStyle}>
+                      {article?.create_date &&
+                        format(article?.create_date, "dd/MM/yyyy")}
+                    </span>
                     
-                  ))}
-                </div>
-              }
-              rightContent={
-                <>
-                  {!(isLoadedLike && isLoadedWatch) && (
-                    <LinearProgress color="success" />
-                  )}
+                    {!(isLoadedLike && isLoadedWatch) && (
+                      <LinearProgress color="success" />
+                    )}
 
-                  {isLoadedLike && isLoadedWatch && <RightContentField />}
-                </>
-              }
-            />
+                    {isLoadedLike && isLoadedWatch && <RightContentField />}
+                  </>
+                  }
+                />
+
+                <MyGrid
+                  isOneFullContent
+                  leftContent={
+                    <div style={{ alignItems: "center", marginLeft: "-5px" }}>
+                      {article?.topics?.split(",")?.map(
+                        (topic) =>
+                          topic && (
+                            <button
+                              key={"ContentField" + article?.title}
+                              className={styles.TopicChipStyle}
+                              onClick={() => router.push("/?search=" + topic)}
+                            >
+                              {topic}
+                            </button>
+                          )
+                      )}
+                    </div>
+                  }
+                />
+              </>
+            )}
+
+            {!isMobile && (
+              <MyGrid
+                leftContent={
+                  <span className={styles.CardHeaderDateStyle}>
+                    {article?.create_date &&
+                      format(article?.create_date, "dd/MM/yyyy")}
+                  </span>
+                }
+                middleContent={
+                  <div style={{ alignItems: "center" }}>
+                    {article?.topics?.split(",")?.map(
+                      (topic) =>
+                        topic && (
+                          <button
+                            key={"ContentField" + article?.title}
+                            className={styles.TopicChipStyle}
+                            onClick={() => router.push("/?search=" + topic)}
+                          >
+                            {topic}
+                          </button>
+                        )
+                    )}
+                  </div>
+                }
+                rightContent={
+                  <>
+                    {!(isLoadedLike && isLoadedWatch) && (
+                      <LinearProgress color="success" />
+                    )}
+
+                    {isLoadedLike && isLoadedWatch && <RightContentField />}
+                  </>
+                }
+              />
+            )}
           </div>
           <Divider />
-
-          {/* //TODO medium daki like ve yorum alanına benzer bir tool geliştir, tarihi de bu tool içerisine alabilirsin
-           */}
         </div>
       </>
     );

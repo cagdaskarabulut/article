@@ -77,7 +77,7 @@ const ArticlePagePanel = ({ article }) => {
 
   const CommentField = () => {
     return (
-      <div className={styles.PanelContainerStyle}>
+      <div className={styles.PanelContainerStyle} style={{paddingBottom: "20vh"}}>
         <Container maxWidth="lg">
           <div className={styles.HomePageInfoStyle}>
             <Comments article={article} />
@@ -98,7 +98,6 @@ const ArticlePagePanel = ({ article }) => {
           <MyGrid leftContent={<CommentField />} isOneFullContent />
         </Container>
         <FooterPanel />
-
         <Analytics />
       </div>
     </>

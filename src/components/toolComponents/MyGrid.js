@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import useWindowSize from "@rooks/use-window-size";
@@ -18,16 +19,23 @@ const MyGrid = ({
   isOneFullContent,
   contentPosition,
   forHeader,
-  isStaticWidth
+  isStaticWidth,
+  isHideRightSideOnMobile
 }) => {
   //_ MobilePart
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
+  const [isFinallyOneFullContent, setIsFinallyOneFullContent] = useState(false);
   useEffect(() => {
+    setIsFinallyOneFullContent(isOneFullContent);
     if (innerWidth === null) {
       setIsMobile(false);
     } else {
-      setIsMobile(innerWidth < MOBILE_SCREEN_SIZE);
+      let nowMobile = (innerWidth < MOBILE_SCREEN_SIZE);
+      setIsMobile(nowMobile);
+      if(nowMobile && isHideRightSideOnMobile){
+        setIsFinallyOneFullContent(true);
+      }
     }
   }, [innerWidth]);
 
@@ -45,12 +53,12 @@ const MyGrid = ({
         alignItems={contentPosition}
         columns={18}
       >
-        {isOneFullContent && (
+        {isFinallyOneFullContent && (
           <Grid item xs={18}>
             {leftContent}
           </Grid>
         )}
-        {!isOneFullContent && !middleContent && (
+        {!isFinallyOneFullContent && !middleContent && (
           <>
             <Grid item xs={(isMobile&&!isStaticWidth) ? 18 : (isRightContentSmall ? 14 : 12)}>
               {leftContent}
@@ -61,15 +69,15 @@ const MyGrid = ({
           </>
         )}
         
-        {!isOneFullContent && middleContent && (
+        {!isFinallyOneFullContent && middleContent && (
           <>
-            <Grid item xs={(isMobile&&!isStaticWidth) ? (forHeader ? 3 : 18) : (forHeader ? 7 : 5)}>
+            <Grid item xs={(isMobile&&!isStaticWidth) ? (forHeader ? 4 : 18) : (forHeader ? 7 : 5)}>
               {leftContent}
             </Grid>
-            <Grid item xs={(isMobile&&!isStaticWidth) ? (forHeader ? 5 : 18) : (forHeader ? 4 : 8)}>
+            <Grid item xs={(isMobile&&!isStaticWidth) ? (forHeader ? 10 : 18) : (forHeader ? 4 : 8)}>
               {middleContent}
             </Grid>
-            <Grid item xs={(isMobile&&!isStaticWidth) ? (forHeader ? 10 : 18) : (forHeader ? 7 : 5)}>
+            <Grid item xs={(isMobile&&!isStaticWidth) ? (forHeader ? 4 : 18) : (forHeader ? 7 : 5)}>
               {rightContent}
             </Grid>
           </>

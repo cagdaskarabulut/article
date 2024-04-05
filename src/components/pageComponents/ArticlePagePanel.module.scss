@@ -60,8 +60,8 @@
 .PanelContainerStyle {
   background-color: white !important;
   border-radius: 5px;
-  margin-left: 30px;
-  margin-right: 30px;
+  // margin-left: 30px;
+  // margin-right: 30px;
 
   @include tablet-or-less {
     margin-left: 0px;

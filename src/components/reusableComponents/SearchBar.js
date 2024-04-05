@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-export default function SearchBar() {
+export default function SearchBar({setIsLoadingFullPage}) {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
 
@@ -20,8 +20,16 @@ export default function SearchBar() {
   };
 
   const searchAction = () => {
+    setIsLoadingFullPage(true);
     if (searchValue) {
-      router.push("/?search="+searchValue);
+      const handler = setTimeout(() => {
+        router.push("/?search="+searchValue);
+        setIsLoadingFullPage(false);
+      }, 500);
+      setSearchValue("");
+      return () => {
+        clearTimeout(handler);
+      };
     }
   };
 
@@ -29,6 +37,7 @@ export default function SearchBar() {
     <div className={styles.SearchBoxStyle}>
       {/* <h1> Test </h1> */}
           <TextField
+          value={searchValue}
             // onChange={(path, value) => handleInputChange(path, value)}
             onChange={(event) => {
               handleInputChange(event.target.value);

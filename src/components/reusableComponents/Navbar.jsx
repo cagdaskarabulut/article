@@ -4,39 +4,33 @@ import NavbarItem from "./NavbarItem";
 import styles from "./NavBar.module.scss";
 import { Autocomplete, Container, Divider, TextField } from "@mui/material";
 import TopicList from "../../components/TopicList";
+import useWindowSize from "@rooks/use-window-size";
+import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 
 export default function Navbar() {
+  const { innerWidth } = useWindowSize();
+  const [isMobile, setIsMobile] = useState(false);
   const [topicList, setTopicList] = useState([]);
   const [isRefreshingTopicList, setIsRefreshingTopicList] = useState(true);
+
+  useEffect(() => {
+    if (innerWidth === null) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(innerWidth < MOBILE_SCREEN_SIZE);
+    }
+  }, [innerWidth]);
 
   return (
     <>
       <Divider />
-      {/* <br /> */}
       <div className={styles.NavbarContainerStyle}>
-        <NavbarItem title="Order By Latest" param="create_date" />
-        <NavbarItem title="Order By Likes" param="like_number" />
-        <NavbarItem title="Order By Views" param="view_number" />
-        <NavbarItem title="Order By Comments" param="comment_number" />
-
-        {/* <Autocomplete
-          options={options}
-          sx={{ width: 300 }}
-        /> */}
-        {/* <div className={styles.TopicContainerStyle}>
-          <TopicList
-            isSingleSelection
-            label="Search"
-            topicList={topicList}
-            setTopicList={setTopicList}
-            isRefreshingTopicList={isRefreshingTopicList}
-            setIsRefreshingTopicList={setIsRefreshingTopicList}
-            activeStyle={{minWidth: "200px"}}
-            activeInputStyle={{padding:"0px", backgroundColor: "#e6f4e7", borderColor: "#2F7D31" }}
-          />
-        </div> */}
+        {isMobile ? (<span>Order by : </span>) : <></>}
+        <NavbarItem title={isMobile ? "Date" : "Order By Latest"} param="create_date" />
+        <NavbarItem title={isMobile ? "Like" : "Order By Likes"} param="like_number" />
+        <NavbarItem title={isMobile ? "View" : "Order By Views"} param="view_number" />
+        <NavbarItem title={isMobile ? "Comment" : "Order By Comments"} param="comment_number" />
       </div>
-      {/* <br /> */}
       <Divider />
     </>
   );
