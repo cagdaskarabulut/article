@@ -44,7 +44,7 @@ export default async function Home({ searchParams }) {
       </div>
       <div className={styles.ContentStyle}>
         <Container maxWidth="lg">
-          
+        {mainDataSize>0 && (
           <MyGrid
             leftContent={
               <>
@@ -88,7 +88,10 @@ export default async function Home({ searchParams }) {
             forHeader={undefined}
             isStaticWidth={undefined}
             isHideRightSideOnMobile={true}
+            isHideWhileLoading={true}
+            isShowLoadingBarWhileLoading={true}
           />
+        )}
         </Container>
         <ScrollToTopButton showBelow={250} />
       </div>

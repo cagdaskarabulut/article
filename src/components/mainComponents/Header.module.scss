@@ -93,7 +93,17 @@
 .blueButtonStyle{
   min-width: 100px !important;
   float: right !important; 
-  margin-top: 10px !important; 
+  margin-top: 20px !important; 
+}
+
+.blueButtonStyleSmall{
+  color: white ;
+  background-color: $blue ;
+  border-color: $blue ;
+  min-width: 50px !important;
+  float: right !important; 
+  margin-top: 15px !important; 
+  border-radius: 3px;
 }
 
 .redButtonStyle{

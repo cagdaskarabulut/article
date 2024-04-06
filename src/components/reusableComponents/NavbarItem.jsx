@@ -11,19 +11,21 @@ export default function NavbarItem({ title, param }) {
   const orderby = searchParams.get('orderby') || 'create_date';
   const [isLoadingFullPage, setIsLoadingFullPage] = useState(false);
 
-  const goTarget = () => {
-    setIsLoadingFullPage(true);
-    const handler = setTimeout(() => {
-      setIsLoadingFullPage(false);
-    }, 200);
-    return () => {
-      clearTimeout(handler);
-    };
-  }
+  // const goTarget = () => {
+  //   console.log("goTarget tıklandı");
+  //   setIsLoadingFullPage(true);
+  //   const handler = setTimeout(() => {
+  //     setIsLoadingFullPage(false);
+  //   }, 200);
+  //   return () => {
+  //     clearTimeout(handler);
+  //   };
+  // }
 
   return (
     <>
     <LoadingFullPage isLoading={isLoadingFullPage} />
+    
       <Link
       key={"NavbarItemId_"+param}
       className={
@@ -31,7 +33,7 @@ export default function NavbarItem({ title, param }) {
           ? styles.greenButtonStyle
           : styles.whiteGreenButtonStyle
       }
-      onClick={() => goTarget}
+      // onClick={() => goTarget}
         href={`/?orderby=${param}`}
       >
         {title}

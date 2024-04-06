@@ -20,6 +20,7 @@ import {
   Container,
   Backdrop,
   CircularProgress,
+  Skeleton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MyGrid from "../toolComponents/MyGrid";
@@ -29,7 +30,7 @@ import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import SearchBar from "../reusableComponents/SearchBar";
-import LinearProgress from "@mui/material/LinearProgress";
+import LoginIcon from "@mui/icons-material/Login";
 
 const permanentMarker = Permanent_Marker({
   subsets: ["latin"],
@@ -63,6 +64,46 @@ export default function Header() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const SkeletonHeader = () => {
+    return (
+      <div style={{ marginTop: "10px", marginBottom: "10px" }}>
+        <MyGrid
+          forHeader={true}
+          leftContent={
+            <Skeleton
+              animation="wave"
+              variant="rounded"
+              width={isMobile ? 48 : 64}
+              height={isMobile ? 48 : 64}
+              style={{ marginTop: "-5px" }}
+            />
+          }
+          middleContent={
+            <Skeleton
+              animation="wave"
+              variant="rounded"
+              height={35}
+              style={{ marginTop: "10px" }}
+            />
+          }
+          rightContent={
+            <Skeleton
+              animation="wave"
+              variant="circular"
+              width={32}
+              height={32}
+              style={{
+                float: "right",
+                marginTop: "5px",
+                marginRight: "5px",
+              }}
+            />
+          }
+        />
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -118,170 +159,174 @@ export default function Header() {
       <LoadingFullPage isLoading={isLoadingFullPage} />
       <div className={styles.PanelContainerStyle}>
         <Container className={styles.header}>
+          {!isAuthChecked && (
+            // <LinearProgress color="success"
+            //   style={{
+            //     marginTop: "25px",
+            //     marginBottom: "25px"
+            //   }}
+            // />
+            <SkeletonHeader />
+          )}
 
+          {isAuthChecked && (
+            <MyGrid
+              forHeader={true}
+              leftContent={
+                <>
+                  <h1 className={styles.LogoStyle} style={{ marginTop: "5px" }}>
+                    <Image
+                      src={"/images/logo.png"}
+                      width={isMobile ? 48 : 64}
+                      height={isMobile ? 48 : 64}
+                      onClick={() => goHomePage()}
+                      alt="newszipped-logo"
+                    />
+                  </h1>
+                </>
+              }
+              middleContent={
+                <div style={{ height: "35px", marginTop: "15px" }}>
+                  <SearchBar setIsLoadingFullPage={setIsLoadingFullPage} />
+                </div>
+              }
+              rightContent={
+                <>
+                  {/* While loading*/}
+                  {!isAuthChecked && (
+                    <CircularProgress
+                      style={{
+                        float: "right",
+                        marginTop: "10px",
+                        width: "32px",
+                        height: "32px",
+                      }}
+                    />
+                  )}
 
-        {!isAuthChecked && (
-          <LinearProgress color="success" 
-            style={{
-              marginTop: "25px",
-              marginBottom: "25px"
-            }}
-          />
-          // <CircularProgress
-          //   style={{
-          //     float: "right",
-          //     marginTop: "10px",
-          //     width: "32px",
-          //     height: "32px",
-          //   }}
-          // />
-        )}
-
-{isAuthChecked && (
-          <MyGrid
-            forHeader={true}
-            leftContent={
-              <>
-                <h1 className={styles.LogoStyle} style={{ marginTop: "5px" }}>
-                  <Image
-                    src={"/images/logo.png"}
-                    width={isMobile ? 48 : 64}
-                    height={isMobile ? 48 : 64}
-                    onClick={() => goHomePage()}
-                    alt="newszipped-logo"
-                  />
-                </h1>
-              </>
-            }
-            middleContent={
-              <div style={{ height: "35px", marginTop: "15px" }}>
-                <SearchBar setIsLoadingFullPage={setIsLoadingFullPage} />
-              </div>
-            }
-            rightContent={
-              <>
-                {/* While loading*/}
-                {!isAuthChecked && (
-                  <CircularProgress
-                    style={{
-                      float: "right",
-                      marginTop: "10px",
-                      width: "32px",
-                      height: "32px",
-                    }}
-                  />
-                )}
-
-                {isAuthChecked ? (
-                  <>
-                    {/* If user logged in */}
-                    {userName && (
-                      <>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            textAlign: "center",
-                            marginTop: "10px",
-                            float: "right",
-                          }}
-                        >
-                          <Tooltip title={userEmail}>
-                            <IconButton
-                              onClick={handleClick}
-                              size="small"
-                              sx={{ ml: 2 }}
-                              aria-controls={open ? "account-menu" : undefined}
-                              aria-haspopup="true"
-                              aria-expanded={open ? "true" : undefined}
-                            >
-                              <Avatar sx={{ width: 32, height: 32 }}>
-                                <Image
-                                  src={userImage}
-                                  width={isMobile ? 48 : 64}
-                                  height={isMobile ? 48 : 64}
-                                  alt="profile-logo"
-                                />{" "}
-                              </Avatar>
-                            </IconButton>
-                          </Tooltip>
-
-                          <Menu
-                            anchorEl={anchorEl}
-                            id="account-menu"
-                            open={open}
-                            onClose={handleClose}
-                            onClick={handleClose}
-                            PaperProps={{
-                              elevation: 0,
-                              sx: {
-                                overflow: "visible",
-                                filter:
-                                  "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                                mt: 1.5,
-                                "& .MuiAvatar-root": {
-                                  width: 32,
-                                  height: 32,
-                                  ml: -0.5,
-                                  mr: 1,
-                                },
-                                "&::before": {
-                                  content: '""',
-                                  display: "block",
-                                  position: "absolute",
-                                  top: 0,
-                                  right: 14,
-                                  width: 10,
-                                  height: 10,
-                                  bgcolor: "background.paper",
-                                  transform: "translateY(-50%) rotate(45deg)",
-                                  zIndex: 0,
-                                },
-                              },
-                            }}
-                            transformOrigin={{
-                              horizontal: "right",
-                              vertical: "top",
-                            }}
-                            anchorOrigin={{
-                              horizontal: "right",
-                              vertical: "bottom",
+                  {isAuthChecked ? (
+                    <>
+                      {/* If user logged in */}
+                      {userName && (
+                        <>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              textAlign: "center",
+                              marginTop: "10px",
+                              float: "right",
                             }}
                           >
-                            <MenuItem onClick={handleClose}>
-                              {userName}
-                            </MenuItem>
-                            <Divider />
-                            <MenuItem onClick={() => signOut()}>
-                              {/* <ListItemIcon>
+                            <Tooltip title={userEmail}>
+                              <IconButton
+                                onClick={handleClick}
+                                size="small"
+                                sx={{ ml: 2 }}
+                                aria-controls={
+                                  open ? "account-menu" : undefined
+                                }
+                                aria-haspopup="true"
+                                aria-expanded={open ? "true" : undefined}
+                              >
+                                <Avatar sx={{ width: 32, height: 32 }}>
+                                  <Image
+                                    src={userImage}
+                                    width={isMobile ? 48 : 64}
+                                    height={isMobile ? 48 : 64}
+                                    alt="profile-logo"
+                                  />{" "}
+                                </Avatar>
+                              </IconButton>
+                            </Tooltip>
+
+                            <Menu
+                              anchorEl={anchorEl}
+                              id="account-menu"
+                              open={open}
+                              onClose={handleClose}
+                              onClick={handleClose}
+                              PaperProps={{
+                                elevation: 0,
+                                sx: {
+                                  overflow: "visible",
+                                  filter:
+                                    "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                                  mt: 1.5,
+                                  "& .MuiAvatar-root": {
+                                    width: 32,
+                                    height: 32,
+                                    ml: -0.5,
+                                    mr: 1,
+                                  },
+                                  "&::before": {
+                                    content: '""',
+                                    display: "block",
+                                    position: "absolute",
+                                    top: 0,
+                                    right: 14,
+                                    width: 10,
+                                    height: 10,
+                                    bgcolor: "background.paper",
+                                    transform: "translateY(-50%) rotate(45deg)",
+                                    zIndex: 0,
+                                  },
+                                },
+                              }}
+                              transformOrigin={{
+                                horizontal: "right",
+                                vertical: "top",
+                              }}
+                              anchorOrigin={{
+                                horizontal: "right",
+                                vertical: "bottom",
+                              }}
+                            >
+                              <MenuItem onClick={handleClose}>
+                                {userName}
+                              </MenuItem>
+                              <Divider />
+                              <MenuItem onClick={() => signOut()}>
+                                {/* <ListItemIcon>
                       <Logout fontSize="small" />
                     </ListItemIcon> */}
-                              Logout
-                            </MenuItem>
-                          </Menu>
-                        </Box>
-                      </>
-                    )}
+                                Logout
+                              </MenuItem>
+                            </Menu>
+                          </Box>
+                        </>
+                      )}
 
-                    {/* If user is not logged in */}
-                    {!userName && (
-                      <>
-                        <button
-                          className={styles.blueButtonStyle}
-                          onClick={() => signIn()}
-                        >
-                          Sign in
-                        </button>
-                      </>
-                    )}
-                  </>
-                ) : (
-                  <></>
-                )}
-              </>
-            }
-          />
-        )}
+                      {/* If user is not logged in */}
+                      {!userName && (
+                        <>
+                          {!isMobile && (
+                            <button
+                              className={styles.blueButtonStyle}
+                              onClick={() => signIn()}
+                            >
+                              Login
+                            </button>
+                          )}
+
+                          {isMobile && (
+                            <IconButton
+                              className={styles.blueButtonStyleSmall}
+                              onClick={() => signIn()}
+                            >
+                              <LoginIcon />
+                            </IconButton>
+                          )}
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              }
+            />
+          )}
 
           <Backdrop
             sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
