@@ -46,7 +46,6 @@ export default async function Home({ searchParams }) {
         <Container maxWidth="lg">
           
           <MyGrid
-            isHideRightSideOnMobile={true}
             leftContent={
               <>
                 <h4
