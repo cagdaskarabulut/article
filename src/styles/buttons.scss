@@ -2,63 +2,63 @@
 @import "./mixins.scss";
 
 .whiteGreenButtonStyle, .greenButtonStyle, .redButtonStyle, .blueButtonStyle{
-  border-width: 1px ;
-  border-style: solid ;
-  padding: 5px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-width: 1px !important;
+  border-style: solid !important;
+  padding: 5px !important;
+  text-decoration: none !important;
+  border-radius: 5px !important;
+  transition: 0.3s !important;
 }
 
 .whiteGreenButtonStyle:hover, .greenButtonStyle:hover, .redButtonStyle:hover, .blueButtonStyle:hover {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .whiteGreenButtonStyle {
-  color: $main;
-  background-color: #e6f4e7 ;
-  border-color: #2F7D31 ;
+  color: $main !important;
+  background-color: #e6f4e7 !important ;
+  border-color: #2F7D31 !important ;
 }
 
 .whiteGreenButtonStyle:hover{
-  color: white ;
-  background-color: #2F7D31 ;
-  border-color: #2F7D31 ;
+  color: white !important ;
+  background-color: #2F7D31 !important ;
+  border-color: #2F7D31 !important ;
 }
 
 .greenButtonStyle {
-  color: white ;
-  background-color: #2F7D31 ;
-  border-color: #e6f4e7 ;
+  color: white !important ;
+  background-color: #2F7D31 !important ;
+  border-color: #e6f4e7 !important ;
 }
 
 .blueButtonStyle {
-  color: white ;
-  background-color: $blue ;
-  border-color: $blue ;
+  color: white !important ;
+  background-color: $blue !important ;
+  border-color: $blue !important ;
 }
 
 .greenButtonStyle:hover {
-  color: white ;
-  background-color: #2F7D31 ;
-  border-color: #2F7D31 ;
+  color: white !important ;
+  background-color: #2F7D31 !important ;
+  border-color: #2F7D31 !important ;
 }
 
 .redButtonStyle {
-  color: white ;
-  background-color: $orangeDark ;
-  border-color: white ;
+  color: white !important ;
+  background-color: $orangeDark !important ;
+  border-color: white !important ;
 }
 
 .redButtonStyle:hover {
-  color: white ;
-  background-color: $orangeDarkHover ;
-  border-color: $orangeDarkHover ;
+  color: white !important ;
+  background-color: $orangeDarkHover !important ;
+  border-color: $orangeDarkHover !important ;
 }
 
 .blueButtonStyle:hover {
-  color: white ;
-  background-color: $blueSecondary ;
-  border-color: $blueSecondary ;
+  color: white !important ;
+  background-color: $blueSecondary !important ;
+  border-color: $blueSecondary !important ;
 
 }
