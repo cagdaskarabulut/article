@@ -13,6 +13,7 @@
   padding-right: 0px;
   @include tablet-or-less {
     background-color: $background;
+    padding-left: 0px;
   }
 }
 

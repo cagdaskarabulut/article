@@ -44,5 +44,4 @@ export default async function ArticlePage({ params }) {
   } else {
     return <NotFoundPage />;
   }
-  // return <><h1>{article}</h1></>;
 }

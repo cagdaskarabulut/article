@@ -97,13 +97,13 @@
 }
 
 .blueButtonStyleSmall{
-  color: white ;
-  background-color: $blue ;
-  border-color: $blue ;
+  color: white !important;
+  background-color: $blue !important;
+  border-color: $blue !important;
   min-width: 50px !important;
   float: right !important; 
   margin-top: 15px !important; 
-  border-radius: 3px;
+  border-radius: 3px !important;
 }
 
 .redButtonStyle{

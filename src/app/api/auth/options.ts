@@ -11,17 +11,17 @@ import GoogleProvider from "next-auth/providers/google";
 
 const authOptions:NextAuthOptions = {
   providers: [
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
     }),
     YandexProvider({
       clientId: process.env.YANDEX_ID!,
       clientSecret: process.env.YANDEX_SECRET!,
     }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
     }),
     // DiscordProvider({
     //   clientId: process.env.DISCORD_ID!,

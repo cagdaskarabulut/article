@@ -54,6 +54,7 @@ export default function Navbar() {
         {!isLoading && (
           <>
           <Divider />
+          <Container maxWidth="lg">
           <div className={styles.NavbarContainerStyle}>
             {isMobile ? <span>Order by : </span> : <></>}
             <NavbarItem
@@ -73,6 +74,7 @@ export default function Navbar() {
               param="comment_number"
             />
             </div>
+            </Container>
             <Divider />
           </>
         )}

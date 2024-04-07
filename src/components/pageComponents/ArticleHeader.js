@@ -85,6 +85,11 @@ const ArticleHeader = ({ article }) => {
     }
   }, [innerWidth]);
 
+
+  const tagSelectedAction = (topic) => {
+    router.push("/?search=" + topic);
+  }
+
   const RightContentField = () => {
     return (
       <>
@@ -138,7 +143,7 @@ const ArticleHeader = ({ article }) => {
     return (
       <>
         <div className={styles.HomePageInfoStyle}>
-          <h1>{article?.title}</h1>
+          <h1 style={{marginTop:"0px"}}>{article?.title}</h1>
 
           <Divider />
           <div className={styles.HeaderActionsContainerStyle}>
@@ -165,14 +170,15 @@ const ArticleHeader = ({ article }) => {
                 <MyGrid
                   isOneFullContent
                   leftContent={
-                    <div style={{ alignItems: "center", marginLeft: "-5px" }}>
+                    <div style={isMobile ? {alignItems: "center", marginLeft: "-5px", marginTop: "10px"} : { alignItems: "center", marginLeft: "-5px" }}>
                       {article?.topics?.split(",")?.map(
                         (topic) =>
                           topic && (
                             <button
                               key={"ContentField" + article?.title}
                               className={styles.TopicChipStyle}
-                              onClick={() => router.push("/?search=" + topic)}
+                              // onClick={() => router.push("/?search=" + topic)}
+                              onClick={() => tagSelectedAction(topic)}
                             >
                               {topic}
                             </button>

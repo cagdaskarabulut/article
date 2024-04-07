@@ -39,7 +39,7 @@ export default async function Home({ searchParams }) {
     <div className={styles.ContainerPageContainerStyle}>
       <div className={styles.HeaderStyle}>
         {/* <Header middleContent={<SearchBar />} /> */}
-        <Header />
+        <Header isMainPage={true}/>
         <NavBar />
       </div>
       <div className={styles.ContentStyle}>

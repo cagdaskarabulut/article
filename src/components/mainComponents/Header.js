@@ -37,7 +37,7 @@ const permanentMarker = Permanent_Marker({
   weight: ["400"],
 });
 
-export default function Header() {
+export default function Header({isMainPage}) {
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
@@ -302,8 +302,8 @@ export default function Header() {
                         <>
                           {!isMobile && (
                             <button
-                              
-                              onClick={() => signIn()}className={styles.blueButtonStyle}
+                              onClick={() => signIn()} className={styles.blueButtonStyle}
+                              style={isMainPage ? {marginRight: '0px'} : {marginRight: '20px'}}
                             >
                               Login
                             </button>

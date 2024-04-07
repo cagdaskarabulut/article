@@ -4,12 +4,20 @@
 
 
 .NavbarContainerStyle {
+  // background-color: black;
+  // color: white;
+  // background-color: transparent !important;
+  // border-width: 3px;
+  // border-style: solid;
   width: 100%;
   align-items: center;
   min-height: 40px;
   display: flex;
-  justify-content: center;
-  justify-content: space-around;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  @include tablet-or-less {
+    flex-direction: row;
+  }
 }
 
 .TopicContainerStyle{

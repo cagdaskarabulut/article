@@ -9,6 +9,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import LoadingFullPage from "../reusableComponents/LoadingFullPage";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
+import { Autocomplete, Container, Divider, TextField } from "@mui/material";
 
 const Comments = ({ article }) => {
   const { quill, quillRef } = useQuill();
@@ -20,6 +21,7 @@ const Comments = ({ article }) => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  // const [latestCommentNumber, setLatestCommentNumber] = useState(article?.comment_number);
   const [latestCommentNumber, setLatestCommentNumber] = useState("");
 
   useEffect(() => {
@@ -37,6 +39,7 @@ const Comments = ({ article }) => {
       .then((data2) => {
         let article_comment_list = data2.article_comment_list.rows;
         setArticleCommentList(article_comment_list);
+        setLatestCommentNumber(article?.comment_number);
       });
   }, []);
 
@@ -49,7 +52,7 @@ const Comments = ({ article }) => {
   }, [innerWidth]);
 
   const AllComments = () => {
-    const marginTopValue = isWriteCommentVisible && isMobile ? "20vh" : "0vh";
+    const marginTopValue = isWriteCommentVisible && isMobile ? "0vh" : "0vh";
     return (
       <div style={{ marginTop: marginTopValue }}>
         {articleCommentList?.map((item) => (
@@ -129,22 +132,37 @@ const Comments = ({ article }) => {
               <br />
               <button
                 style={{ float: "right" }}
-                className={styles.greenButtonStyle}
+                className={styles.redButtonStyle}
                 onClick={() => respondAction()}
               >
                 Respond
               </button>
+              <br />
+              <br />
+              <br />
+              <Divider />
             </>
           )}
           {isMobile && (
             <>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
               <button
-                style={{ float: "right", marginTop: "18vh" }}
-                className={styles.greenButtonStyle}
+                style={{ float: "right" }}
+                className={styles.redButtonStyle}
                 onClick={() => respondAction()}
               >
                 Respond
               </button>
+              <br />
+              <br />
+              <br />
+              <Divider />
             </>
           )}
         </>
