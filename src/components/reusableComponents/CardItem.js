@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Backdrop, CircularProgress } from "@mui/material";
+import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
 
 const CardItem = ({
   url,
@@ -125,8 +126,21 @@ const CardItem = ({
       </>
     );
   };
+  
+  const tagSelectedAction = (topic) => {
+    setIsLoading(true);
+    const handler = setTimeout(() => {
+      router.push("/?search="+topic);
+      setIsLoading(false);
+    }, 300);
+    return () => {
+      clearTimeout(handler);
+    };
+  }
 
   return (
+    <>
+    <LoadingFullPage isLoading={isLoading} />
     <Card
       elevation={3}
       className={styles.CardStyle}
@@ -168,7 +182,7 @@ const CardItem = ({
               <button
                 key={"ChipCardItem" + topic}
                 className={styles.TopicChipStyle}
-                onClick={() => router.push("/?search="+topic)}
+                onClick={() => tagSelectedAction(topic)}
               >
                 {topic}
               </button>
@@ -188,6 +202,7 @@ const CardItem = ({
         </Backdrop>
       </div>
     </Card>
+    </>
   );
 };
 

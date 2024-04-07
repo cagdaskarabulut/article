@@ -22,8 +22,6 @@ import {
   TextField,
 } from "@mui/material";
 import ArticleIcon from "@mui/icons-material/Article";
-import LoadingSkeletonCard from "../reusableComponents/LoadingSkeletonCard";
-import LoadingSkeletonArticle from "../reusableComponents/LoadingSkeletonArticle";
 import Image from "next/image";
 import { format } from "date-fns";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -31,6 +29,7 @@ import Divider from "@mui/material/Divider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import MessageIcon from "@mui/icons-material/Message";
 import LinearProgress from "@mui/material/LinearProgress";
+import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
 
 const ArticleHeader = ({ article }) => {
   const router = useRouter();
@@ -43,7 +42,8 @@ const ArticleHeader = ({ article }) => {
   const [watch_number, setWatch_number] = useState(0);
   const [isLoadedLike, setIsLoadedLike] = useState(false);
   const [isLoadedWatch, setIsLoadedWatch] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  
   useEffect(() => {
     setIsAuthChecked(false);
     fetch("/api/auth/whoAmI/email")
@@ -70,7 +70,7 @@ const ArticleHeader = ({ article }) => {
     fetch("/api/article/article_watchCountByUrl/" + article?.url)
       .then((res2) => res2.json())
       .then((data2) => {
-        let watchCount = parseInt(data2.watchCount.rows[0].count, 10);
+        let watchCount = parseInt(data2?.watchCount?.rows[0]?.count, 10);
         setWatch_number(watchCount);
         setIsLoadedWatch(true);
       });
@@ -87,7 +87,15 @@ const ArticleHeader = ({ article }) => {
 
 
   const tagSelectedAction = (topic) => {
-    router.push("/?search=" + topic);
+    setIsLoading(true);
+    const handler = setTimeout(() => {
+      router.push("/?search=" + topic);
+      setIsLoading(false);
+    }, 200);
+    return () => {
+      clearTimeout(handler);
+    };
+  
   }
 
   const RightContentField = () => {
@@ -287,6 +295,7 @@ const ArticleHeader = ({ article }) => {
 
   return (
     <>
+      <LoadingFullPage isLoading={isLoading} />
       <MyGrid leftContent={<ContentField />} isOneFullContent />
     </>
   );
