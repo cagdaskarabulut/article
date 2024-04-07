@@ -302,8 +302,8 @@ export default function Header() {
                         <>
                           {!isMobile && (
                             <button
-                              className={styles.blueButtonStyle}
-                              onClick={() => signIn()}
+                              
+                              onClick={() => signIn()}className={styles.blueButtonStyle}
                             >
                               Login
                             </button>

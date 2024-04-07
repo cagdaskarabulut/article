@@ -20,7 +20,7 @@ const Comments = ({ article }) => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [latestCommentNumber, setLatestCommentNumber] = useState(article?.comment_number);
+  const [latestCommentNumber, setLatestCommentNumber] = useState("");
 
   useEffect(() => {
     setIsAuthChecked(false);
