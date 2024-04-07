@@ -19,14 +19,14 @@
 
 .TopicChipStyle {
   padding: 2px 10px 2px 10px;
-  background-color: #e0e0e0;
-  border-radius: 5px;
-  border: none;
-  margin-left: 5px;
+  background-color: #e0e0e0 !important;
+  border-radius: 5px !important;
+  border: none !important;
+  margin-left: 5px !important;
 }
 
 .TopicChipStyle:hover {
-  cursor: pointer;
-  background-color: #f3f3f3;
-  border: none;
+  cursor: pointer !important;
+  background-color: #f3f3f3 !important;
+  border: none !important;
 }
