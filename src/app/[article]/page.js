@@ -1,13 +1,10 @@
 export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
-import { Container } from "@mui/material";
 import MetaPanel from "../../components/mainComponents/MetaPanel";
 import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopButton";
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
-
-// export const dynamicParams = false;
 
 async function getArticle(article) {
   const res = await fetch(process.env.URL + "/api/article/" + article);

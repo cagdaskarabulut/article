@@ -2,19 +2,13 @@
 import styles from "./Header.module.scss";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { wait } from "../../utils/CommonUtils";
 import LoadingFullPage from "../reusableComponents/LoadingFullPage";
 import {
   Avatar,
   Menu,
   MenuItem,
   Divider,
-  ListItemIcon,
-  PersonAdd,
-  Settings,
-  Logout,
   Box,
-  Typography,
   Tooltip,
   IconButton,
   Container,
@@ -22,7 +16,6 @@ import {
   CircularProgress,
   Skeleton,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import MyGrid from "../toolComponents/MyGrid";
 import { Permanent_Marker } from "next/font/google";
 import useWindowSize from "@rooks/use-window-size";
@@ -31,11 +24,6 @@ import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import SearchBar from "../reusableComponents/SearchBar";
 import LoginIcon from "@mui/icons-material/Login";
-
-const permanentMarker = Permanent_Marker({
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 export default function Header({isMainPage}) {
   const { innerWidth } = useWindowSize();
@@ -48,14 +36,6 @@ export default function Header({isMainPage}) {
   const [userImage, setUserImage] = useState("");
   const [session, setSession] = useState("");
   const [isLoadingFullPage, setIsLoadingFullPage] = useState(false);
-
-  // const handleClick = () => {
-  //   setIsProfileDialogOpen(true);
-  // };
-  // const handleClose = () => {
-  //   // setAnchorEl(null);
-  //   setIsProfileDialogOpen(false);
-  // };
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -127,21 +107,6 @@ export default function Header({isMainPage}) {
       setIsMobile(innerWidth < MOBILE_SCREEN_SIZE);
     }
   }, [innerWidth]);
-
-  // async function selectAction(event, newValue) {
-  //   setIsLoading(true);
-  //   let selectedSkin = null;
-  //   pageList?.map((option) =>
-  //     option.searchField?.toLowerCase() == newValue?.toLowerCase()
-  //       ? (selectedSkin = option)
-  //       : ""
-  //   );
-  //   if (selectedSkin !== null) {
-  //     router.push("/" + selectedSkin.newPageUrl);
-  //   }
-  //   await wait(200);
-  //   setIsLoading(false);
-  // }
 
   const goHomePage = () => {
     setIsLoadingFullPage(true);

@@ -12,7 +12,6 @@ import {
   Container,
 } from "@mui/material";
 import Image from "next/image";
-import { format } from "date-fns";
 import ArticleHeader from "./ArticleHeader";
 import Comments from "./Comments";
 

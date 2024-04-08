@@ -24,17 +24,6 @@ export default function Navbar() {
     setIsLoading(false);
   }, [innerWidth]);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   const handler = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 200);
-  //   return () => {
-  //     clearTimeout(handler);
-  //   };
-
-  // },[]);
-
   return (
     <>
         {isLoading && (

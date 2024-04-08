@@ -4,7 +4,6 @@ import { Grid } from "@mui/material";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import styles from "./MyGrid.module.scss";
-import LoadingFullPage from "../reusableComponents/LoadingFullPage";
 import Image from "next/image";
 
 //- Tek kolon varsa sadece "leftContent" girilir.
