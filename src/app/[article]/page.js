@@ -1,5 +1,5 @@
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
+// export const dynamic = "force-dynamic";
+// export const fetchCache = "force-no-store";
 
 import MetaPanel from "../../components/mainComponents/MetaPanel";
 import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
