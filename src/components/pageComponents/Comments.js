@@ -52,11 +52,11 @@ const Comments = ({ article }) => {
   }, [innerWidth]);
 
   const AllComments = () => {
-    const marginTopValue = isWriteCommentVisible && isMobile ? "0vh" : "0vh";
+    const marginTopValue = "0vh"; //isWriteCommentVisible && isMobile ? "0vh" : "0vh";
     return (
       <div style={{ marginTop: marginTopValue }}>
         {articleCommentList?.map((item) => (
-          <CommentItem comment={item} />
+          <CommentItem isMobile={isMobile} comment={item} />
         ))}
       </div>
     );
@@ -79,6 +79,7 @@ const Comments = ({ article }) => {
       body: JSON.stringify({
         url: article?.url,
         user_email: userEmail,
+        user_name: userName,
         comment: quill.container.firstChild.innerHTML,
       }),
     })
