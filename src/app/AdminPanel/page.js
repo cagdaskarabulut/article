@@ -288,7 +288,7 @@ const AdminPanel = () => {
           <Container maxWidth="md">
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
-                <h1>Yeni Sayfa Girişi</h1>
+                <h1>Yeni Sayfa Girişi </h1>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -376,9 +376,12 @@ const AdminPanel = () => {
                 />
               </Grid>
               <Grid item xs={10} sm={5}>
-                <TopicList topicList={topicList} setTopicList={setTopicList} 
-                isRefreshingTopicList={isRefreshingTopicList}
-                setIsRefreshingTopicList={setIsRefreshingTopicList} />
+                <TopicList
+                  topicList={topicList}
+                  setTopicList={setTopicList}
+                  isRefreshingTopicList={isRefreshingTopicList}
+                  setIsRefreshingTopicList={setIsRefreshingTopicList}
+                />
               </Grid>
               <Grid item xs={2} sm={1}>
                 <IconButton
@@ -423,23 +426,24 @@ const AdminPanel = () => {
                 />
               </Grid>
               <Divider className={styles.DividerStyle} />
-              <Grid item xs={12} sm={12}>
-                <MyGrid
-                  isOneFullContent
-                  leftContent={
-                    <MyQuillEditor
-                      showInsertHtmlButton
-                      quill={quill}
-                      quillRef={quillRef}
-                      activeStyle={{
-                        width: "100%",
-                        height: "75vh",
-                        marginTop: "4px",
-                      }}
-                    />
-                  }
+              <Container
+                style={{
+                  paddingTop: "20px",
+                  paddingRight: "0px",
+                  paddingLeft: "0px",
+                }}
+              >
+                <MyQuillEditor
+                  showInsertHtmlButton
+                  quill={quill}
+                  quillRef={quillRef}
+                  activeStyle={{
+                    width: "100%",
+                    height: "75vh",
+                    marginTop: "10px",
+                  }}
                 />
-              </Grid>
+              </Container>
               <Grid item xs={12} sm={12}>
                 <div style={{ paddingTop: "30px", paddingBottom: "60px" }}>
                   <Button
@@ -447,6 +451,7 @@ const AdminPanel = () => {
                     type="submit"
                     onClick={() => onSubmit()}
                     color="success"
+                    style={{ float: "right" }}
                   >
                     Save
                   </Button>
@@ -464,7 +469,7 @@ const AdminPanel = () => {
             <DialogContent>
               <h3 style={{ textAlign: "center" }}>Create Topic</h3>
               <div style={{ width: "400px" }}>
-                <div style={{ width: "90%",float: "left" }}>
+                <div style={{ width: "90%", float: "left" }}>
                   <TextField
                     className={styles.TextFieldStyle}
                     label="Enter new topic name"
@@ -472,7 +477,7 @@ const AdminPanel = () => {
                     onChange={(event) => setNewTopicName(event.target.value)}
                   />
                 </div>
-                <div style={{ width: "10%",float: "right" }}>
+                <div style={{ width: "10%", float: "right" }}>
                   <IconButton
                     aria-label="delete"
                     size="large"
