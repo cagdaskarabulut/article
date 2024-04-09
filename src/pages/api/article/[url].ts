@@ -7,6 +7,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) as like_number,
   (select distinct av.count from public.newszipped_article_view av where av.url=a.url) as view_number,
   (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) as comment_number
-   FROM public.newszipped_article a where a.url=${url?.toString()};`;
+   FROM public.newszipped_article a where a.is_active=true and a.url=${url?.toString()};`;
   return res.status(200).json({ article_list });
 }

@@ -111,7 +111,8 @@ const CardItem = ({
           id={"div2_" + url}
           className={styles.BodyRightContentStyle}
         >
-          {title_image && (
+          {/* //TODO - Reklam alındıktan sonra açılacak */}
+          {/* {title_image && (
             <Image
               key={"image_" + url}
               id={"image_" + url}
@@ -121,7 +122,7 @@ const CardItem = ({
               fill
               style={{ float: "right", objectFit: "contain" }}
             />
-          )}
+          )} */}
         </div>
       </>
     );

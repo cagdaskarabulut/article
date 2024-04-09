@@ -11,11 +11,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     if (searchVal) {
       article_list_size =
-        await sql`SELECT count(a.id) FROM public.newszipped_article a where a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%';`;
+        await sql`SELECT count(a.id) FROM public.newszipped_article a where a.is_active=true and a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%';`;
     }
     else if (orderVal === "id" || orderVal === "create_date" || orderVal === "like_number" || orderVal === "view_number" || orderVal === "comment_number") {
       article_list_size =
-        await sql`SELECT count(a.id) FROM public.newszipped_article a;`;
+        await sql`SELECT count(a.id) FROM public.newszipped_article a where a.is_active=true ;`;
     }
   }
   catch (e) {

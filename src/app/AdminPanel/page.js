@@ -48,6 +48,7 @@ const AdminPanel = () => {
   const { quill, quillRef } = useQuill();
   const [topicList, setTopicList] = useState([]);
   const [isManuelPage, setIsManuelPage] = useState(false);
+  const [isActive, setIsActive] = useState(true);
   const [description, setDescription] = useState("");
   const [metaKeys, setMetaKeys] = useState("");
   const [generateImageByRobotText, setGenerateImageByRobotText] = useState("");
@@ -109,6 +110,10 @@ const AdminPanel = () => {
     setIsManuelPage(event?.target?.checked);
   };
 
+  const handleIsActiveChange = (event) => {
+    setIsActive(event?.target?.checked);
+  };
+
   const Errors = () => {
     return (
       <>
@@ -155,7 +160,6 @@ const AdminPanel = () => {
           quill.clipboard.dangerouslyPasteHTML(onlyFirstResponse);
           setUrl(replaceStringForUrlFormat(title));
           setIsManuelPage(false);
-
           fetch("/api/chat-gpt-metatags", {
             method: "POST",
             headers: {
@@ -256,6 +260,7 @@ const AdminPanel = () => {
           is_manuel_page: isManuelPage,
           description: description,
           meta_keys: metaKeys,
+          is_active: isActive,
         }),
       })
         .then((res) => res.json())
@@ -273,6 +278,7 @@ const AdminPanel = () => {
           setTopicList("");
           setTitleImageUrl("");
           setIsLoading(false);
+          setIsActive(true);
         });
     } catch (error) {
       setErrorMessage("Title is required");
@@ -423,6 +429,18 @@ const AdminPanel = () => {
                     />
                   }
                   label="Is Manually Created"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isActive}
+                      onChange={handleIsActiveChange}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                  }
+                  label="Is Active"
                 />
               </Grid>
               <Divider className={styles.DividerStyle} />

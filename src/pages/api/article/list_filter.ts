@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
         (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
          FROM public.newszipped_article a 
-         where a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%'
+         where a.is_active=true and (a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%')
          group by a.id order by a.create_date desc ,id asc 
          OFFSET ${offsetVal}
          LIMIT ${lastPageSizeVal};`;
@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
         (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
          FROM public.newszipped_article a 
-         where a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%'
+         where a.is_active=true and (a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%')
          group by a.id order by a.create_date desc ,id asc 
          OFFSET ${offsetVal}
          LIMIT ${sizeVal};`;
@@ -48,6 +48,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
            FROM public.newszipped_article a 
+           where a.is_active=true 
            order by a.id desc
            OFFSET ${offsetVal} 
            LIMIT ${lastPageSizeVal};`;
@@ -58,6 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
            FROM public.newszipped_article a 
+           where a.is_active=true 
            group by a.id order by a.create_date desc ,id asc 
            OFFSET ${offsetVal} 
            LIMIT ${lastPageSizeVal};`;
@@ -68,6 +70,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
            FROM public.newszipped_article a 
+           where a.is_active=true 
            group by a.id order by like_number desc ,id asc 
            OFFSET ${offsetVal} 
            LIMIT ${lastPageSizeVal};`;
@@ -78,6 +81,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
              FROM public.newszipped_article a 
+             where a.is_active=true 
              group by a.id order by view_number desc ,id asc 
              OFFSET ${offsetVal} 
              LIMIT ${lastPageSizeVal};`;
@@ -88,6 +92,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
              FROM public.newszipped_article a 
+             where a.is_active=true 
              group by a.id order by comment_number desc ,id asc 
              OFFSET ${offsetVal} 
              LIMIT ${lastPageSizeVal};`;
@@ -100,6 +105,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
            FROM public.newszipped_article a 
+           where a.is_active=true 
            group by a.id order by a.id desc
            OFFSET ${offsetVal} 
            LIMIT ${sizeVal};`;
@@ -110,6 +116,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
            FROM public.newszipped_article a 
+           where a.is_active=true 
            group by a.id order by a.create_date desc ,id asc 
            OFFSET ${offsetVal} 
            LIMIT ${sizeVal};`;
@@ -120,6 +127,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
            FROM public.newszipped_article a 
+           where a.is_active=true 
            group by a.id order by like_number desc ,id asc 
            OFFSET ${offsetVal} 
            LIMIT ${sizeVal};`;
@@ -130,6 +138,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
              FROM public.newszipped_article a 
+             where a.is_active=true 
              group by a.id order by view_number desc ,id asc 
              OFFSET ${offsetVal} 
              LIMIT ${sizeVal};`;
@@ -140,6 +149,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
              FROM public.newszipped_article a 
+             where a.is_active=true 
              group by a.id order by comment_number desc ,id asc 
              OFFSET ${offsetVal} 
              LIMIT ${sizeVal};`;

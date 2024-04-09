@@ -11,8 +11,8 @@ const ImageViewerManuel = ({
 }) => {
   return (
     <>
-      {/* <img src={imagePath} alt={imageName} key={"img_" + imageName} width={240} onClick={onClickAction}/> */}
-      <div className={isSmallSize ? styles.smallSize : styles.standartSize}>
+      {/* //TODO - Reklam alındıktan sonra açılacak */}
+      {/* <div className={isSmallSize ? styles.smallSize : styles.standartSize}>
         <Image
           src={imagePath}
           alt={"img_" + imageName}
@@ -21,7 +21,7 @@ const ImageViewerManuel = ({
           fill
           objectFit="contain"
         />
-      </div>
+      </div> */}
     </>
   );
 };
