@@ -9,6 +9,6 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const article_list = await sql`SELECT url, title, topics, create_date, title_image, body, is_manuel_page, description, meta_keys FROM public.newszipped_article;`;
+  const article_list = await sql`SELECT url, title, topics, create_date, title_image, body, is_manuel_page, description, meta_keys FROM public.newszipped_article where is_active=true;`;
   return NextResponse.json({ article_list });
 }
