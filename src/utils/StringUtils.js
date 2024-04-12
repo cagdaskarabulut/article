@@ -30,3 +30,14 @@ export const getStringWithCommaSeperatedFromList = (myStringList) => {
   }
   return ","+result+",";
 };
+
+export const getListFromStringWithCommaSeperated = (myString) => {
+  let result = [];
+  let myList = myString.split(",");
+  for (let index = 0; index < myList.length; index++) {
+    if (myList[index] && myList[index].length > 0 && myList[index] !== ",") {
+      result = [...result, myList[index]];
+    }
+  }
+  return result;
+};

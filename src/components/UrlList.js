@@ -3,12 +3,8 @@ import React, { useEffect, useState } from "react";
 
 import {
   Autocomplete,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 
@@ -22,6 +18,7 @@ const UrlList = ({
   isSingleSelection,
   activeStyle,
   activeInputStyle,
+  isDisabled,
 }) => {
   const [allUrlList, setAllUrlList] = useState([]);
   // const timestamp = Date.now(); // This would be the timestamp you want to format
@@ -55,12 +52,33 @@ const UrlList = ({
     setArticle(article?.article_list?.rows[0]);
   };
 
+  const handleSelectChange = async (event) => {
+    setSelectedUrl(event.target.value);
+    let article = await getArticle(event.target.value);
+    setArticle(article?.article_list?.rows[0]);
+  };
+
   return (
     <div>
-      {isSingleSelection && (
+      {isDisabled && (
+        <Select
+        id="demo-simple-select"
+        value={selectedUrl}
+        onChange={handleSelectChange}
+        style={{width: "100%"}}
+        >
+          <MenuItem value="" key="emptySelect_id">Seçiniz</MenuItem>
+          {allUrlList?.map((urlItem) => (
+          <MenuItem value={urlItem.url} key={urlItem.url+"_id"} >{urlItem.url}</MenuItem>
+        ))}
+        </Select>
+      )}
+
+      {!isDisabled && isSingleSelection && (
         <Autocomplete
           freeSolo
           disableClearable
+          disabled
           style={activeStyle}
           id="tags-standard"
           options={allUrlList}
@@ -74,7 +92,7 @@ const UrlList = ({
           )}
         />
       )}
-      {!isSingleSelection && (
+      {!isDisabled && !isSingleSelection && (
         <Autocomplete
           multiple
           style={activeStyle}

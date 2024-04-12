@@ -13,6 +13,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 import {
+  getListFromStringWithCommaSeperated as getListFromStringWithCommaSeparated,
   getStringWithCommaSeperatedFromList,
   replaceStringForUrlFormat,
 } from "../../utils/StringUtils";
@@ -64,10 +65,19 @@ const AdminPanel = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [newTopicName, setNewTopicName] = useState("");
   const [topicList, setTopicList] = useState([]);
+  const [topicListInfo, setTopicListInfo] = useState("");
   const [isRefreshingTopicList, setIsRefreshingTopicList] = useState(true);
   const [selectedUrl, setSelectedUrl] = useState("");
   const [isRefreshingUrlList, setIsRefreshingUrlList] = useState(true);
   const [article, setArticle] = useState(null);
+
+  const isNewOrReadyToUpdate = () => {
+    if(isNewOrUpdate === "new" || (isNewOrUpdate === "update" && selectedUrl.length > 0)){
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const handleClose = () => {
     setOpenDialog(false);
@@ -87,11 +97,10 @@ const AdminPanel = () => {
   }, []);
 
   useEffect(() => {
-    if(article){
+    if (article) {
       fillAllFields(article);
     }
   }, [article]);
-
 
   async function handleGenerateImageWithRobot() {
     setIsLoading(true);
@@ -269,17 +278,19 @@ const AdminPanel = () => {
   };
 
   const fillAllFields = (myArticle) => {
-    console.log(myArticle);
+    // console.log(myArticle);
     setUrl(myArticle.url);
     setTitle(myArticle.title);
-    setTopicList(myArticle.topics);
-    quill.setText(myArticle.body);
+    // setImagePath(myArticle.title_image);
+    setTitleImageUrl(myArticle.title_image);
+    // console.log(getListFromStringWithCommaSeparated(myArticle.topics)); 
+    // setTopicList(getListFromStringWithCommaSeparated(myArticle.topics));
+    setTopicListInfo(myArticle.topics);
+    quill.clipboard.dangerouslyPasteHTML(myArticle.body);
     setIsManuelPage(myArticle.is_manuel_page);
     setDescription(myArticle.description);
-    setMetaKeys(myArticle.meta);
-    // setImagePath(myArticle.imagePath);
-    setTitleImageUrl(myArticle.imagePath);
-    setIsActive(myArticle.isActive);
+    setMetaKeys(myArticle.meta_keys);
+    setIsActive(myArticle.is_active);
   };
 
   const onSubmit = async () => {
@@ -347,17 +358,15 @@ const AdminPanel = () => {
     }
   };
 
-  
-
   return (
     <>
       {isAuthorizedUser && (
         <>
           <LoadingFullPage isLoading={isLoading} />
-          <Container maxWidth="md">
+          <Container maxWidth="md" style={{backgroundColor:"white",marginTop:"50px",marginBottom:"50px"}}>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
-                <h1>Yeni Sayfa Girişi </h1>
+                <h1>Sayfa Oluştur / Güncelle </h1>
               </Grid>
 
               <Grid item xs={12} sm={12}>
@@ -373,33 +382,31 @@ const AdminPanel = () => {
                 </ToggleButtonGroup>
               </Grid>
 
-              <Grid item xs={12} sm={6}>
-                <>
-                  {isNewOrUpdate == "new" && (
-                    <TextField
-                      className={styles.TextFieldStyle}
-                      id="standard-basic"
-                      label="Title"
-                      value={title}
-                      onChange={(event) =>
-                        handleTitleChange(event.target.value)
-                      }
-                    />
-                  )}
-
-                  {isNewOrUpdate == "update" && (
-                    <UrlList
+              {isNewOrUpdate == "update" && (
+                <Grid item xs={12} sm={12}>
+                  <UrlList
+                    isDisabled
                     isSingleSelection
                     setArticle={setArticle}
                     selectedUrl={selectedUrl}
-                      setSelectedUrl={setSelectedUrl}
-                      isRefreshingUrlList={isRefreshingUrlList}
-                      setIsRefreshingUrlList={setIsRefreshingUrlList}
-                    />
-                  )}
-                </>
+                    setSelectedUrl={setSelectedUrl}
+                    isRefreshingUrlList={isRefreshingUrlList}
+                    setIsRefreshingUrlList={setIsRefreshingUrlList}
+                  />
+                </Grid>
+              )}
+
+{/* // isNewOrReadyToUpdate ? { display: "" } : { display: "none" }} */}
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
+                <TextField
+                  className={styles.TextFieldStyle}
+                  id="standard-basic"
+                  label="Title"
+                  value={title}
+                  onChange={(event) => handleTitleChange(event.target.value)}
+                />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <Button
                   variant="contained"
                   type="submit"
@@ -409,8 +416,8 @@ const AdminPanel = () => {
                   Robot ile metinleri doldur
                 </Button>
               </Grid>
-              <Divider className={styles.DividerStyle} />
-              <Grid item xs={12} sm={6}>
+              <Divider className={styles.DividerStyle} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}/>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <TextField
                   multiline
                   style={{ width: "100%" }}
@@ -423,7 +430,7 @@ const AdminPanel = () => {
                   disabled={process.env.IS_LOCAL == "false"}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <Button
                   variant="contained"
                   type="submit"
@@ -433,7 +440,7 @@ const AdminPanel = () => {
                   Robot ile resim üret
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 {imagePath && (
                   <>
                     <h3 className={styles.subTitleStyle}>Üretilen Resim</h3>
@@ -448,25 +455,25 @@ const AdminPanel = () => {
                   </>
                 )}
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 {imagePath}
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <S3UploadForm
                   titleImageUrl={titleImageUrl}
                   setTitleImageUrl={setTitleImageUrl}
                   setIsLoading={setIsLoading}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <span style={{ color: "red" }}>
                   *** Robot tarafından üretilen resmi; önce bilgisayarınıza
                   indirip sonra siteye upload etmeniz gerekmektedir.
                 </span>
               </Grid>
 
-              <Divider className={styles.DividerStyle} />
-              <Grid item xs={12} sm={6}>
+              <Divider className={styles.DividerStyle} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }} />
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <TextField
                   className={styles.TextFieldStyle}
                   id="standard-basic"
@@ -475,15 +482,22 @@ const AdminPanel = () => {
                   onChange={(event) => setMetaKeys(event.target.value)}
                 />
               </Grid>
-              <Grid item xs={10} sm={5}>
+              <Grid item xs={10} sm={5} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <TopicList
                   topicList={topicList}
                   setTopicList={setTopicList}
                   isRefreshingTopicList={isRefreshingTopicList}
                   setIsRefreshingTopicList={setIsRefreshingTopicList}
                 />
+                {isNewOrUpdate === "update" && (
+                  <>
+                  <br/>
+                  <span>{topicListInfo}</span>
+                  </>
+                ) }
+                
               </Grid>
-              <Grid item xs={2} sm={1}>
+              <Grid item xs={2} sm={1} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <IconButton
                   aria-label="delete"
                   size="large"
@@ -492,8 +506,8 @@ const AdminPanel = () => {
                   <AddCircleIcon fontSize="inherit" color="primary" />
                 </IconButton>
               </Grid>
-              <Divider className={styles.DividerStyle} />
-              <Grid item xs={12} sm={6}>
+              <Divider className={styles.DividerStyle} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }} />
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <TextField
                   className={styles.TextFieldStyle}
                   id="standard-basic"
@@ -503,7 +517,7 @@ const AdminPanel = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <TextField
                   className={styles.TextFieldStyle}
                   id="standard-basic"
@@ -512,8 +526,8 @@ const AdminPanel = () => {
                   onChange={(event) => setDescription(event.target.value)}
                 />
               </Grid>
-              <Divider className={styles.DividerStyle} />
-              <Grid item xs={12} sm={6}>
+              <Divider className={styles.DividerStyle} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}/>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <FormControlLabel
                   control={
                     <Switch
@@ -525,7 +539,7 @@ const AdminPanel = () => {
                   label="Is Manually Created"
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <FormControlLabel
                   control={
                     <Switch
@@ -537,13 +551,18 @@ const AdminPanel = () => {
                   label="Is Active"
                 />
               </Grid>
-              <Divider className={styles.DividerStyle} />
+              <Divider className={styles.DividerStyle} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}/>
               <Container
-                style={{
-                  paddingTop: "20px",
-                  paddingRight: "0px",
-                  paddingLeft: "0px",
-                }}
+                // style={{
+                //   paddingTop: "20px",
+                //   paddingRight: "0px",
+                //   paddingLeft: "0px",
+                // }}
+                style={isNewOrReadyToUpdate() ? { paddingTop: "20px",
+                paddingRight: "0px",
+                paddingLeft: "0px",display: "" } : { paddingTop: "20px",
+                paddingRight: "0px",
+                paddingLeft: "0px",display: "none" }}
               >
                 <MyQuillEditor
                   showInsertHtmlButton
@@ -556,7 +575,7 @@ const AdminPanel = () => {
                   }}
                 />
               </Container>
-              <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={12} style={isNewOrReadyToUpdate() ? { display: "" } : { display: "none" }}>
                 <div style={{ paddingTop: "30px", paddingBottom: "60px" }}>
                   <Button
                     variant="contained"
@@ -570,8 +589,8 @@ const AdminPanel = () => {
                 </div>
               </Grid>
             </Grid>
+            <br />
           </Container>
-
           <Dialog
             open={openDialog}
             onClose={handleClose}
