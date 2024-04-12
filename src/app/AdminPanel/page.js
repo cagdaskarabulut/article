@@ -9,6 +9,8 @@ import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import { useRouter } from "next/navigation";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 import {
   getStringWithCommaSeperatedFromList,
@@ -35,6 +37,7 @@ import S3UploadForm from "../../components/pageComponents/S3UploadForm";
 import MyAlert from "../../components/reusableComponents/MyAlert";
 import styles from "./AdminPanel.module.scss";
 import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
+import UrlList from "../../components/UrlList";
 
 const AdminPanel = () => {
   const router = useRouter();
@@ -46,7 +49,6 @@ const AdminPanel = () => {
   const [url, setUrl] = useState("");
   const [titleImageUrl, setTitleImageUrl] = useState("");
   const { quill, quillRef } = useQuill();
-  const [topicList, setTopicList] = useState([]);
   const [isManuelPage, setIsManuelPage] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [description, setDescription] = useState("");
@@ -55,12 +57,17 @@ const AdminPanel = () => {
   const [attributes, setAttributes] = useState();
   const [imagePath, setImagePath] = useState();
   const [error, setError] = useState(false);
+  const [isNewOrUpdate, setIsNewOrUpdate] = useState("new");
   const [selectedOldPathForCopyFrom, setSelectedOldPathForCopyFrom] =
     useState("");
   const [isAuthorizedUser, setIsAuthorizedUser] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [newTopicName, setNewTopicName] = useState("");
+  const [topicList, setTopicList] = useState([]);
   const [isRefreshingTopicList, setIsRefreshingTopicList] = useState(true);
+  const [selectedUrl, setSelectedUrl] = useState("");
+  const [isRefreshingUrlList, setIsRefreshingUrlList] = useState(true);
+  const [article, setArticle] = useState(null);
 
   const handleClose = () => {
     setOpenDialog(false);
@@ -78,6 +85,13 @@ const AdminPanel = () => {
         }
       });
   }, []);
+
+  useEffect(() => {
+    if(article){
+      fillAllFields(article);
+    }
+  }, [article]);
+
 
   async function handleGenerateImageWithRobot() {
     setIsLoading(true);
@@ -112,6 +126,10 @@ const AdminPanel = () => {
 
   const handleIsActiveChange = (event) => {
     setIsActive(event?.target?.checked);
+  };
+
+  const handleChangeNewOrUpdate = (event, newValue) => {
+    setIsNewOrUpdate(newValue);
   };
 
   const Errors = () => {
@@ -222,6 +240,8 @@ const AdminPanel = () => {
           setNewTopicName("");
           setIsRefreshingTopicList(true);
           setTopicList(null);
+          setIsRefreshingUrlList(true);
+          setSelectedUrl("");
           setOpenDialog(false);
           setIsLoading(false);
         });
@@ -229,6 +249,37 @@ const AdminPanel = () => {
       setErrorMessage("Title is required");
       setIsLoading(false);
     }
+  };
+
+  const clearAllFields = () => {
+    setUrl("");
+    setTitle("");
+    setTopicList("");
+    quill.setText("");
+    setIsManuelPage(false);
+    setDescription("");
+    setMetaKeys("");
+    setIsMessageOpen(true);
+    setGenerateImageByRobotText("");
+    setImagePath("");
+    setTopicList("");
+    setTitleImageUrl("");
+    setIsLoading(false);
+    setIsActive(true);
+  };
+
+  const fillAllFields = (myArticle) => {
+    console.log(myArticle);
+    setUrl(myArticle.url);
+    setTitle(myArticle.title);
+    setTopicList(myArticle.topics);
+    quill.setText(myArticle.body);
+    setIsManuelPage(myArticle.is_manuel_page);
+    setDescription(myArticle.description);
+    setMetaKeys(myArticle.meta);
+    // setImagePath(myArticle.imagePath);
+    setTitleImageUrl(myArticle.imagePath);
+    setIsActive(myArticle.isActive);
   };
 
   const onSubmit = async () => {
@@ -244,47 +295,59 @@ const AdminPanel = () => {
       return;
     }
     try {
-      fetch("/api/article/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          url:
-            replaceStringForUrlFormat(url) +
-            "-" +
-            Math.floor(Math.random() * 1000000000000),
-          title: title,
-          topics: getStringWithCommaSeperatedFromList(topicList),
-          create_date: new Date(),
-          title_image: titleImageUrl,
-          body: quill.container.firstChild.innerHTML,
-          is_manuel_page: isManuelPage,
-          description: description,
-          meta_keys: metaKeys,
-          is_active: isActive,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setUrl("");
-          setTitle("");
-          setTopicList("");
-          quill.setText("");
-          setIsManuelPage(false);
-          setDescription("");
-          setMetaKeys("");
-          setIsMessageOpen(true);
-          setGenerateImageByRobotText("");
-          setImagePath("");
-          setTopicList("");
-          setTitleImageUrl("");
-          setIsLoading(false);
-          setIsActive(true);
-        });
+      if (isNewOrUpdate === "update") {
+        fetch("/api/article/update", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            url: selectedUrl,
+            title: title,
+            topics: getStringWithCommaSeperatedFromList(topicList),
+            create_date: new Date(),
+            title_image: titleImageUrl,
+            body: quill.container.firstChild.innerHTML,
+            is_manuel_page: isManuelPage,
+            description: description,
+            meta_keys: metaKeys,
+            is_active: isActive,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            clearAllFields();
+          });
+      } else {
+        fetch("/api/article/add", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            url:
+              replaceStringForUrlFormat(url) +
+              "-" +
+              Math.floor(Math.random() * 1000000000000),
+            title: title,
+            topics: getStringWithCommaSeperatedFromList(topicList),
+            create_date: new Date(),
+            title_image: titleImageUrl,
+            body: quill.container.firstChild.innerHTML,
+            is_manuel_page: isManuelPage,
+            description: description,
+            meta_keys: metaKeys,
+            is_active: isActive,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            clearAllFields();
+          });
+      }
     } catch (error) {
       setErrorMessage("Title is required");
       setIsLoading(false);
     }
   };
+
+  
 
   return (
     <>
@@ -296,14 +359,45 @@ const AdminPanel = () => {
               <Grid item xs={12} sm={12}>
                 <h1>Yeni Sayfa Girişi </h1>
               </Grid>
+
+              <Grid item xs={12} sm={12}>
+                <ToggleButtonGroup
+                  color="primary"
+                  value={isNewOrUpdate}
+                  exclusive
+                  onChange={handleChangeNewOrUpdate}
+                  aria-label="Platform"
+                >
+                  <ToggleButton value="new">Yeni</ToggleButton>
+                  <ToggleButton value="update">Güncelle</ToggleButton>
+                </ToggleButtonGroup>
+              </Grid>
+
               <Grid item xs={12} sm={6}>
-                <TextField
-                  className={styles.TextFieldStyle}
-                  id="standard-basic"
-                  label="Title"
-                  value={title}
-                  onChange={(event) => handleTitleChange(event.target.value)}
-                />
+                <>
+                  {isNewOrUpdate == "new" && (
+                    <TextField
+                      className={styles.TextFieldStyle}
+                      id="standard-basic"
+                      label="Title"
+                      value={title}
+                      onChange={(event) =>
+                        handleTitleChange(event.target.value)
+                      }
+                    />
+                  )}
+
+                  {isNewOrUpdate == "update" && (
+                    <UrlList
+                    isSingleSelection
+                    setArticle={setArticle}
+                    selectedUrl={selectedUrl}
+                      setSelectedUrl={setSelectedUrl}
+                      isRefreshingUrlList={isRefreshingUrlList}
+                      setIsRefreshingUrlList={setIsRefreshingUrlList}
+                    />
+                  )}
+                </>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Button

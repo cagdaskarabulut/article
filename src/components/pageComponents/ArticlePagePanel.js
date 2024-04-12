@@ -56,8 +56,8 @@ const ArticlePagePanel = ({ article }) => {
             <div className={styles.HomePageInfoStyle}>
               <ArticleHeader article={article} />
               <br />
-              {/* //TODO - Reklam alındıktan sonra açılacak */}
-              {/* <div className={styles.ArticleImageContainerStyle}>
+              {/* //TODO - Reklam almak için kapatıp denendi ama olmadı bir süre sonra tekrar denenebilir*/}
+              <div className={styles.ArticleImageContainerStyle}>
                 {article?.title_image && (
                   <Image
                     src={article?.title_image}
@@ -66,7 +66,7 @@ const ArticlePagePanel = ({ article }) => {
                     objectFit="contain"
                   />
                 )}
-              </div> */}
+              </div>
               <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
             </div>
           </Container>

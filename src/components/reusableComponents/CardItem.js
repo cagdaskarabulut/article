@@ -13,6 +13,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Backdrop, CircularProgress } from "@mui/material";
 import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
+import Link from "@mui/material/Link";
 
 const CardItem = ({
   url,
@@ -42,7 +43,11 @@ const CardItem = ({
   const HeaderLeftContent = (e) => {
     return (
       <>
-        <span
+      <Link
+      style={{textDecoration: 'none'}}
+            href={"/" + url}
+          >
+            <span
           key={"span1_" + url}
           id={"span1_" + url}
           className={styles.CardHeaderTitleStyle}
@@ -50,6 +55,9 @@ const CardItem = ({
         >
           {title}
         </span>
+          </Link>
+          
+        
         <br />
         <span
           key={"span2_" + url}
@@ -111,8 +119,8 @@ const CardItem = ({
           id={"div2_" + url}
           className={styles.BodyRightContentStyle}
         >
-          {/* //TODO - Reklam alındıktan sonra açılacak */}
-          {/* {title_image && (
+          {/* //TODO - Reklam almak için kapatıp denendi ama olmadı bir süre sonra tekrar denenebilir*/}
+          {title_image && (
             <Image
               key={"image_" + url}
               id={"image_" + url}
@@ -122,7 +130,7 @@ const CardItem = ({
               fill
               style={{ float: "right", objectFit: "contain" }}
             />
-          )} */}
+          )}
         </div>
       </>
     );
