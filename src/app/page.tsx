@@ -6,11 +6,14 @@ import Header from "../components/mainComponents/Header";
 import MyGrid from "../components/toolComponents/MyGrid";
 import FooterPanel from "../components/mainComponents/FooterPanel";
 import { Analytics } from "@vercel/analytics/react";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import NavBar from "../components/reusableComponents/Navbar";
+import NavigateButton from "../components/reusableComponents/NavigateButton";
 import { fetchArticleSize } from "./pagination/pagination_article_size";
+import { useRouter } from "next/navigation";
 
 export default async function Home({ searchParams }) {
+  
   const orderType = searchParams.orderby || "create_date"; //order by boş gelirse default değer atanır
   const search = searchParams.search || ""; //search boş gelirse default değer atanır
   const mainData = await fetchArticle(1, 5, orderType, search);
@@ -89,6 +92,15 @@ export default async function Home({ searchParams }) {
             isShowLoadingBarWhileLoading={true}
           />
         )}
+
+{mainDataSize<=0 && (
+  <div style={{textAlign:"center",paddingTop:"50px",paddingBottom:"50px"}}>
+    <p>No record found for "<b>{search}</b>"</p>
+    <br />
+<NavigateButton title="Back to Homepage" target="/" />
+
+</div>
+)}
         </Container>
         <ScrollToTopButton showBelow={250} />
       </div>
