@@ -24,6 +24,7 @@ export default async function ArticlePage({ params }) {
   const { article } = params;
   const articleData = await getArticle(article);
   const activeArticle = articleData?.article_list?.rows[0] || null;
+  const imagePath = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/favicon.ico`;
   if (activeArticle != null) {
     return (
       <>
@@ -31,7 +32,7 @@ export default async function ArticlePage({ params }) {
           title={activeArticle?.title}
           descriptionContent={activeArticle?.description}
           keywordsContent={activeArticle?.meta_keys}
-          imagePath="/images/icon.ico"
+          imagePath={imagePath}
           imageAlt={activeArticle?.url}
         />
         <ArticlePagePanel article={activeArticle} />
