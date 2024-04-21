@@ -9,16 +9,16 @@ export const metadata = {
   publisher: 'Cagdas Karabulut',
   images: [
     {
-      url: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/favicon.ico`,
+      url: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/favicon.ico`,
       width: 32,
       height: 32,
       alt: 'newszipped',
     },
   ],
   icons: {
-    icon: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/favicon.ico`,
-    shortcut: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/favicon.ico`,
-    apple: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/favicon.ico`,
+    icon: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/favicon.ico`,
+    shortcut: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/favicon.ico`,
+    apple: `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/favicon.ico`,
   },
 }
 

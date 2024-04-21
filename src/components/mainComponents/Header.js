@@ -36,7 +36,7 @@ export default function Header({isMainPage}) {
   const [userImage, setUserImage] = useState("");
   const [session, setSession] = useState("");
   const [isLoadingFullPage, setIsLoadingFullPage] = useState(false);
-  let iconHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/logo.png`;
+  let iconHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/logo.png`;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

@@ -15,12 +15,12 @@ const MetaPanel = ({
   iconPath,
 }) => {
   const router = useRouter();
-  let siteName = process.env.PROJECT_NAME;
+  let siteName = process.env.PROJECT_SITE_NAME;
   let siteUrl = process.env.URL;
 
   let currentFullPathUrl = siteUrl + router.asPath;
   let imageFullPathUrl = siteUrl + imagePath;
-  const iconHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/favicon.ico`;
+  const iconHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/favicon.ico`;
   return (
     <Head>
 

@@ -56,7 +56,7 @@ ${robotsTxtFileSource}
 Disallow: /AdminPanel
 Disallow: /AdminPanelLogin
 # Sitemaps
-Sitemap: https://www.newszipped.com/sitemap.xml`;
+Sitemap: ${websiteUrl}/sitemap.xml`;
   return result;
 }
 
