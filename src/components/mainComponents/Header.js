@@ -36,6 +36,7 @@ export default function Header({isMainPage}) {
   const [userImage, setUserImage] = useState("");
   const [session, setSession] = useState("");
   const [isLoadingFullPage, setIsLoadingFullPage] = useState(false);
+  let iconHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/logo.png`;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -140,7 +141,7 @@ export default function Header({isMainPage}) {
                 <>
                   <h1 className={styles.LogoStyle} style={{ marginTop: "5px" }}>
                     <Image
-                      src={"/images/logo.png"}
+                      src={iconHref}
                       width={isMobile ? 48 : 64}
                       height={isMobile ? 48 : 64}
                       onClick={() => goHomePage()}
