@@ -24,7 +24,7 @@ export default async function ArticlePage({ params }) {
   const { article } = params;
   const articleData = await getArticle(article);
   const activeArticle = articleData?.article_list?.rows[0] || null;
-  const imagePath = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_NAME}/favicon.ico`;
+  const imagePath = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/favicon.ico`;
   if (activeArticle != null) {
     return (
       <>

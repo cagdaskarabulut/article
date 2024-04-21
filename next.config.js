@@ -20,7 +20,8 @@ module.exports = nextConfig;
 
 module.exports = {
   env: {
-    PROJECT_NAME: process.env.SITE_NAME,
+    PROJECT_SITE_NAME: process.env.SITE_NAME,
+    PROJECT_URL_WEBSITE: process.env.URL_WEBSITE,
   },
   reactStrictMode: false,
   webpack5: true,
