@@ -19,6 +19,9 @@ const nextConfig = {
 module.exports = nextConfig;
 
 module.exports = {
+  env: {
+    PROJECT_NAME: 'newszipped',
+  },
   reactStrictMode: false,
   webpack5: true,
   images: {
