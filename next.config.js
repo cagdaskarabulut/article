@@ -20,7 +20,7 @@ module.exports = nextConfig;
 
 module.exports = {
   env: {
-    PROJECT_NAME: 'newszipped',
+    PROJECT_NAME: process.env.SITE_NAME,
   },
   reactStrictMode: false,
   webpack5: true,
