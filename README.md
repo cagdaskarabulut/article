@@ -7,4 +7,4 @@
 # Yeni Websitesi Eklerken;
 ## Her eklenen yeni proje için api dosyaları içerisine if koşulu ile o siteye uygun olarak değiştirilmiş yeni scriptler eklenir
 ## Her branch altında çalışılırken o projeye ait env dosyası çekilir 
-
+...
