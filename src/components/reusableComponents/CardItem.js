@@ -36,7 +36,7 @@ const CardItem = ({
   }
 
   const copylink = (e) => {
-    navigator.clipboard.writeText("https://www.newszipped.com/" + url);
+    navigator.clipboard.writeText(process.env.URL_WEBSITE + "/" + url);
     setIsCopyLinkMessageOpen(true);
   };
 

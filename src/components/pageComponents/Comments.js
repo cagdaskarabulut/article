@@ -21,8 +21,6 @@ const Comments = ({ article }) => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // const [latestCommentNumber, setLatestCommentNumber] = useState(article?.comment_number);
-  const [latestCommentNumber, setLatestCommentNumber] = useState("");
 
   useEffect(() => {
     setIsAuthChecked(false);
@@ -39,7 +37,6 @@ const Comments = ({ article }) => {
       .then((data2) => {
         let article_comment_list = data2.article_comment_list.rows;
         setArticleCommentList(article_comment_list);
-        setLatestCommentNumber(article?.comment_number);
       });
   }, []);
 
@@ -91,7 +88,6 @@ const Comments = ({ article }) => {
           .then((res2) => res2.json())
           .then((data2) => {
             let article_comment_list = data2.article_comment_list.rows;
-            setLatestCommentNumber(article_comment_list.length);
             setArticleCommentList(article_comment_list);
             setIsLoading(false);
           });
@@ -102,7 +98,7 @@ const Comments = ({ article }) => {
     <div id="commentsContentId">
       <LoadingFullPage isLoading={isLoading} />
       <h3 style={{ color: "rgba(0, 0, 0, 0.6)" }}>
-        Comments ({latestCommentNumber})
+        Comments ({articleCommentList?.length})
       </h3>
       <button
         style={{

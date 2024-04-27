@@ -36,7 +36,7 @@ const UploadForm = ({
         setUploading(false);
         setIsLoading(false);
         setTitleImageUrl(
-          "https://karabulut-storage.s3.amazonaws.com/newszipped/" + file.name
+          "https://karabulut-storage.s3.amazonaws.com/"+ process.env.PROJECT_SITE_NAME + "/" + file.name
         );
         setFile(null);
       } catch (error) {
