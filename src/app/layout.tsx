@@ -8,7 +8,7 @@ type Props = {
 };
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params, searchParams }: any,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
 
