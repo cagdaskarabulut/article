@@ -125,12 +125,6 @@ export default function Header({isMainPage}) {
       <div className={styles.PanelContainerStyle}>
         <Container className={styles.header}>
           {!isAuthChecked && (
-            // <LinearProgress color="success"
-            //   style={{
-            //     marginTop: "25px",
-            //     marginBottom: "25px"
-            //   }}
-            // />
             <SkeletonHeader />
           )}
 
@@ -145,7 +139,7 @@ export default function Header({isMainPage}) {
                       width={isMobile ? 48 : 64}
                       height={isMobile ? 48 : 64}
                       onClick={() => goHomePage()}
-                      alt="newszipped-logo"
+                      alt={process.env.PROJECT_SITE_NAME+"-logo"} 
                     />
                   </h1>
                 </>

@@ -34,7 +34,7 @@
     "src/pages/api/article/[is_liked_by_user].js",
     "src/app/[article]/page.js",
     "src/app/[article]/page.js"
-  ],
+, "src/hooks/useProjectMetaTags.js"  ],
   "exclude": [
     "node_modules"
   ]

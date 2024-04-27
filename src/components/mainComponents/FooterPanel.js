@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import styles from "./FooterPanel.module.scss";
 import { Grid } from "@mui/material";
 import React from "react";
@@ -6,11 +6,14 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import MyGrid from "../toolComponents/MyGrid";
+import useProjectSpecialFields from "../../hooks/useProjectSpecialFields";
 
 const FooterPanel = () => {
   //_ MobilePart
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
+  const specialFields = useProjectSpecialFields();
+  
   useEffect(() => {
     if (innerWidth === null) {
       setIsMobile(false);
@@ -24,9 +27,9 @@ const FooterPanel = () => {
       <>
         <div className={styles.PanelContainerStyle}>
           <div className={styles.FooterContentStyle}>
-            Copyright © 2023 newszipped. All rights reserved.
+            {specialFields?.footer_copyright}
             {isMobile ? " " : <br />}
-            Made by Karabulut Software.
+            {specialFields?.footer_company}
           </div>
         </div>
       </>
@@ -35,7 +38,11 @@ const FooterPanel = () => {
 
   return (
     <div className={styles.footerStyle}>
-      <MyGrid leftContent={<LeftContent />} isOneFullContent={true} isHideWhileLoading={true}/>
+      <MyGrid
+        leftContent={<LeftContent />}
+        isOneFullContent={true}
+        isHideWhileLoading={true}
+      />
     </div>
   );
 };

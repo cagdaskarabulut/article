@@ -26,7 +26,7 @@ module.exports = {
   reactStrictMode: false,
   webpack5: true,
   images: {
-    domains: ["127.0.0.1","localhost","newszipped.com","https://newszipped-new.vercel.app"],
+    domains: ["127.0.0.1","localhost",process.env.URL_WEBSITE,process.env.URL_WEBSITE_ROOT_DOMAIN],
     unoptimized: true
   },
   webpack(config, { isServer }) {

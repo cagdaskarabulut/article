@@ -1,7 +1,8 @@
 const fs = require("fs");
 const rootPath = process.env.URL;
-const websiteUrl = process.env.URL_WEBSITE;
-const websiteUrlRootomain = process.env.URL_WEBSITE_ROOT_DOMAIN;
+const siteName = process.env.PROJECT_SITE_NAME;
+const websiteUrl = process.env.PROJECT_URL_WEBSITE;
+const websiteUrlRootomain = process.env.PROJECT_URL_WEBSITE_ROOT_DOMAIN;
 const isLocal = process.env.IS_LOCAL;
 const now = getNowWithISOFormat();
 
@@ -103,6 +104,7 @@ daily
   return result;
 }
 
+
 function generateRobotsTxtAndSitemapXml() {
   if (isLocal == "false") {
     let dynamicRobotsTxtFields = "";
@@ -132,6 +134,25 @@ function generateRobotsTxtAndSitemapXml() {
         fs.writeFileSync("public/robots.txt", robotsTxt);
         fs.writeFileSync("public/sitemap.xml", sitemapXml);
       });
+
+
+
+
+      fetch(process.env.URL + "/api/article/article_project_auto_generate_files", {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((dataList) => {
+          //- add auto generated urls
+          dataList?.file?.rows.map((activeFile, index) => {
+            if(activeFile?.project_name == siteName){
+              fs.writeFileSync(activeFile?.file_path, activeFile?.file_content);
+            }
+          });
+        });
+
+
+
   }
 }
 
