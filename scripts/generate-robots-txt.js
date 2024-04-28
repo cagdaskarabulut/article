@@ -140,9 +140,6 @@ function generateRobotsTxtAndSitemapXml() {
         fs.writeFileSync("public/sitemap.xml", sitemapXml);
       });
 
-
-
-
       fetch(process.env.URL + "/api/article/article_project_auto_generate_files", {
         method: "GET",
       })
