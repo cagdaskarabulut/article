@@ -109,7 +109,6 @@ daily
   return result;
 }
 
-
 function generateRobotsTxtAndSitemapXml() {
   if (isLocal == "false") {
     let dynamicRobotsTxtFields = "";
