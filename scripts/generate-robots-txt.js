@@ -1,9 +1,14 @@
 const fs = require("fs");
 const rootPath = process.env.URL;
-const siteName = process.env.PROJECT_SITE_NAME;
-const websiteUrl = process.env.PROJECT_URL_WEBSITE;
-const websiteUrlRootomain = process.env.PROJECT_URL_WEBSITE_ROOT_DOMAIN;
+const siteName = process.env.SITE_NAME;
+const websiteUrl = process.env.URL_WEBSITE;
+const websiteUrlRootomain = process.env.URL_WEBSITE_ROOT_DOMAIN;
 const isLocal = process.env.IS_LOCAL;
+
+// const siteName = process.env.PROJECT_SITE_NAME;
+// const websiteUrl = process.env.PROJECT_URL_WEBSITE;
+// const websiteUrlRootomain = process.env.PROJECT_URL_WEBSITE_ROOT_DOMAIN;
+
 const now = getNowWithISOFormat();
 
 function getNowWithISOFormat() {
