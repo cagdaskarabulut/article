@@ -11,18 +11,18 @@ function getNowWithISOFormat() {
   return today.toISOString();
 }
 
-function replaceStringForUrlFormat(myString) {
-  myString = myString.replace(/ /g, "-");
-  myString = myString.replace(/'/g, "");
-  myString = myString.replace(/"/g, "");
-  myString = myString.replace(/\//g, "");
-  myString = myString.replace(/&/g, "");
-  myString = myString.replace("(", "");
-  myString = myString.replace(")", "");
-  myString = myString.replace(/ó/g, "o");
-  myString = myString.replace(",", "");
-  return myString;
-}
+// function replaceStringForUrlFormat(myString) {
+//   myString = myString.replace(/ /g, "-");
+//   myString = myString.replace(/'/g, "");
+//   myString = myString.replace(/"/g, "");
+//   myString = myString.replace(/\//g, "");
+//   myString = myString.replace(/&/g, "");
+//   myString = myString.replace("(", "");
+//   myString = myString.replace(")", "");
+//   myString = myString.replace(/ó/g, "o");
+//   myString = myString.replace(",", "");
+//   return myString;
+// }
 
 function addUrlToSitemapList(existingList, newUrl) {
   existingList = `${existingList}
