@@ -1,6 +1,3 @@
-// export const dynamic = "force-dynamic";
-// export const fetchCache = "force-no-store";
-
 import MetaPanel from "../../components/mainComponents/MetaPanel";
 import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopButton";
