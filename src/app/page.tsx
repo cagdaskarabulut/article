@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 export default async function Home({ searchParams }) {
   
   const orderType = searchParams.orderby || "create_date"; //order by boş gelirse default değer atanır
-  const search = searchParams.search || ""; //search boş gelirse default değer atanır
+  const search = searchParams.search || ""; 
   const mainData = await fetchArticle(1, 5, orderType, search);
   const lastData = await fetchArticle(1, 5, "like_number", "");
   const mainDataSize = await fetchArticleSize(1, 5, orderType, search);
