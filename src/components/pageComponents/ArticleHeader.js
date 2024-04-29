@@ -43,7 +43,8 @@ const ArticleHeader = ({ article }) => {
   const [isLoadedLike, setIsLoadedLike] = useState(false);
   const [isLoadedWatch, setIsLoadedWatch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [activeArticle, setActiveArticle] = useState("");// todo bunu doldur useeffect te sonra bunu kullan
+
   useEffect(() => {
     setIsAuthChecked(false);
     fetch("/api/auth/whoAmI/email")
@@ -185,7 +186,6 @@ const ArticleHeader = ({ article }) => {
                             <button
                               key={"ContentField" + article?.title}
                               className={styles.TopicChipStyle}
-                              // onClick={() => router.push("/?search=" + topic)}
                               onClick={() => tagSelectedAction(topic)}
                             >
                               {topic}
