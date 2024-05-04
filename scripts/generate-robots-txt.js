@@ -169,7 +169,7 @@ daily
 }
 
 async function generateRobotsTxtAndSitemapXml() {
-  if (isLocal == "true") {
+  if (isLocal == "false") {
     // let colorsScss = generateFinalColorsScssFile();
     //     let globalsScss = generateFinalGlobalsScssFile();
     // fs.writeFileSync("src/styles/colors.scss", colorsScss);
