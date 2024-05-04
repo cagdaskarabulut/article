@@ -47,7 +47,7 @@
         font-size: 24px !important;
         height: 35px !important;
         margin-top: 12px !important;
-        color: $main !important;
+        color: $color1 !important;
         float: right !important;
       }
 
@@ -57,28 +57,28 @@
 
       :global {
         .MuiOutlinedInput-notchedOutline {
-          border-color: $darkColor !important;
+          border-color: $color5 !important;
           border-width: 1px !important;
         }
 
         .MuiInputBase-input {
           font-family: inherit !important;
-          color: $orangeDark !important;
+          color: $color4 !important;
         }
 
         .MuiSvgIcon-root {
-          color: $darkColor !important;
+          color: $color5 !important;
         }
 
         .MuiInputLabel-root {
-          color: $darkColor !important;
+          color: $color5 !important;
           font-family: inherit !important;
           
         }
 
         .MuiAutocomplete-input {
           font-family: inherit !important;
-          color: $orangeDark !important;
+          color: $color4 !important;
         }
       }
 
@@ -90,23 +90,23 @@
   }
 }
 
-.blueButtonStyle{
+.fourthButtonStyle{
   min-width: 100px !important;
   float: right !important; 
   margin-top: 20px !important; 
 }
 
-.blueButtonStyleSmall{
-  color: white !important;
-  background-color: $blue !important;
-  border-color: $blue !important;
+.fourthButtonStyleSmall{
+  color: $color0 !important;
+  background-color: $color3 !important;
+  border-color: $color3 !important;
   min-width: 50px !important;
   float: right !important; 
   margin-top: 15px !important; 
   border-radius: 3px !important;
 }
 
-.redButtonStyle{
+.thirdButtonStyle{
   min-width: 100px !important;
   float: right !important; 
   margin-top: 10px !important; 

@@ -1,7 +1,12 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/colors.scss";
 @import "../../styles/common.scss";
-// @import "../../app/globals.scss";
+
+.ContainerStyle{
+  background-color: $color0;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 
 .ImageContainerStyle{
   width: 100%;  
@@ -22,14 +27,10 @@
   width: 100%;
   :global {
     .MuiOutlinedInput-notchedOutline{
-      border-color: red !important;  
+      border-color: $textFieldErrorBorderColor !important;
     }
     .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-      border-color: red !important;  
+      border-color: $textFieldErrorBorderColor !important;
     }
   }
 }
-
-// .subTitleStyle{
-//   color: $fontTitle;
-// }

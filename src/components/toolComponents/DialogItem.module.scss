@@ -1,6 +1,5 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/colors.scss";
-// @import "../../app/globals.scss";
 
 .menuPanelStyle {
   display: flex !important;
@@ -16,12 +15,11 @@
 
   .menuButtonStyle,
   .menuButtonStyleSelected {
-    // font-family: 'Times New Roman' !important;
     font-size: 14px !important;
     color: $font !important;
     font-weight: bold !important;
     border: none !important;
-    background: linear-gradient(90deg, $orangeDark, $orangeDark) !important;
+    background: linear-gradient(90deg, $color4, $color4) !important;
     background-size: 0% 3px !important;
     background-repeat: no-repeat !important;
     background-position: left bottom !important;
@@ -29,12 +27,12 @@
 
     &:hover {
       background-size: 100% 3px !important;
-      color: $orangeDark !important;
+      color: $color4 !important;
     }
   }
 
   .menuButtonStyleSelected {
-    color: $orangeDark !important;
+    color: $color4 !important;
     background-size: 100% 3px !important;
 
   }
