@@ -1,5 +1,3 @@
-import "../../src/app/globals.scss";
-
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
