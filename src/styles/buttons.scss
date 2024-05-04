@@ -1,7 +1,7 @@
 @import "./colors.scss";
 @import "./mixins.scss";
 
-.whiteGreenButtonStyle, .greenButtonStyle, .redButtonStyle, .blueButtonStyle{
+.firstButtonStyle, .secondButtonStyle, .thirdButtonStyle, .fourthButtonStyle{
   border-width: 1px !important;
   border-style: solid !important;
   padding: 5px !important;
@@ -10,55 +10,31 @@
   transition: 0.3s !important;
 }
 
-.whiteGreenButtonStyle:hover, .greenButtonStyle:hover, .redButtonStyle:hover, .blueButtonStyle:hover {
+.firstButtonStyle {
+  color: $firstButtonFontColor !important;
+  background-color: $firstButtonBackgroundColor !important ;
+  border-color: $firstButtonBorderColor !important ;
+}
+
+.secondButtonStyle {
+  color: $secondButtonFontColor !important ;
+  background-color: $secondButtonBackgroundColor !important ;
+  border-color: $secondButtonBorderColor !important ;
+}
+
+.thirdButtonStyle {
+  color: $thirdButtonFontColor !important ;
+  background-color: $thirdButtonBackgroundColor !important ;
+  border-color: $thirdButtonBorderColor !important ;
+}
+
+.fourthButtonStyle {
+  color: $fourthButtonFontColor !important ;
+  background-color: $fourthButtonBackgroundColor !important ;
+  border-color: $fourthButtonBorderColor !important ;
+}
+
+.firstButtonStyle:hover, .secondButtonStyle:hover, .thirdButtonStyle:hover, .fourthButtonStyle:hover {
+  opacity: 0.6;
   cursor: pointer !important;
-}
-
-.whiteGreenButtonStyle {
-  color: $main !important;
-  background-color: #e6f4e7 !important ;
-  border-color: #2F7D31 !important ;
-}
-
-.whiteGreenButtonStyle:hover{
-  color: white !important ;
-  background-color: #2F7D31 !important ;
-  border-color: #2F7D31 !important ;
-}
-
-.greenButtonStyle {
-  color: white !important ;
-  background-color: #2F7D31 !important ;
-  border-color: #e6f4e7 !important ;
-}
-
-.blueButtonStyle {
-  color: white !important ;
-  background-color: $blue !important ;
-  border-color: $blue !important ;
-}
-
-.greenButtonStyle:hover {
-  color: white !important ;
-  background-color: #2F7D31 !important ;
-  border-color: #2F7D31 !important ;
-}
-
-.redButtonStyle {
-  color: white !important ;
-  background-color: $orangeDark !important ;
-  border-color: white !important ;
-}
-
-.redButtonStyle:hover {
-  color: white !important ;
-  background-color: $orangeDarkHover !important ;
-  border-color: $orangeDarkHover !important ;
-}
-
-.blueButtonStyle:hover {
-  color: white !important ;
-  background-color: $blueSecondary !important ;
-  border-color: $blueSecondary !important ;
-
 }

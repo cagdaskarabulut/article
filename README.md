@@ -6,3 +6,4 @@
 # Yeni Websitesi Eklerken;
 ## Her eklenen yeni proje için api dosyaları içerisine if koşulu ile o siteye uygun olarak değiştirilmiş yeni scriptler eklenir
 ## Sitenin özel alanları db ve env dosyalarına eklenir
+## colors.scss dosyasına sitenin ana renkleri eklenir

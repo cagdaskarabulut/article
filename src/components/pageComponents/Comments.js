@@ -97,14 +97,14 @@ const Comments = ({ article }) => {
   return (
     <div id="commentsContentId">
       <LoadingFullPage isLoading={isLoading} />
-      <h3 style={{ color: "rgba(0, 0, 0, 0.6)" }}>
+      <h3 className={styles.HeaderStyle}>
         Comments ({articleCommentList?.length})
       </h3>
       <button
         style={{
           display: isAuthChecked && !isWriteCommentVisible ? "" : "none",
         }}
-        className={styles.redButtonStyle}
+        className={styles.thirdButtonStyle}
         onClick={() => prepareWriteCommentAction()}
       >
         Write a Comment
@@ -129,7 +129,7 @@ const Comments = ({ article }) => {
               <br />
               <button
                 style={{ float: "right" }}
-                className={styles.redButtonStyle}
+                className={styles.thirdButtonStyle}
                 onClick={() => respondAction()}
               >
                 Respond
@@ -151,7 +151,7 @@ const Comments = ({ article }) => {
               <br />
               <button
                 style={{ float: "right" }}
-                className={styles.redButtonStyle}
+                className={styles.thirdButtonStyle}
                 onClick={() => respondAction()}
               >
                 Respond

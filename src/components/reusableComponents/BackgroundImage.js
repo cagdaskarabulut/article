@@ -4,13 +4,13 @@ const BackgroundImage = ({ content, height, width }) => {
   return (
     <div>
       <div
+      className={styles.ContainerStyle}
         style={{
           position: "absolute",
           height: height,
           width: width,
           clipPath: "inset(0 0 0 0)",
           zIndex: "1",
-          color: "red",
         }}
       >
         <div

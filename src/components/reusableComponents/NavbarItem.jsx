@@ -34,8 +34,8 @@ export default function NavbarItem({ title, param }) {
       key={"NavbarItemId_"+param}
       className={
         orderby === param
-          ? styles.greenButtonStyle
-          : styles.whiteGreenButtonStyle
+          ? styles.secondButtonStyle
+          : styles.firstButtonStyle
       }
       onClick={() => goTarget(param)}
         // href={`/?orderby=${param}`}

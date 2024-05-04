@@ -13,9 +13,8 @@ import { fetchArticleSize } from "./pagination/pagination_article_size";
 import { useRouter } from "next/navigation";
 
 export default async function Home({ searchParams }) {
-  
   const orderType = searchParams.orderby || "create_date"; //order by boş gelirse default değer atanır
-  const search = searchParams.search || ""; 
+  const search = searchParams.search || "";
   const mainData = await fetchArticle(1, 5, orderType, search);
   const lastData = await fetchArticle(1, 5, "like_number", "");
   const mainDataSize = await fetchArticleSize(1, 5, orderType, search);
@@ -39,68 +38,66 @@ export default async function Home({ searchParams }) {
   return (
     <div className={styles.ContainerPageContainerStyle}>
       <div className={styles.HeaderStyle}>
-        <Header isMainPage={true}/>
+        <Header isMainPage={true} />
         <NavBar />
       </div>
       <div className={styles.ContentStyle}>
         <Container maxWidth="lg">
-        {mainDataSize>0 && (
-          <MyGrid
-            leftContent={
-              <>
-                <h4
-                  style={{
-                    margin: "0px",
-                    textAlign: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-                  {findTitleByUrl()}
-                </h4>
-                {mainData}
-                <LoadMore
-                  orderType={orderType}
-                  search={search}
-                  totalListSize={mainDataSize}
-                />
-              </>
-            }
-            rightContent={
-              <>
-                <h4
-                  style={{
-                    margin: "0px",
-                    textAlign: "center",
-                    color: "rgba(0, 0, 0, 0.6)",
-                  }}
-                >
-                  Most Liked Posts
-                </h4>
-                {lastData}
-              </>
-            }
-            breadcrumbs={undefined}
-            title={undefined}
-            middleContent={undefined}
-            isRightContentSmall={undefined}
-            isOneFullContent={undefined}
-            contentPosition={undefined}
-            forHeader={undefined}
-            isStaticWidth={undefined}
-            isHideRightSideOnMobile={true}
-            isHideWhileLoading={true}
-            isShowLoadingBarWhileLoading={true}
-          />
-        )}
+          {mainDataSize > 0 && (
+            <MyGrid
+              leftContent={
+                <>
+                  <h4 className={styles.FindTitleHeaderStyle}
+                  >
+                    {findTitleByUrl()}
+                  </h4>
+                  {mainData}
+                  <LoadMore
+                    orderType={orderType}
+                    search={search}
+                    totalListSize={mainDataSize}
+                  />
+                </>
+              }
+              rightContent={
+                <>
+                  <h4
+                    className={styles.FindTitleHeaderStyle}
+                  >
+                    Most Liked Posts
+                  </h4>
+                  {lastData}
+                </>
+              }
+              breadcrumbs={undefined}
+              title={undefined}
+              middleContent={undefined}
+              isRightContentSmall={undefined}
+              isOneFullContent={undefined}
+              contentPosition={undefined}
+              forHeader={undefined}
+              isStaticWidth={undefined}
+              isHideRightSideOnMobile={true}
+              isHideWhileLoading={true}
+              isShowLoadingBarWhileLoading={true}
+            />
+          )}
 
-{mainDataSize<=0 && (
-  <div style={{textAlign:"center",paddingTop:"50px",paddingBottom:"50px"}}>
-    <p>No record found for "<b>{search}</b>"</p>
-    <br />
-<NavigateButton title="Back to Homepage" target="/" />
-
-</div>
-)}
+          {mainDataSize <= 0 && (
+            <div
+              style={{
+                textAlign: "center",
+                paddingTop: "50px",
+                paddingBottom: "50px",
+              }}
+            >
+              <p>
+                No record found for "<b>{search}</b>"
+              </p>
+              <br />
+              <NavigateButton title="Back to Homepage" target="/" />
+            </div>
+          )}
         </Container>
         <ScrollToTopButton showBelow={250} />
       </div>

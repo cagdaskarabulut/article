@@ -363,7 +363,7 @@ const AdminPanel = () => {
       {isAuthorizedUser && (
         <>
           <LoadingFullPage isLoading={isLoading} />
-          <Container maxWidth="md" style={{backgroundColor:"white",marginTop:"50px",marginBottom:"50px"}}>
+          <Container maxWidth="md" className={styles.ContainerStyle} >
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
                 <h1>Sayfa Oluştur / Güncelle </h1>

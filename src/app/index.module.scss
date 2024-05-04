@@ -28,7 +28,7 @@
     h1 a,
     h2,
     h2 a {
-      color: $orangeDark !important;
+      color: $color4 !important;
     }
 
     @include tablet-or-less {
@@ -49,8 +49,8 @@
 }
 
 .HomePageInfoStyle{
-  color: $main;
+  color: $color1;
   h1{
-    color: $secondary;
+    color: $color2;
   }
 }

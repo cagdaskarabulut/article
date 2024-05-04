@@ -1,5 +1,5 @@
 @import "../styles/mixins.scss";
-@import "../styles/colors.scss";
+@import "../../src/app/globals.scss";
 @import "../styles/common.scss";
 // @import "../app/globals.scss";
 
@@ -8,7 +8,7 @@
   flex-direction: column !important;
   min-height: 98vh !important;
   margin: 0 !important;
-  color: $main !important;
+  color: $color1 !important;
   font-size: 16px !important;
   background-color: $background !important;
 
@@ -26,7 +26,7 @@
   h1 a,
   h2,
   h2 a {
-    color: $secondary !important;
+    color: $color1 !important;
   }
 
   .HeaderStyle {
@@ -37,12 +37,19 @@
 }
 
 .HomePageInfoStyle {
-  color: $main;
+  color: $color1;
   h1 {
-    color: $secondary;
+    color: $color1;
+    opacity: 0.6;
   }
 }
 
 .ContentStyle{
   padding-top: 20px !important;
+}
+
+.FindTitleHeaderStyle{
+  margin: "0px";
+  text-align: "center";
+  color: $color2;
 }

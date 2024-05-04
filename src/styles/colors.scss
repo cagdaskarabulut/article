@@ -1,87 +1,34 @@
-$main: black;
-$secondary: rgba(0, 0, 0, 0.6);
-$blue: #0093E9;
-$blueSecondary: #5a94ca;
-$blueDark: #02539D;
-$orange: #e4b9a3;
-$darkColor: gray;
-$orangeDarkHover: #f26118;
-$orangeDark: #d34600;
-$background: #F2F2F2;
-$containerBackgroundDesktop: rgba(255, 255, 255, 0.5);
-$containerBackgroundMobile: rgba(255, 255, 255, 0.4);
-$containerBackgroundHeader: rgba(255, 255, 255, 0.85);
-// background-color: #0093E9;
-// background-image: 
+$color0: rgb(255, 255, 255);
+$color1: rgb(0, 0, 0);
+$color2: rgba(0, 0, 0, 0.6);
+$color3: rgb(0, 147, 233);
+$color4: rgb(211, 70, 0);
+$color5: rgb(220, 220, 220);
+$color6: #2F7D31;
+$color7: rgb(230, 244, 231);
+$color8: rgb(242, 242, 242);
 
-$white: white;
-$yellow: #FAF8BF;
-$gold: gold;
-$bronze: #C28F2B;
-$fontTitle: rgb(108, 115, 130);
-$font: #02539D;
 
-/*
-Lacivert
-Mavi
-Gri
-Sarı
-Turuncu 
+$PanelContainerColor: $color0;
+$containerBackgroundDesktop: $color8;
+$containerBackgroundHeader: $color8;
+$background: $color8;
+$font: $color3;
+$textFieldErrorBorderColor: rgb(255, 0, 0);
 
-#FBECDA
-#EE4E34
+$firstButtonFontColor: $color1;
+$firstButtonBackgroundColor: $color7;
+$firstButtonBorderColor: $color6;
+$firstButtonFontColorHover: $color0;
 
-#02539D
-#EEA47F
+$secondButtonFontColor: $color0;
+$secondButtonBackgroundColor: $color6;
+$secondButtonBorderColor: $color7;
 
-#2F3C7E
-#F9EAEC
+$thirdButtonFontColor: $color0;
+$thirdButtonBackgroundColor: $color4;
+$thirdButtonBorderColor: $color0;
 
-#89AAE5
-#FFFFFF
-
-#ADD8E6
-#00008C
-
-#89AAE4
-#EA738D
-
-#E3B447
-#CBD190
-#3A6B34
-
-#FFA351
-#FFBE7C
-#EDD871
-
-#FD7669
-#793937
-#F1AD88
-
-#AB96DB
-#C5F9D6
-#FFFFD2
-
-#2AAE66
-#FCF6F6
-
-#DDC2A5
-#201E21
-#E0AA6E
-
-#234E70
-#FAF8BF
-
-#CCF281
-#4832D5
-
-#E2D1F9
-#307773
-
-#990112
-#FCF6F6
-
-#B95144
-#E7E8D2
-#A6BEAE
-*/
+$fourthButtonFontColor: $color0;
+$fourthButtonBackgroundColor: $color3 ;
+$fourthButtonBorderColor: $color3 ;
