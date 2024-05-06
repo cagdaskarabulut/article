@@ -47,7 +47,7 @@
         font-size: 24px !important;
         height: 35px !important;
         margin-top: 12px !important;
-        color: $color1 !important;
+        color: $fontColor !important;
         float: right !important;
       }
 
@@ -57,28 +57,26 @@
 
       :global {
         .MuiOutlinedInput-notchedOutline {
-          border-color: $color5 !important;
+          border-color: $searchBarColor !important;
           border-width: 1px !important;
         }
 
         .MuiInputBase-input {
           font-family: inherit !important;
-          color: $color4 !important;
         }
 
         .MuiSvgIcon-root {
-          color: $color5 !important;
+          color: $searchBarColor !important;
         }
 
         .MuiInputLabel-root {
-          color: $color5 !important;
+          color: $searchBarColor !important;
           font-family: inherit !important;
           
         }
 
         .MuiAutocomplete-input {
           font-family: inherit !important;
-          color: $color4 !important;
         }
       }
 
@@ -97,9 +95,9 @@
 }
 
 .fourthButtonStyleSmall{
-  color: $color0 !important;
-  background-color: $color3 !important;
-  border-color: $color3 !important;
+  color: $backgroundColor !important;
+  background-color: $fourthButtonBackgroundColor !important;
+  border-color: $fourthButtonBackgroundColor !important;
   min-width: 50px !important;
   float: right !important; 
   margin-top: 15px !important; 

@@ -5,29 +5,12 @@ const websiteUrl = process.env.URL_WEBSITE;
 const websiteUrlRootomain = process.env.URL_WEBSITE_ROOT_DOMAIN;
 const isLocal = process.env.IS_LOCAL;
 
-// const siteName = process.env.PROJECT_SITE_NAME;
-// const websiteUrl = process.env.PROJECT_URL_WEBSITE;
-// const websiteUrlRootomain = process.env.PROJECT_URL_WEBSITE_ROOT_DOMAIN;
-
 const now = getNowWithISOFormat();
 
 function getNowWithISOFormat() {
   const today = new Date();
   return today.toISOString();
 }
-
-// function replaceStringForUrlFormat(myString) {
-//   myString = myString.replace(/ /g, "-");
-//   myString = myString.replace(/'/g, "");
-//   myString = myString.replace(/"/g, "");
-//   myString = myString.replace(/\//g, "");
-//   myString = myString.replace(/&/g, "");
-//   myString = myString.replace("(", "");
-//   myString = myString.replace(")", "");
-//   myString = myString.replace(/ó/g, "o");
-//   myString = myString.replace(",", "");
-//   return myString;
-// }
 
 function addUrlToSitemapList(existingList, newUrl) {
   existingList = `${existingList}
@@ -65,65 +48,6 @@ Disallow: /AdminPanelLogin
 Sitemap: ${websiteUrl}/sitemap.xml`;
   return result;
 }
-
-function generateFinalColorsScssFile() {
-//   let result = `
-// @import "../styles/colors.scss";
-// @import "../styles/mixins.scss";
-
-// body {
-//   background-color: $containerBackgroundDesktop !important;
-// }
-// `;
-let result = `
-$color0: rgb(255, 255, 255);
-$color1: rgb(0, 0, 0);
-$color2: rgba(0, 0, 0, 0.6);
-$color3: rgb(0, 147, 233);
-$color4: rgb(211, 70, 0);
-$color5: rgb(220, 220, 220);
-$color6: #2F7D31;
-$color7: rgb(230, 244, 231);
-$color8: rgb(242, 242, 242);
-
-
-$PanelContainerColor: $color0;
-$containerBackgroundDesktop: $color8;
-$containerBackgroundHeader: $color8;
-$background: $color8;
-$font: $color3;
-$textFieldErrorBorderColor: rgb(255, 0, 0);
-
-$firstButtonFontColor: $color1;
-$firstButtonBackgroundColor: $color7;
-$firstButtonBorderColor: $color6;
-$firstButtonFontColorHover: $color0;
-
-$secondButtonFontColor: $color0;
-$secondButtonBackgroundColor: $color6;
-$secondButtonBorderColor: $color7;
-
-$thirdButtonFontColor: $color0;
-$thirdButtonBackgroundColor: $color4;
-$thirdButtonBorderColor: $color0;
-
-$fourthButtonFontColor: $color0;
-$fourthButtonBackgroundColor: $color3 ;
-$fourthButtonBorderColor: $color3 ;
-
-`;
-  return result;
-}
-
-function generateFinalGlobalsScssFile() {
-    let result = `
-  @import "../styles/colors.scss";
-  @import "../styles/mixins.scss";
-  `;
-    return result;
-  }
-  
-
 
 function generateFinalSitemapXmlFile(SitemapXmlFileSource) {
   let result = `
@@ -169,11 +93,7 @@ daily
 }
 
 async function generateRobotsTxtAndSitemapXml() {
-  if (isLocal == "false") {
-    // let colorsScss = generateFinalColorsScssFile();
-    //     let globalsScss = generateFinalGlobalsScssFile();
-    // fs.writeFileSync("src/styles/colors.scss", colorsScss);
-    //     fs.writeFileSync("src/app/globals.scss", globalsScss);
+  if (isLocal == "true") {
 
     await fetch(process.env.URL + "/api/article/article_project_auto_generate_files", {
       method: "GET",
@@ -182,7 +102,7 @@ async function generateRobotsTxtAndSitemapXml() {
       .then((dataList) => {
         //- add auto generated urls
         dataList?.file?.rows.map((activeFile, index) => {
-          if(activeFile?.project_name == siteName){
+          if(activeFile?.project == siteName){
             fs.writeFileSync(activeFile?.file_path, activeFile?.file_content);
           }
         });

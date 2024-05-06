@@ -7,9 +7,9 @@
   flex-direction: column !important;
   min-height: 98vh !important;
   margin: 0 !important;
-  color: $color1 !important;
+  color: $fontColor !important;
   font-size: 16px !important;
-  background-color: $background !important;
+  background-color: $backgroundColor !important;
 
   :global {
     .MuiChip-label {
@@ -25,7 +25,7 @@
   h1 a,
   h2,
   h2 a {
-    color: $color1 !important;
+    color: $fontColor !important;
   }
 
   .HeaderStyle {
@@ -36,9 +36,9 @@
 }
 
 .HomePageInfoStyle {
-  color: $color1;
+  color: $fontColor;
   h1 {
-    color: $color1;
+    color: $fontColor;
     opacity: 0.6;
   }
 }
@@ -50,5 +50,5 @@
 .FindTitleHeaderStyle{
   margin: "0px";
   text-align: "center";
-  color: $color2;
+  color: $fontColorSoft;
 }

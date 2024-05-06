@@ -19,7 +19,6 @@
     color: $font !important;
     font-weight: bold !important;
     border: none !important;
-    background: linear-gradient(90deg, $color4, $color4) !important;
     background-size: 0% 3px !important;
     background-repeat: no-repeat !important;
     background-position: left bottom !important;
@@ -27,12 +26,10 @@
 
     &:hover {
       background-size: 100% 3px !important;
-      color: $color4 !important;
     }
   }
 
   .menuButtonStyleSelected {
-    color: $color4 !important;
     background-size: 100% 3px !important;
 
   }
