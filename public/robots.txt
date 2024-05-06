@@ -49,4 +49,4 @@ Allow: /why-does-iphone-get-so-hot-how-can-it-be-fixed
 Disallow: /AdminPanel
 Disallow: /AdminPanelLogin
 # Sitemaps
-Sitemap: https://brickstanbul.vercel.app/sitemap.xml
+Sitemap: https://newszipped-nuzkf5tp6-karabulut-team.vercel.app/sitemap.xml
