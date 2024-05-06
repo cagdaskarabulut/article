@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres';
 import type { NextApiRequest, NextApiResponse } from 'next';
  
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { url } = req?.query;
+  let { url } = req?.query;
   
    let article_list;
   if (process.env.PROJECT_SITE_NAME === "newszipped") {
