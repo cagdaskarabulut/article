@@ -1,0 +1,96 @@
+//Change this part for active project
+$mainColor0: rgba(0, 0, 0, 0.6); //font color
+$mainColor1: black; //font color
+$mainColor2: #f2f2f2; //main background color
+$mainColor3: #f2f2f2; //content background color 
+$mainColor4: #f2f2f2; // header background color
+$mainColor5: #f2f2f2; //footer background color
+$mainColor6: #dcdcdc; // tag color
+
+$mainColor7: #e6f4e7; //button color
+$mainColor8: #f2f2f2; //button color
+$mainColor9: #2F7D31; //button color
+$mainColor10: rgb(0, 147, 233); //button color
+$mainColor11: rgb(211, 70, 0); //button color
+
+//No need to change
+$fontColorSoft: $mainColor0;
+$textFieldErrorBorderColor: rgb(255, 0, 0);
+$cautionColor: rgb(211, 70, 0);
+
+//Genereated fields
+$fontColor: $mainColor1;
+$backgroundColor: $mainColor2;
+
+$headerBackgroundColor1: $mainColor2;
+$headerBackgroundColor2: $mainColor4;
+
+$bodyContentBackgroundColor1: $mainColor3;
+$bodyContentBackgroundColor2: $mainColor2;
+
+$footerBackgroundColor1: $mainColor2;
+$footerBackgroundColor2: $mainColor5;
+
+$searchBarColor: $mainColor1;
+
+$tagColor: $mainColor6;
+
+$firstButtonFontColor: $mainColor1;
+$firstButtonBackgroundColor: $mainColor7;
+$firstButtonBorderColor: $mainColor9;
+$firstButtonFontColorHover: $mainColor8;
+
+$secondButtonFontColor: $mainColor8;
+$secondButtonBackgroundColor: $mainColor9;
+$secondButtonBorderColor: $mainColor7;
+
+$thirdButtonFontColor: $mainColor8;
+$thirdButtonBackgroundColor: $mainColor11;
+$thirdButtonBorderColor: $mainColor8;
+
+$fourthButtonFontColor: $mainColor8;
+$fourthButtonBackgroundColor: $mainColor10 ;
+$fourthButtonBorderColor: $mainColor10 ;
+
+
+/*
+
+$color0: #f2f2f2;
+$color1: rgb(0, 0, 0);
+$color2: rgba(0, 0, 0, 0.6);
+$color3: rgb(0, 147, 233);
+$color4: rgb(211, 70, 0);
+$color5: rgb(220, 220, 220);
+$color6: #2F7D31;
+$color7: rgb(230, 244, 231);
+$color8: rgb(242, 242, 242);
+
+
+$PanelContainerColor: $color0;
+$containerBackgroundDesktop: $color8;
+$containerBackgroundHeader: $color8;
+$background: $color8;
+$font: $color3;
+$textFieldErrorBorderColor: rgb(255, 0, 0);
+
+$firstButtonFontColor: $color1;
+$firstButtonBackgroundColor: $color7;
+$firstButtonBorderColor: $color6;
+$firstButtonFontColorHover: $color0;
+
+$secondButtonFontColor: $color0;
+$secondButtonBackgroundColor: $color6;
+$secondButtonBorderColor: $color7;
+
+$thirdButtonFontColor: $color0;
+$thirdButtonBackgroundColor: $color4;
+$thirdButtonBorderColor: $color0;
+
+$fourthButtonFontColor: $color0;
+$fourthButtonBackgroundColor: $color3 ;
+$fourthButtonBorderColor: $color3 ;
+
+
+*/
+
+
