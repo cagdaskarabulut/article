@@ -10,6 +10,9 @@
   color: $fontColor !important;
   font-size: 16px !important;
 
+  background: $bodyContentBackgroundColor2;
+  background: radial-gradient(circle, $bodyContentBackgroundColor2 0%, $bodyContentBackgroundColor2 100%);
+
   :global {
     .MuiChip-label {
       font-size: 14px !important;

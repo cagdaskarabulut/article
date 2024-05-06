@@ -9,7 +9,9 @@
   border-radius: 0px;
   margin: 0px;
   padding: 0px;
-  
+
+  background: $headerBackgroundColor1;
+  background: linear-gradient(0deg, $headerBackgroundColor1 0%, $headerBackgroundColor2 100%);
 
   .header {
     justify-content: center;
