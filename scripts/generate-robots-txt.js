@@ -94,6 +94,7 @@ daily
 
 async function generateRobotsTxtAndSitemapXml() {
   if (isLocal == "false") {
+
     await fetch(process.env.URL + "/api/article/article_project_auto_generate_files", {
       method: "GET",
     })
@@ -106,6 +107,7 @@ async function generateRobotsTxtAndSitemapXml() {
           }
         });
       });
+
     let dynamicRobotsTxtFields = "";
     let dynamicSitemapFields = addStaticValuesIntoSitemapList();
     await fetch(process.env.URL + "/api/article/list_url", {
