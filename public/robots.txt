@@ -1,5 +1,6 @@
 # *
 User-agent: *
+Allow: /why-does-iphone-get-so-hot-how-can-it-be-fixed
 Allow: /the-history-of-art-a-journey-through-time-988732468
 Allow: /the-best-whiskey-brands-a-comprehensive-guide-716087228549
 Allow: /why-apple-magic-mouse-sensitivity-is-too-slow-and-how-to-fix-it
@@ -44,9 +45,8 @@ Allow: /why-are-palestine-and-israel-fighting
 Allow: /espeto-recipe-how-to-make-espeto
 Allow: /bibimbap-recipe-how-to-make-bibimbap
 Allow: /the-history-of-basketball-866773093844
-Allow: /why-does-iphone-get-so-hot-how-can-it-be-fixed
 
 Disallow: /AdminPanel
 Disallow: /AdminPanelLogin
 # Sitemaps
-Sitemap: https://newszipped-nuzkf5tp6-karabulut-team.vercel.app/sitemap.xml
+Sitemap: https://www.newszipped.com/sitemap.xml
