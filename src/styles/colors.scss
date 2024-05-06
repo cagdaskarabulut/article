@@ -1,15 +1,15 @@
 //Change this part for active project
-$mainColor0: rgba(0, 0, 0, 0.6); //font color
+$mainColor0: rgba(0, 0, 0, 0.6);
 $mainColor1: black; //font color
-$mainColor2: #f2f2f2; //main background color
-$mainColor3: #f2f2f2; //content background color 
-$mainColor4: #f2f2f2; // header background color
-$mainColor5: #f2f2f2; //footer background color
+$mainColor2: white; //main background color
+$mainColor3: #fcf7dd; //content background color 
+$mainColor4: #FFD502; // header background color
+$mainColor5: rgb(0, 147, 233); //footer background color
 $mainColor6: #dcdcdc; // tag color
 
-$mainColor7: #e6f4e7; //button color
-$mainColor8: #f2f2f2; //button color
-$mainColor9: #2F7D31; //button color
+$mainColor7: #f7faffce; //button color
+$mainColor8: #fcf7dd; //button color
+$mainColor9: #015AD2; //button color
 $mainColor10: rgb(0, 147, 233); //button color
 $mainColor11: rgb(211, 70, 0); //button color
 
@@ -28,8 +28,8 @@ $headerBackgroundColor2: $mainColor4;
 $bodyContentBackgroundColor1: $mainColor3;
 $bodyContentBackgroundColor2: $mainColor2;
 
-$footerBackgroundColor1: $mainColor2;
-$footerBackgroundColor2: $mainColor5;
+$footerBackgroundColor1: $mainColor5;
+$footerBackgroundColor2: $mainColor2;
 
 $searchBarColor: $mainColor1;
 
@@ -51,6 +51,9 @@ $thirdButtonBorderColor: $mainColor8;
 $fourthButtonFontColor: $mainColor8;
 $fourthButtonBackgroundColor: $mainColor10 ;
 $fourthButtonBorderColor: $mainColor10 ;
+
+
+
 
 
 /*
