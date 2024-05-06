@@ -93,7 +93,7 @@ daily
 }
 
 async function generateRobotsTxtAndSitemapXml() {
-  if (isLocal == "true") {
+  if (isLocal == "false") {
 
     await fetch(process.env.URL + "/api/article/article_project_auto_generate_files", {
       method: "GET",
