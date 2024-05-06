@@ -2,17 +2,17 @@
 @import "../styles/mixins.scss";
 
 .subTitleStyle{
-  color: $color5;
+  color: $fontColor;
 }
 
 .PanelContainerStyle{
-  background-color: $background;
+  background-color: $backgroundColor;
   border-radius: 25px; 
   margin: 10px;
   padding: 20px;
   padding-right: 0px;
   @include tablet-or-less {
-    background-color: $background;
+    background-color: $backgroundColor;
     padding-left: 0px;
   }
 }
@@ -22,8 +22,8 @@
   border-radius: 5px !important;
   border: none !important;
   margin-left: 5px !important;
-  background-color: $color5 !important;
-  color: $color1 !important;;
+  background-color: $tagColor !important;
+  color: $searchBarColor !important;
 }
 
 .TopicChipStyle:hover {

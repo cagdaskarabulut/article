@@ -3,9 +3,9 @@
 @import "../../styles/common.scss";
 
 .HomePageInfoStyle {
-  color: $color1;
+  color: $fontColor;
   h1 {
-    color: $color2;
+    color: $fontColorSoft;
   }
 
   .ArticleImageContainerStyle{
@@ -25,7 +25,7 @@
 }
 
 .PanelContainerStyle {
-  background-color: $color0 !important;
+  background-color: $backgroundColor !important;
   border-radius: 5px;
   margin-left: 30px; 
   margin-right: 30px; 
