@@ -106,7 +106,6 @@ async function generateRobotsTxtAndSitemapXml() {
           }
         });
       });
-
     let dynamicRobotsTxtFields = "";
     let dynamicSitemapFields = addStaticValuesIntoSitemapList();
     await fetch(process.env.URL + "/api/article/list_url", {
