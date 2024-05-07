@@ -16,9 +16,9 @@
   .menuButtonStyle,
   .menuButtonStyleSelected {
     font-size: 14px !important;
-    color: $font !important;
     font-weight: bold !important;
     border: none !important;
+    background: linear-gradient(90deg, $searchBarColor, $searchBarColor) !important;
     background-size: 0% 3px !important;
     background-repeat: no-repeat !important;
     background-position: left bottom !important;
@@ -26,10 +26,12 @@
 
     &:hover {
       background-size: 100% 3px !important;
+      color: $cautionColor !important;
     }
   }
 
   .menuButtonStyleSelected {
+    color: $cautionColor !important;
     background-size: 100% 3px !important;
 
   }

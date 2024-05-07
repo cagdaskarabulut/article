@@ -92,6 +92,7 @@ const ArticlePagePanel = ({ article }) => {
       <div className={styles.ContainerPageContainerStyle}>
         <div className={styles.HeaderStyle}>
           <Header />
+          <br />
         </div>
         <Container maxWidth="lg" className={styles.ContentStyle}>
           <MyGrid leftContent={<ContentField />} isOneFullContent 
@@ -100,6 +101,7 @@ const ArticlePagePanel = ({ article }) => {
           <MyGrid leftContent={<CommentField />} isOneFullContent isHideWhileLoading
             isShowLoadingBarWhileLoading/>
         </Container>
+        <br />
         <FooterPanel />
         <Analytics />
       </div>

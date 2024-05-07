@@ -93,7 +93,7 @@ daily
 }
 
 async function generateRobotsTxtAndSitemapXml() {
-  if (isLocal == "false") {
+  if (isLocal === "true") {
     await fetch(process.env.URL + "/api/article/article_project_auto_generate_files", {
       method: "GET",
     })
@@ -136,11 +136,6 @@ async function generateRobotsTxtAndSitemapXml() {
         fs.writeFileSync("public/sitemap.xml", sitemapXml);
         
       });
-
-      
-
-
-
   }
 }
 

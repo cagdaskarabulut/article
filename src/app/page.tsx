@@ -42,7 +42,7 @@ export default async function Home({ searchParams }) {
         <NavBar />
       </div>
       <div className={styles.ContentStyle}>
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" className={styles.ContentContainerStyle}>
           {mainDataSize > 0 && (
             <MyGrid
               leftContent={
@@ -101,6 +101,7 @@ export default async function Home({ searchParams }) {
         </Container>
         <ScrollToTopButton showBelow={250} />
       </div>
+      <br />
       <FooterPanel />
       <Analytics />
     </div>

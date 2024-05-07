@@ -16,6 +16,11 @@ export default async function handler(request, response) {
         SELECT id FROM public.brickstanbul_article_view 
         WHERE url=${request.body.url});`;
   }
+  // await sql`INSERT INTO public.article_view (url,count,project)
+  //     SELECT ${request.body.url}, 0, ${process.env.PROJECT_SITE_NAME} 
+  //     WHERE NOT EXISTS (
+  //       SELECT id FROM public.article_view 
+  //       WHERE url=${request.body.url} and project=${process.env.PROJECT_SITE_NAME});`;
     return response.status(200).json("successfully saved");
   } catch (error) {
     return response.status(500).json({ error });

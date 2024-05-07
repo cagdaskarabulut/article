@@ -1,67 +1,32 @@
 @import "../../styles/mixins.scss";
 @import "../../styles/colors.scss";
-// @import "../../app/globals.scss";
 @import "../../styles/common.scss";
 
-.PanelContainerStyle {
-  top: 0 !important;
-  position: fixed !important;
-  width: 100vw;
-  border-radius: 0px;
-  margin: 0px;
-  padding: 0px;
-  z-index: 999 !important;
-  background-color: $bodyContentBackgroundColor1;
-  .header {
+.SearchBoxStyle{
+  :global {
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $searchBarColor !important;
+      border-width: 2px !important;
+    }
 
-    height: 75px !important;
-    justify-content: center;
-    font-family: permanentMarker !important;
+    .MuiInputBase-input {
+      font-family: inherit !important;
+      color: $searchBarColor !important;
+    }
 
-    // h1 {
-    //   margin-top: 0px;
-    //   margin-bottom: 0px;
-    // }
+    .MuiSvgIcon-root {
+      color: $fontColor !important;
+    }
 
-    .SearchBoxStyle {
-      // margin-top: 5px;
-      // margin-bottom: 5px;
-      // height: 65px !important;
-      width: 400px !important;
-      justify-content: end;
-      float: right;
-     
+    .MuiInputLabel-root {
+      color: $fontColor !important;
+      font-family: inherit !important;
+      
+    }
 
-      :global {
-        .MuiOutlinedInput-notchedOutline {
-          border-color: $searchBarColor !important;
-          border-width: 5px !important;
-        }
-
-        .MuiInputBase-input {
-          font-family: inherit !important;
-        }
-
-        .MuiSvgIcon-root {
-          color: $searchBarColor !important;
-        }
-
-        .MuiInputLabel-root {
-          color: $searchBarColor !important;
-          font-family: inherit !important;
-          
-        }
-
-        .MuiAutocomplete-input {
-          font-family: inherit !important;
-          color: $searchBarColor !important;//color4
-        }
-      }
-
-      @include tablet-or-less {
-        width: 100% !important;
-      }
-
+    .MuiAutocomplete-input {
+      font-family: inherit !important;
+      color: $searchBarColor !important;
     }
   }
 }

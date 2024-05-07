@@ -2,35 +2,43 @@
 @import "../../styles/colors.scss";
 @import "../../styles/common.scss";
 
-.ContainerStyle{
+.AdminPanelContainerStyle{
+  margin-top: 0px !important;
+  padding-top: 0px !important;
   background-color: $backgroundColor;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.ImageContainerStyle{
-  width: 100%;  
-  position: relative; 
-  height: 40vh; 
-  @include tablet-or-less{
-    height: 25vh; 
+  .ContainerStyle{
+    // background-color: $bodyContentBackgroundColor;
+    background: $bodyContentBackgroundColor1;
+    background: radial-gradient(circle, $bodyContentBackgroundColor1 0%, $bodyContentBackgroundColor2 100%);
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
-}
-
-.DividerStyle {
-  width: 100%;
-  padding-top: 10px; 
-  padding-bottom: 10px;
-}
-
-.TextFieldStyle {
-  width: 100%;
-  :global {
-    .MuiOutlinedInput-notchedOutline{
-      border-color: $textFieldErrorBorderColor !important;
-    }
-    .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-      border-color: $textFieldErrorBorderColor !important;
+  
+  .ImageContainerStyle{
+    width: 100%;  
+    position: relative; 
+    height: 40vh; 
+    @include tablet-or-less{
+      height: 25vh; 
     }
   }
+  
+  .DividerStyle {
+    width: 100%;
+    padding-top: 10px; 
+    padding-bottom: 10px;
+  }
+  
+  .TextFieldStyle {
+    width: 100%;
+    :global {
+      .MuiOutlinedInput-notchedOutline{
+        border-color: $textFieldErrorBorderColor !important;
+      }
+      .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: $textFieldErrorBorderColor !important;
+      }
+    }
+  }
+  
 }

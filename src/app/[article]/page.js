@@ -9,7 +9,6 @@ async function getArticle(article) {
 }
 
 export async function generateStaticParams() {
-  // console.log(process.env.URL + "/api/article/list_url"); 
   const articleUrlList = await fetch(
     process.env.URL + "/api/article/list_url"
   ).then((res) => res.json());

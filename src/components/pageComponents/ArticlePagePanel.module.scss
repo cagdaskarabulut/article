@@ -3,15 +3,13 @@
 @import "../../styles/common.scss";
 
 .ContainerPageContainerStyle {
+  background-color: $backgroundColor !important;
   display: flex !important;
   flex-direction: column !important;
   min-height: 98vh !important;
   margin: 0 !important;
   color: $fontColor !important;
   font-size: 16px !important;
-
-  background: $bodyContentBackgroundColor2;
-  background: radial-gradient(circle, $bodyContentBackgroundColor2 0%, $bodyContentBackgroundColor2 100%);
 
   :global {
     .MuiChip-label {
@@ -61,7 +59,9 @@
 }
 
 .PanelContainerStyle {
-  background-color: $backgroundColor !important;
+  // background-color: $bodyContentBackgroundColor !important;
+  background: $bodyContentBackgroundColor1;
+  background: radial-gradient(circle, $bodyContentBackgroundColor1 0%, $bodyContentBackgroundColor2 100%);
   border-radius: 5px;
   // margin-left: 30px;
   // margin-right: 30px;
