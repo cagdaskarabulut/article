@@ -1,4 +1,5 @@
 //Change this part for active project
+$mainColor0: rgba(0, 0, 0, 0.6); //font color
 $mainColor1: black; //font color
 $mainColor2: #f2f2f2; //main background color
 $mainColor3: #f2f2f2; //content background color 
@@ -13,6 +14,7 @@ $mainColor10: rgb(0, 147, 233); //button color
 $mainColor11: rgb(211, 70, 0); //button color
 
 //No need to change
+$fontColorSoft: $mainColor0;
 $textFieldErrorBorderColor: rgb(255, 0, 0);
 $cautionColor: rgb(211, 70, 0);
 
