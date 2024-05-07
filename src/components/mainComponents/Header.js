@@ -122,7 +122,7 @@ export default function Header({isMainPage}) {
   return (
     <>
       <LoadingFullPage isLoading={isLoadingFullPage} />
-      <div className={styles.PanelContainerStyle}>
+      <div className={styles.HeaderContainerStyle}>
         <Container className={styles.header}>
           {!isAuthChecked && (
             <SkeletonHeader />

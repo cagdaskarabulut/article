@@ -39,6 +39,8 @@ import MyAlert from "../../components/reusableComponents/MyAlert";
 import styles from "./AdminPanel.module.scss";
 import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
 import UrlList from "../../components/UrlList";
+import Header from "../../components/mainComponents/Header";
+import FooterPanel from "../../components/mainComponents/FooterPanel";
 
 const AdminPanel = () => {
   const router = useRouter();
@@ -359,6 +361,9 @@ const AdminPanel = () => {
   };
 
   return (
+    <div className={styles.AdminPanelContainerStyle}>
+    <Header />
+          <br />
     <>
       {isAuthorizedUser && (
         <>
@@ -560,9 +565,9 @@ const AdminPanel = () => {
                 // }}
                 style={isNewOrReadyToUpdate() ? { paddingTop: "20px",
                 paddingRight: "0px",
-                paddingLeft: "0px",display: "" } : { paddingTop: "20px",
+                paddingLeft: "24px",display: "" } : { paddingTop: "20px",
                 paddingRight: "0px",
-                paddingLeft: "0px",display: "none" }}
+                paddingLeft: "24px",display: "none" }}
               >
                 <MyQuillEditor
                   showInsertHtmlButton
@@ -625,6 +630,9 @@ const AdminPanel = () => {
         </>
       )}
     </>
+    <br />
+    <FooterPanel />
+    </div>
   );
 };
 

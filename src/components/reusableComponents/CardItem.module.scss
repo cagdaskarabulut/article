@@ -10,14 +10,14 @@
     .CardHeaderTitleStyle {
       font-weight: 700;
       font-size: 24px;
-      color: $color1;
+      color: $fontColor;
       cursor: pointer;
     }
 
     .CardHeaderDateStyle {
       font-weight: 400;
       font-size: 16px;
-      color: $color2;
+      color: rgba(0, 0, 0, 0.6);
     }
 
     .CardHeaderRightStyle {
