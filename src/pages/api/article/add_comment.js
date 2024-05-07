@@ -10,6 +10,8 @@ export default async function handler(request, response) {
       VALUES (${request.body.url}, ${request.body.user_email}, ${request.body.user_name}, CURRENT_TIMESTAMP, ${request.body.comment});`;
     }
 
+      // await sql`INSERT INTO public.article_comment (url, user_email, user_name, create_date, comment, project)
+      // VALUES (${request.body.url}, ${request.body.user_email}, ${request.body.user_name}, CURRENT_TIMESTAMP, ${request.body.comment}, ${process.env.PROJECT_SITE_NAME});`;
     return response.status(200).json("successfully saved");
   } catch (error) {
     return response.status(500).json({ error });

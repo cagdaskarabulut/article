@@ -3,38 +3,30 @@
 @import "../../styles/buttons.scss";
 @import "../../styles/common.scss";
 
-.PanelContainerStyle {
+.HeaderContainerStyle {
   top: 0 !important;
   width: 100vw;
   border-radius: 0px;
   margin: 0px;
   padding: 0px;
+  // background-color: $headerBackgroundColor !important;
+  background: $headerBackgroundColor1;
+  background: linear-gradient(0deg, $headerBackgroundColor1 0%, $headerBackgroundColor2 100%);
   
-
   .header {
     justify-content: center;
     font-family: permanentMarker !important;
 
-    // h1 {
-    //   margin-top: 0px;
-    //   margin-bottom: 0px;
-    //   padding-left: 16px !important;
-    // }
-
     .LogoStyle {
-      
       margin-top: 0px;
       margin-bottom: 0px;
-      // padding-left: 16px !important;
       padding-left: 0px !important;
       cursor: pointer;
     }
 
     .SearchBoxStyle {
-      // padding-right: 16px !important;
       margin-right: 30px !important;
       margin-top: 5px !important;
-      // width: 200px !important;
       justify-content: end;
       float: right;
 
@@ -47,7 +39,7 @@
         font-size: 24px !important;
         height: 35px !important;
         margin-top: 12px !important;
-        color: $color1 !important;
+        color: $fontColor !important;
         float: right !important;
       }
 
@@ -57,28 +49,28 @@
 
       :global {
         .MuiOutlinedInput-notchedOutline {
-          border-color: $color5 !important;
+          border-color: $fontColor !important;
           border-width: 1px !important;
         }
 
         .MuiInputBase-input {
           font-family: inherit !important;
-          color: $color4 !important;
+          color: $fontColor !important;
         }
 
         .MuiSvgIcon-root {
-          color: $color5 !important;
+          color: $fontColor !important;
         }
 
         .MuiInputLabel-root {
-          color: $color5 !important;
+          color: $fontColor !important;
           font-family: inherit !important;
           
         }
 
         .MuiAutocomplete-input {
           font-family: inherit !important;
-          color: $color4 !important;
+          color: $fontColor !important;
         }
       }
 
@@ -97,9 +89,9 @@
 }
 
 .fourthButtonStyleSmall{
-  color: $color0 !important;
-  background-color: $color3 !important;
-  border-color: $color3 !important;
+  color: $bodyContentBackgroundColor1 !important;
+  background-color: $fourthButtonBackgroundColor !important;
+  border-color: $fourthButtonBackgroundColor !important;
   min-width: 50px !important;
   float: right !important; 
   margin-top: 15px !important; 
