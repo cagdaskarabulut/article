@@ -4,10 +4,11 @@
 // @import "../../app/globals.scss";
 
 .footerStyle {
-  background: $footerBackgroundColor1;
-  background: linear-gradient(0deg, $footerBackgroundColor1 0%, $footerBackgroundColor2 100%);
-
   position: inherit;
+  // background-color: $footerBackgroundColor !important;
+  background: $footerBackgroundColor1;
+  background: linear-gradient(180deg, $footerBackgroundColor1 0%, $footerBackgroundColor2 100%);
+
   font-weight: bold !important;
   color: $fontColorSoft !important;
   .FooterContentStyle {

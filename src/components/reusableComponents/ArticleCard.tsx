@@ -49,11 +49,11 @@ function ArticleCard({ article, index }: Prop) {
     >
       <div className="py-4 flex flex-col gap-3">
         <div className="flex justify-between items-center gap-1">
-          <h2 className="font-bold text-$backgroundColor text-xl line-clamp-1 w-full">
+          <h2 className="font-bold text-xl line-clamp-1 w-full">
             {article.title}
           </h2>
           <div className="py-1 px-2 bg-[#161921] rounded-sm">
-            <p className="text-$backgroundColor text-sm font-bold capitalize">
+            <p className="text-sm font-bold capitalize">
               {article.url}
             </p>
           </div>
@@ -65,4 +65,3 @@ function ArticleCard({ article, index }: Prop) {
 }
 
 export default ArticleCard;
-

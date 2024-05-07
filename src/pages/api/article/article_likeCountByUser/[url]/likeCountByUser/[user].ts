@@ -14,6 +14,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     likeCount =
       await sql`SELECT count(id) FROM public.brickstanbul_article_like where url=${url?.toString()} and user_email=${user?.toString()};`;
   }
-
+  // let likeCount = await sql`SELECT count(id) FROM public.article_like where url=${url?.toString()} and user_email=${user?.toString()} and project=${process.env.PROJECT_SITE_NAME};`;
   return res.status(200).json({ likeCount });
 }

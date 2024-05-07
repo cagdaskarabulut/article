@@ -13,6 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     watchCount =
       await sql`SELECT count FROM public.brickstanbul_article_view where url=${url?.toString()};`;
   }
-  
+  // let watchCount = await sql`SELECT count FROM public.article_view where url=${url?.toString()} and project=${process.env.PROJECT_SITE_NAME};`;
   return res.status(200).json({ watchCount });
 }

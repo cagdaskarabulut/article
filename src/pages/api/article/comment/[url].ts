@@ -15,6 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
       public.brickstanbul_article_comment where url=${url?.toString()} order by create_date desc;`;
   }
-
+  // let article_comment_list = await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
+  //     public.article_comment where url=${url?.toString()} 
+  //     and project=${process.env.PROJECT_SITE_NAME} order by create_date desc;`;
   return res.status(200).json({ article_comment_list });
 }
