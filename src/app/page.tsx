@@ -13,11 +13,11 @@ import { fetchArticleSize } from "./pagination/pagination_article_size";
 import { useRouter } from "next/navigation";
 
 export default async function Home({ searchParams }) {
-  const orderType = searchParams.orderby || "create_date"; //order by boş gelirse default değer atanır
-  const search = searchParams.search || "";
-  const mainData = await fetchArticle(1, 5, orderType, search);
-  const lastData = await fetchArticle(1, 5, "like_number", "");
-  const mainDataSize = await fetchArticleSize(1, 5, orderType, search);
+  let orderType = searchParams.orderby || "create_date"; //order by boş gelirse default değer atanır
+  let search = searchParams.search || "";
+  let mainData = await fetchArticle(1, 5, orderType, search);
+  let lastData = await fetchArticle(1, 5, "like_number", "");
+  let mainDataSize = await fetchArticleSize(1, 5, orderType, search);
 
   function findTitleByUrl() {
     if (search) {
