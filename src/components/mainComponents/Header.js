@@ -92,10 +92,11 @@ export default function Header({isMainPage}) {
     fetch("/api/auth/whoAmI/session")
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setSession(data);
         setUserName(data?.name?.user?.name);
         setUserEmail(data?.name?.user?.email);
-        setUserImage(data?.name?.user?.image);
+        setUserImage(data?.name?.user?.image !== null ? data?.name?.user?.image : "");
         setIsAuthChecked(true);
       });
   }, []);
@@ -189,12 +190,15 @@ export default function Header({isMainPage}) {
                                 aria-expanded={open ? "true" : undefined}
                               >
                                 <Avatar sx={{ width: 32, height: 32 }}>
+                                  {userImage && (
                                   <Image
                                     src={userImage}
                                     width={isMobile ? 48 : 64}
                                     height={isMobile ? 48 : 64}
                                     alt="profile-logo"
-                                  />{" "}
+                                  />)}
+                                  {!userImage && (
+                                  <span>{Array.from(userName)[0]}</span>)}
                                 </Avatar>
                               </IconButton>
                             </Tooltip>

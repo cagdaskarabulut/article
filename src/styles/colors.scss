@@ -7,6 +7,11 @@ $mainColor4: #f2f2f2; // header background color
 $mainColor5: #f2f2f2; //footer background color
 $mainColor6: #dcdcdc; // tag color
 
+$mainColor12: #f2f2f2; //content background color - 2
+$mainColor13: #f2f2f2; // header background color - 2
+$mainColor14: #f2f2f2; //footer background color - 2
+
+
 $mainColor7: #e6f4e7; //button color
 $mainColor8: #f2f2f2; //button color
 $mainColor9: #2F7D31; //button color
@@ -22,13 +27,13 @@ $cautionColor: rgb(211, 70, 0);
 $fontColor: $mainColor1;
 $backgroundColor: $mainColor2;
 
-$headerBackgroundColor1: $mainColor2;
+$headerBackgroundColor1: $mainColor13;
 $headerBackgroundColor2: $mainColor4;
 
 $bodyContentBackgroundColor1: $mainColor3;
-$bodyContentBackgroundColor2: $mainColor2;
+$bodyContentBackgroundColor2: $mainColor12;
 
-$footerBackgroundColor1: $mainColor2;
+$footerBackgroundColor1: $mainColor14;
 $footerBackgroundColor2: $mainColor5;
 
 $searchBarColor: $mainColor1;
