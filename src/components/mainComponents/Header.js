@@ -92,7 +92,6 @@ export default function Header({isMainPage}) {
     fetch("/api/auth/whoAmI/session")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setSession(data);
         setUserName(data?.name?.user?.name);
         setUserEmail(data?.name?.user?.email);
