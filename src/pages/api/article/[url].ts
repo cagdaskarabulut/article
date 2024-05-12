@@ -27,5 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   //     (select count(ac.id) from public.article_comment ac where ac.url=a.url and ac.project=${process.env.PROJECT_SITE_NAME}) as comment_number
   //      FROM public.article_article a where a.is_active=true and a.url=${url?.toString()} and a.project=${process.env.PROJECT_SITE_NAME};`;
   
+  // console.log(article_list);
+  
    return res.status(200).json({ article_list });
 }

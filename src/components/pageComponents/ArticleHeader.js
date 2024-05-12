@@ -212,7 +212,7 @@ const ArticleHeader = ({ article }) => {
                       (topic) =>
                         topic && (
                           <button
-                            key={"ContentField" + article?.title}
+                            key={"ContentFieldMid" + article?.title + Math.floor(Math.random() * 1000000000000)}
                             className={styles.TopicChipStyle}
                             onClick={() => router.push("/?search=" + topic)}
                           >
