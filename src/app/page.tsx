@@ -12,6 +12,9 @@ import NavigateButton from "../components/reusableComponents/NavigateButton";
 import { fetchArticleSize } from "./pagination/pagination_article_size";
 import { useRouter } from "next/navigation";
 
+export const dynamicParams = true // true | false,
+export const revalidate = 300
+
 export default async function Home({ searchParams }) {
   let orderType = searchParams.orderby || "create_date"; //order by boş gelirse default değer atanır
   let search = searchParams.search || "";
