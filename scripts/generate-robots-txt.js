@@ -113,17 +113,17 @@ async function generateRobotsTxtAndSitemapXml() {
     await fetch(process.env.URL + "/api/list_url", {
       method: "GET",
     })
-      .then((res) => res.json())
+      .then((res) => res?.json())
       .then((dataList) => {
         //- add auto generated urls
         dataList?.article_url_list?.rows.map((article, index) => {
           dynamicRobotsTxtFields = addUrlToRobotsList(
             dynamicRobotsTxtFields,
-            article.url
+            article?.url
           );
           dynamicSitemapFields = addUrlToSitemapList(
             dynamicSitemapFields,
-            article.url
+            article?.url
           );
         });
 
