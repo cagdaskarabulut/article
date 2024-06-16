@@ -37,22 +37,24 @@
 
 .HomePageInfoStyle {
   color: $fontColor;
+
   h1 {
     color: rgba(0, 0, 0, 0.6);
   }
 }
 
-.ContentStyle{
+.ContentStyle {
   padding-top: 20px !important;
-  .ContentContainerStyle{
+
+  .ContentContainerStyle {
     // background-color: $bodyContentBackgroundColor !important;
     background: $bodyContentBackgroundColor1;
     background: radial-gradient(circle, $bodyContentBackgroundColor1 0%, $bodyContentBackgroundColor2 100%);
   }
 }
 
-.FindTitleHeaderStyle{
+.FindTitleHeaderStyle {
   margin: "0px";
-  text-align: "center";
+  text-align: center !important;
   color: rgba(0, 0, 0, 0.6);
 }

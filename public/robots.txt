@@ -47,6 +47,5 @@ Allow: /bibimbap-recipe-how-to-make-bibimbap
 Allow: /the-history-of-basketball-866773093844
 
 Disallow: /AdminPanel
-Disallow: /AdminPanelLogin
 # Sitemaps
 Sitemap: https://www.newszipped.com/sitemap.xml

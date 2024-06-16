@@ -43,7 +43,6 @@ function generateFinalRobotsTxtFile(robotsTxtFileSource) {
 User-agent: *
 ${robotsTxtFileSource}
 Disallow: /AdminPanel
-Disallow: /AdminPanelLogin
 # Sitemaps
 Sitemap: ${websiteUrl}/sitemap.xml`;
   return result;
@@ -94,22 +93,24 @@ daily
 
 async function generateRobotsTxtAndSitemapXml() {
   if (isLocal === "false") {
-    
-    await fetch(process.env.URL + "/api/article/article_project_auto_generate_files", {
-      method: "GET",
-    })
+    await fetch(
+      process.env.URL + "/api/article/article_project_auto_generate_files",
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((dataList) => {
         //- add auto generated urls
         dataList?.file?.rows.map((activeFile, index) => {
-          if(activeFile?.project == siteName){
+          if (activeFile?.project == siteName) {
             fs.writeFileSync(activeFile?.file_path, activeFile?.file_content);
           }
         });
       });
     let dynamicRobotsTxtFields = "";
     let dynamicSitemapFields = addStaticValuesIntoSitemapList();
-    await fetch(process.env.URL + "/api/article/list_url", {
+    await fetch(process.env.URL + "/api/list_url", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -129,12 +130,10 @@ async function generateRobotsTxtAndSitemapXml() {
         //-generate final files to store
         let robotsTxt = generateFinalRobotsTxtFile(dynamicRobotsTxtFields);
         let sitemapXml = generateFinalSitemapXmlFile(dynamicSitemapFields);
-        
 
         //-create physical files
         fs.writeFileSync("public/robots.txt", robotsTxt);
         fs.writeFileSync("public/sitemap.xml", sitemapXml);
-        
       });
   }
 }

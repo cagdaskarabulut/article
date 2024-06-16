@@ -43,7 +43,7 @@ const ArticleHeader = ({ article }) => {
   const [isLoadedLike, setIsLoadedLike] = useState(false);
   const [isLoadedWatch, setIsLoadedWatch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeArticle, setActiveArticle] = useState("");// todo bunu doldur useeffect te sonra bunu kullan
+  const [activeArticle, setActiveArticle] = useState(""); // todo bunu doldur useeffect te sonra bunu kullan
 
   useEffect(() => {
     setIsAuthChecked(false);
@@ -86,7 +86,6 @@ const ArticleHeader = ({ article }) => {
     }
   }, [innerWidth]);
 
-
   const tagSelectedAction = (topic) => {
     setIsLoading(true);
     const handler = setTimeout(() => {
@@ -96,8 +95,7 @@ const ArticleHeader = ({ article }) => {
     return () => {
       clearTimeout(handler);
     };
-  
-  }
+  };
 
   const RightContentField = () => {
     return (
@@ -152,96 +150,120 @@ const ArticleHeader = ({ article }) => {
     return (
       <>
         <div className={styles.HomePageInfoStyle}>
-          <h1 style={{marginTop:"0px"}}>{article?.title}</h1>
+          {article?.is_core_page && (
+            <h1 style={{ marginTop: "0px", textAlign: "center" }}>
+              {article?.title}
+            </h1>
+          )}
 
-          <Divider />
-          <div className={styles.HeaderActionsContainerStyle}>
-            {isMobile && (
-              <>
-                <MyGrid
-                isOneFullContent
-                  leftContent={
-                    <>
-                    <span className={styles.CardHeaderDateStyle}>
-                      {article?.create_date &&
-                        format(article?.create_date, "dd/MM/yyyy")}
-                    </span>
-                    
-                    {!(isLoadedLike && isLoadedWatch) && (
-                      <LinearProgress color="success" />
-                    )}
-
-                    {isLoadedLike && isLoadedWatch && <RightContentField />}
-                  </>
-                  }
-                />
-
-                <MyGrid
-                  isOneFullContent
-                  leftContent={
-                    <div style={isMobile ? {alignItems: "center", marginLeft: "-5px", marginTop: "10px"} : { alignItems: "center", marginLeft: "-5px" }}>
-                      {article?.topics?.split(",")?.map(
-                        (topic) =>
-                          topic && (
-                            <button
-                              key={"ContentField" + article?.title}
-                              className={styles.TopicChipStyle}
-                              onClick={() => tagSelectedAction(topic)}
-                            >
-                              {topic}
-                            </button>
-                          )
-                      )}
-                    </div>
-                  }
-                />
-              </>
-            )}
-
-            {!isMobile && (
-              <MyGrid
-                leftContent={
-                  <span className={styles.CardHeaderDateStyle}>
-                    {article?.create_date &&
-                      format(article?.create_date, "dd/MM/yyyy")}
-                  </span>
-                }
-                middleContent={
-                  <div style={{ alignItems: "center" }}>
-                    {article?.topics?.split(",")?.map(
-                      (topic) =>
-                        topic && (
-                          <button
-                            key={"ContentFieldMid" + article?.title + Math.floor(Math.random() * 1000000000000)}
-                            className={styles.TopicChipStyle}
-                            onClick={() => router.push("/?search=" + topic)}
-                          >
-                            {topic}
-                          </button>
-                        )
-                    )}
-                  </div>
-                }
-                rightContent={
+          {!article?.is_core_page && (
+            <>
+              <h1 style={{ marginTop: "0px" }}>{article?.title}</h1>
+              <Divider />
+              <div className={styles.HeaderActionsContainerStyle}>
+                {isMobile && (
                   <>
-                    {!(isLoadedLike && isLoadedWatch) && (
-                      <LinearProgress color="success" />
-                    )}
+                    <MyGrid
+                      isOneFullContent
+                      leftContent={
+                        <>
+                          <span className={styles.CardHeaderDateStyle}>
+                            {article?.create_date &&
+                              format(article?.create_date, "dd/MM/yyyy")}
+                          </span>
 
-                    {isLoadedLike && isLoadedWatch && <RightContentField />}
+                          {!(isLoadedLike && isLoadedWatch) && (
+                            <LinearProgress color="success" />
+                          )}
+
+                          {isLoadedLike && isLoadedWatch && (
+                            <RightContentField />
+                          )}
+                        </>
+                      }
+                    />
+
+                    <MyGrid
+                      isOneFullContent
+                      leftContent={
+                        <div
+                          style={
+                            isMobile
+                              ? {
+                                  alignItems: "center",
+                                  marginLeft: "-5px",
+                                  marginTop: "10px",
+                                }
+                              : { alignItems: "center", marginLeft: "-5px" }
+                          }
+                        >
+                          {article?.topics?.split(",")?.map(
+                            (topic) =>
+                              topic && (
+                                <button
+                                  key={"ContentField" + article?.title}
+                                  className={styles.TopicChipStyle}
+                                  onClick={() => tagSelectedAction(topic)}
+                                >
+                                  {topic}
+                                </button>
+                              )
+                          )}
+                        </div>
+                      }
+                    />
                   </>
-                }
-              />
-            )}
-          </div>
-          <Divider />
+                )}
+
+                {!isMobile && (
+                  <MyGrid
+                    leftContent={
+                      <span className={styles.CardHeaderDateStyle}>
+                        {article?.create_date &&
+                          format(article?.create_date, "dd/MM/yyyy")}
+                      </span>
+                    }
+                    middleContent={
+                      <div style={{ alignItems: "center" }}>
+                        {article?.topics?.split(",")?.map(
+                          (topic) =>
+                            topic && (
+                              <button
+                                key={
+                                  "ContentFieldMid" +
+                                  article?.title +
+                                  Math.floor(Math.random() * 1000000000000)
+                                }
+                                className={styles.TopicChipStyle}
+                                onClick={() => router.push("/?search=" + topic)}
+                              >
+                                {topic}
+                              </button>
+                            )
+                        )}
+                      </div>
+                    }
+                    rightContent={
+                      <>
+                        {!(isLoadedLike && isLoadedWatch) && (
+                          <LinearProgress color="success" />
+                        )}
+
+                        {isLoadedLike && isLoadedWatch && <RightContentField />}
+                      </>
+                    }
+                  />
+                )}
+              </div>
+              <Divider />
+            </>
+          )}
         </div>
       </>
     );
   };
 
   const likeAction = async () => {
-    // setIsLoading(true);
     if (!userEmail) {
       router.push("/api/auth/signin", { scroll: false });
     } else if (isLiked) {

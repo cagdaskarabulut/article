@@ -8,16 +8,17 @@ import useWindowSize from "@rooks/use-window-size";
 import FooterPanel from "../mainComponents/FooterPanel";
 import MyGrid from "../toolComponents/MyGrid";
 import { Analytics } from "@vercel/analytics/react";
-import {
-  Container,
-} from "@mui/material";
+import { Container, Divider } from "@mui/material";
 import Image from "next/image";
 import ArticleHeader from "./ArticleHeader";
 import Comments from "./Comments";
+import useProjectSpecialFields from "../../hooks/useProjectSpecialFields";
+import Navbar from "../reusableComponents/Navbar";
 
 const ArticlePagePanel = ({ article }) => {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
+  const specialFields = useProjectSpecialFields();
 
   useEffect(() => {
     fetch("/api/article/add_view", {
@@ -56,17 +57,18 @@ const ArticlePagePanel = ({ article }) => {
             <div className={styles.HomePageInfoStyle}>
               <ArticleHeader article={article} />
               <br />
-              {/* //TODO - Reklam almak için kapatıp denendi ama olmadı bir süre sonra tekrar denenebilir*/}
-              <div className={styles.ArticleImageContainerStyle}>
-                {article?.title_image && (
+
+              {article?.title_image && (
+                <div className={styles.ArticleImageContainerStyle}>
                   <Image
                     src={article?.title_image}
                     alt={"img_" + article?.url}
                     fill={true}
                     objectFit="contain"
                   />
-                )}
-              </div>
+                </div>
+              )}
+
               <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
             </div>
           </Container>
@@ -77,7 +79,10 @@ const ArticlePagePanel = ({ article }) => {
 
   const CommentField = () => {
     return (
-      <div className={styles.PanelContainerStyle} style={{paddingBottom: "20vh"}}>
+      <div
+        className={styles.PanelContainerStyle}
+        style={{ paddingBottom: "20vh" }}
+      >
         <Container maxWidth="lg">
           <div className={styles.HomePageInfoStyle}>
             <Comments article={article} />
@@ -92,14 +97,29 @@ const ArticlePagePanel = ({ article }) => {
       <div className={styles.ContainerPageContainerStyle}>
         <div className={styles.HeaderStyle}>
           <Header />
-          <br />
+          {specialFields?.is_top_menu_active && (
+            <>
+              <Navbar />
+              {/* <div style={{ width: "100%", height: "20px" }}>
+                <Divider />
+              </div> */}
+            </>
+          )}
         </div>
         <Container maxWidth="lg" className={styles.ContentStyle}>
-          <MyGrid leftContent={<ContentField />} isOneFullContent 
+          <MyGrid
+            leftContent={<ContentField />}
+            isOneFullContent
             isHideWhileLoading
-             />
-          <MyGrid leftContent={<CommentField />} isOneFullContent isHideWhileLoading
-            isShowLoadingBarWhileLoading/>
+          />
+          {!article.is_core_page && (
+            <MyGrid
+              leftContent={<CommentField />}
+              isOneFullContent
+              isHideWhileLoading
+              isShowLoadingBarWhileLoading
+            />
+          )}
         </Container>
         <br />
         <FooterPanel />

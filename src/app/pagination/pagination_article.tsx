@@ -15,6 +15,7 @@ export async function fetchArticle(
   size: number,
   orderby: string,
   search: string,
+  isSmallCards: boolean
 ) {
   let response;
   let responseSize;
@@ -33,12 +34,12 @@ export async function fetchArticle(
         `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&search=${search}`
       );
       data = await response.json();
-    } else if(page == 1){
+    } else if (page == 1) {
       response = await fetch(
         `${process.env.URL}/api/article/list_filter?page=0&size=${listSize}&search=${search}`
       );
       data = await response.json();
-    } else if (listSize % size > 0){
+    } else if (listSize % size > 0) {
       let lastPageSize = listSize % size;
       response = await fetch(
         `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&search=${search}&lastPageSize=${lastPageSize}`
@@ -59,12 +60,12 @@ export async function fetchArticle(
         `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&order=${orderby}`
       );
       data = await response.json();
-    } else if(page == 1){
+    } else if (page == 1) {
       response = await fetch(
         `${process.env.URL}/api/article/list_filter?page=0&size=${listSize}&order=${orderby}`
       );
       data = await response.json();
-    } else if (listSize % size > 0){
+    } else if (listSize % size > 0) {
       let lastPageSize = listSize % size;
       response = await fetch(
         `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&order=${orderby}&lastPageSize=${lastPageSize}`
@@ -92,6 +93,7 @@ export async function fetchArticle(
         body={item?.description}
         is_manuel_page={item?.is_manuel_page}
         isSmallCardStyle
+        isManyCardsInRow={isSmallCards}
       />
     </>
   ));

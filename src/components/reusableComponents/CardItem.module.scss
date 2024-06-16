@@ -2,30 +2,45 @@
 @import "../../styles/colors.scss";
 @import "../../styles/common.scss";
 
-.CardStyle {
+
+.CardStyle,
+.CardManyStyle {
   margin-top: 20px;
   padding: 10px !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  .HeaderContent {
-    .CardHeaderTitleStyle {
-      font-weight: 700;
-      font-size: 24px;
-      color: $fontColor;
-      cursor: pointer;
-    }
-
-    .CardHeaderDateStyle {
-      font-weight: 400;
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.6);
-    }
-
-    .CardHeaderRightStyle {
-      float: right;
-    }
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    z-index: 10;
   }
 
-  .BodyContent {
+  .CardHeaderTitleStyle {
+    font-weight: 700;
+    font-size: 24px;
+    color: $fontColor;
+    cursor: pointer;
+  }
+
+  .CardBigImageHeaderTitleStyle {
+    font-weight: 700;
+    font-size: 18px;
+    color: $fontColor;
+    cursor: pointer;
+  }
+
+  .CardHeaderDateStyle {
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .CardHeaderRightStyle {
+    float: right;
+  }
+
+  .BodyContent,
+  .BodyContentBigImage {
     margin-top: 10px !important;
 
     .BodyLeftContentStyle,
@@ -40,7 +55,7 @@
       h1 {
         display: none;
       }
-      
+
       @include tablet-or-less {
         padding-right: 35px !important;
       }
@@ -65,6 +80,12 @@
       cursor: pointer;
     }
   }
+}
+
+.CardManyStyle {
+  width: 30% !important;
+  margin: 5px !important;
+  padding: 5px !important;
 }
 
 .TopicListStyle {

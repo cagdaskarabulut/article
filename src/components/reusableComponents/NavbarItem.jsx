@@ -1,47 +1,52 @@
-'use client';
+"use client";
 
-// import Link from 'next/link';
-
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./NavBarItem.module.scss";
 import LoadingFullPage from "../reusableComponents/LoadingFullPage";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Link } from "@mui/material";
+import { useState } from "react";
+import { Icon, Link, ListItemText } from "@mui/material";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 
-export default function NavbarItem({ title, param }) {
-  const searchParams = useSearchParams();
-  const orderby = searchParams.get('orderby') || 'create_date';
-  const [isLoadingFullPage, setIsLoadingFullPage] = useState(false);
+export default function NavbarItem({ title, param, size, isShowOrderByIcon }) {
   const router = useRouter();
+  const pathname = usePathname();
+  const activePageName = pathname?.split("/").pop() || "/";
+  const isActive = activePageName === param;
+
+  const [isLoadingFullPage, setIsLoadingFullPage] = useState(false);
 
   const goTarget = (param) => {
     setIsLoadingFullPage(true);
     const handler = setTimeout(() => {
-      router.push("/?orderby="+param);
+      router.push(param);
       setIsLoadingFullPage(false);
     }, 200);
     return () => {
       clearTimeout(handler);
     };
-  }
+  };
 
   return (
     <>
-    <LoadingFullPage isLoading={isLoadingFullPage} />
-    
+      {console.log(size)}
+      <LoadingFullPage isLoading={isLoadingFullPage} />
       <Link
-      key={"NavbarItemId_"+param}
-      className={
-        orderby === param
-          ? styles.secondButtonStyle
-          : styles.firstButtonStyle
-      }
-      onClick={() => goTarget(param)}
-        // href={`/?orderby=${param}`}
+        key={"NavbarItemId_" + param}
+        className={
+          isActive ? styles.secondButtonStyle : styles.firstButtonStyle
+        }
+        onClick={() => goTarget(param)}
       >
-        {title}
+        <span
+          className={
+            size === "small" ? styles.ListItemStyleSmall : styles.ListItemStyle
+          }
+        >
+          {title}
+
+          {isShowOrderByIcon && <SwapVertIcon fontSize="xxx" />}
+        </span>
       </Link>
-      </>
+    </>
   );
 }

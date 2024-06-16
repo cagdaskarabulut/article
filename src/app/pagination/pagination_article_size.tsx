@@ -2,7 +2,6 @@
 
 // import AnimeCard, { AnimeProp } from "@/components/AnimeCard";
 import { headers } from "next/headers";
-import CardItem from "../../components/reusableComponents/CardItem";
 import ArticleCard, {
   ArticleProp,
 } from "../../components/reusableComponents/ArticleCard";
