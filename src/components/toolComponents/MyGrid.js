@@ -17,6 +17,7 @@ const MyGrid = ({
   middleContent,
   rightContent,
   isRightContentSmall,
+  isLeftContentSmall,
   isOneFullContent,
   contentPosition,
   forHeader,
@@ -24,6 +25,7 @@ const MyGrid = ({
   isHideRightSideOnMobile,
   isHideWhileLoading,
   isShowLoadingBarWhileLoading,
+  isLeftContentSticky,
 }) => {
   //_ MobilePart
   const { innerWidth } = useWindowSize();
@@ -84,20 +86,26 @@ const MyGrid = ({
             alignItems={contentPosition}
             columns={18}
           >
+            {/* 1 columns */}
             {isFinallyOneFullContent && (
               <Grid item xs={18}>
                 {leftContent}
               </Grid>
             )}
+
+            {/* 2 columns */}
             {!isFinallyOneFullContent && !middleContent && (
               <>
                 <Grid
                   item
+                  className={isLeftContentSticky && styles.sticky}
                   xs={
                     isMobile && !isStaticWidth
                       ? 18
                       : isRightContentSmall
                       ? 14
+                      : isLeftContentSmall
+                      ? 4
                       : 12
                   }
                 >
@@ -110,6 +118,8 @@ const MyGrid = ({
                       ? 18
                       : isRightContentSmall
                       ? 4
+                      : isLeftContentSmall
+                      ? 14
                       : 6
                   }
                 >
@@ -118,6 +128,7 @@ const MyGrid = ({
               </>
             )}
 
+            {/* 3 columns */}
             {!isFinallyOneFullContent && middleContent && (
               <>
                 <Grid

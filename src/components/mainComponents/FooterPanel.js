@@ -13,7 +13,7 @@ const FooterPanel = () => {
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
   const specialFields = useProjectSpecialFields();
-  
+
   useEffect(() => {
     if (innerWidth === null) {
       setIsMobile(false);

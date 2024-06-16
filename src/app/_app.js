@@ -29,7 +29,7 @@ const App = ({ Component, pageProps }) => {
           src= "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8764830534484668"
         /> */}
         {/* Google Ads - End */}
-        
+
         <script
           dangerouslySetInnerHTML={{
             __html: `

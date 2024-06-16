@@ -9,7 +9,6 @@ export async function generateMetadata(
   { params, searchParams }: any,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-
   const metatags = await fetch(
     process.env.URL + "/api/article/article_project_metatags"
   )

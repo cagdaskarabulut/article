@@ -1,12 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import {
-  Autocomplete,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Autocomplete, MenuItem, Select, TextField } from "@mui/material";
 
 const UrlList = ({
   label,
@@ -62,15 +57,19 @@ const UrlList = ({
     <div>
       {isDisabled && (
         <Select
-        id="demo-simple-select"
-        value={selectedUrl}
-        onChange={handleSelectChange}
-        style={{width: "100%"}}
+          id="demo-simple-select"
+          value={selectedUrl}
+          onChange={handleSelectChange}
+          style={{ width: "100%" }}
         >
-          <MenuItem value="" key="emptySelect_id">Seçiniz</MenuItem>
+          <MenuItem value="" key="emptySelect_id">
+            Select
+          </MenuItem>
           {allUrlList?.map((urlItem) => (
-          <MenuItem value={urlItem.url} key={urlItem.url+"_id"} >{urlItem.url}</MenuItem>
-        ))}
+            <MenuItem value={urlItem.url} key={urlItem.url + "_id"}>
+              {urlItem.url}
+            </MenuItem>
+          ))}
         </Select>
       )}
 

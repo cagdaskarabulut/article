@@ -34,7 +34,7 @@
     "src/pages/api/article/[is_liked_by_user].js",
     "src/app/[article]/page.js",
     "src/app/[article]/page.js"
-, "src/hooks/useProjectMetaTags.js"  ],
+, "src/hooks/useProjectMetaTags.js", "src/components/reusableComponents/Carousel.jsx", "src/pages/api/article/list_filter.js"  ],
   "exclude": [
     "node_modules"
   ]

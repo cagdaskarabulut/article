@@ -25,7 +25,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import SearchBar from "../reusableComponents/SearchBar";
 import LoginIcon from "@mui/icons-material/Login";
 
-export default function Header({isMainPage}) {
+export default function Header({ isMainPage }) {
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
@@ -95,7 +95,9 @@ export default function Header({isMainPage}) {
         setSession(data);
         setUserName(data?.name?.user?.name);
         setUserEmail(data?.name?.user?.email);
-        setUserImage(data?.name?.user?.image !== null ? data?.name?.user?.image : "");
+        setUserImage(
+          data?.name?.user?.image !== null ? data?.name?.user?.image : ""
+        );
         setIsAuthChecked(true);
       });
   }, []);
@@ -124,9 +126,7 @@ export default function Header({isMainPage}) {
       <LoadingFullPage isLoading={isLoadingFullPage} />
       <div className={styles.HeaderContainerStyle}>
         <Container className={styles.header}>
-          {!isAuthChecked && (
-            <SkeletonHeader />
-          )}
+          {!isAuthChecked && <SkeletonHeader />}
 
           {isAuthChecked && (
             <MyGrid
@@ -139,7 +139,7 @@ export default function Header({isMainPage}) {
                       width={isMobile ? 48 : 64}
                       height={isMobile ? 48 : 64}
                       onClick={() => goHomePage()}
-                      alt={process.env.PROJECT_SITE_NAME+"-logo"} 
+                      alt={process.env.PROJECT_SITE_NAME + "-logo"}
                     />
                   </h1>
                 </>
@@ -190,14 +190,16 @@ export default function Header({isMainPage}) {
                               >
                                 <Avatar sx={{ width: 32, height: 32 }}>
                                   {userImage && (
-                                  <Image
-                                    src={userImage}
-                                    width={isMobile ? 48 : 64}
-                                    height={isMobile ? 48 : 64}
-                                    alt="profile-logo"
-                                  />)}
+                                    <Image
+                                      src={userImage}
+                                      width={isMobile ? 48 : 64}
+                                      height={isMobile ? 48 : 64}
+                                      alt="profile-logo"
+                                    />
+                                  )}
                                   {!userImage && (
-                                  <span>{Array.from(userName)[0]}</span>)}
+                                    <span>{Array.from(userName)[0]}</span>
+                                  )}
                                 </Avatar>
                               </IconButton>
                             </Tooltip>
@@ -264,8 +266,13 @@ export default function Header({isMainPage}) {
                         <>
                           {!isMobile && (
                             <button
-                              onClick={() => signIn()} className={styles.fourthButtonStyle}
-                              style={isMainPage ? {marginRight: '0px'} : {marginRight: '20px'}}
+                              onClick={() => signIn()}
+                              className={styles.fourthButtonStyle}
+                              style={
+                                isMainPage
+                                  ? { marginRight: "0px" }
+                                  : { marginRight: "20px" }
+                              }
                             >
                               Login
                             </button>

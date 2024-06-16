@@ -3,9 +3,8 @@ import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopButton";
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 
-export const dynamicParams = true // true | false,
-export const revalidate = 300
-
+export const dynamicParams = true; // true | false,
+export const revalidate = 300;
 
 async function getArticle(article) {
   let res = await fetch(process.env.URL + "/api/article/" + article);
@@ -14,7 +13,7 @@ async function getArticle(article) {
 
 export async function generateStaticParams() {
   const articleUrlList = await fetch(
-    process.env.URL + "/api/article/list_url"
+    process.env.URL + "/api/list_url"
     // ,{ next: { revalidate: 3600 } }
   ).then((res) => res.json());
   return articleUrlList?.article_url_list?.rows.map((p) => ({
@@ -22,7 +21,6 @@ export async function generateStaticParams() {
     revalidate: 30,
   }));
 }
-
 
 export default async function ArticlePage({ params }) {
   let { article } = params;

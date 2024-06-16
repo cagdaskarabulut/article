@@ -7,12 +7,14 @@ import TopicList from "../../components/TopicList";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import LinearProgress from "@mui/material/LinearProgress";
-
+import { red } from "@mui/material/colors";
+import useLanguages from "../../hooks/useLanguages";
 export default function Navbar() {
+  const LABELS = useLanguages();
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
-  const [topicList, setTopicList] = useState([]);
-  const [isRefreshingTopicList, setIsRefreshingTopicList] = useState(true);
+  const [topMenuList, setTopMenuList] = useState([]);
+  const [isRefreshingTopMenuList, setIsRefreshingTopMenuList] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -21,52 +23,49 @@ export default function Navbar() {
     } else {
       setIsMobile(innerWidth < MOBILE_SCREEN_SIZE);
     }
+
+    fetch("/api/core-page/list_all_url")
+      .then((res) => res.json())
+      .then((table) => {
+        setTopMenuList(table?.data?.rows);
+      });
+
     setIsLoading(false);
   }, [innerWidth]);
 
   return (
     <>
-        {isLoading && (
-          <>
+      <Divider />
+      {isLoading && (
+        <>
           <div className={styles.NavbarContainerStyle}>
-          <LinearProgress
-            color="success"
-            style={{
-              marginTop: "25px",
-              marginBottom: "25px",
-            }}
-          />
+            <LinearProgress
+              color="success"
+              style={{
+                marginTop: "25px",
+                marginBottom: "25px",
+              }}
+            />
           </div>
-          </>
-        )}
+        </>
+      )}
 
-        {!isLoading && (
-          <>
-          <Divider />
+      {!isLoading && (
+        <>
           <Container maxWidth="lg">
-          <div className={styles.NavbarContainerStyle}>
-            {isMobile ? <span>Order by : </span> : <></>}
-            <NavbarItem
-              title={isMobile ? "Date" : "Order By Latest"}
-              param="create_date"
-            />
-            <NavbarItem
-              title={isMobile ? "Like" : "Order By Likes"}
-              param="like_number"
-            />
-            <NavbarItem
-              title={isMobile ? "View" : "Order By Views"}
-              param="view_number"
-            />
-            <NavbarItem
-              title={isMobile ? "Comment" : "Order By Comments"}
-              param="comment_number"
-            />
+            <div className={styles.NavbarContainerStyle}>
+              {topMenuList?.map((item) => (
+                <>
+                  <NavbarItem title={item?.page_name} param={item?.url} />
+                </>
+              ))}
+              <NavbarItem title={LABELS.MAINPAGE} param="/" />
             </div>
-            </Container>
-            <Divider />
-          </>
-        )}
+          </Container>
+        </>
+      )}
+      <Divider />
+      <br />
     </>
   );
 }

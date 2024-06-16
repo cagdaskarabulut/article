@@ -7,16 +7,22 @@ import { useEffect, useState } from "react";
 import { fetchArticle } from "../../app/pagination/pagination_article";
 
 let page = 2;
-let rowForPage = 5;
+
 export type ArticleCard = JSX.Element;
 
-function LoadMore({orderType,search,totalListSize}) {
+function LoadMore({
+  orderType,
+  search,
+  totalListSize,
+  pageSize,
+  isSmallCards,
+}) {
+  let rowForPage = pageSize;
   const { ref, inView } = useInView();
 
   const [data, setData] = useState<ArticleCard[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -27,24 +33,24 @@ function LoadMore({orderType,search,totalListSize}) {
   }, [orderType, search]);
 
   useEffect(() => {
-     
     if (inView && !isFinished) {
       setIsLoading(true);
       const delay = 200;
       const timeoutId = setTimeout(() => {
-
-        if(totalListSize<(page*rowForPage)){
+        if (totalListSize < page * rowForPage) {
           setIsFinished(true);
         } else {
-          fetchArticle(page,rowForPage,orderType,search).then((res) => {
-            if (res){
-              setData([...data, ...res]);
-              page++;
-            } else {
-              setIsFinished(true);
+          fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
+            (res) => {
+              if (res) {
+                setData([...data, ...res]);
+                page++;
+              } else {
+                setIsFinished(true);
+              }
+              setIsLoading(false);
             }
-            setIsLoading(false);  
-          });
+          );
         }
       }, delay);
       // Clear the timeout if the component is unmounted or inView becomes false
@@ -56,24 +62,39 @@ function LoadMore({orderType,search,totalListSize}) {
   return (
     <>
       <section>
-        {data}
-      </section>
-      <br />
-      <section>
-        <div ref={ref} style={{width: "100%", display: "flex", justifyContent: "center"}}>
-          {inView && isLoading && !isFinished && (
-            <>
-            <Image
-              src="./spinner.svg"
-              alt="spinner"
-              width={56}
-              height={56}
-              className="object-contain"
-            />
-            </>
-          )}
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "flex-start",
+          }}
+        >
+          {data}
         </div>
       </section>
+      <br />
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <section>
+          <br />
+          <div
+            ref={ref}
+            style={{ width: "100%", display: "flex", justifyContent: "center" }}
+          >
+            {inView && isLoading && !isFinished && (
+              <>
+                <Image
+                  src="./spinner.svg"
+                  alt="spinner"
+                  width={56}
+                  height={56}
+                  className="object-contain"
+                />
+              </>
+            )}
+          </div>
+        </section>
+      </div>
       <style jsx global>{`
         body {
           background-color: #f2f2f2;

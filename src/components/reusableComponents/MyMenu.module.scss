@@ -1,0 +1,52 @@
+@import "../../styles/colors.scss";
+@import "../../styles/mixins.scss";
+
+
+.ListContainerStyle {
+  flex-direction: column;
+
+  @include tablet-or-less {
+    flex-direction: row !important; // flex-wrap: nowrap !important;
+    overflow-x: scroll !important;
+    display: flex;
+    // width: 100%;
+    // justify-content: space-between !important;
+  }
+}
+
+.menuItem {
+  position: relative;
+  padding: 8px 16px !important;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: $mainColor10;
+    transition: width 0.8s ease;
+    z-index: -1;
+  }
+
+  &:hover::before {
+    width: 100%;
+    transition: width 0.8s ease;
+  }
+
+  &:hover {
+    color: $mainColor8 !important;
+    background-color: transparent !important;
+  }
+
+  &.active {
+    color: $mainColor8 !important;
+    background-color: $mainColor10 !important;
+  }
+
+  z-index: 1;
+}

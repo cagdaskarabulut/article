@@ -11,7 +11,6 @@ const ImageViewerManuel = ({
 }) => {
   return (
     <>
-      {/* //TODO - Reklam almak için kapatıp denendi ama olmadı bir süre sonra tekrar denenebilir*/}
       <div className={isSmallSize ? styles.smallSize : styles.standartSize}>
         <Image
           src={imagePath}
