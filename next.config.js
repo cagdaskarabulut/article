@@ -22,6 +22,7 @@ module.exports = {
   env: {
     PROJECT_SITE_NAME: process.env.SITE_NAME,
     PROJECT_URL_WEBSITE: process.env.URL_WEBSITE,
+    PROJECT_URL: process.env.URL,
   },
   reactStrictMode: false,
   webpack5: true,
