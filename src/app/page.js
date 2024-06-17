@@ -30,15 +30,14 @@ export const dynamicParams = true; // true | false,
 export const revalidate = 60;
 
 export default async function Home({ searchParams }) {
-  //TODO
-  const specialFields = undefined;
-  // const specialFields = await fetch(
-  //   `${process.env.URL}/api/article/article_project_special_fields`
-  // )
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     return data?.fields?.rows[0];
-  //   });
+  //TODO - aşağısı çalıştıysa bu satırı sil: const specialFields = undefined;
+  const specialFields = await fetch(
+    `${process.env.URL}/api/article/article_project_special_fields`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data?.fields?.rows[0];
+    });
 
   const LABELS =
     specialFields?.default_language === "tr" ? LABELS_tr : LABELS_en;
