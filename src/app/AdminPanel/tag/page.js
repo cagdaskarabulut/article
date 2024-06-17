@@ -21,7 +21,6 @@ import TopicList from "../../../components/TopicList";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import useLanguages from "../../../hooks/useLanguages";
 import { useRouter } from "next/navigation";
-import { isEmailInList } from "../../../utils/ListUtils";
 
 const AdminPanel = () => {
   const router = useRouter();
@@ -37,16 +36,19 @@ const AdminPanel = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [newTopicName, setNewTopicName] = useState("");
 
+  function isEmailInList(email, emailListString) {
+    // E-posta listesini virgül ile ayır ve diziye dönüştür
+    const emailArray = emailListString.split(",");
+
+    // E-posta adresinin listede olup olmadığını kontrol et
+    return emailArray.includes(email);
+  }
+
   useEffect(() => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        if (
-          isEmailInList(
-            data.email,
-            process.env.PROJECT_SUPER_PROJECT_PROJECT_ADMIN_USER
-          )
-        ) {
+        if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
           setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
         } else if (
