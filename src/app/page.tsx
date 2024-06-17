@@ -16,7 +16,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import Navbar from "../components/reusableComponents/Navbar";
+import Navbar from "../../src/pages/components/Navbar";
 import NavbarOrderby from "../components/reusableComponents/NavbarOrderby";
 import NavigateButton from "../components/reusableComponents/NavigateButton";
 import { fetchArticleSize } from "./pagination/pagination_article_size";
