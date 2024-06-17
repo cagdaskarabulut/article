@@ -21,13 +21,10 @@ import NavBarOrderby from "../components/reusableComponents/NavBarOrderby";
 import NavigateButton from "../components/reusableComponents/NavigateButton";
 import { fetchArticleSize } from "./pagination/pagination_article_size";
 import MyMenu from "../components/reusableComponents/MyMenu";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import Image from "next/image";
 import MyCarousel from "../components/reusableComponents/MyCarousel";
 import FocusContent from "../components/reusableComponents/FocusContent";
 import { LABELS as LABELS_en } from "../app/enums/lang/en";
 import { LABELS as LABELS_tr } from "../app/enums/lang/tr";
-// import { useLanguages } from "../hooks/useLanguages";
 
 export const dynamicParams = true; // true | false,
 export const revalidate = 60;
