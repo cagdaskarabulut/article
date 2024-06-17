@@ -23,20 +23,22 @@ import { fetchArticleSize } from "./pagination/pagination_article_size";
 import MyMenu from "../components/reusableComponents/MyMenu";
 import MyCarousel from "../components/reusableComponents/MyCarousel";
 import FocusContent from "../components/reusableComponents/FocusContent";
-import { LABELS as LABELS_en } from "../app/enums/lang/en";
-import { LABELS as LABELS_tr } from "../app/enums/lang/tr";
+import { LABELS as LABELS_en } from "./enums/lang/en";
+import { LABELS as LABELS_tr } from "./enums/lang/tr";
 
 export const dynamicParams = true; // true | false,
 export const revalidate = 60;
 
 export default async function Home({ searchParams }) {
-  const specialFields = await fetch(
-    `${process.env.URL}/api/article/article_project_special_fields`
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data?.fields?.rows[0];
-    });
+  //TODO
+  const specialFields = undefined;
+  // const specialFields = await fetch(
+  //   `${process.env.URL}/api/article/article_project_special_fields`
+  // )
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     return data?.fields?.rows[0];
+  //   });
 
   const LABELS =
     specialFields?.default_language === "tr" ? LABELS_tr : LABELS_en;
@@ -71,7 +73,7 @@ export default async function Home({ searchParams }) {
       result = LABELS.ALL_RESULTS;
     }
 
-    if (!search && specialFields.is_order_by_menu_active) {
+    if (!search && specialFields?.is_order_by_menu_active) {
       if (orderType === "create_date") {
         result += ", " + LABELS.ORDER_BY_LATEST;
       } else if (orderType === "like_number") {
@@ -91,7 +93,7 @@ export default async function Home({ searchParams }) {
     <div className={styles.ContainerPageContainerStyle}>
       <div className={styles.HeaderStyle}>
         <Header isMainPage={true} />
-        {specialFields.is_top_menu_active && <Navbar />}
+        {specialFields?.is_top_menu_active && <Navbar />}
         {/* <Divider /> */}
       </div>
       <div style={{ height: "300px" }}>
@@ -107,7 +109,7 @@ export default async function Home({ searchParams }) {
                 <MyGrid
                   leftContent={
                     <div style={{ paddingTop: "20px" }}>
-                      {!search && specialFields.is_order_by_menu_active && (
+                      {!search && specialFields?.is_order_by_menu_active && (
                         <>
                           <Divider />
                           <NavbarOrderby />
@@ -176,7 +178,7 @@ export default async function Home({ searchParams }) {
                 leftContent={<MyMenu activePageName={search} />}
                 rightContent={
                   <>
-                    {!search && specialFields.is_order_by_menu_active && (
+                    {!search && specialFields?.is_order_by_menu_active && (
                       <>
                         <Divider />
                         <NavbarOrderby />
