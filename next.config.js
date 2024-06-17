@@ -34,11 +34,11 @@ module.exports = {
     ],
     unoptimized: true,
   },
-  webpack(config, { isServer }) {
-    config.resolve.fallback = { fs: false };
-    // if (isServer) {
-    //   generateRobotsTxtAndSitemapXml();
-    // }
-    return config;
-  },
+  // webpack(config, { isServer }) {
+  //   config.resolve.fallback = { fs: false };
+  //   if (isServer) {
+  //     generateRobotsTxtAndSitemapXml();
+  //   }
+  //   return config;
+  // },
 };
