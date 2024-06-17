@@ -13,7 +13,7 @@ import Image from "next/image";
 import ArticleHeader from "./ArticleHeader";
 import Comments from "./Comments";
 import useProjectSpecialFields from "../../hooks/useProjectSpecialFields";
-import Navbar from "../reusableComponents/Navbar";
+import Navbar from "../../pages/components/Navbar";
 
 const ArticlePagePanel = ({ article }) => {
   const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();

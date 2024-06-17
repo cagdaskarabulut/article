@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import NavbarItem from "./NavbarItem";
+import NavbarItem from "../../components/reusableComponents/NavbarItem";
 import styles from "./Navbar.module.scss";
 import { Autocomplete, Container, Divider, TextField } from "@mui/material";
-import TopicList from "../TopicList";
+import TopicList from "../../components/TopicList";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import LinearProgress from "@mui/material/LinearProgress";
