@@ -93,46 +93,47 @@ daily
 
 async function generateRobotsTxtAndSitemapXml() {
   if (isLocal === "true") {
-    await fetch(rootPath + "/api/article/article_project_auto_generate_files", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((dataList) => {
-        //- add auto generated urls
-        dataList?.file?.rows.map((activeFile, index) => {
-          if (activeFile?.project == siteName) {
-            fs.writeFileSync(activeFile?.file_path, activeFile?.file_content);
-          }
-        });
-      });
-    let dynamicRobotsTxtFields = "";
-    let dynamicSitemapFields = addStaticValuesIntoSitemapList();
-    // await fetch(process.env.URL + "/api/article/list_url", {
-    await fetch(rootPath + "/api/list_url", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((dataList) => {
-        //- add auto generated urls
-        dataList?.article_url_list?.rows.map((article, index) => {
-          dynamicRobotsTxtFields = addUrlToRobotsList(
-            dynamicRobotsTxtFields,
-            article.url
-          );
-          dynamicSitemapFields = addUrlToSitemapList(
-            dynamicSitemapFields,
-            article.url
-          );
-        });
+    console.log("test");
+    // await fetch(rootPath + "/api/article/article_project_auto_generate_files", {
+    //   method: "GET",
+    // })
+    //   .then((res) => res.json())
+    //   .then((dataList) => {
+    //     //- add auto generated urls
+    //     dataList?.file?.rows.map((activeFile, index) => {
+    //       if (activeFile?.project == siteName) {
+    //         fs.writeFileSync(activeFile?.file_path, activeFile?.file_content);
+    //       }
+    //     });
+    //   });
+    // let dynamicRobotsTxtFields = "";
+    // let dynamicSitemapFields = addStaticValuesIntoSitemapList();
+    // // await fetch(process.env.URL + "/api/article/list_url", {
+    // await fetch(rootPath + "/api/list_url", {
+    //   method: "GET",
+    // })
+    //   .then((res) => res.json())
+    //   .then((dataList) => {
+    //     //- add auto generated urls
+    //     dataList?.article_url_list?.rows.map((article, index) => {
+    //       dynamicRobotsTxtFields = addUrlToRobotsList(
+    //         dynamicRobotsTxtFields,
+    //         article.url
+    //       );
+    //       dynamicSitemapFields = addUrlToSitemapList(
+    //         dynamicSitemapFields,
+    //         article.url
+    //       );
+    //     });
 
-        //-generate final files to store
-        let robotsTxt = generateFinalRobotsTxtFile(dynamicRobotsTxtFields);
-        let sitemapXml = generateFinalSitemapXmlFile(dynamicSitemapFields);
+    //     //-generate final files to store
+    //     let robotsTxt = generateFinalRobotsTxtFile(dynamicRobotsTxtFields);
+    //     let sitemapXml = generateFinalSitemapXmlFile(dynamicSitemapFields);
 
-        //-create physical files
-        fs.writeFileSync("public/robots.txt", robotsTxt);
-        fs.writeFileSync("public/sitemap.xml", sitemapXml);
-      });
+    //     //-create physical files
+    //     fs.writeFileSync("public/robots.txt", robotsTxt);
+    //     fs.writeFileSync("public/sitemap.xml", sitemapXml);
+    //   });
   }
 }
 
