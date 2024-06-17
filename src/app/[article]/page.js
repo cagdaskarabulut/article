@@ -11,16 +11,16 @@ async function getArticle(article) {
   return res.json();
 }
 
-// export async function generateStaticParams() {
-//   const articleUrlList = await fetch(
-//     process.env.URL + "/api/list_url"
-//     // ,{ next: { revalidate: 3600 } }
-//   ).then((res) => res.json());
-//   return articleUrlList?.article_url_list?.rows.map((p) => ({
-//     article: p.url,
-//     revalidate: 30,
-//   }));
-// }
+export async function generateStaticParams() {
+  const articleUrlList = await fetch(
+    process.env.URL + "/api/list_url"
+    // ,{ next: { revalidate: 3600 } }
+  ).then((res) => res.json());
+  return articleUrlList?.article_url_list?.rows.map((p) => ({
+    article: p.url,
+    revalidate: 30,
+  }));
+}
 
 export default async function ArticlePage({ params }) {
   let { article } = params;
