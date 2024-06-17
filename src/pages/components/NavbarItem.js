@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./NavbarItem.module.scss";
-import LoadingFullPage from "./LoadingFullPage";
+import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
 import { useState } from "react";
 import { Icon, Link, ListItemText } from "@mui/material";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
