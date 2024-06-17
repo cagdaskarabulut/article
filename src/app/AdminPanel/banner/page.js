@@ -15,7 +15,6 @@ import LoadingFullPage from "../../../components/reusableComponents/LoadingFullP
 import MyAlert from "../../../components/reusableComponents/MyAlert";
 import useLanguages from "../../../hooks/useLanguages";
 import { useRouter } from "next/navigation";
-import { isEmailInList } from "../../../utils/ListUtils";
 
 const AdminPanel = () => {
   const router = useRouter();
@@ -30,12 +29,7 @@ const AdminPanel = () => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        if (
-          isEmailInList(
-            data.email,
-            process.env.PROJECT_SUPER_PROJECT_PROJECT_ADMIN_USER
-          )
-        ) {
+        if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
           setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
         } else if (
@@ -50,6 +44,14 @@ const AdminPanel = () => {
         }
       });
   }, []);
+
+  function isEmailInList(email, emailListString) {
+    // E-posta listesini virgül ile ayır ve diziye dönüştür
+    const emailArray = emailListString.split(",");
+
+    // E-posta adresinin listede olup olmadığını kontrol et
+    return emailArray.includes(email);
+  }
 
   return (
     <>

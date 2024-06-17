@@ -10,7 +10,6 @@ import Divider from "@mui/material/Divider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { isEmailInList } from "../../../utils/ListUtils";
 import {
   getListFromStringWithCommaSeperated as getListFromStringWithCommaSeparated,
   getStringWithCommaSeperatedFromList,
@@ -92,6 +91,14 @@ const AdminPanel = () => {
     }
   };
 
+  function isEmailInList(email, emailListString) {
+    // E-posta listesini virgül ile ayır ve diziye dönüştür
+    const emailArray = emailListString.split(",");
+
+    // E-posta adresinin listede olup olmadığını kontrol et
+    return emailArray.includes(email);
+  }
+
   const handleClose = () => {
     setOpenDialog(false);
   };
@@ -100,12 +107,7 @@ const AdminPanel = () => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        if (
-          isEmailInList(
-            data.email,
-            process.env.PROJECT_SUPER_PROJECT_PROJECT_ADMIN_USER
-          )
-        ) {
+        if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
           setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
         } else if (

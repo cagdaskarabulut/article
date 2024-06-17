@@ -42,7 +42,6 @@ import Header from "../../../components/mainComponents/Header";
 import FooterPanel from "../../../components/mainComponents/FooterPanel";
 import NavbarAdminPanel from "../../../pages/components/NavbarAdminPanel";
 import MyAlert from "../../../components/reusableComponents/MyAlert";
-import { isEmailInList } from "../../../utils/ListUtils";
 
 const AdminPanel = () => {
   const LABELS = useLanguages();
@@ -80,6 +79,14 @@ const AdminPanel = () => {
   const [isBannerFitStyle, setIsBannerFitStyle] = useState(false);
   const [isBannerStretchStyle, setIsBannerStretchStyle] = useState(false);
 
+  function isEmailInList(email, emailListString) {
+    // E-posta listesini virgül ile ayır ve diziye dönüştür
+    const emailArray = emailListString.split(",");
+
+    // E-posta adresinin listede olup olmadığını kontrol et
+    return emailArray.includes(email);
+  }
+
   const isNewOrReadyToUpdate = () => {
     if (
       isNewOrUpdate === "new" ||
@@ -98,12 +105,7 @@ const AdminPanel = () => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        if (
-          isEmailInList(
-            data.email,
-            process.env.PROJECT_SUPER_PROJECT_PROJECT_ADMIN_USER
-          )
-        ) {
+        if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
           setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
         } else if (
