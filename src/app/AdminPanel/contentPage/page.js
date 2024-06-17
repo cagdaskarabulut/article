@@ -40,7 +40,7 @@ import LoadingFullPage from "../../../components/reusableComponents/LoadingFullP
 import UrlList from "../../../components/UrlList";
 import Header from "../../../components/mainComponents/Header";
 import FooterPanel from "../../../components/mainComponents/FooterPanel";
-import NavbarAdminPanel from "../../../components/reusableComponents/NavbarAdminPanel";
+import NavbarAdminPanel from "../../../pages/components/NavbarAdminPanel";
 import MyAlert from "../../../components/reusableComponents/MyAlert";
 import { isEmailInList } from "../../../utils/ListUtils";
 
