@@ -42,6 +42,7 @@ import Header from "../../../components/mainComponents/Header";
 import FooterPanel from "../../../components/mainComponents/FooterPanel";
 import NavbarAdminPanel from "../../../components/reusableComponents/NavbarAdminPanel";
 import MyAlert from "../../../components/reusableComponents/MyAlert";
+import { isEmailInList } from "../../../utils/ListUtils";
 
 const AdminPanel = () => {
   const LABELS = useLanguages();
@@ -66,6 +67,7 @@ const AdminPanel = () => {
   const [selectedOldPathForCopyFrom, setSelectedOldPathForCopyFrom] =
     useState("");
   const [isAuthorizedUser, setIsAuthorizedUser] = useState(false);
+  const [isSuperAuthorizedUser, setIsSuperAuthorizedUser] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [newTopicName, setNewTopicName] = useState("");
   const [topicList, setTopicList] = useState([]);
@@ -92,16 +94,24 @@ const AdminPanel = () => {
   const handleClose = () => {
     setOpenDialog(false);
   };
-
   useEffect(() => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        setIsAuthorizedUser(false);
-        if (data.email !== process.env.NEXT_PUBLIC_ADMIN_USER) {
-          router.push("/api/auth/signin", { scroll: false });
-        } else {
+        if (
+          isEmailInList(data.email, process.env.NEXT_PUBLIC_SUPER_ADMIN_USER)
+        ) {
+          setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
+        } else if (
+          isEmailInList(data.email, process.env.NEXT_PUBLIC_ADMIN_USER)
+        ) {
+          setIsAuthorizedUser(true);
+          setIsSuperAuthorizedUser(false);
+        } else {
+          setIsAuthorizedUser(false);
+          setIsSuperAuthorizedUser(false);
+          router.push("/api/auth/signin", { scroll: false });
         }
       });
   }, []);
@@ -433,25 +443,27 @@ const AdminPanel = () => {
                     onChange={(event) => handleTitleChange(event.target.value)}
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  style={
-                    isNewOrReadyToUpdate()
-                      ? { display: "" }
-                      : { display: "none" }
-                  }
-                >
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    onClick={async () => handleGenerateTextFieldsWithRobot()}
-                    disabled={process.env.IS_LOCAL == "false"}
+                {isSuperAuthorizedUser && (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    style={
+                      isNewOrReadyToUpdate()
+                        ? { display: "" }
+                        : { display: "none" }
+                    }
                   >
-                    {LABELS.FILL_TEXT_FIELDS_WITH_ROBOT}
-                  </Button>
-                </Grid>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      onClick={async () => handleGenerateTextFieldsWithRobot()}
+                      disabled={process.env.IS_LOCAL == "false"}
+                    >
+                      {LABELS.FILL_TEXT_FIELDS_WITH_ROBOT}
+                    </Button>
+                  </Grid>
+                )}
                 <Divider className={styles.DividerStyle} />
                 <Grid item xs={12} sm={4}>
                   <FormControlLabel
@@ -561,25 +573,27 @@ const AdminPanel = () => {
                     disabled={process.env.IS_LOCAL == "false"}
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  style={
-                    isNewOrReadyToUpdate()
-                      ? { display: "" }
-                      : { display: "none" }
-                  }
-                >
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    onClick={async () => handleGenerateImageWithRobot()}
-                    disabled={process.env.IS_LOCAL == "false"}
+                {isSuperAuthorizedUser && (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    style={
+                      isNewOrReadyToUpdate()
+                        ? { display: "" }
+                        : { display: "none" }
+                    }
                   >
-                    {LABELS.CREATE_A_PICTURE_WITH_ROBOT}
-                  </Button>
-                </Grid>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      onClick={async () => handleGenerateImageWithRobot()}
+                      disabled={process.env.IS_LOCAL == "false"}
+                    >
+                      {LABELS.CREATE_A_PICTURE_WITH_ROBOT}
+                    </Button>
+                  </Grid>
+                )}
                 <Grid
                   item
                   xs={12}
