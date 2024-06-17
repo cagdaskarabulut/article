@@ -10,8 +10,3 @@ export const findObjectByChampion = (list, champion) => {
     return "";
   }
 };
-
-export const isEmailInList = (email, emailListString) => {
-  const emailArray = emailListString.split(",");
-  return emailArray.includes(email);
-};
