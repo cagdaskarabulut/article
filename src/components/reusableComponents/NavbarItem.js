@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import styles from "./NavBarItem.module.scss";
+import styles from "./NavbarItem.module.scss";
 import LoadingFullPage from "./LoadingFullPage";
 import { useState } from "react";
 import { Icon, Link, ListItemText } from "@mui/material";

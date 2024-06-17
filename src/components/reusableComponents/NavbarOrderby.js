@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import NavbarItemOrderBy from "./NavbarItemOrderBy";
-import styles from "./NavBarOrderby.module.scss";
+import styles from "./NavbarOrderby.module.scss";
 import { Autocomplete, Container, Divider, TextField } from "@mui/material";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
@@ -9,7 +9,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import useLanguages from "../../hooks/useLanguages";
 import { useSearchParams } from "next/navigation";
 
-export default function NavBarOrderby() {
+export default function NavbarOrderby() {
   const searchParams = useSearchParams();
   const search = searchParams.get("search") || "";
   const LABELS = useLanguages();
