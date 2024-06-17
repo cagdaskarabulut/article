@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/mainComponents/Header";
 import FooterPanel from "../../components/mainComponents/FooterPanel";
-import NavbarAdminPanel from "../../../pages/components/NavbarAdminPanel";
+import NavbarAdminPanel from "../../pages/components/NavbarAdminPanel";
 import {
   Button,
   Container,
