@@ -38,7 +38,7 @@ import styles from "../AdminPanel.module.scss";
 import LoadingFullPage from "../../../components/reusableComponents/LoadingFullPage";
 import Header from "../../../components/mainComponents/Header";
 import FooterPanel from "../../../components/mainComponents/FooterPanel";
-import NavbarAdminPanel from "../../../components/reusableComponents/NavbarAdminPanel";
+import NavbarAdminPanel from "../../../pages/components/NavbarAdminPanel";
 import MyAlert from "../../../components/reusableComponents/MyAlert";
 import useLanguages from "../../../hooks/useLanguages";
 import { useRouter } from "next/navigation";
