@@ -21,9 +21,12 @@ import TopicList from "../../../components/TopicList";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import useLanguages from "../../../hooks/useLanguages";
 import { useRouter } from "next/navigation";
+import { isEmailInList } from "../../../utils/ListUtils";
 
 const AdminPanel = () => {
   const router = useRouter();
+  const [isSuperAuthorizedUser, setIsSuperAuthorizedUser] = useState(false);
+
   const LABELS = useLanguages();
   const [isAuthorizedUser, setIsAuthorizedUser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,11 +41,20 @@ const AdminPanel = () => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        setIsAuthorizedUser(false);
-        if (data.email !== process.env.NEXT_PUBLIC_ADMIN_USER) {
-          router.push("/api/auth/signin", { scroll: false });
-        } else {
+        if (
+          isEmailInList(data.email, process.env.NEXT_PUBLIC_SUPER_ADMIN_USER)
+        ) {
+          setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
+        } else if (
+          isEmailInList(data.email, process.env.NEXT_PUBLIC_ADMIN_USER)
+        ) {
+          setIsAuthorizedUser(true);
+          setIsSuperAuthorizedUser(false);
+        } else {
+          setIsAuthorizedUser(false);
+          setIsSuperAuthorizedUser(false);
+          router.push("/api/auth/signin", { scroll: false });
         }
       });
   }, []);

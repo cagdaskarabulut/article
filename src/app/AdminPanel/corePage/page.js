@@ -10,7 +10,7 @@ import Divider from "@mui/material/Divider";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-
+import { isEmailInList } from "../../../utils/ListUtils";
 import {
   getListFromStringWithCommaSeperated as getListFromStringWithCommaSeparated,
   getStringWithCommaSeperatedFromList,
@@ -45,6 +45,8 @@ import { useRouter } from "next/navigation";
 
 const AdminPanel = () => {
   const LABELS = useLanguages();
+  const [isSuperAuthorizedUser, setIsSuperAuthorizedUser] = useState(false);
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
@@ -98,11 +100,20 @@ const AdminPanel = () => {
     fetch("/api/auth/whoAmI/email")
       .then((res) => res.json())
       .then((data) => {
-        setIsAuthorizedUser(false);
-        if (data.email !== process.env.NEXT_PUBLIC_ADMIN_USER) {
-          router.push("/api/auth/signin", { scroll: false });
-        } else {
+        if (
+          isEmailInList(data.email, process.env.NEXT_PUBLIC_SUPER_ADMIN_USER)
+        ) {
+          setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
+        } else if (
+          isEmailInList(data.email, process.env.NEXT_PUBLIC_ADMIN_USER)
+        ) {
+          setIsAuthorizedUser(true);
+          setIsSuperAuthorizedUser(false);
+        } else {
+          setIsAuthorizedUser(false);
+          setIsSuperAuthorizedUser(false);
+          router.push("/api/auth/signin", { scroll: false });
         }
       });
   }, []);
@@ -616,25 +627,27 @@ const AdminPanel = () => {
                     onChange={(event) => handleTitleChange(event.target.value)}
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  style={
-                    isNewOrReadyToUpdate()
-                      ? { display: "" }
-                      : { display: "none" }
-                  }
-                >
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    onClick={async () => handleGenerateTextFieldsWithRobot()}
-                    disabled={process.env.IS_LOCAL == "false"}
+                {isSuperAuthorizedUser && (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    style={
+                      isNewOrReadyToUpdate()
+                        ? { display: "" }
+                        : { display: "none" }
+                    }
                   >
-                    {LABELS.FILL_TEXT_FIELDS_WITH_ROBOT}
-                  </Button>
-                </Grid>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      onClick={async () => handleGenerateTextFieldsWithRobot()}
+                      disabled={process.env.IS_LOCAL == "false"}
+                    >
+                      {LABELS.FILL_TEXT_FIELDS_WITH_ROBOT}
+                    </Button>
+                  </Grid>
+                )}
                 <Divider
                   className={styles.DividerStyle}
                   style={
@@ -665,25 +678,27 @@ const AdminPanel = () => {
                     disabled={process.env.IS_LOCAL == "false"}
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  style={
-                    isNewOrReadyToUpdate()
-                      ? { display: "" }
-                      : { display: "none" }
-                  }
-                >
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    onClick={async () => handleGenerateImageWithRobot()}
-                    disabled={process.env.IS_LOCAL == "false"}
+                {isSuperAuthorizedUser && (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    style={
+                      isNewOrReadyToUpdate()
+                        ? { display: "" }
+                        : { display: "none" }
+                    }
                   >
-                    {LABELS.CREATE_A_PICTURE_WITH_ROBOT}
-                  </Button>
-                </Grid>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      onClick={async () => handleGenerateImageWithRobot()}
+                      disabled={process.env.IS_LOCAL == "false"}
+                    >
+                      {LABELS.CREATE_A_PICTURE_WITH_ROBOT}
+                    </Button>
+                  </Grid>
+                )}
                 <Grid
                   item
                   xs={12}
