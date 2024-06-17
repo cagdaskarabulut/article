@@ -22,6 +22,8 @@ module.exports = {
   env: {
     PROJECT_SITE_NAME: process.env.SITE_NAME,
     PROJECT_URL_WEBSITE: process.env.URL_WEBSITE,
+    PROJECT_SUPER_ADMIN_USER: process.env.SUPER_ADMIN_USER,
+    PROJECT_ADMIN_USER: process.env.ADMIN_USER,
   },
   reactStrictMode: false,
   webpack5: true,
