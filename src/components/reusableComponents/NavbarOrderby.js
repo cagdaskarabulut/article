@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import NavbarItemOrderBy from "./NavbarItemOrderBy";
+// import NavbarItemOrderBy from "./NavbarItemOrderBy";
 // import styles from "./NavbarOrderby.module.scss";
 import { Autocomplete, Container, Divider, TextField } from "@mui/material";
 import useWindowSize from "@rooks/use-window-size";
@@ -56,8 +56,7 @@ export default function NavbarOrderby() {
         <>
           <Container maxWidth="lg">
             <div className={styles.NavbarContainerStyle}>
-              {/* {isMobile ? <span>{LABELS.ORDER_BY + " : "}</span> : <></>} */}
-              <NavbarItemOrderBy
+              {/* <NavbarItemOrderBy
                 size="small"
                 isShowOrderByIcon={true}
                 title={
@@ -100,7 +99,7 @@ export default function NavbarOrderby() {
                 }
                 url={"/?" + addSearchPartIfNeeded() + "orderby=comment_number"}
                 name="comment_number"
-              />
+              /> */}
             </div>
           </Container>
         </>
