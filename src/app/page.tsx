@@ -16,8 +16,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import NavBar from "../components/reusableComponents/Navbar";
-import NavBarOrderby from "../components/reusableComponents/NavBarOrderby";
+import Navbar from "../components/reusableComponents/Navbar";
+import NavbarOrderby from "../components/reusableComponents/NavbarOrderby";
 import NavigateButton from "../components/reusableComponents/NavigateButton";
 import { fetchArticleSize } from "./pagination/pagination_article_size";
 import MyMenu from "../components/reusableComponents/MyMenu";
@@ -91,7 +91,7 @@ export default async function Home({ searchParams }) {
     <div className={styles.ContainerPageContainerStyle}>
       <div className={styles.HeaderStyle}>
         <Header isMainPage={true} />
-        {specialFields.is_top_menu_active && <NavBar />}
+        {specialFields.is_top_menu_active && <Navbar />}
         {/* <Divider /> */}
       </div>
       <div style={{ height: "300px" }}>
@@ -110,7 +110,7 @@ export default async function Home({ searchParams }) {
                       {!search && specialFields.is_order_by_menu_active && (
                         <>
                           <Divider />
-                          <NavBarOrderby />
+                          <NavbarOrderby />
                           <Divider />
                         </>
                       )}
@@ -179,7 +179,7 @@ export default async function Home({ searchParams }) {
                     {!search && specialFields.is_order_by_menu_active && (
                       <>
                         <Divider />
-                        <NavBarOrderby />
+                        <NavbarOrderby />
                         <Divider />
                       </>
                     )}

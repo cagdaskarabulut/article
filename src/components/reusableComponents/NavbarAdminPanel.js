@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import styles from "./NavBarAdminPanel.module.scss";
+import styles from "./NavbarAdminPanel.module.scss";
 import { Autocomplete, Container, Divider, TextField } from "@mui/material";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
