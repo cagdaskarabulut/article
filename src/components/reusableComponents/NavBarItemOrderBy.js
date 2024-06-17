@@ -4,7 +4,7 @@
 
 import { useSearchParams } from "next/navigation";
 import styles from "./NavBarItem.module.scss";
-import LoadingFullPage from "../reusableComponents/LoadingFullPage";
+import LoadingFullPage from "./LoadingFullPage";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Link } from "@mui/material";
