@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, usePathname } from "next/navigation";
-import styles from "./NavbarItem.module.scss";
+// import styles from "./NavbarItem.module.scss";
 import LoadingFullPage from "./LoadingFullPage";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
