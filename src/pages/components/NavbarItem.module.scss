@@ -12,13 +12,13 @@
   font-style: bold !important;
 }
 
-$hover-color: $mainColor10;
+$hover-color: $mainMenuSelectedFontColor;
 $underline-animation-duration: 0.3s;
 
 .link {
   position: relative;
   display: inline-block;
-  color: $fontColorSoft;
+  color: $headerFontColor;
   text-decoration: none;
   transition: color $underline-animation-duration ease;
 

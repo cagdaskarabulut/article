@@ -33,6 +33,8 @@ module.exports = {
       "localhost",
       "newszipped.com",
       "https://newszipped-new.vercel.app",
+      "https://brickstanbul.vercel.app",
+      "https://cnmautoparts.vercel.app",
     ],
     unoptimized: true,
   },

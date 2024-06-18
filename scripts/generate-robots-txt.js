@@ -91,9 +91,70 @@ daily
   return result;
 }
 
+function generateCssFileContent(activeFile) {
+  let result = `
+//font colors
+$fontColor: ${activeFile.fontcolor};
+$headerFontColor: ${activeFile.headerfontcolor}; //header font color
+
+//background colors
+$backgroundColor: ${activeFile.backgroundcolor};
+
+$headerBackgroundColor1: ${activeFile.headerbackgroundcolor1};
+$headerBackgroundColor2: ${activeFile.headerbackgroundcolor2};
+
+$bodyContentBackgroundColor1: ${activeFile.bodycontentbackgroundcolor1};
+$bodyContentBackgroundColor2: ${activeFile.bodycontentbackgroundcolor2};
+
+$footerBackgroundColor1: ${activeFile.footerbackgroundcolor1};
+$footerBackgroundColor2: ${activeFile.footerbackgroundcolor2};
+
+//component colors
+$searchBarColor: ${activeFile.searchbarcolor};
+
+//menu & navigations
+$mainMenuSelectedFontColor: ${activeFile.mainmenuselectedfontcolor}; // main menu selected font color
+
+$categoryMenuSelectedBackgroundColor: ${activeFile.categorymenuselectedbackgroundcolor}; // category menu selected background color
+$categoryMenuSelectedFontColor: ${activeFile.categorymenuselectedfontcolor}; // category menu selected font color
+
+$orderByMenuSelectedFontColor: ${activeFile.orderbymenuselectedfontcolor}; // order by menu selected font color
+
+//buttons
+$tagColor: ${activeFile.tagcolor}; //tag color
+
+$commentButtonFontColor: ${activeFile.commentbuttonfontcolor}; //comment button font color
+$commentButtonBackgroundColor: ${activeFile.commentbuttonbackgroundcolor}; //comment button background color
+$commentButtonBorderColor: ${activeFile.commentbuttonbordercolor}; //comment button border color
+
+$loginButtonFontColor: ${activeFile.loginbuttonfontcolor}; //login button font color
+$loginButtonBackgroundColor: ${activeFile.loginbuttonbackgroundcolor}; //login button background color
+$loginButtonBorderColor: ${activeFile.loginbuttonbordercolor}; //login button border color
+
+//no need to change
+$textFieldErrorBorderColor: ${activeFile.textfielderrorbordercolor};
+$cautionColor: ${activeFile.cautioncolor};
+  `;
+
+  return result;
+}
+
 async function generateRobotsTxtAndSitemapXml() {
   if (isLocal === "false") {
-    // console.log("test");
+    await fetch(rootPath + "/api/article/article_project_colors", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((dataList) => {
+        //- add css file
+        dataList?.file?.rows.map((activeFile, index) => {
+          if (activeFile?.project == siteName) {
+            let cssFileContent = generateCssFileContent(activeFile);
+            fs.writeFileSync("src/styles/colors.scss", cssFileContent);
+          }
+        });
+      });
+
     await fetch(rootPath + "/api/article/article_project_auto_generate_files", {
       method: "GET",
     })
@@ -106,9 +167,9 @@ async function generateRobotsTxtAndSitemapXml() {
           }
         });
       });
+
     let dynamicRobotsTxtFields = "";
     let dynamicSitemapFields = addStaticValuesIntoSitemapList();
-    // await fetch(process.env.URL + "/api/article/list_url", {
     await fetch(rootPath + "/api/list_url", {
       method: "GET",
     })
