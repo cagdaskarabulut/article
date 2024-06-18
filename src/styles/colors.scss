@@ -1,6 +1,7 @@
+
 //font colors
-$fontColor: black;
-$headerFontColor: rgba(0, 0, 0, 0.6); //header font color
+$fontColor: #000000;
+$headerFontColor: #00000099; //header font color
 
 //background colors
 $backgroundColor: #f2f2f2;
@@ -15,27 +16,28 @@ $footerBackgroundColor1: #f2f2f2;
 $footerBackgroundColor2: #f2f2f2;
 
 //component colors
-$searchBarColor: black;
+$searchBarColor: #000000;
 
 //menu & navigations
-$mainMenuSelectedFontColor: rgb(0, 147, 233); // main menu selected font color
+$mainMenuSelectedFontColor: #0093e9; // main menu selected font color
 
-$categoryMenuSelectedBackgroundColor: rgb(0, 147, 233); // category menu selected background color
+$categoryMenuSelectedBackgroundColor: #0093e9; // category menu selected background color
 $categoryMenuSelectedFontColor: #f2f2f2; // category menu selected font color
 
-$orderByMenuSelectedFontColor: rgb(0, 147, 233); // order by menu selected font color
+$orderByMenuSelectedFontColor: #0093e9; // order by menu selected font color
 
 //buttons
-$tagColor: #dcdcdc;
+$tagColor: #dcdcdc; //tag color
 
-$thirdButtonFontColor: #f2f2f2; //comment button font color
-$thirdButtonBackgroundColor: rgb(211, 70, 0); //comment button background color
-$thirdButtonBorderColor: #f2f2f2; //comment button border color
+$commentButtonFontColor: #f2f2f2; //comment button font color
+$commentButtonBackgroundColor: #d34600; //comment button background color
+$commentButtonBorderColor: #f2f2f2; //comment button border color
 
-$fourthButtonFontColor: #f2f2f2; //login button font color
-$fourthButtonBackgroundColor: rgb(0, 147, 233); //login button background color
-$fourthButtonBorderColor: rgb(0, 147, 233); //login button border color
+$loginButtonFontColor: #f2f2f2; //login button font color
+$loginButtonBackgroundColor: #0093e9; //login button background color
+$loginButtonBorderColor: #0093e9; //login button border color
 
 //no need to change
-$textFieldErrorBorderColor: rgb(255, 0, 0);
-$cautionColor: rgb(211, 70, 0);
+$textFieldErrorBorderColor: #ff0000;
+$cautionColor: #d34600;
+  
