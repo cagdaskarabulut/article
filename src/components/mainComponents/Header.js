@@ -267,7 +267,7 @@ export default function Header({ isMainPage }) {
                           {!isMobile && (
                             <button
                               onClick={() => signIn()}
-                              className={styles.fourthButtonStyle}
+                              className={styles.loginButtonStyle}
                               style={
                                 isMainPage
                                   ? { marginRight: "0px" }
@@ -280,7 +280,7 @@ export default function Header({ isMainPage }) {
 
                           {isMobile && (
                             <IconButton
-                              className={styles.fourthButtonStyleSmall}
+                              className={styles.loginButtonStyleSmall}
                               onClick={() => signIn()}
                             >
                               <LoginIcon />

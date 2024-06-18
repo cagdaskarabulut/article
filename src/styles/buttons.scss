@@ -3,8 +3,8 @@
 
 // .firstButtonStyle,
 // .secondButtonStyle,
-.thirdButtonStyle,
-.fourthButtonStyle {
+.commentButtonStyle,
+.loginButtonStyle {
   border-width: 1px !important;
   border-style: solid !important;
   padding: 5px !important;
@@ -25,13 +25,13 @@
 //   border-color: $secondButtonBorderColor !important;
 // }
 
-.thirdButtonStyle {
+.commentButtonStyle {
   color: $commentButtonFontColor !important;
   background-color: $commentButtonBackgroundColor !important;
   border-color: $commentButtonBorderColor !important;
 }
 
-.fourthButtonStyle {
+.loginButtonStyle {
   color: $loginButtonFontColor !important;
   background-color: $loginButtonBackgroundColor !important;
   border-color: $loginButtonBorderColor !important;
@@ -39,8 +39,8 @@
 
 // .firstButtonStyle:hover,
 // .secondButtonStyle:hover,
-.thirdButtonStyle:hover,
-.fourthButtonStyle:hover {
+.commentButtonStyle:hover,
+.loginButtonStyle:hover {
   opacity: 0.6;
   cursor: pointer !important;
 }

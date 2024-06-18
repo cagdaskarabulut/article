@@ -104,7 +104,7 @@ const Comments = ({ article }) => {
         style={{
           display: isAuthChecked && !isWriteCommentVisible ? "" : "none",
         }}
-        className={styles.thirdButtonStyle}
+        className={styles.commentButtonStyle}
         onClick={() => prepareWriteCommentAction()}
       >
         Write a Comment
@@ -129,7 +129,7 @@ const Comments = ({ article }) => {
               <br />
               <button
                 style={{ float: "right" }}
-                className={styles.thirdButtonStyle}
+                className={styles.commentButtonStyle}
                 onClick={() => respondAction()}
               >
                 Respond
@@ -151,7 +151,7 @@ const Comments = ({ article }) => {
               <br />
               <button
                 style={{ float: "right" }}
-                className={styles.thirdButtonStyle}
+                className={styles.commentButtonStyle}
                 onClick={() => respondAction()}
               >
                 Respond
