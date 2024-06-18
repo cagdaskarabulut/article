@@ -132,7 +132,7 @@ $loginButtonBackgroundColor: ${activeFile.loginbuttonbackgroundcolor}; //login b
 $loginButtonBorderColor: ${activeFile.loginbuttonbordercolor}; //login button border color
 
 //no need to change
-$textFieldErrorBorderColor: ${activeFile.textfielderrorbordercolor};
+$errorColor: ${activeFile.errorcolor};
 $cautionColor: ${activeFile.cautioncolor};
   `;
 
@@ -160,7 +160,7 @@ async function generateRobotsTxtAndSitemapXml() {
       .then((res) => res.json())
       .then((dataList) => {
         //- add css file
-        dataList?.file?.rows.map(async (activeFile, index) => {
+        dataList?.fields?.rows.map(async (activeFile, index) => {
           if (activeFile?.project == siteName) {
             let cssFileContent = await generateCssFileContent(activeFile);
             fs.writeFileSync("src/styles/colors.scss", cssFileContent);

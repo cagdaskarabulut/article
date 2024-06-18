@@ -1,7 +1,7 @@
 "use client"
 import { sql } from '@vercel/postgres';
 import type { NextApiRequest, NextApiResponse } from 'next';
- 
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { url } = req?.query;
 
@@ -14,6 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     article_comment_list =
       await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
       public.brickstanbul_article_comment where url=${url?.toString()} order by create_date desc;`;
+  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+    article_comment_list =
+      await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
+      public.cnmautoparts_article_comment where url=${url?.toString()} order by create_date desc;`;
   }
   // let article_comment_list = await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
   //     public.article_comment where url=${url?.toString()} 

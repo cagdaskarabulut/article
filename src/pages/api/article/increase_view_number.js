@@ -6,6 +6,8 @@ export default async function handler(request, response) {
       await sql`Update public.newszipped_article_view set count=count+1 where url=${request.body.url}`;
     } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
       await sql`Update public.brickstanbul_article_view set count=count+1 where url=${request.body.url}`;
+    } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+      await sql`Update public.cnmautoparts_article_view set count=count+1 where url=${request.body.url}`;
     }
     // await sql`Update public.article_view set count=count+1 where url=${request.body.url} and project=${process.env.PROJECT_SITE_NAME}`;
     return response.status(200).json("successfully saved");
