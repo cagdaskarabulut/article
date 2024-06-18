@@ -31,8 +31,8 @@
 
   .DividerStyle {
     width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
   }
 
   .TextFieldStyle {
@@ -40,11 +40,11 @@
 
     :global {
       .MuiOutlinedInput-notchedOutline {
-        border-color: $textFieldErrorBorderColor !important;
+        border-color: $errorColor !important;
       }
 
       .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-        border-color: $textFieldErrorBorderColor !important;
+        border-color: $errorColor !important;
       }
     }
   }

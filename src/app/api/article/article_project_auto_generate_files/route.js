@@ -14,6 +14,9 @@ export async function GET() {
   } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
     file =
       await sql`SELECT id, file_name, file_content, file_path, project FROM public.article_project_auto_generate_files where project='brickstanbul';`;
+  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+    file =
+      await sql`SELECT id, file_name, file_content, file_path, project FROM public.article_project_auto_generate_files where project='cnmautoparts';`;
   }
   return NextResponse.json({ file });
 }

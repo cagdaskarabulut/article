@@ -16,6 +16,11 @@ is_show_in_menu, page_name, is_core_page, is_show_in_banner, is_banner_fit_style
       await sql`SELECT id, url, title, topics, create_date, title_image, 
 is_manuel_page, description, meta_keys, is_active, 
 is_show_in_menu, page_name, is_core_page, is_show_in_banner, is_banner_fit_style,is_banner_stretch_style FROM public.brickstanbul_article where is_active=true and is_show_in_banner=true;`;
+  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+    article_url_list =
+      await sql`SELECT id, url, title, topics, create_date, title_image, 
+is_manuel_page, description, meta_keys, is_active, 
+is_show_in_menu, page_name, is_core_page, is_show_in_banner, is_banner_fit_style,is_banner_stretch_style FROM public.cnmautoparts_article where is_active=true and is_show_in_banner=true;`;
   }
   return NextResponse.json({ article_url_list });
 }

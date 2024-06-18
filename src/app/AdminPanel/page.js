@@ -246,7 +246,7 @@ const AdminPanel = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12}>
                   <div style={{ paddingTop: "30px", paddingBottom: "60px" }}>
                     <Button
                       variant="contained"
@@ -255,7 +255,7 @@ const AdminPanel = () => {
                       color="success"
                       style={{ float: "right" }}
                     >
-                      Save
+                      {LABELS.SAVE}
                     </Button>
                   </div>
                 </Grid>

@@ -14,6 +14,10 @@ export async function GET() {
     fields = await sql`SELECT id, project, footer_copyright, footer_company, 
     is_project_type_article, is_project_type_product, is_order_by_menu_active, is_top_menu_active, is_card_design_with_big_image, default_language    
     FROM public.article_project_special_fields where project='brickstanbul';`;
+  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+    fields = await sql`SELECT id, project, footer_copyright, footer_company, 
+    is_project_type_article, is_project_type_product, is_order_by_menu_active, is_top_menu_active, is_card_design_with_big_image, default_language    
+    FROM public.article_project_special_fields where project='cnmautoparts';`;
   }
   return NextResponse.json({ fields });
 }

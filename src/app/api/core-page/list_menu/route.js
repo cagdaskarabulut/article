@@ -12,6 +12,9 @@ export async function GET() {
   } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
     data =
       await sql`SELECT url FROM public.brickstanbul_article where is_core_page=true and is_active=true and is_show_in_menu=true;`;
+  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+    data =
+      await sql`SELECT url FROM public.cnmautoparts_article where is_core_page=true and is_active=true and is_show_in_menu=true;`;
   }
   return NextResponse.json({ data });
 }
