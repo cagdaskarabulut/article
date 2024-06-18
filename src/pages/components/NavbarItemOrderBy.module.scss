@@ -12,20 +12,19 @@
   font-style: bold !important;
 }
 
-$hover-color: $mainColor10;
 $underline-animation-duration: 0.3s;
 
 .link {
   position: relative;
   display: inline-block;
-  color: $fontColorSoft;
+  color: $headerFontColor;
   text-decoration: none;
   transition: color $underline-animation-duration ease;
 
   &:hover,
   &:focus {
     cursor: pointer;
-    color: $hover-color;
+    color: $orderByMenuSelectedFontColor;
 
     &::after {
       transform: scaleX(1);
@@ -40,7 +39,7 @@ $underline-animation-duration: 0.3s;
     height: 2px;
     bottom: -2px;
     left: 0;
-    background-color: $hover-color;
+    background-color: $orderByMenuSelectedFontColor;
     transform: scaleX(0);
     transform-origin: right;
     transition: transform $underline-animation-duration ease;
@@ -53,7 +52,7 @@ $underline-animation-duration: 0.3s;
 
 .secondButtonStyle {
   @extend .link;
-  color: $hover-color;
+  color: $orderByMenuSelectedFontColor;
 
   &::after {
     transform: scaleX(1);

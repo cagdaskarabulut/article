@@ -12,7 +12,7 @@
   // background-color: $headerBackgroundColor !important;
   background: $headerBackgroundColor1;
   background: linear-gradient(0deg, $headerBackgroundColor1 0%, $headerBackgroundColor2 100%);
-  
+
   .header {
     justify-content: center;
     font-family: permanentMarker !important;
@@ -65,7 +65,7 @@
         .MuiInputLabel-root {
           color: $fontColor !important;
           font-family: inherit !important;
-          
+
         }
 
         .MuiAutocomplete-input {
@@ -82,24 +82,24 @@
   }
 }
 
-.fourthButtonStyle{
+.fourthButtonStyle {
   min-width: 100px !important;
-  float: right !important; 
-  margin-top: 20px !important; 
+  float: right !important;
+  margin-top: 20px !important;
 }
 
-.fourthButtonStyleSmall{
+.fourthButtonStyleSmall {
   color: $bodyContentBackgroundColor1 !important;
-  background-color: $fourthButtonBackgroundColor !important;
-  border-color: $fourthButtonBackgroundColor !important;
+  background-color: $loginButtonBackgroundColor !important;
+  border-color: $loginButtonBackgroundColor !important;
   min-width: 50px !important;
-  float: right !important; 
-  margin-top: 15px !important; 
+  float: right !important;
+  margin-top: 15px !important;
   border-radius: 3px !important;
 }
 
-.thirdButtonStyle{
+.thirdButtonStyle {
   min-width: 100px !important;
-  float: right !important; 
-  margin-top: 10px !important; 
+  float: right !important;
+  margin-top: 10px !important;
 }

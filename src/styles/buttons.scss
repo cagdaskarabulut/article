@@ -1,7 +1,10 @@
 @import "./colors.scss";
 @import "./mixins.scss";
 
-.firstButtonStyle, .secondButtonStyle, .thirdButtonStyle, .fourthButtonStyle{
+// .firstButtonStyle,
+// .secondButtonStyle,
+.thirdButtonStyle,
+.fourthButtonStyle {
   border-width: 1px !important;
   border-style: solid !important;
   padding: 5px !important;
@@ -10,31 +13,34 @@
   transition: 0.3s !important;
 }
 
-.firstButtonStyle {
-  color: $firstButtonFontColor !important;
-  background-color: $firstButtonBackgroundColor !important ;
-  border-color: $firstButtonBorderColor !important ;
-}
+// .firstButtonStyle {
+//   color: $firstButtonFontColor !important;
+//   background-color: $firstButtonBackgroundColor !important ;
+//   border-color: $firstButtonBorderColor !important ;
+// }
 
-.secondButtonStyle {
-  color: $secondButtonFontColor !important ;
-  background-color: $secondButtonBackgroundColor !important ;
-  border-color: $secondButtonBorderColor !important ;
-}
+// .secondButtonStyle {
+//   color: $secondButtonFontColor !important;
+//   background-color: $secondButtonBackgroundColor !important;
+//   border-color: $secondButtonBorderColor !important;
+// }
 
 .thirdButtonStyle {
-  color: $thirdButtonFontColor !important ;
-  background-color: $thirdButtonBackgroundColor !important ;
-  border-color: $thirdButtonBorderColor !important ;
+  color: $commentButtonFontColor !important;
+  background-color: $commentButtonBackgroundColor !important;
+  border-color: $commentButtonBorderColor !important;
 }
 
 .fourthButtonStyle {
-  color: $fourthButtonFontColor !important ;
-  background-color: $fourthButtonBackgroundColor !important ;
-  border-color: $fourthButtonBorderColor !important ;
+  color: $loginButtonFontColor !important;
+  background-color: $loginButtonBackgroundColor !important;
+  border-color: $loginButtonBorderColor !important;
 }
 
-.firstButtonStyle:hover, .secondButtonStyle:hover, .thirdButtonStyle:hover, .fourthButtonStyle:hover {
+// .firstButtonStyle:hover,
+// .secondButtonStyle:hover,
+.thirdButtonStyle:hover,
+.fourthButtonStyle:hover {
   opacity: 0.6;
   cursor: pointer !important;
 }

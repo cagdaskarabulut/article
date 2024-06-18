@@ -1,101 +1,41 @@
-//Change this part for active project
-$mainColor0: rgba(0, 0, 0, 0.6); //font color
-$mainColor1: black; //font color
-$mainColor2: #f2f2f2; //main background color
-$mainColor3: #f2f2f2; //content background color 
-$mainColor4: #f2f2f2; // header background color
-$mainColor5: #f2f2f2; //footer background color
-$mainColor6: #dcdcdc; // tag color
+//font colors
+$fontColor: black;
+$headerFontColor: rgba(0, 0, 0, 0.6); //header font color
 
-$mainColor12: #f2f2f2; //content background color - 2
-$mainColor13: #f2f2f2; // header background color - 2
-$mainColor14: #f2f2f2; //footer background color - 2
+//background colors
+$backgroundColor: #f2f2f2;
 
+$headerBackgroundColor1: #f2f2f2;
+$headerBackgroundColor2: #f2f2f2;
 
-$mainColor7: #e6f4e7; //button color
-$mainColor8: #f2f2f2; //button color
-$mainColor9: #2F7D31; //button color
-$mainColor10: rgb(0, 147, 233); //button color
-$mainColor11: rgb(211, 70, 0); //button color
+$bodyContentBackgroundColor1: #f2f2f2;
+$bodyContentBackgroundColor2: #f2f2f2;
 
-//No need to change
-$fontColorSoft: $mainColor0;
+$footerBackgroundColor1: #f2f2f2;
+$footerBackgroundColor2: #f2f2f2;
+
+//component colors
+$searchBarColor: black;
+
+//menu & navigations
+$mainMenuSelectedFontColor: rgb(0, 147, 233); // main menu selected font color
+
+$categoryMenuSelectedBackgroundColor: rgb(0, 147, 233); // category menu selected background color
+$categoryMenuSelectedFontColor: #f2f2f2; // category menu selected font color
+
+$orderByMenuSelectedFontColor: rgb(0, 147, 233); // order by menu selected font color
+
+//buttons
+$tagColor: #dcdcdc;
+
+$thirdButtonFontColor: #f2f2f2; //comment button font color
+$thirdButtonBackgroundColor: rgb(211, 70, 0); //comment button background color
+$thirdButtonBorderColor: #f2f2f2; //comment button border color
+
+$fourthButtonFontColor: #f2f2f2; //login button font color
+$fourthButtonBackgroundColor: rgb(0, 147, 233); //login button background color
+$fourthButtonBorderColor: rgb(0, 147, 233); //login button border color
+
+//no need to change
 $textFieldErrorBorderColor: rgb(255, 0, 0);
 $cautionColor: rgb(211, 70, 0);
-
-//Genereated fields
-$fontColor: $mainColor1;
-$backgroundColor: $mainColor2;
-
-$headerBackgroundColor1: $mainColor13;
-$headerBackgroundColor2: $mainColor4;
-
-$bodyContentBackgroundColor1: $mainColor3;
-$bodyContentBackgroundColor2: $mainColor12;
-
-$footerBackgroundColor1: $mainColor14;
-$footerBackgroundColor2: $mainColor5;
-
-$searchBarColor: $mainColor1;
-
-$tagColor: $mainColor6;
-
-$firstButtonFontColor: $mainColor1;
-$firstButtonBackgroundColor: $mainColor7;
-$firstButtonBorderColor: $mainColor9;
-$firstButtonFontColorHover: $mainColor8;
-
-$secondButtonFontColor: $mainColor8;
-$secondButtonBackgroundColor: $mainColor9;
-$secondButtonBorderColor: $mainColor7;
-
-$thirdButtonFontColor: $mainColor8;
-$thirdButtonBackgroundColor: $mainColor11;
-$thirdButtonBorderColor: $mainColor8;
-
-$fourthButtonFontColor: $mainColor8;
-$fourthButtonBackgroundColor: $mainColor10 ;
-$fourthButtonBorderColor: $mainColor10 ;
-
-
-/*
-
-$color0: #f2f2f2;
-$color1: rgb(0, 0, 0);
-$color2: rgba(0, 0, 0, 0.6);
-$color3: rgb(0, 147, 233);
-$color4: rgb(211, 70, 0);
-$color5: rgb(220, 220, 220);
-$color6: #2F7D31;
-$color7: rgb(230, 244, 231);
-$color8: rgb(242, 242, 242);
-
-
-$PanelContainerColor: $color0;
-$containerBackgroundDesktop: $color8;
-$containerBackgroundHeader: $color8;
-$background: $color8;
-$font: $color3;
-$textFieldErrorBorderColor: rgb(255, 0, 0);
-
-$firstButtonFontColor: $color1;
-$firstButtonBackgroundColor: $color7;
-$firstButtonBorderColor: $color6;
-$firstButtonFontColorHover: $color0;
-
-$secondButtonFontColor: $color0;
-$secondButtonBackgroundColor: $color6;
-$secondButtonBorderColor: $color7;
-
-$thirdButtonFontColor: $color0;
-$thirdButtonBackgroundColor: $color4;
-$thirdButtonBorderColor: $color0;
-
-$fourthButtonFontColor: $color0;
-$fourthButtonBackgroundColor: $color3 ;
-$fourthButtonBorderColor: $color3 ;
-
-
-*/
-
-

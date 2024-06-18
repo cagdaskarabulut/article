@@ -28,7 +28,7 @@
     left: 0;
     width: 0;
     height: 100%;
-    background-color: $mainColor10;
+    background-color: $categoryMenuSelectedBackgroundColor;
     transition: width 0.8s ease;
     z-index: -1;
   }
@@ -39,13 +39,13 @@
   }
 
   &:hover {
-    color: $mainColor8 !important;
+    color: $categoryMenuSelectedFontColor !important;
     background-color: transparent !important;
   }
 
   &.active {
-    color: $mainColor8 !important;
-    background-color: $mainColor10 !important;
+    color: $categoryMenuSelectedFontColor !important;
+    background-color: $categoryMenuSelectedBackgroundColor !important;
   }
 
   z-index: 1;

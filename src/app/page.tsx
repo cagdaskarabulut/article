@@ -20,7 +20,7 @@ import Navbar from "../../src/pages/components/Navbar";
 import NavbarOrderby from "../pages/components/NavbarOrderby";
 import NavigateButton from "../pages/components/NavigateButton";
 import { fetchArticleSize } from "./pagination/pagination_article_size";
-import MyMenu from "../components/reusableComponents/MyMenu";
+import CategoryMenu from "../components/reusableComponents/CategoryMenu";
 import MyCarousel from "../components/reusableComponents/MyCarousel";
 import FocusContent from "../components/reusableComponents/FocusContent";
 import { LABELS as LABELS_en } from "./enums/lang/en";
@@ -174,7 +174,7 @@ export default async function Home({ searchParams }) {
           {specialFields?.is_project_type_product && (
             <Container maxWidth="lg" className={styles.ContentContainerStyle}>
               <MyGrid
-                leftContent={<MyMenu activePageName={search} />}
+                leftContent={<CategoryMenu activePageName={search} />}
                 rightContent={
                   <>
                     {!search && specialFields?.is_order_by_menu_active && (
