@@ -25,9 +25,9 @@ export default async function handler(request, response) {
         commentbuttonbackgroundcolor=${request.body.commentbuttonbackgroundcolor},
         commentbuttonbordercolor=${request.body.commentbuttonbordercolor},
         loginbuttonfontcolor=${request.body.loginbuttonfontcolor},
-        loginbuttonbackgroundbolor=${request.body.loginbuttonbackgroundbolor},
+        loginbuttonbackgroundcolor=${request.body.loginbuttonbackgroundcolor},
         loginbuttonbordercolor=${request.body.loginbuttonbordercolor},
-        textfieldrrrorbordercolor=${request.body.textfieldrrrorbordercolor},
+        textfielderrorbordercolor=${request.body.textfielderrorbordercolor},
         cautioncolor=${request.body.cautioncolor}
         where project='newszipped';`;
     } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
@@ -53,9 +53,9 @@ export default async function handler(request, response) {
         commentbuttonbackgroundcolor=${request.body.commentbuttonbackgroundcolor},
         commentbuttonbordercolor=${request.body.commentbuttonbordercolor},
         loginbuttonfontcolor=${request.body.loginbuttonfontcolor},
-        loginbuttonbackgroundbolor=${request.body.loginbuttonbackgroundbolor},
+        loginbuttonbackgroundcolor=${request.body.loginbuttonbackgroundcolor},
         loginbuttonbordercolor=${request.body.loginbuttonbordercolor},
-        textfieldrrrorbordercolor=${request.body.textfieldrrrorbordercolor},
+        textfielderrorbordercolor=${request.body.textfielderrorbordercolor},
         cautioncolor=${request.body.cautioncolor}
         where project='brickstanbul';`;
     }

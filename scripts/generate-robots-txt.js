@@ -140,21 +140,7 @@ $cautionColor: ${activeFile.cautioncolor};
 }
 
 async function generateRobotsTxtAndSitemapXml() {
-  if (isLocal === "false") {
-    await fetch(rootPath + "/api/article/article_project_colors", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((dataList) => {
-        //- add css file
-        dataList?.file?.rows.map((activeFile, index) => {
-          if (activeFile?.project == siteName) {
-            let cssFileContent = generateCssFileContent(activeFile);
-            fs.writeFileSync("src/styles/colors.scss", cssFileContent);
-          }
-        });
-      });
-
+  if (isLocal === "true") {
     await fetch(rootPath + "/api/article/article_project_auto_generate_files", {
       method: "GET",
     })
@@ -164,6 +150,20 @@ async function generateRobotsTxtAndSitemapXml() {
         dataList?.file?.rows.map((activeFile, index) => {
           if (activeFile?.project == siteName) {
             fs.writeFileSync(activeFile?.file_path, activeFile?.file_content);
+          }
+        });
+      });
+
+    await fetch(rootPath + "/api/article/article_project_colors", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((dataList) => {
+        //- add css file
+        dataList?.file?.rows.map(async (activeFile, index) => {
+          if (activeFile?.project == siteName) {
+            let cssFileContent = await generateCssFileContent(activeFile);
+            fs.writeFileSync("src/styles/colors.scss", cssFileContent);
           }
         });
       });
