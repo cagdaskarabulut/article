@@ -333,6 +333,7 @@ const AdminPanel = () => {
     }
     try {
       if (isNewOrUpdate === "update") {
+        console.log(isShowInBanner);
         fetch("/api/article/update", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -357,6 +358,7 @@ const AdminPanel = () => {
             clearAllFields();
           });
       } else {
+        console.log(isShowInBanner);
         fetch("/api/article/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
