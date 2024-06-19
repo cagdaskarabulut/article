@@ -91,4 +91,6 @@ export enum LABELS {
   LOGIN_BUTTON_BORDER_COLOR = "Yorum Butonu Kenar Rengi",
   ERROR_COLOR = "Hata rengi",
   CAUTION_COLON = "Dikkat rengi",
+  LOGIN = "Giriş",
+  LOGOUT = "Çıkış",
 }

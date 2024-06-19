@@ -24,9 +24,11 @@ import Image from "next/image";
 import { signIn, signOut, useSession } from "next-auth/react";
 import SearchBar from "../reusableComponents/SearchBar";
 import LoginIcon from "@mui/icons-material/Login";
+import useLanguages from "../../hooks/useLanguages";
 
 export default function Header({ isMainPage }) {
   const { innerWidth } = useWindowSize();
+  const LABELS = useLanguages() || {};
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -254,7 +256,7 @@ export default function Header({ isMainPage }) {
                                 {/* <ListItemIcon>
                       <Logout fontSize="small" />
                     </ListItemIcon> */}
-                                Logout
+                                {LABELS.LOGOUT}
                               </MenuItem>
                             </Menu>
                           </Box>
@@ -274,7 +276,7 @@ export default function Header({ isMainPage }) {
                                   : { marginRight: "20px" }
                               }
                             >
-                              Login
+                              {LABELS.LOGIN}
                             </button>
                           )}
 

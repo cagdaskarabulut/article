@@ -93,4 +93,6 @@ export enum LABELS {
   LOGIN_BUTTON_BORDER_COLOR = "Logout Button Border Color",
   ERROR_COLOR = "Error Color",
   CAUTION_COLON = "Caution Color",
+  LOGIN = "Login",
+  LOGOUT = "Logout",
 }
