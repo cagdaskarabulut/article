@@ -476,7 +476,7 @@ const AdminPanel = () => {
                       <Switch
                         checked={isShowInBanner}
                         onChange={(event) =>
-                          setIsShowInMenu(event?.target?.checked)
+                          setIsShowInBanner(event?.target?.checked)
                         }
                         inputProps={{ "aria-label": "controlled" }}
                       />
