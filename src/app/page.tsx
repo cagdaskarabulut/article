@@ -105,52 +105,63 @@ export default async function Home({ searchParams }) {
           {specialFields?.is_project_type_article && (
             <Container maxWidth="lg" className={styles.ContentContainerStyle}>
               {mainDataSize > 0 && (
-                <MyGrid
-                  leftContent={
-                    <div style={{ paddingTop: "20px" }}>
-                      {!search && specialFields?.is_order_by_menu_active && (
-                        <>
-                          <Divider />
-                          <NavbarOrderby />
-                          <Divider />
-                        </>
-                      )}
-
-                      <h4 className={styles.FindTitleHeaderStyle}>
-                        {findTitleByUrl()}
-                      </h4>
-                      {mainData}
-                      <LoadMore
-                        orderType={orderType}
-                        search={search}
-                        totalListSize={mainDataSize}
-                        pageSize={pageSize}
-                        isSmallCards={isSmallCards}
-                      />
-                    </div>
-                  }
-                  rightContent={
+                <>
+                  {specialFields?.is_project_type_article && (
                     <>
-                      <h4 className={styles.FindTitleHeaderStyle}>
-                        {LABELS.MOST_LIKED_POSTS}
-                      </h4>
-                      {lastData}
+                      <Divider />
+                      <NavbarOrderby />
+                      <Divider />
                     </>
-                  }
-                  breadcrumbs={undefined}
-                  title={undefined}
-                  middleContent={undefined}
-                  isRightContentSmall={undefined}
-                  isLeftContentSmall={undefined}
-                  isOneFullContent={undefined}
-                  contentPosition={undefined}
-                  forHeader={undefined}
-                  isStaticWidth={undefined}
-                  isHideRightSideOnMobile={true}
-                  isHideWhileLoading={true}
-                  isShowLoadingBarWhileLoading={true}
-                  isLeftContentSticky={undefined}
-                />
+                  )}
+                  <MyGrid
+                    leftContent={
+                      <div>
+                        {!specialFields?.is_project_type_article &&
+                          !search &&
+                          specialFields?.is_order_by_menu_active && (
+                            <>
+                              <Divider />
+                              <NavbarOrderby />
+                              <Divider />
+                            </>
+                          )}
+
+                        <h4 className={styles.FindTitleHeaderStyle}>
+                          {findTitleByUrl()}
+                        </h4>
+                        {mainData}
+                        <LoadMore
+                          orderType={orderType}
+                          search={search}
+                          totalListSize={mainDataSize}
+                          pageSize={pageSize}
+                          isSmallCards={isSmallCards}
+                        />
+                      </div>
+                    }
+                    rightContent={
+                      <>
+                        <h4 className={styles.FindTitleHeaderStyle}>
+                          {LABELS.MOST_LIKED_POSTS}
+                        </h4>
+                        {lastData}
+                      </>
+                    }
+                    breadcrumbs={undefined}
+                    title={undefined}
+                    middleContent={undefined}
+                    isRightContentSmall={undefined}
+                    isLeftContentSmall={undefined}
+                    isOneFullContent={undefined}
+                    contentPosition={undefined}
+                    forHeader={undefined}
+                    isStaticWidth={undefined}
+                    isHideRightSideOnMobile={true}
+                    isHideWhileLoading={true}
+                    isShowLoadingBarWhileLoading={true}
+                    isLeftContentSticky={undefined}
+                  />
+                </>
               )}
 
               {mainDataSize <= 0 && (

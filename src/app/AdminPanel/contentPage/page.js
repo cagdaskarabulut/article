@@ -351,6 +351,9 @@ const AdminPanel = () => {
             is_show_in_banner: isShowInBanner,
             is_banner_fit_style: isBannerFitStyle,
             is_banner_stretch_style: isBannerStretchStyle,
+            is_show_in_menu: false,
+            page_name: "",
+            is_core_page: false,
           }),
         })
           .then((res) => res.json())
@@ -379,6 +382,9 @@ const AdminPanel = () => {
             is_show_in_banner: isShowInBanner,
             is_banner_fit_style: isBannerFitStyle,
             is_banner_stretch_style: isBannerStretchStyle,
+            is_show_in_menu: false,
+            page_name: "",
+            is_core_page: false,
           }),
         })
           .then((res) => res.json())
@@ -471,8 +477,24 @@ const AdminPanel = () => {
                     </Button>
                   </Grid>
                 )}
-                <Divider className={styles.DividerStyle} />
-                <Grid item xs={12} sm={4}>
+                <Divider
+                  className={styles.DividerStyle}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                />
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                >
                   <FormControlLabel
                     control={
                       <Switch
@@ -486,7 +508,16 @@ const AdminPanel = () => {
                     label={LABELS.SHOW_IN_BANNER}
                   />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                >
                   <FormControlLabel
                     control={
                       <Switch
@@ -500,7 +531,16 @@ const AdminPanel = () => {
                     label={LABELS.IS_BANNER_FIT_STYLE}
                   />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                >
                   <FormControlLabel
                     control={
                       <Switch
@@ -514,7 +554,14 @@ const AdminPanel = () => {
                     label={LABELS.IS_BANNER_STRETCH_STYLE}
                   />
                 </Grid>
-                <Divider className={styles.DividerStyle} />
+                <Divider
+                  className={styles.DividerStyle}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                />
                 <Grid
                   item
                   xs={12}
@@ -557,7 +604,14 @@ const AdminPanel = () => {
                     label={LABELS.IS_ACTIVE}
                   />
                 </Grid>
-                <Divider className={styles.DividerStyle} />
+                <Divider
+                  className={styles.DividerStyle}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                />
                 <Grid
                   item
                   xs={12}

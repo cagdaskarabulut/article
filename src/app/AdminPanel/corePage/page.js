@@ -359,11 +359,12 @@ const AdminPanel = () => {
             description: description,
             meta_keys: metaKeys,
             is_active: isActive,
-            is_show_in_menu: isShowInMenu,
-            page_name: pageName,
             is_show_in_banner: isShowInBanner,
             is_banner_fit_style: isBannerFitStyle,
             is_banner_stretch_style: isBannerStretchStyle,
+            is_show_in_menu: isShowInMenu,
+            page_name: pageName,
+            is_core_page: true,
           }),
         })
           .then((res) => res.json())
@@ -376,7 +377,6 @@ const AdminPanel = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             url: replaceStringForUrlFormat(url),
-            // + "-" + Math.floor(Math.random() * 1000000000000)
             title: title,
             topics: getStringWithCommaSeperatedFromList(corePageList),
             create_date: new Date(),
@@ -386,11 +386,12 @@ const AdminPanel = () => {
             description: description,
             meta_keys: metaKeys,
             is_active: isActive,
-            is_show_in_menu: isShowInMenu,
-            page_name: pageName,
             is_show_in_banner: isShowInBanner,
             is_banner_fit_style: isBannerFitStyle,
             is_banner_stretch_style: isBannerStretchStyle,
+            is_show_in_menu: isShowInMenu,
+            page_name: pageName,
+            is_core_page: true,
           }),
         })
           .then((res) => res.json())
