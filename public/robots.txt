@@ -1,9 +1,9 @@
 # *
 User-agent: *
-Allow: /the-history-of-art-a-journey-through-time-988732468
 Allow: /why-apple-magic-mouse-sensitivity-is-too-slow-and-how-to-fix-it
 Allow: /the-best-whiskey-brands-a-comprehensive-guide-716087228549
 Allow: /why-does-iphone-get-so-hot-how-can-it-be-fixed
+Allow: /the-history-of-art-a-journey-through-time-988732468
 Allow: /the-best-countries-for-buying-and-renting-houses-as-an-investment
 Allow: /the-best-laptop-brands-to-consider-for-your-next-purchase
 Allow: /the-availability-of-clean-water-sources-on-earth-how-many-years-do-we-have-left
