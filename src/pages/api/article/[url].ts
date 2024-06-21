@@ -1,6 +1,7 @@
 import { sql } from '@vercel/postgres';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   let { url } = req?.query;
 

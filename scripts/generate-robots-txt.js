@@ -140,7 +140,7 @@ $cautionColor: ${activeFile.cautioncolor};
 }
 
 async function generateRobotsTxtAndSitemapXml() {
-  if (isLocal === "false") {
+  if (isLocal === "true") {
     await fetch(rootPath + "/api/article/article_project_auto_generate_files", {
       method: "GET",
     })
