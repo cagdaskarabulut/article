@@ -11,14 +11,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     if (searchVal) {
       if (process.env.PROJECT_SITE_NAME === "newszipped") {
-        article_list_size = await sql`SELECT count(a.id) FROM public.newszipped_article a where (a.is_core_page is null or a.is_core_page=false) and a.is_active=true and a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%';`;
+        article_list_size = await sql`SELECT count(a.id) FROM public.newszipped_article a where (a.is_core_page is null or a.is_core_page=false) and a.is_active=true and (unaccent(LOWER(a.topics))) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.title)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.description)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.meta_keys)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or
+           (unaccent(UPPER(a.topics))) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.title)) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.description)) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.meta_keys)) ilike unaccent(UPPER('%'||${searchVal}||'%'));`;
       } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-        article_list_size = await sql`SELECT count(a.id) FROM public.brickstanbul_article a where (a.is_core_page is null or a.is_core_page=false) and a.is_active=true and a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%';`;
+        article_list_size = await sql`SELECT count(a.id) FROM public.brickstanbul_article a where (a.is_core_page is null or a.is_core_page=false) and a.is_active=true and (unaccent(LOWER(a.topics))) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.title)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.description)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.meta_keys)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or
+           (unaccent(UPPER(a.topics))) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.title)) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.description)) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.meta_keys)) ilike unaccent(UPPER('%'||${searchVal}||'%'));`;
       }
       else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-        article_list_size = await sql`SELECT count(a.id) FROM public.cnmautoparts_article a where (a.is_core_page is null or a.is_core_page=false) and a.is_active=true and a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%';`;
+        article_list_size = await sql`SELECT count(a.id) FROM public.cnmautoparts_article a where (a.is_core_page is null or a.is_core_page=false) and a.is_active=true and (unaccent(LOWER(a.topics))) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.title)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.description)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or unaccent(LOWER(a.meta_keys)) ilike unaccent(LOWER('%'||${searchVal}||'%')) or
+           (unaccent(UPPER(a.topics))) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.title)) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.description)) ilike unaccent(UPPER('%'||${searchVal}||'%')) or unaccent(UPPER(a.meta_keys)) ilike unaccent(UPPER('%'||${searchVal}||'%'));`;
       }
-      // article_list_size = await sql`SELECT count(a.id) FROM public.article_article a where a.project=${process.env.PROJECT_SITE_NAME} and a.is_active=true and a.topics ilike '%'||${searchVal}||'%' or a.title ilike '%'||${searchVal}||'%' or a.description ilike '%'||${searchVal}||'%';`;
     }
     else if (orderVal === "id" || orderVal === "create_date" || orderVal === "like_number" || orderVal === "view_number" || orderVal === "comment_number") {
       if (process.env.PROJECT_SITE_NAME === "newszipped") {
@@ -28,7 +30,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
         article_list_size = await sql`SELECT count(a.id) FROM public.cnmautoparts_article a where (a.is_core_page is null or a.is_core_page=false) and a.is_active=true ;`;
       }
-      // article_list_size = await sql`SELECT count(a.id) FROM public.article_article a where a.is_active=true and a.project=${process.env.PROJECT_SITE_NAME};`;
     }
   }
   catch (e) {
