@@ -1,8 +1,7 @@
 # Genel Mimari: 
 ## Bu uygulama, birden fazla internet sitesi için şablon olarak kullanılır. 
 ## Her projesinin dosyaları aws de kendi ismiyle oluşturulmuş klasör altında tutulur.
-## Her projesinin değişkenleri ve parametreleri postgresql'de ve vercel'in env dosyasında tutulur
-
+## Her projesinin değişkenleri ve parametreleri postgresql'de ve env dosyasında tutulur
 
 
 # Yeni Websitesi Eklerken;
