@@ -660,48 +660,51 @@ const AdminPanel = () => {
                       : { display: "none" }
                   }
                 />
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  style={
-                    isNewOrReadyToUpdate()
-                      ? { display: "" }
-                      : { display: "none" }
-                  }
-                >
-                  <TextField
-                    multiline
-                    style={{ width: "100%" }}
-                    id="standard-basic"
-                    label={LABELS.WHAT_WOULD_YOU_LIKE_THE_ROBOT_TO_PRODUCE}
-                    value={generateImageByRobotText}
-                    onChange={(event) =>
-                      setGenerateImageByRobotText(event.target.value)
-                    }
-                    disabled={process.env.IS_LOCAL == "false"}
-                  />
-                </Grid>
                 {isSuperAuthorizedUser && (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    style={
-                      isNewOrReadyToUpdate()
-                        ? { display: "" }
-                        : { display: "none" }
-                    }
-                  >
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      onClick={async () => handleGenerateImageWithRobot()}
-                      disabled={process.env.IS_LOCAL == "false"}
+                  <>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      style={
+                        isNewOrReadyToUpdate()
+                          ? { display: "" }
+                          : { display: "none" }
+                      }
                     >
-                      {LABELS.CREATE_A_PICTURE_WITH_ROBOT}
-                    </Button>
-                  </Grid>
+                      <TextField
+                        multiline
+                        style={{ width: "100%" }}
+                        id="standard-basic"
+                        label={LABELS.WHAT_WOULD_YOU_LIKE_THE_ROBOT_TO_PRODUCE}
+                        value={generateImageByRobotText}
+                        onChange={(event) =>
+                          setGenerateImageByRobotText(event.target.value)
+                        }
+                        disabled={process.env.IS_LOCAL == "false"}
+                      />
+                    </Grid>
+
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      style={
+                        isNewOrReadyToUpdate()
+                          ? { display: "" }
+                          : { display: "none" }
+                      }
+                    >
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        onClick={async () => handleGenerateImageWithRobot()}
+                        disabled={process.env.IS_LOCAL == "false"}
+                      >
+                        {LABELS.CREATE_A_PICTURE_WITH_ROBOT}
+                      </Button>
+                    </Grid>
+                  </>
                 )}
                 <Grid
                   item
