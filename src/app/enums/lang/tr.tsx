@@ -93,4 +93,7 @@ export enum LABELS {
   CAUTION_COLON = "Dikkat rengi",
   LOGIN = "Giriş",
   LOGOUT = "Çıkış",
+  COMMENTS = "Yorumlar",
+  WRITE_A_COMMENT = "Yorum yaz",
+  RESPOND = "Yanıtla",
 }

@@ -95,4 +95,7 @@ export enum LABELS {
   CAUTION_COLON = "Caution Color",
   LOGIN = "Login",
   LOGOUT = "Logout",
+  COMMENTS = "Comments",
+  WRITE_A_COMMENT = "Write a comment",
+  RESPOND = "Respond",
 }

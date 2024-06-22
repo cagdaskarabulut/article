@@ -10,8 +10,10 @@ import LoadingFullPage from "../reusableComponents/LoadingFullPage";
 import useWindowSize from "@rooks/use-window-size";
 import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import { Autocomplete, Container, Divider, TextField } from "@mui/material";
+import useLanguages from "../../hooks/useLanguages";
 
 const Comments = ({ article }) => {
+  const LABELS = useLanguages();
   const { quill, quillRef } = useQuill();
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
@@ -98,7 +100,7 @@ const Comments = ({ article }) => {
     <div id="commentsContentId">
       <LoadingFullPage isLoading={isLoading} />
       <h3 className={styles.HeaderStyle}>
-        Comments ({articleCommentList?.length})
+        {LABELS.COMMENTS} ({articleCommentList?.length})
       </h3>
       <button
         style={{
@@ -107,7 +109,7 @@ const Comments = ({ article }) => {
         className={styles.commentButtonStyle}
         onClick={() => prepareWriteCommentAction()}
       >
-        Write a Comment
+        {LABELS.WRITE_A_COMMENT}
       </button>
 
       <MyQuillEditor
@@ -132,7 +134,7 @@ const Comments = ({ article }) => {
                 className={styles.commentButtonStyle}
                 onClick={() => respondAction()}
               >
-                Respond
+                {LABELS.RESPOND}
               </button>
               <br />
               <br />
@@ -154,7 +156,7 @@ const Comments = ({ article }) => {
                 className={styles.commentButtonStyle}
                 onClick={() => respondAction()}
               >
-                Respond
+                {LABELS.RESPOND}
               </button>
               <br />
               <br />
