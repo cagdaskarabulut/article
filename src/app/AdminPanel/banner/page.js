@@ -32,9 +32,7 @@ const AdminPanel = () => {
         if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
           setIsSuperAuthorizedUser(true);
           setIsAuthorizedUser(true);
-        } else if (
-          isEmailInList(data.email, process.env.PROJECT_PROJECT_ADMIN_USER)
-        ) {
+        } else if (isEmailInList(data.email, process.env.PROJECT_ADMIN_USER)) {
           setIsAuthorizedUser(true);
           setIsSuperAuthorizedUser(false);
         } else {
