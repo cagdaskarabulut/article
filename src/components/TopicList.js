@@ -39,22 +39,60 @@ const TopicList = ({
       .then((res) => res.json())
       .then((data) => {
         setAllTopicList(data?.topic_list.rows);
+        setIsRefreshingTopicList(false);
       });
     setIsRefreshingTopicList(false);
   }, [isRefreshingTopicList, setIsRefreshingTopicList, topicList]);
 
   return (
+    // <div>
+    //   {isSingleSelection && (
+    //     <Autocomplete
+    //       freeSolo
+    //       disableClearable
+    //       style={activeStyle}
+    //       id="tags-standard"
+    //       options={allTopicList}
+    //       getOptionLabel={(option) => option?.name}
+    //       onChange={(event, newValue) => {
+    //         setTopicList(newValue);
+    //       }}
+    //       renderInput={(params) => (
+    //         <TextField {...params} style={activeInputStyle} label={label} />
+    //       )}
+    //     />
+    //   )}
+    //   {!isSingleSelection && (
+    //     <Autocomplete
+    //       multiple
+    //       style={activeStyle}
+    //       id="tags-standard"
+    //       options={allTopicList}
+    //       getOptionLabel={(option) => option?.name}
+    //       onChange={(event, newValue) => {
+    //         setTopicList(newValue);
+    //       }}
+    //       renderInput={(params) => (
+    //         <TextField {...params} style={activeInputStyle} label={label} />
+    //       )}
+    //     />
+    //   )}
+    // </div>
+
+    // NEW TODO
     <div>
       {isSingleSelection && (
         <Autocomplete
-        freeSolo
-        disableClearable
+          freeSolo
+          disableClearable
           style={activeStyle}
           id="tags-standard"
           options={allTopicList}
-          getOptionLabel={(option) => option?.name}
+          getOptionLabel={(option) => option?.name || ""}
+          isOptionEqualToValue={(option, value) => option.name === value.name}
+          value={topicList.length > 0 ? topicList[0] : null}
           onChange={(event, newValue) => {
-            setTopicList(newValue);
+            setTopicList(newValue ? [{ name: newValue.name }] : []);
           }}
           renderInput={(params) => (
             <TextField {...params} style={activeInputStyle} label={label} />
@@ -67,9 +105,11 @@ const TopicList = ({
           style={activeStyle}
           id="tags-standard"
           options={allTopicList}
-          getOptionLabel={(option) => option?.name}
+          getOptionLabel={(option) => option?.name || ""}
+          isOptionEqualToValue={(option, value) => option.name === value.name}
+          value={topicList}
           onChange={(event, newValue) => {
-            setTopicList(newValue);
+            setTopicList(newValue.map((item) => ({ name: item.name })));
           }}
           renderInput={(params) => (
             <TextField {...params} style={activeInputStyle} label={label} />

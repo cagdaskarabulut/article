@@ -13,7 +13,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import useLanguages from "../../../hooks/useLanguages";
 import {
-  getListFromStringWithCommaSeperated as getListFromStringWithCommaSeparated,
+  getListFromStringWithCommaSeperated,
   getStringWithCommaSeperatedFromList,
   replaceStringForUrlFormat,
 } from "../../../utils/StringUtils";
@@ -270,7 +270,7 @@ const AdminPanel = () => {
         .then((data) => {
           setNewTopicName("");
           setIsRefreshingTopicList(true);
-          setTopicList(null);
+          setTopicList([]);
           setIsRefreshingUrlList(true);
           setSelectedUrl("");
           setOpenDialog(false);
@@ -285,7 +285,8 @@ const AdminPanel = () => {
   const clearAllFields = () => {
     setUrl("");
     setTitle("");
-    setTopicList("");
+    setTopicList([]);
+    setTopicListInfo("");
     quill.setText("");
     setIsManuelPage(false);
     setDescription("");
@@ -293,7 +294,6 @@ const AdminPanel = () => {
     setIsMessageOpen(true);
     setGenerateImageByRobotText("");
     setImagePath("");
-    setTopicList("");
     setTitleImageUrl("");
     setIsLoading(false);
     setIsActive(true);
@@ -302,11 +302,35 @@ const AdminPanel = () => {
     setIsBannerStretchStyle(false);
   };
 
+  // const fillAllFields = (myArticle) => {
+  //   setUrl(myArticle.url);
+  //   setTitle(myArticle.title);
+  //   setTitleImageUrl(myArticle.title_image);
+  //   console.log(getListFromStringWithCommaSeperated(myArticle.topics));
+  //   setTopicList(getListFromStringWithCommaSeperated(myArticle.topics)); //getStringWithCommaSeperatedFromList(topicList);//TODO
+  //   setTopicListInfo(myArticle.topics);
+  //   setIsRefreshingTopicList(true);
+  //   quill.clipboard.dangerouslyPasteHTML(myArticle.body);
+  //   setIsManuelPage(myArticle.is_manuel_page);
+  //   setDescription(myArticle.description);
+  //   setMetaKeys(myArticle.meta_keys);
+  //   setIsActive(myArticle.is_active);
+  //   setIsShowInBanner(myArticle.is_show_in_banner);
+  //   setIsBannerFitStyle(myArticle.is_banner_fit_style);
+  //   setIsBannerStretchStyle(myArticle.is_banner_stretch_style);
+  // };
+
+  // NEW TODO
   const fillAllFields = (myArticle) => {
     setUrl(myArticle.url);
     setTitle(myArticle.title);
     setTitleImageUrl(myArticle.title_image);
-    setTopicListInfo(myArticle.topics);
+
+    const topicsArray = getListFromStringWithCommaSeperated(
+      myArticle.topics
+    ).map((topic) => ({ name: topic }));
+    setTopicList(topicsArray);
+
     quill.clipboard.dangerouslyPasteHTML(myArticle.body);
     setIsManuelPage(myArticle.is_manuel_page);
     setDescription(myArticle.description);
@@ -330,8 +354,12 @@ const AdminPanel = () => {
       return;
     }
     try {
+      // let list = getListFromStringWithCommaSeperated(topicList);
+      // let str = getStringWithCommaSeperatedFromList(list);
+      // console.log(list);
+      // console.log(str);
+      // console.log(topicList);
       if (isNewOrUpdate === "update") {
-        console.log(isShowInBanner);
         fetch("/api/article/update", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -339,6 +367,7 @@ const AdminPanel = () => {
             url: selectedUrl,
             title: title,
             topics: getStringWithCommaSeperatedFromList(topicList),
+            // topics: topicList,
             create_date: new Date(),
             title_image: titleImageUrl,
             body: quill.container.firstChild.innerHTML,
@@ -359,7 +388,6 @@ const AdminPanel = () => {
             clearAllFields();
           });
       } else {
-        console.log(isShowInBanner);
         fetch("/api/article/add", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

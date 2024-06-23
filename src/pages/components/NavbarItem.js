@@ -28,7 +28,6 @@ export default function NavbarItem({ title, param, size, isShowOrderByIcon }) {
 
   return (
     <>
-      {console.log(size)}
       <LoadingFullPage isLoading={isLoadingFullPage} />
       <Link
         key={"NavbarItemId_" + param}

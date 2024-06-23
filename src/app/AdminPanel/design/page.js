@@ -86,8 +86,6 @@ const AdminPanel = () => {
     fetch("/api/article/article_project_colors")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data?.fields?.rows[0]);
-
         setFontColor(data?.fields?.rows[0]?.fontcolor);
 
         setHeaderFontColor(data?.fields?.rows[0]?.headerfontcolor);

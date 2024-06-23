@@ -7,8 +7,6 @@ const FocusContent = ({ children }) => {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    console.log(contentRef);
-    console.log(contentRef.current);
     if (contentRef.current) {
       contentRef.current.scrollIntoView({ behavior: "smooth" });
     }

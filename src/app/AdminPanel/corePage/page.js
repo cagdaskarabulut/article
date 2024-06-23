@@ -11,7 +11,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import {
-  getListFromStringWithCommaSeperated as getListFromStringWithCommaSeparated,
+  getListFromStringWithCommaSeperated,
   getStringWithCommaSeperatedFromList,
   replaceStringForUrlFormat,
 } from "../../../utils/StringUtils";
