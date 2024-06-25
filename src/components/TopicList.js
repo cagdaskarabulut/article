@@ -79,7 +79,6 @@ const TopicList = ({
     //   )}
     // </div>
 
-    // NEW TODO
     <div>
       {isSingleSelection && (
         <Autocomplete

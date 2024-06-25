@@ -31,7 +31,6 @@ export const capitalizeFirstChar = (myString) => {
 //   return "," + result + ",";
 // };
 
-//NEW TODO
 export const getStringWithCommaSeperatedFromList = (list) => {
   if (!Array.isArray(list)) {
     return "";
@@ -40,7 +39,6 @@ export const getStringWithCommaSeperatedFromList = (list) => {
 };
 
 // export const getListFromStringWithCommaSeperated = (myString) => {
-//   console.log(myString);
 //   let result = [];
 //   let myList = myString.split(",");
 //   for (let index = 0; index < myList.length; index++) {
@@ -48,11 +46,9 @@ export const getStringWithCommaSeperatedFromList = (list) => {
 //       result = [...result, myList[index]];
 //     }
 //   }
-//   console.log(result);
 //   return result;
 // };
 
-//NEW TODO
 export const getListFromStringWithCommaSeperated = (myString) => {
   let result = [];
   let myList = myString.split(",");

@@ -283,6 +283,8 @@ const AdminPanel = () => {
   };
 
   const clearAllFields = () => {
+    setSelectedUrl("");
+    setIsRefreshingUrlList(true);
     setUrl("");
     setTitle("");
     setTopicList([]);
@@ -302,25 +304,6 @@ const AdminPanel = () => {
     setIsBannerStretchStyle(false);
   };
 
-  // const fillAllFields = (myArticle) => {
-  //   setUrl(myArticle.url);
-  //   setTitle(myArticle.title);
-  //   setTitleImageUrl(myArticle.title_image);
-  //   console.log(getListFromStringWithCommaSeperated(myArticle.topics));
-  //   setTopicList(getListFromStringWithCommaSeperated(myArticle.topics)); //getStringWithCommaSeperatedFromList(topicList);//TODO
-  //   setTopicListInfo(myArticle.topics);
-  //   setIsRefreshingTopicList(true);
-  //   quill.clipboard.dangerouslyPasteHTML(myArticle.body);
-  //   setIsManuelPage(myArticle.is_manuel_page);
-  //   setDescription(myArticle.description);
-  //   setMetaKeys(myArticle.meta_keys);
-  //   setIsActive(myArticle.is_active);
-  //   setIsShowInBanner(myArticle.is_show_in_banner);
-  //   setIsBannerFitStyle(myArticle.is_banner_fit_style);
-  //   setIsBannerStretchStyle(myArticle.is_banner_stretch_style);
-  // };
-
-  // NEW TODO
   const fillAllFields = (myArticle) => {
     setUrl(myArticle.url);
     setTitle(myArticle.title);
@@ -346,81 +329,79 @@ const AdminPanel = () => {
     if (!title) {
       setShowError(true);
       setErrorMessage(LABELS.TITLE_IS_REQUIRED);
+      setIsLoading(false);
       return;
     } else if (!titleImageUrl) {
       setShowError(true);
-      setIsLoading(false);
       setErrorMessage(LABELS.IMAGE_IS_REQUIRED);
-      return;
-    }
-    try {
-      // let list = getListFromStringWithCommaSeperated(topicList);
-      // let str = getStringWithCommaSeperatedFromList(list);
-      // console.log(list);
-      // console.log(str);
-      // console.log(topicList);
-      if (isNewOrUpdate === "update") {
-        fetch("/api/article/update", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            url: selectedUrl,
-            title: title,
-            topics: getStringWithCommaSeperatedFromList(topicList),
-            // topics: topicList,
-            create_date: new Date(),
-            title_image: titleImageUrl,
-            body: quill.container.firstChild.innerHTML,
-            is_manuel_page: isManuelPage,
-            description: description,
-            meta_keys: metaKeys,
-            is_active: isActive,
-            is_show_in_banner: isShowInBanner,
-            is_banner_fit_style: isBannerFitStyle,
-            is_banner_stretch_style: isBannerStretchStyle,
-            is_show_in_menu: false,
-            page_name: "",
-            is_core_page: false,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            clearAllFields();
-          });
-      } else {
-        fetch("/api/article/add", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            url:
-              replaceStringForUrlFormat(url) +
-              "-" +
-              Math.floor(Math.random() * 1000000000000),
-            title: title,
-            topics: getStringWithCommaSeperatedFromList(topicList),
-            create_date: new Date(),
-            title_image: titleImageUrl,
-            body: quill.container.firstChild.innerHTML,
-            is_manuel_page: isManuelPage,
-            description: description,
-            meta_keys: metaKeys,
-            is_active: isActive,
-            is_show_in_banner: isShowInBanner,
-            is_banner_fit_style: isBannerFitStyle,
-            is_banner_stretch_style: isBannerStretchStyle,
-            is_show_in_menu: false,
-            page_name: "",
-            is_core_page: false,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            clearAllFields();
-          });
-      }
-    } catch (error) {
-      setErrorMessage(LABELS.TITLE_IS_REQUIRED);
       setIsLoading(false);
+      return;
+    } else {
+      try {
+        if (isNewOrUpdate === "update") {
+          fetch("/api/article/update", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              url: selectedUrl,
+              title: title,
+              topics: getStringWithCommaSeperatedFromList(topicList),
+              create_date: new Date(),
+              title_image: titleImageUrl,
+              body: quill.container.firstChild.innerHTML,
+              is_manuel_page: isManuelPage,
+              description: description,
+              meta_keys: metaKeys,
+              is_active: isActive,
+              is_show_in_banner: isShowInBanner,
+              is_banner_fit_style: isBannerFitStyle,
+              is_banner_stretch_style: isBannerStretchStyle,
+              is_show_in_menu: false,
+              page_name: "",
+              is_core_page: false,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              clearAllFields();
+            });
+        } else {
+          fetch("/api/article/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              url:
+                replaceStringForUrlFormat(url) +
+                "-" +
+                Math.floor(Math.random() * 1000000000000),
+              title: title,
+              topics: getStringWithCommaSeperatedFromList(topicList),
+              create_date: new Date(),
+              title_image: titleImageUrl,
+              body: quill.container.firstChild.innerHTML,
+              is_manuel_page: isManuelPage,
+              description: description,
+              meta_keys: metaKeys,
+              is_active: isActive,
+              is_show_in_banner: isShowInBanner,
+              is_banner_fit_style: isBannerFitStyle,
+              is_banner_stretch_style: isBannerStretchStyle,
+              is_show_in_menu: false,
+              page_name: "",
+              is_core_page: false,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              clearAllFields();
+            });
+        }
+      } catch (error) {
+        setErrorMessage(LABELS.TITLE_IS_REQUIRED);
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 

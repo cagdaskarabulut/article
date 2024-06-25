@@ -17,14 +17,11 @@ export default async function handler(req, res) {
       // prompt: "A cute baby sea otter",
       prompt: description,
     });
-    
+
     await res.status(200).json({
-      image: results.data[0]
+      image: results.data[0],
     });
-    
-    
   } catch (e) {
-    console.log(`Failed to create image: ${e.message}`);
     res.status(500).json({
       error: e.message,
     });

@@ -14,7 +14,7 @@ export default async function handler(request, response) {
       }, ${request.body.is_show_in_menu}, ${request.body.page_name},
       true);`;
     } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-      await sql`INSERT INTO brickstanbul_core_pages (url, title, topics, create_date, title_image, body, is_manuel_page, description, meta_keys, is_active, is_show_in_menu, page_name, is_core_page) VALUES (${
+      await sql`INSERT INTO brickstanbul_article (url, title, topics, create_date, title_image, body, is_manuel_page, description, meta_keys, is_active, is_show_in_menu, page_name, is_core_page) VALUES (${
         request.body.url
       }, ${request.body.title}, ${request.body.topics}, ${
         new Date().toLocaleString() + ""
@@ -25,7 +25,7 @@ export default async function handler(request, response) {
       }, ${request.body.is_show_in_menu}, ${request.body.page_name},
       true);`;
     } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-      await sql`INSERT INTO cnmautoparts_core_pages (url, title, topics, create_date, title_image, body, is_manuel_page, description, meta_keys, is_active, is_show_in_menu, page_name, is_core_page) VALUES (${
+      await sql`INSERT INTO cnmautoparts_article (url, title, topics, create_date, title_image, body, is_manuel_page, description, meta_keys, is_active, is_show_in_menu, page_name, is_core_page) VALUES (${
         request.body.url
       }, ${request.body.title}, ${request.body.topics}, ${
         new Date().toLocaleString() + ""

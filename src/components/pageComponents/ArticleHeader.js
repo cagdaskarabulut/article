@@ -288,7 +288,6 @@ const ArticleHeader = ({ article }) => {
       } catch (error) {
         // setErrorMessage("Like action failed");
         // setIsLoading(false);
-        console.log(error);
       }
     } else {
       //_ ADD LIKE
@@ -310,7 +309,6 @@ const ArticleHeader = ({ article }) => {
       } catch (error) {
         // setErrorMessage("Like action failed");
         // setIsLoading(false);
-        console.log(error);
       }
     }
   };

@@ -296,6 +296,8 @@ const AdminPanel = () => {
   };
 
   const clearAllFields = () => {
+    setSelectedUrl("");
+    setIsRefreshingUrlList(true);
     setUrl("");
     setTitle("");
     setCorePageList("");
@@ -339,68 +341,72 @@ const AdminPanel = () => {
     if (!title) {
       setShowError(true);
       setErrorMessage(LABELS.TITLE_IS_REQUIRED);
-      return;
-    }
-    try {
-      if (isNewOrUpdate === "update") {
-        fetch("/api/corePage/update", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            url: selectedUrl,
-            title: title,
-            topics: getStringWithCommaSeperatedFromList(corePageList),
-            create_date: new Date(),
-            title_image: titleImageUrl,
-            body: quill.container.firstChild.innerHTML,
-            is_manuel_page: isManuelPage,
-            description: description,
-            meta_keys: metaKeys,
-            is_active: isActive,
-            is_show_in_banner: isShowInBanner,
-            is_banner_fit_style: isBannerFitStyle,
-            is_banner_stretch_style: isBannerStretchStyle,
-            is_show_in_menu: isShowInMenu,
-            page_name: pageName,
-            is_core_page: true,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            clearAllFields();
-          });
-      } else {
-        fetch("/api/corePage/add", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            url: replaceStringForUrlFormat(url),
-            title: title,
-            topics: getStringWithCommaSeperatedFromList(corePageList),
-            create_date: new Date(),
-            title_image: titleImageUrl,
-            body: quill.container.firstChild.innerHTML,
-            is_manuel_page: isManuelPage,
-            description: description,
-            meta_keys: metaKeys,
-            is_active: isActive,
-            is_show_in_banner: isShowInBanner,
-            is_banner_fit_style: isBannerFitStyle,
-            is_banner_stretch_style: isBannerStretchStyle,
-            is_show_in_menu: isShowInMenu,
-            page_name: pageName,
-            is_core_page: true,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            clearAllFields();
-          });
-      }
-    } catch (error) {
-      setErrorMessage(LABELS.TITLE_IS_REQUIRED);
       setIsLoading(false);
-      router.refresh();
+      return;
+    } else {
+      try {
+        if (isNewOrUpdate === "update") {
+          fetch("/api/corePage/update", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              url: selectedUrl,
+              title: title,
+              topics: getStringWithCommaSeperatedFromList(corePageList),
+              create_date: new Date(),
+              title_image: titleImageUrl,
+              body: quill.container.firstChild.innerHTML,
+              is_manuel_page: isManuelPage,
+              description: description,
+              meta_keys: metaKeys,
+              is_active: isActive,
+              is_show_in_banner: isShowInBanner,
+              is_banner_fit_style: isBannerFitStyle,
+              is_banner_stretch_style: isBannerStretchStyle,
+              is_show_in_menu: isShowInMenu,
+              page_name: pageName,
+              is_core_page: true,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              clearAllFields();
+            });
+        } else {
+          fetch("/api/corePage/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              url: replaceStringForUrlFormat(url),
+              title: title,
+              topics: getStringWithCommaSeperatedFromList(corePageList),
+              create_date: new Date(),
+              title_image: titleImageUrl,
+              body: quill.container.firstChild.innerHTML,
+              is_manuel_page: isManuelPage,
+              description: description,
+              meta_keys: metaKeys,
+              is_active: isActive,
+              is_show_in_banner: isShowInBanner,
+              is_banner_fit_style: isBannerFitStyle,
+              is_banner_stretch_style: isBannerStretchStyle,
+              is_show_in_menu: isShowInMenu,
+              page_name: pageName,
+              is_core_page: true,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              clearAllFields();
+            });
+        }
+      } catch (error) {
+        setErrorMessage(LABELS.TITLE_IS_REQUIRED);
+        setIsLoading(false);
+        router.refresh();
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -456,7 +462,6 @@ const AdminPanel = () => {
                 >
                   <TextField
                     className={styles.TextFieldStyle}
-                    id="standard-basic"
                     label={LABELS.PAGE_NAME}
                     value={pageName}
                     onChange={(event) =>
@@ -625,7 +630,6 @@ const AdminPanel = () => {
                 >
                   <TextField
                     className={styles.TextFieldStyle}
-                    id="standard-basic"
                     label={LABELS.TITLE}
                     value={title}
                     onChange={(event) => handleTitleChange(event.target.value)}
@@ -675,7 +679,6 @@ const AdminPanel = () => {
                       <TextField
                         multiline
                         style={{ width: "100%" }}
-                        id="standard-basic"
                         label={LABELS.WHAT_WOULD_YOU_LIKE_THE_ROBOT_TO_PRODUCE}
                         value={generateImageByRobotText}
                         onChange={(event) =>
@@ -795,7 +798,6 @@ const AdminPanel = () => {
                 >
                   <TextField
                     className={styles.TextFieldStyle}
-                    id="standard-basic"
                     label={LABELS.META_KEYS}
                     value={metaKeys}
                     onChange={(event) => setMetaKeys(event.target.value)}
@@ -860,7 +862,6 @@ const AdminPanel = () => {
                 >
                   <TextField
                     className={styles.TextFieldStyle}
-                    id="standard-basic"
                     label="Url"
                     value={url}
                     onChange={(event) => setUrl(event.target.value)}
@@ -879,7 +880,6 @@ const AdminPanel = () => {
                 >
                   <TextField
                     className={styles.TextFieldStyle}
-                    id="standard-basic"
                     label={LABELS.DESCRIPTION}
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
