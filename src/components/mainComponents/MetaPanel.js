@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Head from "next/head";
 import React, { Component } from "react";
 import { useRouter } from "next/navigation";
@@ -23,7 +23,6 @@ const MetaPanel = ({
   const iconHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/favicon.ico`;
   return (
     <Head>
-
       {title != null && title != "" && (
         <>
           <title>{title}</title>
@@ -99,22 +98,21 @@ const MetaPanel = ({
         name="viewport"
         content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1"
       />
-      <meta name="Language" content="tr" />
+      {/* <meta name="Language" content="tr" />
       <meta property="og:locale" content="tr_TR" />
-      <meta name="twitter:app:country" content="TR" />
+      <meta name="twitter:app:country" content="TR" /> */}
       <meta name="doc-type" content="Web Page" />
       <meta name="doc-class" content="Published" />
       <meta name="doc-rights" content="Public" />
       <meta property="og:type" content="website" />
-      <meta
+      {/* <meta
         httpEquiv="Copyright"
         content="Copyright 2023 leagueoflegends-skins.com"
-      />
+      /> */}
       {/* <meta httpEquiv="Reply-to" content="oznurilhan@windowslive.com" /> */}
       <meta name="mobile-web-app-capable" content="yes" />
 
-      <meta name="google-adsense-account" content="ca-pub-8764830534484668" />      
-      
+      <meta name="google-adsense-account" content="ca-pub-8764830534484668" />
     </Head>
   );
 };

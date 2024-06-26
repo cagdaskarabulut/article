@@ -3,8 +3,6 @@
 ## Her projesinin dosyaları aws de kendi ismiyle oluşturulmuş klasör altında tutulur.
 ## Her projesinin değişkenleri ve parametreleri postgresql'de ve env dosyasında tutulur
 
-
-
 # Yeni Websitesi Eklerken;
 ## Yeni proje vercel içerisinde yaratılıp article git reposu bağlandıktan sonra env verisi olarak çalışan eski bir projenin verileri girilip ilk yükleme yapılır. Daha sonra mevcut proje için env verileri güncellenir.
 ## Her eklenen yeni proje için api dosyaları içerisine if koşulu ile o siteye uygun olarak değiştirilmiş yeni scriptler eklenir
