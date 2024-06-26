@@ -18,7 +18,6 @@ import {
 } from "@mui/material";
 import styles from "./AdminPanel.module.scss";
 import { styled } from "@mui/material/styles";
-import useProjectSpecialFields from "../../hooks/useProjectSpecialFields";
 import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
 import MyAlert from "../../components/reusableComponents/MyAlert";
 import { Label } from "@mui/icons-material";
@@ -37,6 +36,7 @@ const AdminPanel = () => {
   const [isOrderbyMenuActive, setIsOrderbyMenuActive] = useState(false);
   const [isTopMenuActive, setIsTopMenuActive] = useState(false);
   const [defaultLanguage, setDefaultLanguage] = useState("");
+  const [mainPageName, setMainPageName] = useState("");
 
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
@@ -116,6 +116,7 @@ const AdminPanel = () => {
         );
         setIsOrderbyMenuActive(data?.fields?.rows[0]?.is_order_by_menu_active);
         setIsTopMenuActive(data?.fields?.rows[0]?.is_top_menu_active);
+        setMainPageName(data?.fields?.rows[0]?.main_page_name);
         setIsCardDesignWithBigImage(
           data?.fields?.rows[0]?.is_card_design_with_big_image
         );
@@ -143,6 +144,10 @@ const AdminPanel = () => {
     setDefaultLanguage(event.target.value);
   };
 
+  function handleMainPageNameChange(value) {
+    setMainPageName(value);
+  }
+
   const onSubmit = async () => {
     setIsLoading(true);
     await fetch("/api/article_project_special_fields/update", {
@@ -153,6 +158,7 @@ const AdminPanel = () => {
         is_project_type_product: isProjectProductDesign,
         is_order_by_menu_active: isOrderbyMenuActive,
         is_top_menu_active: isTopMenuActive,
+        main_page_name: mainPageName,
         is_card_design_with_big_image: isCardDesignWithBigImage,
         default_language: defaultLanguage,
       }),
@@ -220,6 +226,15 @@ const AdminPanel = () => {
                       />
                     }
                     label=""
+                  />
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <TextField
+                    label={LABELS.MAIN_PAGE_NAME}
+                    value={mainPageName}
+                    onChange={(event) =>
+                      handleMainPageNameChange(event.target.value)
+                    }
                   />
                 </Grid>
                 <Grid item xs={12} sm={12}>

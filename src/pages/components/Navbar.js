@@ -9,6 +9,8 @@ import { MOBILE_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import LinearProgress from "@mui/material/LinearProgress";
 import { red } from "@mui/material/colors";
 import useLanguages from "../../hooks/useLanguages";
+import useProjectSpecialFields from "../../hooks/useProjectSpecialFields";
+
 export default function Navbar() {
   const LABELS = useLanguages();
   const { innerWidth } = useWindowSize();
@@ -16,6 +18,7 @@ export default function Navbar() {
   const [topMenuList, setTopMenuList] = useState([]);
   const [isRefreshingTopMenuList, setIsRefreshingTopMenuList] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const specialFields = useProjectSpecialFields();
 
   useEffect(() => {
     if (innerWidth === null) {
@@ -59,7 +62,10 @@ export default function Navbar() {
                   <NavbarItem title={item?.page_name} param={item?.url} />
                 </>
               ))}
-              <NavbarItem title={LABELS.MAINPAGE} param="/" />
+              <NavbarItem
+                title={specialFields?.main_page_name || LABELS.MAINPAGE}
+                param="/"
+              />
             </div>
           </Container>
         </>

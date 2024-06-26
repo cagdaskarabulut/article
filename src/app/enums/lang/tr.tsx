@@ -96,4 +96,5 @@ export enum LABELS {
   COMMENTS = "Yorumlar",
   WRITE_A_COMMENT = "Yorum yaz",
   RESPOND = "Yanıtla",
+  MAIN_PAGE_NAME = "Anasayfa Adı",
 }

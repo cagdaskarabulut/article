@@ -98,4 +98,5 @@ export enum LABELS {
   COMMENTS = "Comments",
   WRITE_A_COMMENT = "Write a comment",
   RESPOND = "Respond",
+  MAIN_PAGE_NAME = "Main Page Name",
 }
