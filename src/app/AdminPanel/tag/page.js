@@ -9,6 +9,8 @@ import {
   Grid,
   Switch,
   TextField,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
 import LoadingFullPage from "../../../components/reusableComponents/LoadingFullPage";
 import MyAlert from "../../../components/reusableComponents/MyAlert";
@@ -22,6 +24,7 @@ import { set } from "date-fns";
 
 const AdminPanel = () => {
   const router = useRouter();
+  const [isNewOrUpdate, setIsNewOrUpdate] = useState("new");
   const [isSuperAuthorizedUser, setIsSuperAuthorizedUser] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -86,7 +89,7 @@ const AdminPanel = () => {
       return;
     } else {
       try {
-        if (selectedTag && selectedTag?.id > 0) {
+        if (isNewOrUpdate === "update") {
           fetch("/api/topic/update", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -100,7 +103,6 @@ const AdminPanel = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              setIsMessageOpen(true);
               clearAllFields();
             });
         } else {
@@ -116,7 +118,6 @@ const AdminPanel = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              setIsMessageOpen(true);
               clearAllFields();
             });
         }
@@ -154,6 +155,11 @@ const AdminPanel = () => {
     setIsMain(false);
     setSelectedTag("");
     setIsRefreshingTagList(true);
+    setIsMessageOpen(true);
+  };
+
+  const handleChangeNewOrUpdate = (event, newValue) => {
+    setIsNewOrUpdate(newValue);
   };
 
   return (
@@ -167,17 +173,31 @@ const AdminPanel = () => {
             <Container maxWidth="md" className={styles.ContainerStyle}>
               <h3 style={{ textAlign: "center" }}>{LABELS.SUBJECT}</h3>
               <Grid item xs={12} sm={12}>
-                <TagList
-                  selectedTag={selectedTag}
-                  setSelectedTag={setSelectedTag}
-                  isRefreshingTagList={isRefreshingTagList}
-                  setIsRefreshingTagList={setIsRefreshingTagList}
-                />
-                {/* <>
+                <ToggleButtonGroup
+                  color="primary"
+                  value={isNewOrUpdate}
+                  exclusive
+                  onChange={handleChangeNewOrUpdate}
+                  aria-label="Platform"
+                >
+                  <ToggleButton value="new">{LABELS.CREATE}</ToggleButton>
+                  <ToggleButton value="update">{LABELS.UPDATE}</ToggleButton>
+                </ToggleButtonGroup>
+              </Grid>
+              {isNewOrUpdate == "update" && (
+                <Grid item xs={12} sm={12} style={{ marginTop: "20px" }}>
+                  <TagList
+                    selectedTag={selectedTag}
+                    setSelectedTag={setSelectedTag}
+                    isRefreshingTagList={isRefreshingTagList}
+                    setIsRefreshingTagList={setIsRefreshingTagList}
+                  />
+                  {/* <>
                     <br />
                     <span>{topicListInfo}</span>
                   </> */}
-              </Grid>
+                </Grid>
+              )}
               <Grid item xs={12} sm={6}>
                 <TextField
                   style={{ width: "100%", marginTop: "20px" }}
@@ -246,7 +266,18 @@ const AdminPanel = () => {
                 </div> */}
               </Grid>
             </Container>
-            <Errors />
+            {/* <Errors /> */}
+            <MyAlert
+              text={LABELS.PAGE_IS_SUCCESFULLY_SAVED}
+              isOpen={isMessageOpen}
+              setIsOpen={setIsMessageOpen}
+            />
+            <MyAlert
+              text={errorMessage}
+              isOpen={showError}
+              setIsOpen={setShowError}
+              severity="error"
+            />
           </>
         )}
       </>

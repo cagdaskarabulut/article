@@ -9,7 +9,8 @@ export default async function handler(request, response) {
     } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
       await sql`INSERT INTO public.cnmautoparts_topic (name, is_main, image, order_number) VALUES (${request.body.name},${request.body.is_main},${request.body.image}, ${request.body.order_number});`;
     }
-  } catch (error) {
     return response.status(200).json("successfully saved");
+  } catch (error) {
+    return response.status(500).json({ error });
   }
 }
