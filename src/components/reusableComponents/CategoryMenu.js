@@ -78,6 +78,7 @@ const CategoryMenu = ({ activePageName }) => {
                     objectFit="contain"
                     width={32}
                     height={32}
+                    style={{ borderRadius: "50%" }}
                   />
                 </ListItemIcon>
               )}

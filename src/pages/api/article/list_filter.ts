@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (lastPageSizeVal) {
         if (process.env.PROJECT_SITE_NAME === "newszipped") {
-          article_list = await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+          article_list = await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style,banner_order_number, 
           (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -30,7 +30,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            OFFSET ${offsetVal}
            LIMIT ${lastPageSizeVal};`;
         } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-          article_list = await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+          article_list = await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -41,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            OFFSET ${offsetVal}
            LIMIT ${lastPageSizeVal};`;
         } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-          article_list = await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+          article_list = await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -55,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } else {
         if (process.env.PROJECT_SITE_NAME === "newszipped") {
           article_list =
-            await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+            await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
         (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
         (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
         (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -67,7 +67,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
          LIMIT ${sizeVal};`;
         } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
           article_list =
-            await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+            await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
         (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
         (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
         (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -79,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
          LIMIT ${sizeVal};`;
         } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
           article_list =
-            await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+            await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
         (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
         (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
         (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -99,7 +99,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (orderVal === "id") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -110,7 +110,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -121,7 +121,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -134,7 +134,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "create_date") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -145,7 +145,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -156,7 +156,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -169,7 +169,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "like_number") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -180,7 +180,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -191,7 +191,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -204,7 +204,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "view_number") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
             (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -215,7 +215,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
             (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -226,7 +226,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
             (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -239,7 +239,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "comment_number") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
             (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -250,7 +250,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
             (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -261,7 +261,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${lastPageSizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
             (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -276,7 +276,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (orderVal === "id") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -287,7 +287,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -298,7 +298,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
           (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -311,7 +311,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "create_date") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
           (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -322,7 +322,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
           (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -333,7 +333,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
           (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -346,7 +346,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "like_number") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
           (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -357,7 +357,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
           (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -368,7 +368,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
            LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
           (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
           (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
           (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -381,7 +381,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "view_number") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
             (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -392,7 +392,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number, 
             (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -403,7 +403,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, banner_order_number,
             (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -416,7 +416,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         } else if (orderVal === "comment_number") {
           if (process.env.PROJECT_SITE_NAME === "newszipped") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style,  banner_order_number,
             (CASE WHEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.newszipped_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.newszipped_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.newszipped_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -427,7 +427,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style,  banner_order_number,
             (CASE WHEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.brickstanbul_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.brickstanbul_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.brickstanbul_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number
@@ -438,7 +438,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
              LIMIT ${sizeVal};`;
           } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
             article_list =
-              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style, 
+              await sql`SELECT a.id, a.url, a.title, a.topics, a.create_date, a.title_image, a.body, a.is_manuel_page, a.description, a.meta_keys, a.is_active, a.is_show_in_menu, a.page_name, a.is_core_page,is_show_in_banner, is_banner_fit_style, is_banner_stretch_style,  banner_order_number,
             (CASE WHEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) IS NOT NULL THEN (select count(ak.id) from public.cnmautoparts_article_like ak where ak.url=a.url) ELSE 0 END) as like_number,
             (CASE WHEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) IS NOT NULL THEN (select distinct av.count from public.cnmautoparts_article_view av where av.url=a.url) ELSE 0 END) as view_number,
             (CASE WHEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) IS NOT NULL THEN (select count(ac.id) from public.cnmautoparts_article_comment ac where ac.url=a.url) ELSE 0 END) as comment_number

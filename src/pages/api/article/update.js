@@ -18,7 +18,8 @@ export default async function handler(request, response) {
     is_core_page=${request.body.is_core_page}, 
     is_show_in_banner=${request.body.is_show_in_banner}, 
     is_banner_fit_style=${request.body.is_banner_fit_style}, 
-    is_banner_stretch_style=${request.body.is_banner_stretch_style}
+    is_banner_stretch_style=${request.body.is_banner_stretch_style},
+    banner_order_number=${request.body.banner_order_number}
     where url=${request.body.url};`;
     } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
       await sql`UPDATE brickstanbul_article set  
@@ -36,7 +37,8 @@ export default async function handler(request, response) {
     is_core_page=${request.body.is_core_page}, 
     is_show_in_banner=${request.body.is_show_in_banner}, 
     is_banner_fit_style=${request.body.is_banner_fit_style}, 
-    is_banner_stretch_style=${request.body.is_banner_stretch_style}
+    is_banner_stretch_style=${request.body.is_banner_stretch_style},
+    banner_order_number=${request.body.banner_order_number}
     where url=${request.body.url};`;
     } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
       await sql`UPDATE cnmautoparts_article set  
@@ -54,7 +56,8 @@ export default async function handler(request, response) {
     is_core_page=${request.body.is_core_page}, 
     is_show_in_banner=${request.body.is_show_in_banner}, 
     is_banner_fit_style=${request.body.is_banner_fit_style}, 
-    is_banner_stretch_style=${request.body.is_banner_stretch_style}
+    is_banner_stretch_style=${request.body.is_banner_stretch_style},
+    banner_order_number=${request.body.banner_order_number}
     where url=${request.body.url};`;
     }
     return response.status(200).json("successfully saved");

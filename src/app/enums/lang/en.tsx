@@ -11,6 +11,7 @@ export enum LABELS {
   PAGE_IS_SUCCESFULLY_SAVED = "Page is successfully saved",
   USE_WHITE_BACKGROUND_NEVER_TYPE_ANY_WORD = "(use white background. Never type any word)",
   TITLE_IS_REQUIRED = "Title is required",
+  NAME_IS_REQUIRED = "Name is required",
   ACTIVE_LANGUAGE = "English",
   AN_ERROR_OCCURED_WHILE_GENERATING_CONTENT = "An error occurred while generating content",
   IMAGE_IS_REQUIRED = "Image is required",
@@ -99,4 +100,9 @@ export enum LABELS {
   WRITE_A_COMMENT = "Write a comment",
   RESPOND = "Respond",
   MAIN_PAGE_NAME = "Main Page Name",
+  SELECT_TAG = "Select Tag",
+  NAME = "Name",
+  ORDER_NUMBER = "Order Number",
+  IS_MAIN_TOPIC = "Is Main Topic",
+  BANNER_ORDER_NUMBER = "Banner Order Number",
 }

@@ -8,7 +8,8 @@ import styles from "./S3UploadForm.module.scss";
 const UploadForm = ({
   titleImageUrl,
   setTitleImageUrl,
-  setIsLoading
+  setIsLoading,
+  folderPath,
 }) => {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -18,33 +19,37 @@ const UploadForm = ({
   };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      if (!file) return;
+    e.preventDefault();
+    if (!file) return;
 
-      setUploading(true);
-      setIsLoading(true);
-      const formData = new FormData();
-      formData.append("file", file);
+    setUploading(true);
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folderPath", folderPath);
 
-      try {
-        const response = await fetch("/api/s3-upload", {
-          method: "POST",
-          body: formData,
-        });
+    try {
+      const response = await fetch("/api/s3-upload", {
+        method: "POST",
+        body: formData,
+      });
 
-        const data = await response.json();
-        setUploading(false);
-        setIsLoading(false);
-        setTitleImageUrl(
-          "https://karabulut-storage.s3.amazonaws.com/"+ process.env.PROJECT_SITE_NAME + "/" + file.name
-        );
-        setFile(null);
-      } catch (error) {
-        setUploading(false);
-        setIsLoading(false);
-      }
+      const data = await response.json();
+      setUploading(false);
+      setIsLoading(false);
+      setTitleImageUrl(
+        "https://karabulut-storage.s3.amazonaws.com/" +
+          process.env.PROJECT_SITE_NAME +
+          "/" +
+          (folderPath ? folderPath + "/" : "") +
+          file.name
+      );
+      setFile(null);
+    } catch (error) {
+      setUploading(false);
+      setIsLoading(false);
+    }
   };
-
 
   return (
     <>
@@ -71,7 +76,12 @@ const UploadForm = ({
           <br />
           <h3 className={styles.subTitleStyle}>Yüklenen Resim</h3>
           <div className={styles.ArticleImageContainerStyle}>
-            <Image src={titleImageUrl} fill={true} objectFit="contain" alt={"img_" + titleImageUrl}/>
+            <Image
+              src={titleImageUrl}
+              fill={true}
+              objectFit="contain"
+              alt={"img_" + titleImageUrl}
+            />
           </div>
         </>
       )}

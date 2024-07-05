@@ -51,6 +51,7 @@ const AdminPanel = () => {
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [title, setTitle] = useState("");
+  const [bannerOrderNumber, setBannerOrderNumber] = useState(0);
   const [url, setUrl] = useState("");
   const [titleImageUrl, setTitleImageUrl] = useState("");
   const { quill, quillRef } = useQuill();
@@ -190,6 +191,10 @@ const AdminPanel = () => {
     );
   }
 
+  function handleBannerOrderNumberChange(value) {
+    setBannerOrderNumber(value);
+  }
+
   async function handleGenerateTextFieldsWithRobot() {
     setIsLoading(true);
     try {
@@ -259,7 +264,7 @@ const AdminPanel = () => {
       return;
     }
     try {
-      fetch("/api/topic/add", {
+      fetch("/api/topic/addSimple", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -495,7 +500,7 @@ const AdminPanel = () => {
                 <Grid
                   item
                   xs={12}
-                  sm={4}
+                  sm={3}
                   style={
                     isNewOrReadyToUpdate()
                       ? { display: "" }
@@ -518,7 +523,7 @@ const AdminPanel = () => {
                 <Grid
                   item
                   xs={12}
-                  sm={4}
+                  sm={3}
                   style={
                     isNewOrReadyToUpdate()
                       ? { display: "" }
@@ -541,7 +546,7 @@ const AdminPanel = () => {
                 <Grid
                   item
                   xs={12}
-                  sm={4}
+                  sm={3}
                   style={
                     isNewOrReadyToUpdate()
                       ? { display: "" }
@@ -559,6 +564,27 @@ const AdminPanel = () => {
                       />
                     }
                     label={LABELS.IS_BANNER_STRETCH_STYLE}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={3}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                >
+                  <TextField
+                    type="number"
+                    className={styles.TextFieldStyle}
+                    id="standard-basic"
+                    label={LABELS.BANNER_ORDER_NUMBER}
+                    value={bannerOrderNumber}
+                    onChange={(event) =>
+                      handleBannerOrderNumberChange(event.target.value)
+                    }
                   />
                 </Grid>
                 <Divider
@@ -715,6 +741,7 @@ const AdminPanel = () => {
                     titleImageUrl={titleImageUrl}
                     setTitleImageUrl={setTitleImageUrl}
                     setIsLoading={setIsLoading}
+                    folderPath=""
                   />
                 </Grid>
                 <Grid

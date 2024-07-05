@@ -4,6 +4,11 @@
 
 .ListContainerStyle {
   flex-direction: column;
+  max-height: 90vh;
+  /* Ekranın %90'ını geçmeyecek şekilde yükseklik sınırı */
+  overflow-y: auto;
+  /* İçerik yüksekliği sınırları aşarsa dikey kaydırma çubuğu ekle */
+
 
   @include tablet-or-less {
     flex-direction: row !important; // flex-wrap: nowrap !important;

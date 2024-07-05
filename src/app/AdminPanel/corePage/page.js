@@ -761,6 +761,7 @@ const AdminPanel = () => {
                     titleImageUrl={titleImageUrl}
                     setTitleImageUrl={setTitleImageUrl}
                     setIsLoading={setIsLoading}
+                    folderPath=""
                   />
                 </Grid>
                 <Grid

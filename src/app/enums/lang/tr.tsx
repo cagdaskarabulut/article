@@ -10,6 +10,8 @@ export enum LABELS {
   BACK_TO_HOMEPAGE = "Anasayfaya Dön",
   PAGE_IS_SUCCESFULLY_SAVED = "Sayfa başarıyla kaydedildi",
   USE_WHITE_BACKGROUND_NEVER_TYPE_ANY_WORD = "(beyaz arkaplan kullan. Asla kelime yazma)",
+  TITLE_IS_REQUIRED = "Başlık zorunludur",
+  NAME_IS_REQUIRED = "İsim zorunludur",
   ACTIVE_LANGUAGE = "Turkish",
   AN_ERROR_OCCURED_WHILE_GENERATING_CONTENT = "İçerik üretilirken hata oluştu",
   IMAGE_IS_REQUIRED = "Resim eklenmesi zorunludur",
@@ -97,4 +99,9 @@ export enum LABELS {
   WRITE_A_COMMENT = "Yorum yaz",
   RESPOND = "Yanıtla",
   MAIN_PAGE_NAME = "Anasayfa Adı",
+  SELECT_TAG = "Etiket Seç",
+  NAME = "İsim",
+  ORDER_NUMBER = "Sıra Numarası",
+  IS_MAIN_TOPIC = "Ana Konu mu",
+  BANNER_ORDER_NUMBER = "Banner Sıra Numarası",
 }
