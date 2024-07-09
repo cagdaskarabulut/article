@@ -55,10 +55,6 @@ export default function NavbarAdminPanel() {
                 param="/AdminPanel/tag"
               />
               <NavbarItemAdminPanel
-                title={LABELS.BANNER}
-                param="/AdminPanel/banner"
-              />
-              <NavbarItemAdminPanel
                 title={LABELS.DESIGN}
                 param="/AdminPanel/design"
               />

@@ -5,16 +5,9 @@ export const dynamicParams = true;
 export const revalidate = 60;
 
 export async function GET() {
-  let data = "";
-  if (process.env.PROJECT_SITE_NAME === "newszipped") {
-    data =
-      await sql`SELECT page_name, url FROM public.newszipped_article where is_core_page=true;`;
-  } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-    data =
-      await sql`SELECT page_name, url FROM public.brickstanbul_article where is_core_page=true;`;
-  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-    data =
-      await sql`SELECT page_name, url FROM public.cnmautoparts_article where is_core_page=true;`;
-  }
+  const projectName = process.env.PROJECT_SITE_NAME;
+  const values = [projectName];
+  let script = `SELECT page_name, url FROM public.article where project=$1 and is_core_page=true;`;
+  let data = await sql.query(script, values);
   return NextResponse.json({ data });
 }

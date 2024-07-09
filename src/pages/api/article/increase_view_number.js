@@ -2,14 +2,10 @@ import { sql } from "@vercel/postgres";
 
 export default async function handler(request, response) {
   try {
-    if (process.env.PROJECT_SITE_NAME === "newszipped") {
-      await sql`Update public.newszipped_article_view set count=count+1 where url=${request.body.url}`;
-    } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-      await sql`Update public.brickstanbul_article_view set count=count+1 where url=${request.body.url}`;
-    } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-      await sql`Update public.cnmautoparts_article_view set count=count+1 where url=${request.body.url}`;
-    }
-    // await sql`Update public.article_view set count=count+1 where url=${request.body.url} and project=${process.env.PROJECT_SITE_NAME}`;
+    const projectName = process.env.PROJECT_SITE_NAME;
+    const values = [request.body.url, projectName];
+    const script = `Update public.article_view set count=count+1 where url=$1 and project=$2`;
+    let data = await sql.query(script, values);
     return response.status(200).json("successfully saved");
   } catch (error) {
     return response.status(500).json({ error });

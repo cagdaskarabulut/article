@@ -28,7 +28,6 @@ export async function fetchArticle(
 
     const dataSize = await responseSize.json();
     let listSize = dataSize?.article_list_size?.rows[0]?.count;
-
     if (listSize >= pageSize) {
       response = await fetch(
         `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&search=${search}`
@@ -52,6 +51,7 @@ export async function fetchArticle(
     responseSize = await fetch(
       `${process.env.URL}/api/article/list_filter_size?&order=${orderby}`
     );
+
     const dataSize = await responseSize.json();
     let listSize = dataSize?.article_list_size?.rows[0].count;
 

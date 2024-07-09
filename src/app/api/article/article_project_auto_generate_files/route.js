@@ -5,18 +5,10 @@ export const dynamicParams = true;
 export const revalidate = 60;
 
 export async function GET() {
-  // let file = await sql`SELECT id, file_name, file_content, file_path, project FROM public.article_project_auto_generate_files where project=${process.env.PROJECT_SITE_NAME};`;
-  let file;
+  const projectName = process.env.PROJECT_SITE_NAME;
+  const values = [projectName];
+  const script = `SELECT id, file_name, file_content, file_path, project FROM public.article_project_auto_generate_files where project=$1`;
+  let file = await sql.query(script, values);
 
-  if (process.env.PROJECT_SITE_NAME === "newszipped") {
-    file =
-      await sql`SELECT id, file_name, file_content, file_path, project FROM public.article_project_auto_generate_files where project='newszipped';`;
-  } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-    file =
-      await sql`SELECT id, file_name, file_content, file_path, project FROM public.article_project_auto_generate_files where project='brickstanbul';`;
-  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-    file =
-      await sql`SELECT id, file_name, file_content, file_path, project FROM public.article_project_auto_generate_files where project='cnmautoparts';`;
-  }
   return NextResponse.json({ file });
 }

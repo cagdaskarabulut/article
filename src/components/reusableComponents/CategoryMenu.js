@@ -62,7 +62,11 @@ const CategoryMenu = ({ activePageName }) => {
         </ListItem>
 
         {menuList?.map((object, index) => (
-          <ListItem key={object.id} disablePadding style={{ maxWidth: "100%" }}>
+          <ListItem
+            key={object.id}
+            disablePadding
+            style={{ maxWidth: "100%", paddingRight: "8px" }}
+          >
             <ListItemButton
               style={{ maxWidth: "100%" }}
               className={`${styles.menuItem} ${

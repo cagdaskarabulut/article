@@ -80,8 +80,6 @@ const AdminPanel = () => {
 
   const onSubmit = async () => {
     setIsLoading(true);
-    console.log(name);
-    console.log(selectedTag);
     if (!name) {
       setShowError(true);
       setErrorMessage(LABELS.TITLE_IS_REQUIRED);

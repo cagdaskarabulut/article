@@ -1,20 +1,20 @@
 import { sql } from "@vercel/postgres";
 
 export default async function handler(request, response) {
+  const projectName = process.env.PROJECT_SITE_NAME;
   try {
-    if (process.env.PROJECT_SITE_NAME === "newszipped") {
-      await sql`INSERT INTO public.newszipped_article_comment (url, user_email, user_name, create_date, comment)
-      VALUES (${request.body.url}, ${request.body.user_email}, ${request.body.user_name}, CURRENT_TIMESTAMP, ${request.body.comment});`;
-    } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-      await sql`INSERT INTO public.brickstanbul_article_comment (url, user_email, user_name, create_date, comment)
-      VALUES (${request.body.url}, ${request.body.user_email}, ${request.body.user_name}, CURRENT_TIMESTAMP, ${request.body.comment});`;
-    } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-      await sql`INSERT INTO public.cnmautoparts_article_comment (url, user_email, user_name, create_date, comment)
-    VALUES (${request.body.url}, ${request.body.user_email}, ${request.body.user_name}, CURRENT_TIMESTAMP, ${request.body.comment});`;
-    }
+    const values = [
+      request.body.url,
+      request.body.user_email,
+      request.body.user_name,
+      request.body.comment,
+      projectName,
+    ];
 
-    // await sql`INSERT INTO public.article_comment (url, user_email, user_name, create_date, comment, project)
-    // VALUES (${request.body.url}, ${request.body.user_email}, ${request.body.user_name}, CURRENT_TIMESTAMP, ${request.body.comment}, ${process.env.PROJECT_SITE_NAME});`;
+    const script = `INSERT INTO public.article_comment (url, user_email, user_name,create_date, comment,project)
+      VALUES ($1, $2, $3, CURRENT_TIMESTAMP, $4, $5);`;
+
+    let data = await sql.query(script, values);
     return response.status(200).json("successfully saved");
   } catch (error) {
     return response.status(500).json({ error });

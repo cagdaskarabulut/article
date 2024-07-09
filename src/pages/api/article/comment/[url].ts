@@ -4,23 +4,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { url } = req?.query;
-
-  let article_comment_list;
-  if (process.env.PROJECT_SITE_NAME === "newszipped") {
-    article_comment_list =
-      await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
-      public.newszipped_article_comment where url=${url?.toString()} order by create_date desc;`;
-  } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-    article_comment_list =
-      await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
-      public.brickstanbul_article_comment where url=${url?.toString()} order by create_date desc;`;
-  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-    article_comment_list =
-      await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
-      public.cnmautoparts_article_comment where url=${url?.toString()} order by create_date desc;`;
-  }
-  // let article_comment_list = await sql`SELECT id, url, user_email, user_name, create_date, comment FROM 
-  //     public.article_comment where url=${url?.toString()} 
-  //     and project=${process.env.PROJECT_SITE_NAME} order by create_date desc;`;
+  const projectName = process.env.PROJECT_SITE_NAME;
+  const values = [projectName, url?.toString()];
+  const script = `SELECT id, url, user_email, user_name, create_date, comment FROM
+      public.article_comment where project=$1 and url=$2 order by create_date desc;`;
+  let article_comment_list = await sql.query(script, values);
   return res.status(200).json({ article_comment_list });
 }

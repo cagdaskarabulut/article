@@ -26,7 +26,6 @@ const MyCarousel = () => {
   return (
     <Container maxWidth="lg">
       <div className={styles.MyCarouselContainer}>
-        {/* <CrudTable tableName="newszipped_article" /> */}
         {sliderArticleList.length > 0 ? (
           <Carousel autoPlay interval={10000} infiniteLoop>
             {sliderArticleList.map((object, index) => (

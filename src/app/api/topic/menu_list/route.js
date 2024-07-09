@@ -5,16 +5,9 @@ export const dynamicParams = true; // true | false,
 export const revalidate = 60;
 
 export async function GET() {
-  let list;
-  if (process.env.PROJECT_SITE_NAME === "newszipped") {
-    list =
-      await sql`SELECT id, name, is_main, image, order_number FROM public.newszipped_topic where is_main=true order by order_number;`;
-  } else if (process.env.PROJECT_SITE_NAME === "brickstanbul") {
-    list =
-      await sql`SELECT id, name, is_main, image, order_number FROM public.brickstanbul_topic where is_main=true order by order_number;`;
-  } else if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
-    list =
-      await sql`SELECT id, name, is_main, image, order_number FROM public.cnmautoparts_topic where is_main=true order by order_number;`;
-  }
+  const projectName = process.env.PROJECT_SITE_NAME;
+  const values = [projectName];
+  const script = `SELECT id, name, is_main, image, order_number FROM public.topic where project=$1 and is_main=true order by order_number;`;
+  let list = await sql.query(script, values);
   return NextResponse.json({ list });
 }
