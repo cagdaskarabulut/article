@@ -18,7 +18,13 @@
   transform: perspective(1000px) translateZ(30px);
   background-color: $backgroundColor;
   padding: 10px;
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-  margin-left: -4px !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: -4px;
+
+  @include tablet-or-less {
+    margin-left: 8px;
+    padding-left: 10px;
+    width: calc(100% + 8px);
+  }
 }

@@ -4,7 +4,7 @@ import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopBu
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 
 export const dynamicParams = true; // true | false,
-export const revalidate = 300;
+export const revalidate = 86400; // 24 hours
 
 async function getArticle(article) {
   let res = await fetch(process.env.URL + "/api/article/" + article);
@@ -12,13 +12,12 @@ async function getArticle(article) {
 }
 
 export async function generateStaticParams() {
-  const articleUrlList = await fetch(
-    process.env.URL + "/api/list_url"
-    // ,{ next: { revalidate: 3600 } }
-  ).then((res) => res.json());
+  const articleUrlList = await fetch(process.env.URL + "/api/list_url").then(
+    (res) => res.json()
+  );
   return articleUrlList?.article_url_list?.rows.map((p) => ({
     article: p.url,
-    revalidate: 30,
+    revalidate: 86400, // 24 hours
   }));
 }
 
