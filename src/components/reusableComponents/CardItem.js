@@ -60,7 +60,7 @@ const CardItem = ({
   }
 
   const copylink = (e) => {
-    navigator.clipboard.writeText(process.env.URL_WEBSITE + "/" + url);
+    navigator.clipboard.writeText(process.env.PROJECT_URL_WEBSITE + "/" + url);
     setIsCopyLinkMessageOpen(true);
   };
 
