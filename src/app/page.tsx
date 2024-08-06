@@ -6,16 +6,7 @@ import Header from "../components/mainComponents/Header";
 import MyGrid from "../components/toolComponents/MyGrid";
 import FooterPanel from "../components/mainComponents/FooterPanel";
 import { Analytics } from "@vercel/analytics/react";
-import {
-  Button,
-  Container,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Button, Container, Divider } from "@mui/material";
 import Navbar from "../../src/pages/components/Navbar";
 import NavbarOrderby from "../pages/components/NavbarOrderby";
 import NavigateButton from "../pages/components/NavigateButton";
