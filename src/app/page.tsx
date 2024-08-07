@@ -43,13 +43,9 @@ export default async function Home({ searchParams }) {
     search,
     isSmallCards
   );
-  let lastData = await fetchArticle(
-    1,
-    pageSize,
-    "like_number",
-    "",
-    isSmallCards
-  );
+  let mostLikedData = specialFields?.is_project_type_article
+    ? await fetchArticle(1, pageSize, "like_number", "", isSmallCards)
+    : [];
   let mainDataSize = await fetchArticleSize(1, pageSize, orderType, search);
 
   function findTitleByUrl() {
@@ -129,7 +125,7 @@ export default async function Home({ searchParams }) {
                         <h4 className={styles.FindTitleHeaderStyle}>
                           {LABELS.MOST_LIKED_POSTS}
                         </h4>
-                        {lastData}
+                        {mostLikedData}
                       </>
                     }
                     breadcrumbs={undefined}

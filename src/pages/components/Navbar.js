@@ -59,10 +59,15 @@ export default function Navbar() {
             <div className={styles.NavbarContainerStyle}>
               {topMenuList?.map((item) => (
                 <>
-                  <NavbarItem title={item?.page_name} param={item?.url} />
+                  <NavbarItem
+                    key={item?.page_name}
+                    title={item?.page_name}
+                    param={item?.url}
+                  />
                 </>
               ))}
               <NavbarItem
+                key="mainpage"
                 title={specialFields?.main_page_name || LABELS.MAINPAGE}
                 param="/"
               />

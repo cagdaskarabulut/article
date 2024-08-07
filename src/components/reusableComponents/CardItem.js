@@ -157,19 +157,17 @@ const CardItem = ({
 
   const BodyLeftContent = () => {
     return (
-      <>
-        <div
-          key={"div1_" + url}
-          id={"div1_" + url}
-          className={
-            activeIsSmallCardStyle
-              ? styles.SmallBodyLeftContentStyle
-              : styles.BodyLeftContentStyle
-          }
-          dangerouslySetInnerHTML={{ __html: body }}
-          onClick={() => goToArticlePageAction()}
-        ></div>
-      </>
+      <div
+        key={"div1_" + url}
+        id={"div1_" + url}
+        className={
+          activeIsSmallCardStyle
+            ? styles.SmallBodyLeftContentStyle
+            : styles.BodyLeftContentStyle
+        }
+        dangerouslySetInnerHTML={{ __html: body }}
+        onClick={() => goToArticlePageAction()}
+      ></div>
     );
   };
 
@@ -226,8 +224,8 @@ const CardItem = ({
       >
         <div
           className={styles.HeaderContent}
-          key={"div3_" + url}
-          id={"div3_" + url}
+          key={"div30_" + url}
+          id={"div30_" + url}
         >
           <MyGrid
             leftContent={<HeaderLeftContent />}
@@ -298,8 +296,8 @@ const CardItem = ({
       >
         <div
           className={styles.HeaderContentBigImage}
-          key={"div3_" + url}
-          id={"div3_" + url}
+          key={"div31_" + url}
+          id={"div31_" + url}
         >
           <CardMedia
             onClick={() => goToArticlePageAction()}
@@ -312,8 +310,8 @@ const CardItem = ({
         </div>
         <div
           className={styles.BodyContentBigImage}
-          key={"div3_" + url}
-          id={"div3_" + url}
+          key={"div32_" + url}
+          id={"div32_" + url}
         >
           <CardContent>
             <MyGrid
@@ -323,9 +321,9 @@ const CardItem = ({
               isRightContentSmall
             ></MyGrid>
 
-            <Typography variant="body2" color="text.secondary">
-              <BodyLeftContent />
-            </Typography>
+            {/* <Typography variant="body2" color="text.secondary"> */}
+            <BodyLeftContent />
+            {/* </Typography> */}
           </CardContent>
         </div>
       </Card>

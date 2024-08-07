@@ -37,6 +37,7 @@ export default function NavbarItem({ title, param, size, isShowOrderByIcon }) {
         onClick={() => goTarget(param)}
       >
         <span
+          key={"NavbarItemSpanId_" + param}
           className={
             size === "small" ? styles.ListItemStyleSmall : styles.ListItemStyle
           }

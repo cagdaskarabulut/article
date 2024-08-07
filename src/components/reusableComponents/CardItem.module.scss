@@ -51,6 +51,7 @@
       -webkit-line-clamp: 5;
       /* after x line show ... */
       -webkit-box-orient: vertical;
+      color: $headerFontColor !important;
 
       h1 {
         display: none;
