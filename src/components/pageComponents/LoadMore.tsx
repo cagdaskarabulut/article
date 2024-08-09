@@ -33,25 +33,65 @@ function LoadMore({
   }, [orderType, search]);
 
   useEffect(() => {
+    console.log("useEffect geldi ");
+
     if (inView && !isFinished) {
+      console.log("inView geldi ");
       setIsLoading(true);
       const delay = 200;
-      const timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout(async () => {
         if (totalListSize < page * rowForPage) {
           setIsFinished(true);
-        } else {
-          fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
-            (res) => {
-              if (res) {
-                setData([...data, ...res]);
-                page++;
-              } else {
-                setIsFinished(true);
-              }
-              setIsLoading(false);
-            }
-          );
         }
+
+        fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
+          (res) => {
+            if (res) {
+              console.log("res geldi ");
+              setData([...data, ...res]);
+              page++;
+            } else {
+              console.log("res null geldi ");
+              setIsFinished(true);
+            }
+            setIsLoading(false);
+          }
+        );
+
+        // if (totalListSize < page * rowForPage) {
+        //   // const remainingList = totalListSize - (page - 1) * rowForPage;
+        //   fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
+        //     (res) => {
+        //       if (res) {
+        //         console.log("res geldi ");
+        //         setData([...data, ...res]);
+        //         page++;
+        //       } else {
+        //         console.log("res null geldi ");
+        //         setIsFinished(true);
+        //       }
+        //       setIsLoading(false);
+        //     }
+        //   );
+        //   setIsFinished(true);
+        // } else {
+        //   console.log(
+        //     "else e geldi => totalListSize >= page * rowForPage geldi "
+        //   );
+        //   fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
+        //     (res) => {
+        //       if (res) {
+        //         console.log("res geldi ");
+        //         setData([...data, ...res]);
+        //         page++;
+        //       } else {
+        //         console.log("res null geldi ");
+        //         setIsFinished(true);
+        //       }
+        //       setIsLoading(false);
+        //     }
+        //   );
+        // }
       }, delay);
       // Clear the timeout if the component is unmounted or inView becomes false
       return () => clearTimeout(timeoutId);

@@ -21,6 +21,7 @@ export async function fetchArticle(
   let responseSize;
   let data;
   const pageSize = page * size;
+
   if (search) {
     responseSize = await fetch(
       `${process.env.URL}/api/article/list_filter_size?&search=${search}`
@@ -28,6 +29,7 @@ export async function fetchArticle(
 
     const dataSize = await responseSize.json();
     let listSize = dataSize?.article_list_size?.rows[0]?.count;
+
     if (listSize >= pageSize) {
       response = await fetch(
         `${process.env.URL}/api/article/list_filter?page=${page}&size=${size}&search=${search}`
@@ -75,10 +77,6 @@ export async function fetchArticle(
       data = null;
     }
   }
-
-  // if (!response.ok) {
-  //   throw new Error("Failed to fetch data");
-  // }
 
   return data?.article_list?.rows?.map((item: ArticleProp, index: number) => (
     <>

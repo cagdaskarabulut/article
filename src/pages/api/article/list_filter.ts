@@ -8,7 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let sizeVal = (size?.toString() != undefined ? parseInt(size?.toString(), 10) : 1);
   let orderVal = order?.toString();
   let orderByPart = orderVal ? `order by ${orderVal} desc,id asc` : "order by id asc";
-  let offsetVal = pageVal - 1 > 0 ? (((pageVal - 1) * sizeVal) + 1) : 0;
+  // let offsetVal = pageVal - 1 > 0 ? (((pageVal - 1) * sizeVal) + 1) : 0;
+  let offsetVal = pageVal - 1 > 0 ? (((pageVal - 1) * sizeVal)) : 0;
   let searchVal = search?.toString();
   let searchPart = searchVal ? (`and (
     unaccent(a.topics) ilike unaccent('%${searchVal}%') or 

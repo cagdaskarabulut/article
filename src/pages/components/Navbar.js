@@ -60,6 +60,7 @@ export default function Navbar() {
               {topMenuList?.map((item) => (
                 <>
                   <NavbarItem
+                    id={item?.page_name}
                     key={item?.page_name}
                     title={item?.page_name}
                     param={item?.url}
@@ -67,6 +68,7 @@ export default function Navbar() {
                 </>
               ))}
               <NavbarItem
+                id="mainpage"
                 key="mainpage"
                 title={specialFields?.main_page_name || LABELS.MAINPAGE}
                 param="/"

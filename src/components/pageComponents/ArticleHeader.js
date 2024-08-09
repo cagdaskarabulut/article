@@ -43,7 +43,6 @@ const ArticleHeader = ({ article }) => {
   const [isLoadedLike, setIsLoadedLike] = useState(false);
   const [isLoadedWatch, setIsLoadedWatch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeArticle, setActiveArticle] = useState(""); // todo bunu doldur useeffect te sonra bunu kullan
 
   useEffect(() => {
     setIsAuthChecked(false);

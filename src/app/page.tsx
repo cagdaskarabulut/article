@@ -43,10 +43,10 @@ export default async function Home({ searchParams }) {
     search,
     isSmallCards
   );
+  let mainDataSize = await fetchArticleSize(1, pageSize, orderType, search);
   let mostLikedData = specialFields?.is_project_type_article
     ? await fetchArticle(1, pageSize, "like_number", "", isSmallCards)
     : [];
-  let mainDataSize = await fetchArticleSize(1, pageSize, orderType, search);
 
   function findTitleByUrl() {
     let result = "";
