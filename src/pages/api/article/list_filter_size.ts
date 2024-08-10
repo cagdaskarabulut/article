@@ -18,6 +18,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const script = `SELECT count(a.id) FROM public.article a where a.project=$1 and (a.is_core_page is null or a.is_core_page=false) and a.is_active=true ${searchPart};`;
 
+    // console.log("script: " + script);
+
+    // console.log("values: " + values);
+
     article_list_size = await sql.query(script, values);
   } catch (e) {
     article_list_size = "";

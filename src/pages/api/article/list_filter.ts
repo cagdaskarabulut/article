@@ -21,6 +21,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let article_list;
   const projectName = process.env.PROJECT_SITE_NAME;
   let activeSize = lastPageSizeVal ? lastPageSizeVal : sizeVal;
+  // console.log("lastPageSizeVal: " + lastPageSizeVal);
+  // console.log("sizeVal: " + sizeVal);
+
+
 
   try {
     let values = [projectName, offsetVal, activeSize];
@@ -38,6 +42,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ${orderByPart}
     OFFSET $2
     LIMIT $3;`;
+
+
+    // console.log("script: " + script);
+
+    // console.log("values: " + values);
 
     article_list = await sql.query(script, values);
   }

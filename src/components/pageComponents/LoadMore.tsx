@@ -33,10 +33,10 @@ function LoadMore({
   }, [orderType, search]);
 
   useEffect(() => {
-    console.log("useEffect geldi ");
+    // console.log("useEffect geldi ");
 
     if (inView && !isFinished) {
-      console.log("inView geldi ");
+      // console.log("inView geldi ");
       setIsLoading(true);
       const delay = 200;
       const timeoutId = setTimeout(async () => {
@@ -47,11 +47,11 @@ function LoadMore({
         fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
           (res) => {
             if (res) {
-              console.log("res geldi ");
+              // console.log("res geldi ");
               setData([...data, ...res]);
               page++;
             } else {
-              console.log("res null geldi ");
+              // console.log("res null geldi ");
               setIsFinished(true);
             }
             setIsLoading(false);
