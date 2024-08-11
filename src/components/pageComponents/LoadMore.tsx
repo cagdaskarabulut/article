@@ -101,17 +101,15 @@ function LoadMore({
 
   return (
     <>
-      <section>
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "flex-start",
-          }}
-        >
-          {data}
-        </div>
+      <section
+        style={{
+          width: "100%",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "flex-start",
+        }}
+      >
+        {data}
       </section>
       <br />
       <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>

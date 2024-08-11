@@ -32,7 +32,8 @@ export default async function Home({ searchParams }) {
   const LABELS =
     specialFields?.default_language === "tr" ? LABELS_tr : LABELS_en;
 
-  let pageSize = specialFields?.is_project_type_product ? 9 : 5;
+  // let pageSize = specialFields?.is_project_type_product ? 9 : 5;
+  let pageSize = 9;
   let orderType = searchParams.orderby || "create_date"; //order by boş gelirse default değer atanır
   let search = searchParams.search || "";
   let isSmallCards = specialFields?.is_project_type_product ? true : false;
