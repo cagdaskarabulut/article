@@ -18,7 +18,8 @@ import { LABELS as LABELS_en } from "./enums/lang/en";
 import { LABELS as LABELS_tr } from "./enums/lang/tr";
 
 export const dynamicParams = true; // true | false,
-export const revalidate = 86400;
+//export const revalidate = 86400;
+export const revalidate = 60;
 
 export default async function Home({ searchParams }) {
   const specialFields = await fetch(
