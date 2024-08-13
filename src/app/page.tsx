@@ -16,7 +16,6 @@ import MyCarousel from "../components/reusableComponents/MyCarousel";
 import FocusContent from "../components/reusableComponents/FocusContent";
 import { LABELS as LABELS_en } from "./enums/lang/en";
 import { LABELS as LABELS_tr } from "./enums/lang/tr";
-
 export const dynamicParams = true;
 export const revalidate = 86400;
 
