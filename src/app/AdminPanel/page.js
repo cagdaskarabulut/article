@@ -23,6 +23,8 @@ import MyAlert from "../../components/reusableComponents/MyAlert";
 import { Label } from "@mui/icons-material";
 import useLanguages from "../../hooks/useLanguages";
 import { useRouter } from "next/navigation";
+import RevalidateAllButton from "../../components/reusableComponents/RevalidateAllButton";
+
 const AdminPanel = () => {
   const router = useRouter();
   const LABELS = useLanguages() || {};
@@ -263,6 +265,7 @@ const AdminPanel = () => {
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <div style={{ paddingTop: "30px", paddingBottom: "60px" }}>
+                    <RevalidateAllButton />
                     <Button
                       variant="contained"
                       type="submit"
