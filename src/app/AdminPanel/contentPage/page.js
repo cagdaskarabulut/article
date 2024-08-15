@@ -437,17 +437,19 @@ const AdminPanel = () => {
                 </Grid>
 
                 {isNewOrUpdate == "update" && (
-                  <Grid item xs={12} sm={12}>
-                    <UrlList
-                      isDisabled
-                      isSingleSelection
-                      setArticle={setArticle}
-                      selectedUrl={selectedUrl}
-                      setSelectedUrl={setSelectedUrl}
-                      isRefreshingUrlList={isRefreshingUrlList}
-                      setIsRefreshingUrlList={setIsRefreshingUrlList}
-                    />
-                  </Grid>
+                  <>
+                    <Grid item xs={12} sm={12}>
+                      <UrlList
+                        isDisabled
+                        isSingleSelection
+                        setArticle={setArticle}
+                        selectedUrl={selectedUrl}
+                        setSelectedUrl={setSelectedUrl}
+                        isRefreshingUrlList={isRefreshingUrlList}
+                        setIsRefreshingUrlList={setIsRefreshingUrlList}
+                      />
+                    </Grid>
+                  </>
                 )}
 
                 <Grid

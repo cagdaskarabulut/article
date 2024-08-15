@@ -17,7 +17,7 @@ import FocusContent from "../components/reusableComponents/FocusContent";
 import { LABELS as LABELS_en } from "./enums/lang/en";
 import { LABELS as LABELS_tr } from "./enums/lang/tr";
 export const dynamicParams = true;
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export default async function Home({ searchParams }) {
   const specialFields = await fetch(

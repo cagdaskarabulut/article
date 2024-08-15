@@ -1,4 +1,3 @@
-// components/FocusContent.js
 "use client";
 
 import { useEffect, useRef } from "react";

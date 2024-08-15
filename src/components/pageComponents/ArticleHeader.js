@@ -126,7 +126,7 @@ const ArticleHeader = ({ article }) => {
               <span style={{ marginLeft: "5px" }}>{watch_number}</span>
             </div>
 
-            <div style={{ float: "right", marginLeft: "25px" }}>
+            {/* <div style={{ float: "right", marginLeft: "25px" }}>
               <IconButton
                 aria-label="view"
                 size="medium"
@@ -139,7 +139,7 @@ const ArticleHeader = ({ article }) => {
               <span style={{ marginLeft: "5px" }}>
                 {article?.comment_number}
               </span>
-            </div>
+            </div> */}
           </>
         </div>
       </>

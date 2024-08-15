@@ -82,9 +82,6 @@ const UrlList = ({
           id="tags-standard"
           options={allUrlList}
           getOptionLabel={(option) => option?.url}
-          // onChange={(event, newValue) => {
-          //   setSelectedUrl(newValue);
-          // }}
           onChange={(event, newValue) => handleChange(newValue)}
           renderInput={(params) => (
             <TextField {...params} style={activeInputStyle} label={label} />
