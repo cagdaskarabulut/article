@@ -4,7 +4,7 @@ import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopBu
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 
 export const dynamicParams = true; // true | false,
-export const revalidate = 3600; // 1 hour
+export const revalidate = 86400; // 1 hour
 
 async function getArticle(article) {
   let res = await fetch(process.env.URL + "/api/article/" + article);

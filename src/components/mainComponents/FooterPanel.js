@@ -24,15 +24,17 @@ const FooterPanel = () => {
 
   const LeftContent = () => {
     return (
-      <>
-        <div className={styles.PanelContainerStyle}>
-          <div className={styles.FooterContentStyle}>
-            {specialFields?.footer_copyright}
-            {isMobile ? " " : <br />}
-            {specialFields?.footer_company}
-          </div>
+      <div className={styles.PanelContainerStyle}>
+        <div className={styles.FooterContentStyle}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: specialFields?.footer_copyright || "",
+            }}
+          />
+          {isMobile ? " " : <br />}
+          {specialFields?.footer_company}
         </div>
-      </>
+      </div>
     );
   };
 
