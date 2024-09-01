@@ -392,7 +392,13 @@ export default async function Home({ searchParams }) {
                     </Grid>
                   ))}
                   <Grid item xs={12}>
-                    <LoadMore orderType={orderType} />
+                    <LoadMore
+                      orderType={orderType}
+                      search={search}
+                      totalListSize={mainDataSize}
+                      pageSize={pageSize}
+                      isSmallCards={isSmallCards}
+                    />
                   </Grid>
                 </Grid>
               }
