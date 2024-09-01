@@ -382,6 +382,8 @@ export default async function Home({ searchParams }) {
           <FullScreenVideo />
           <div className={styles.content}>
             <MyGrid
+              breadcrumbs={null}
+              title={null}
               leftContent={
                 <Grid container spacing={2}>
                   {mainData.map((item, index) => (
@@ -390,18 +392,22 @@ export default async function Home({ searchParams }) {
                     </Grid>
                   ))}
                   <Grid item xs={12}>
-                    <LoadMore
-                      orderType={orderType}
-                      search={search}
-                      totalListSize={mainDataSize}
-                      pageSize={pageSize}
-                      isSmallCards={isSmallCards}
-                    />
+                    <LoadMore orderType={orderType} />
                   </Grid>
                 </Grid>
               }
+              middleContent={null}
+              rightContent={null}
+              isRightContentSmall={false}
+              isLeftContentSmall={false}
               isOneFullContent={true}
+              contentPosition={null}
+              forHeader={false}
+              isStaticWidth={false}
+              isHideRightSideOnMobile={false}
               isHideWhileLoading={true}
+              isShowLoadingBarWhileLoading={false}
+              isLeftContentSticky={false}
             />
             {/* <GoogleMap /> */}
           </div>
