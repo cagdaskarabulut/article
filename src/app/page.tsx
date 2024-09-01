@@ -418,6 +418,9 @@ export default async function Home({ searchParams }) {
             {/* <GoogleMap /> */}
           </div>
           <FloatingButtons />
+          <ScrollToTopButton showBelow={250} />
+          <FooterPanel />
+          <Analytics />
         </>
       )}
 
