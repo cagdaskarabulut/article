@@ -16,6 +16,11 @@ import MyCarousel from "../components/reusableComponents/MyCarousel";
 import FocusContent from "../components/reusableComponents/FocusContent";
 import { LABELS as LABELS_en } from "./enums/lang/en";
 import { LABELS as LABELS_tr } from "./enums/lang/tr";
+import FixedHeaderMenu from "../components/pageComponents/FixedHeaderMenu";
+import FullScreenVideo from "../components/pageComponents/FullScreenVideo";
+import GoogleMap from "../components/pageComponents/GoogleMap";
+import FloatingButtons from "../components/pageComponents/FloatingButtons";
+
 export const dynamicParams = true;
 export const revalidate = 86400;
 
@@ -73,167 +78,204 @@ export default async function Home({ searchParams }) {
   }
 
   return (
-    <div className={styles.ContainerPageContainerStyle}>
-      <div className={styles.HeaderStyle}>
-        <Header isMainPage={true} />
-        {specialFields?.is_top_menu_active && <Navbar />}
-      </div>
-      <div style={{ height: "300px" }}>
-        <MyCarousel />
-      </div>
-      <FocusContent>
-        <Container className={styles.ContentStyle} id="content" maxWidth="lg">
-          {/* ARTICLE TYPE PAGE */}
-          {specialFields?.is_project_type_article && (
-            <Container maxWidth="lg" className={styles.ContentContainerStyle}>
-              {mainDataSize > 0 && (
-                <>
-                  {specialFields?.is_project_type_article && (
-                    <>
-                      <Divider />
-                      <NavbarOrderby />
-                      <Divider />
-                    </>
-                  )}
-                  <MyGrid
-                    leftContent={
-                      <div>
-                        {!specialFields?.is_project_type_article &&
-                          !search &&
-                          specialFields?.is_order_by_menu_active && (
+    <>
+      {/* MODERN TYPE PAGE */}
+      {specialFields?.is_project_type_modern && (
+        <>
+          <FixedHeaderMenu />
+          <FullScreenVideo />
+          <div className={styles.content}>
+            <div className={styles.textSection}></div>
+            {/* <GoogleMap /> */}
+          </div>
+          {/* <FloatingButtons /> */}
+        </>
+      )}
+
+      {(specialFields?.is_project_type_article ||
+        specialFields?.is_project_type_product) && (
+        <>
+          <div className={styles.ContainerPageContainerStyle}>
+            <div className={styles.HeaderStyle}>
+              <Header isMainPage={true} />
+              {specialFields?.is_top_menu_active && <Navbar />}
+            </div>
+            <div style={{ height: "300px" }}>
+              <MyCarousel />
+            </div>
+            <FocusContent>
+              <Container
+                className={styles.ContentStyle}
+                id="content"
+                maxWidth="lg"
+              >
+                {/* ARTICLE TYPE PAGE */}
+                {specialFields?.is_project_type_article && (
+                  <Container
+                    maxWidth="lg"
+                    className={styles.ContentContainerStyle}
+                  >
+                    {mainDataSize > 0 && (
+                      <>
+                        {specialFields?.is_project_type_article && (
+                          <>
+                            <Divider />
+                            <NavbarOrderby />
+                            <Divider />
+                          </>
+                        )}
+                        <MyGrid
+                          leftContent={
+                            <div>
+                              {!specialFields?.is_project_type_article &&
+                                !search &&
+                                specialFields?.is_order_by_menu_active && (
+                                  <>
+                                    <Divider />
+                                    <NavbarOrderby />
+                                    <Divider />
+                                  </>
+                                )}
+                              <h4 className={styles.FindTitleHeaderStyle}>
+                                {findTitleByUrl()}
+                              </h4>
+                              {mainData}
+                              <LoadMore
+                                orderType={orderType}
+                                search={search}
+                                totalListSize={mainDataSize}
+                                pageSize={pageSize}
+                                isSmallCards={isSmallCards}
+                              />
+                            </div>
+                          }
+                          rightContent={
                             <>
-                              <Divider />
-                              <NavbarOrderby />
-                              <Divider />
+                              <h4 className={styles.FindTitleHeaderStyle}>
+                                {LABELS.MOST_LIKED_POSTS}
+                              </h4>
+                              {mostLikedData}
                             </>
-                          )}
-                        <h4 className={styles.FindTitleHeaderStyle}>
-                          {findTitleByUrl()}
-                        </h4>
-                        {mainData}
-                        <LoadMore
-                          orderType={orderType}
-                          search={search}
-                          totalListSize={mainDataSize}
-                          pageSize={pageSize}
-                          isSmallCards={isSmallCards}
+                          }
+                          breadcrumbs={undefined}
+                          title={undefined}
+                          middleContent={undefined}
+                          isRightContentSmall={undefined}
+                          isLeftContentSmall={undefined}
+                          isOneFullContent={undefined}
+                          contentPosition={undefined}
+                          forHeader={undefined}
+                          isStaticWidth={undefined}
+                          isHideRightSideOnMobile={true}
+                          isHideWhileLoading={true}
+                          isShowLoadingBarWhileLoading={true}
+                          isLeftContentSticky={undefined}
                         />
-                      </div>
-                    }
-                    rightContent={
-                      <>
-                        <h4 className={styles.FindTitleHeaderStyle}>
-                          {LABELS.MOST_LIKED_POSTS}
-                        </h4>
-                        {mostLikedData}
-                      </>
-                    }
-                    breadcrumbs={undefined}
-                    title={undefined}
-                    middleContent={undefined}
-                    isRightContentSmall={undefined}
-                    isLeftContentSmall={undefined}
-                    isOneFullContent={undefined}
-                    contentPosition={undefined}
-                    forHeader={undefined}
-                    isStaticWidth={undefined}
-                    isHideRightSideOnMobile={true}
-                    isHideWhileLoading={true}
-                    isShowLoadingBarWhileLoading={true}
-                    isLeftContentSticky={undefined}
-                  />
-                </>
-              )}
-              {mainDataSize <= 0 && (
-                <div
-                  style={{
-                    textAlign: "center",
-                    paddingTop: "50px",
-                    paddingBottom: "50px",
-                  }}
-                >
-                  <p>
-                    No record found for "<b>{search}</b>"
-                  </p>
-                  <br />
-                  <NavigateButton title={LABELS.BACK_TO_HOMEPAGE} target="/" />
-                </div>
-              )}
-            </Container>
-          )}
-          {/* PRODUCT TYPE PAGE */}
-          {specialFields?.is_project_type_product && (
-            <Container maxWidth="lg" className={styles.ContentContainerStyle}>
-              <MyGrid
-                leftContent={<CategoryMenu activePageName={search} />}
-                rightContent={
-                  <>
-                    {!search && specialFields?.is_order_by_menu_active && (
-                      <>
-                        <Divider />
-                        <NavbarOrderby />
-                        <Divider />
                       </>
                     )}
-                    <h4 className={styles.FindTitleHeaderStyle}>
-                      {findTitleByUrl()}
-                    </h4>
-                    <div
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        flexWrap: "wrap",
-                        justifyContent: "flex-start",
-                      }}
-                    >
-                      {mainData}
-                      <LoadMore
-                        orderType={orderType}
-                        search={search}
-                        totalListSize={mainDataSize}
-                        pageSize={pageSize}
-                        isSmallCards={isSmallCards}
-                      />
-                    </div>
-                  </>
-                }
-                breadcrumbs={undefined}
-                title={undefined}
-                middleContent={undefined}
-                isRightContentSmall={undefined}
-                isOneFullContent={undefined}
-                contentPosition={undefined}
-                forHeader={undefined}
-                isStaticWidth={undefined}
-                isHideRightSideOnMobile={false}
-                isHideWhileLoading={true}
-                isShowLoadingBarWhileLoading={true}
-                isLeftContentSmall={true}
-                isLeftContentSticky={true}
-              />
-              {mainDataSize <= 0 && (
-                <div
-                  style={{
-                    textAlign: "center",
-                    paddingTop: "50px",
-                    paddingBottom: "50px",
-                  }}
-                >
-                  <p>
-                    No record found for "<b>{search}</b>"
-                  </p>
-                  <br />
-                  <NavigateButton title={LABELS.BACK_TO_HOMEPAGE} target="/" />
-                </div>
-              )}
-            </Container>
-          )}
-          <ScrollToTopButton showBelow={250} />
-        </Container>
-      </FocusContent>
-      <br />
-      <FooterPanel />
-      <Analytics />
-    </div>
+                    {mainDataSize <= 0 && (
+                      <div
+                        style={{
+                          textAlign: "center",
+                          paddingTop: "50px",
+                          paddingBottom: "50px",
+                        }}
+                      >
+                        <p>
+                          No record found for "<b>{search}</b>"
+                        </p>
+                        <br />
+                        <NavigateButton
+                          title={LABELS.BACK_TO_HOMEPAGE}
+                          target="/"
+                        />
+                      </div>
+                    )}
+                  </Container>
+                )}
+                {/* PRODUCT TYPE PAGE */}
+                {specialFields?.is_project_type_product && (
+                  <Container
+                    maxWidth="lg"
+                    className={styles.ContentContainerStyle}
+                  >
+                    <MyGrid
+                      leftContent={<CategoryMenu activePageName={search} />}
+                      rightContent={
+                        <>
+                          {!search &&
+                            specialFields?.is_order_by_menu_active && (
+                              <>
+                                <Divider />
+                                <NavbarOrderby />
+                                <Divider />
+                              </>
+                            )}
+                          <h4 className={styles.FindTitleHeaderStyle}>
+                            {findTitleByUrl()}
+                          </h4>
+                          <div
+                            style={{
+                              width: "100%",
+                              display: "flex",
+                              flexWrap: "wrap",
+                              justifyContent: "flex-start",
+                            }}
+                          >
+                            {mainData}
+                            <LoadMore
+                              orderType={orderType}
+                              search={search}
+                              totalListSize={mainDataSize}
+                              pageSize={pageSize}
+                              isSmallCards={isSmallCards}
+                            />
+                          </div>
+                        </>
+                      }
+                      breadcrumbs={undefined}
+                      title={undefined}
+                      middleContent={undefined}
+                      isRightContentSmall={undefined}
+                      isOneFullContent={undefined}
+                      contentPosition={undefined}
+                      forHeader={undefined}
+                      isStaticWidth={undefined}
+                      isHideRightSideOnMobile={false}
+                      isHideWhileLoading={true}
+                      isShowLoadingBarWhileLoading={true}
+                      isLeftContentSmall={true}
+                      isLeftContentSticky={true}
+                    />
+                    {mainDataSize <= 0 && (
+                      <div
+                        style={{
+                          textAlign: "center",
+                          paddingTop: "50px",
+                          paddingBottom: "50px",
+                        }}
+                      >
+                        <p>
+                          No record found for "<b>{search}</b>"
+                        </p>
+                        <br />
+                        <NavigateButton
+                          title={LABELS.BACK_TO_HOMEPAGE}
+                          target="/"
+                        />
+                      </div>
+                    )}
+                  </Container>
+                )}
+                <ScrollToTopButton showBelow={250} />
+              </Container>
+            </FocusContent>
+            <br />
+            <FooterPanel />
+            <Analytics />
+          </div>
+        </>
+      )}
+    </>
   );
 }

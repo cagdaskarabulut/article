@@ -2,6 +2,7 @@ import { sql } from "@vercel/postgres";
 
 export default async function handler(request, response) {
   try {
+    //todo - is_project_type_modern alanı eklenecek.
     const projectName = process.env.PROJECT_SITE_NAME;
     const values = [
       request.body.is_project_type_article,

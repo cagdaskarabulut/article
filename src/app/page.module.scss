@@ -46,6 +46,7 @@
 .ContentStyle {
   padding-top: 20px !important;
 
+
   .ContentContainerStyle {
     // background-color: $bodyContentBackgroundColor !important;
     background: $bodyContentBackgroundColor1;
@@ -57,4 +58,14 @@
   margin: "0px";
   text-align: center !important;
   color: rgba(0, 0, 0, 0.6);
+}
+
+.content {
+  min-height: 200vh;
+  padding-top: 100vh;
+
+  .textSection {
+    margin-top: 50px;
+    text-align: center;
+  }
 }
