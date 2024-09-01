@@ -62,23 +62,21 @@ const FixedHeaderMenu = () => {
         {!isMobile && (
           <ul style={styles.navList}>
             <li style={styles.navItem}>
+              {/* Burası anasayfa zaten diğer tasarım tiplerinde de vardı */}
               <a href="#" style={styles.navLink}>
-                Home
+                Anasayfa
               </a>
             </li>
             <li style={styles.navItem}>
+              {/* Burası dinamik eklenen sayfalar kısmından alınabilir */}
               <a href="#" style={styles.navLink}>
-                About
+                Hakkımızda
               </a>
             </li>
             <li style={styles.navItem}>
+              {/* Burası için Anasayfa gibi özel bir sayfa yapılıp bir admin sayfasından iletişim sayfası yönetilebilir yapılacak */}
               <a href="#" style={styles.navLink}>
-                Services
-              </a>
-            </li>
-            <li style={styles.navItem}>
-              <a href="#" style={styles.navLink}>
-                Contact
+                İletişim
               </a>
             </li>
           </ul>

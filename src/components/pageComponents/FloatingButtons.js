@@ -8,12 +8,12 @@ const FloatingButtons = () => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     if (isMobile) {
       window.open(
-        `https://wa.me/${process.env.PHONE_NUMBER_WHATSAPP}`, //905XXXXXXXXX
+        `https://wa.me/${process.env.PROJECT_PHONE_NUMBER_WHATSAPP}`,
         "_blank"
       );
     } else {
       window.open(
-        `https://web.whatsapp.com/send?phone=${process.env.PHONE_NUMBER_WHATSAPP}`,
+        `https://web.whatsapp.com/send?phone=${process.env.PROJECT_PHONE_NUMBER_WHATSAPP}`,
         "_blank"
       );
     }
@@ -21,8 +21,10 @@ const FloatingButtons = () => {
 
   return (
     <div style={styles.container}>
-      <a href={"tel:" + process.env.PHONE_NUMBER_CALL} style={styles.button}>
-        {/* +905XXXXXXXXX */}
+      <a
+        href={"tel:" + process.env.PROJECT_PHONE_NUMBER_CALL}
+        style={styles.button}
+      >
         <PhoneIcon style={styles.icon} />
       </a>
       <button onClick={handleWhatsAppClick} style={styles.button}>

@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 
 const FullScreenVideo = () => {
+  let introHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/intro.mp4`;
+
   useEffect(() => {
     const handleResize = () => {
       const height = window.innerHeight;
@@ -18,12 +20,8 @@ const FullScreenVideo = () => {
 
   return (
     <div id="video-container" style={styles.videoContainer}>
-      <video style={styles.video} autoPlay muted loop>
-        <source
-          src="https://karabulut-storage.s3.amazonaws.com/ozkansurucukursu/intro.mp4"
-          // src="/intro.mov"
-          type="video/mp4"
-        />
+      <video style={styles.video} autoPlay muted loop playsInline>
+        <source src={introHref} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

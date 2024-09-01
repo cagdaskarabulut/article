@@ -24,6 +24,8 @@ module.exports = {
     PROJECT_URL_WEBSITE: process.env.URL_WEBSITE,
     PROJECT_SUPER_ADMIN_USER: process.env.SUPER_ADMIN_USER,
     PROJECT_ADMIN_USER: process.env.ADMIN_USER,
+    PROJECT_PHONE_NUMBER_WHATSAPP: process.env.PHONE_NUMBER_WHATSAPP,
+    PROJECT_PHONE_NUMBER_CALL: process.env.PHONE_NUMBER_CALL,
   },
   reactStrictMode: false,
   webpack5: true,
