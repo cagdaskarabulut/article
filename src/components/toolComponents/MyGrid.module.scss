@@ -64,17 +64,20 @@
 // Varsayılan stil
 .gridContainer {
   display: flex;
-  justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
-}
 
-// Medya sorgusu ile sadece geniş ekranlarda aktif hale gelir
-@media (min-width: 768px) {
-  .gridContainer {
-    justify-content: flex-start; // Sol baştan başlama
+  // Medya sorgusu ile sadece geniş ekranlarda aktif hale gelir
+  @include desktop {
+    justify-content: flex-start !important; // Sol baştan başlama
+  }
+
+  @include tablet-or-less {
+    justify-content: center !important; // Sol baştan başlama
   }
 }
+
+
 
 // Diğer stiller
 .titleStyle {

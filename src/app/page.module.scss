@@ -71,5 +71,10 @@
   display: flex;
   justify-content: flex-start; // Sol baştan başlama
   max-width: 1200px;
-  margin: 0 auto;
+
+  @include desktop {
+    margin: 0 auto !important;
+  }
+
+  // 
 }
