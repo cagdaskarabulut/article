@@ -57,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "black",
     },
     [theme.breakpoints.up("xs")]: {
-      right: "5%",
+      left: "5%",
       backgroundColor: "black",
     },
     [theme.breakpoints.up("lg")]: {
-      right: "6.5%",
+      left: "6.5%",
     },
   },
 }));

@@ -35,7 +35,6 @@ const styles = {
     left: 0,
     width: "100%",
     overflow: "hidden",
-    // zIndex: -1,
   },
   video: {
     width: "100%",

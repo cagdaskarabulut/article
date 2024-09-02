@@ -296,6 +296,8 @@
 //   );
 // }
 
+/********************************************************************************************************/
+
 import LoadMore from "../components/pageComponents/LoadMore";
 import ScrollToTopButton from "../components/reusableComponents/ScrollToTopButton";
 import { fetchArticle } from "./pagination/pagination_article";
@@ -385,7 +387,7 @@ export default async function Home({ searchParams }) {
               breadcrumbs={null}
               title={null}
               leftContent={
-                <Grid container spacing={2}>
+                <Grid container spacing={2} className={styles.gridContainer}>
                   {mainData.map((item, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
                       {item}

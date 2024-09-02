@@ -55,6 +55,37 @@ const App = ({ Component, pageProps }) => {
 
       <main>
         <Component {...pageProps} />
+        <style jsx global>{`
+          body,
+          html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+          }
+
+          .container,
+          .content {
+            max-width: 100%;
+            overflow-x: hidden;
+            padding: 0;
+          }
+
+          img,
+          video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+          }
+
+          .full-width-component {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            overflow-x: hidden;
+          }
+        `}</style>
       </main>
     </>
   );
