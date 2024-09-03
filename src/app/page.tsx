@@ -89,7 +89,14 @@ export default async function Home({ searchParams }) {
               leftContent={
                 <Grid container spacing={2} className={styles.gridContainer}>
                   {mainData.map((item, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      key={index}
+                      className={styles.gridItem}
+                    >
                       {item}
                     </Grid>
                   ))}

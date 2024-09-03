@@ -74,5 +74,12 @@
     margin: 0 auto !important;
   }
 
+  .gridItem {
+    @include tablet-or-less {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   // 
 }

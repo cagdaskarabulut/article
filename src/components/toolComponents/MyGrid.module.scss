@@ -2,20 +2,20 @@
 @import "../../styles/colors.scss";
 
 // Varsayılan stil
-.gridContainer {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
+// .gridContainer {
+//   display: flex;
+//   max-width: 1200px;
+//   margin: 0 auto;
 
-  // Medya sorgusu ile sadece geniş ekranlarda aktif hale gelir
-  @include desktop {
-    justify-content: flex-start !important; // Sol baştan başlama
-  }
+//   // Medya sorgusu ile sadece geniş ekranlarda aktif hale gelir
+//   @include desktop {
+//     justify-content: flex-start !important; // Sol baştan başlama
+//   }
 
-  @include tablet-or-less {
-    justify-content: center !important; // Sol baştan başlama
-  }
-}
+//   @include tablet-or-less {
+//     justify-content: center !important; // Sol baştan başlama
+//   }
+// }
 
 
 
