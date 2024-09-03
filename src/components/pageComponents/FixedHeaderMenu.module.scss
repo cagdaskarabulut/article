@@ -4,12 +4,13 @@
   left: 0;
   width: 100%;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5); // Şeffaf arkaplan
-  backdrop-filter: blur(10px); // Arkaplanı bulanıklaştırma
-  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5); // Transparent background
+  backdrop-filter: blur(10px); // Blur effect for background
+  z-index: 1000; // Ensure it stays above other content
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: background-color 0.3s ease; // Smooth background change
 }
 
 .nav {
@@ -44,15 +45,16 @@
 }
 
 .menuButton {
-  color: #fff;
-  position: absolute; // İkonu sabit bir noktada tutmak için
-  right: 55px; // Sağdan boşluk bırak
-  top: 15px; // Üstten boşluk bırak
-  z-index: 1100; // Üstte kalmasını sağlamak için z-index yüksek
+  color: #fff !important;
+  position: absolute !important; // Keep the icon fixed at a specific point
+  right: 55px !important; // Space from the right
+  top: 15px !important; // Space from the top
+  z-index: 1100 !important; // Ensure it stays on top
+  padding: 12px !important;
 }
 
-.drawerPaper {
-  background-color: rgba(0, 0, 0, 0.7); // Şeffaf siyah arka plan
-  backdrop-filter: blur(10px); // Arka planı bulanıklaştırma
-  color: #fff; // Yazı rengini beyaz yapıyoruz
+.drawer {
+  background-color: rgba(0, 0, 0, 0.5); // Transparent black background
+  backdrop-filter: blur(10px); // Blur effect for the background
+  color: #fff;
 }

@@ -105,17 +105,13 @@ const FixedHeaderMenu = () => {
         )}
       </nav>
 
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={toggleDrawer(false)}
-        classes={{ paper: styles.drawerPaper }} // drawerPaper sınıfını ekledik
-      >
+      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
         <Box
           sx={{ width: 250 }}
           role="presentation"
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
+          className={styles.drawer}
         >
           {menuItems}
         </Box>
