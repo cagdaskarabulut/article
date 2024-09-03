@@ -1,9 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import styles from "./FullScreenVideo.module.scss";
 
 const FullScreenVideo = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   let introHref = `https://karabulut-storage.s3.amazonaws.com/${process.env.PROJECT_SITE_NAME}/intro.mp4`;
 
   useEffect(() => {
@@ -15,8 +17,13 @@ const FullScreenVideo = () => {
     handleResize();
     window.addEventListener("resize", handleResize);
 
+    const timer = setTimeout(() => {
+      setIsLoaded(true); // 1 saniye sonra videoContainer'ı görünür yap
+    }, 1000);
+
     return () => {
       window.removeEventListener("resize", handleResize);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -28,8 +35,11 @@ const FullScreenVideo = () => {
   };
 
   return (
-    <div id="video-container" className={styles.videoContainer}>
-      <video className={styles.video} autoPlay muted loop playsInline>
+    <div
+      id="video-container"
+      className={`${styles.videoContainer} ${isLoaded ? styles.visible : ""}`}
+    >
+      <video className={styles.video} autoPlay muted playsInline>
         <source src={introHref} type="video/mp4" />
         Your browser does not support the video tag.
       </video>

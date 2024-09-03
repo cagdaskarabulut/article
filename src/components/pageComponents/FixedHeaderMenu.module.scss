@@ -54,7 +54,8 @@
 }
 
 .drawer {
-  background-color: rgba(0, 0, 0, 0.5); // Transparent black background
-  backdrop-filter: blur(10px); // Blur effect for the background
+  background-color: rgba(0, 0, 0, 0.2) !important; // Transparent background similar to header
+  backdrop-filter: blur(10px); // Blur effect to match the header
   color: #fff;
+  height: 100%; // Ensures it covers the full height of the screen
 }

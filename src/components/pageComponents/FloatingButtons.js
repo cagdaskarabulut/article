@@ -2,6 +2,7 @@
 import React from "react";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import zIndex from "@mui/material/styles/zIndex";
 
 const FloatingButtons = () => {
   const handleWhatsAppClick = () => {
@@ -42,6 +43,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
+    zIndex: "9999",
   },
   button: {
     backgroundColor: "#25D366",

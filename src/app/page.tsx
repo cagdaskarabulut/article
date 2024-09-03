@@ -21,7 +21,7 @@ import FullScreenVideo from "../components/pageComponents/FullScreenVideo";
 import FloatingButtons from "../components/pageComponents/FloatingButtons";
 
 export const dynamicParams = true;
-export const revalidate = 100;
+export const revalidate = 86400; // 1 hour
 
 export default async function Home({ searchParams }) {
   const specialFields = await fetch(

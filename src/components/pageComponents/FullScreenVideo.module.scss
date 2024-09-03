@@ -2,9 +2,21 @@
   position: relative;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
+  /* Genişliği tüm ekrana yaymak için */
+  height: 100vh;
+  /* Yüksekliği tüm ekrana yaymak için */
   overflow: hidden;
   z-index: 1;
+  opacity: 0;
+  /* Başlangıçta görünmez */
+  transition: opacity 1s ease-in-out;
+  /* Görünürlüğü yumuşakça artırmak için */
+}
+
+.videoContainer.visible {
+  opacity: 1;
+  /* 1 saniye sonra görünür olacak */
 }
 
 .video {
@@ -29,25 +41,32 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.4); // Siyah renkte ve şeffaf arkaplan
-  backdrop-filter: blur(10px); // Arka tarafı bulanık gösterir
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Siyah renkte ve şeffaf arkaplan */
+  backdrop-filter: blur(10px);
+  /* Arka tarafı bulanık gösterir */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   animation: pulse 2s infinite, moveUpDown 2s infinite;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out; // Renk değişimi için transition ekledik
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  /* Renk değişimi için transition ekledik */
 
   &:hover {
-    transform: scale(1.3); // İkon büyüyor
-    background-color: rgba(255, 255, 255, 0.8); // Beyaza dönüşüyor
+    transform: scale(1.3);
+    /* İkon büyüyor */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Beyaza dönüşüyor */
   }
 }
 
 .scrollIcon {
   font-size: 48px;
   color: #fff;
-  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; // Renk değişimi için transition ekledik
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+  /* Renk değişimi için transition ekledik */
 
   .animatedIcon:hover & {
-    color: #000; // Siyah renge dönüşüyor
+    color: #000;
+    /* Siyah renge dönüşüyor */
   }
 }
 
@@ -59,7 +78,8 @@
   }
 
   50% {
-    transform: translateY(-20px); // Zıplama yüksekliği artırıldı
+    transform: translateY(-20px);
+    /* Zıplama yüksekliği artırıldı */
   }
 }
 
