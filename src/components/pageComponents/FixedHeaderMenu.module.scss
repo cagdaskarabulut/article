@@ -1,0 +1,58 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5); // Şeffaf arkaplan
+  backdrop-filter: blur(10px); // Arkaplanı bulanıklaştırma
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logoContainer {
+  margin-right: auto;
+}
+
+.navList {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  margin-right: 20px;
+}
+
+.navItem {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.menuButton {
+  color: #fff;
+  position: absolute; // İkonu sabit bir noktada tutmak için
+  right: 55px; // Sağdan boşluk bırak
+  top: 15px; // Üstten boşluk bırak
+  z-index: 1100; // Üstte kalmasını sağlamak için z-index yüksek
+}
+
+.drawerPaper {
+  background-color: rgba(0, 0, 0, 0.7); // Şeffaf siyah arka plan
+  backdrop-filter: blur(10px); // Arka planı bulanıklaştırma
+  color: #fff; // Yazı rengini beyaz yapıyoruz
+}
