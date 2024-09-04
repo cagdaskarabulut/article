@@ -52,6 +52,8 @@ const FixedHeaderMenu = () => {
         button
         component="a"
         href="https://kolayehliyet.com/bafra-ozkan-surucu-kursu/test-coz"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <ListItemText primary="E-Sınav Deneme" />
       </ListItem>
@@ -98,6 +100,8 @@ const FixedHeaderMenu = () => {
               <a
                 href="https://kolayehliyet.com/bafra-ozkan-surucu-kursu/test-coz"
                 className={styles.navLink}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 E-Sınav Deneme
               </a>
