@@ -59,3 +59,7 @@
   color: #fff;
   height: 100%; // Ensures it covers the full height of the screen
 }
+
+.drawer .MuiListItem-root {
+  padding-left: 20px !important; // Soldan 20px mesafe bırakılır
+}
