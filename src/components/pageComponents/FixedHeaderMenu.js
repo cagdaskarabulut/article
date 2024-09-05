@@ -60,12 +60,12 @@ const FixedHeaderMenu = () => {
       <ListItem button component="a" href="hakkimizda">
         <ListItemText primary="Hakkımızda" />
       </ListItem>
-      <ListItem button component="a" href="#">
+      {/* <ListItem button component="a" href="#">
         <ListItemText primary="Ekibimiz" />
       </ListItem>
       <ListItem button component="a" href="#">
         <ListItemText primary="Galeri" />
-      </ListItem>
+      </ListItem> */}
       <ListItem button component="a" href="iletisim">
         <ListItemText primary="İletişim" />
       </ListItem>
@@ -73,12 +73,7 @@ const FixedHeaderMenu = () => {
   );
 
   if (loading) {
-    return (
-      // <div className={styles.loadingContainer}>
-      //   <CircularProgress color="inherit" />
-      // </div>
-      <></>
-    );
+    return <></>;
   }
 
   return (
@@ -111,7 +106,7 @@ const FixedHeaderMenu = () => {
                 Hakkımızda
               </a>
             </li>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
                 Ekibimiz
               </a>
@@ -120,7 +115,7 @@ const FixedHeaderMenu = () => {
               <a href="#" className={styles.navLink}>
                 Galeri
               </a>
-            </li>
+            </li> */}
             <li className={styles.navItem}>
               <a href="iletisim" className={styles.navLink}>
                 İletişim
