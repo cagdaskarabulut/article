@@ -26,7 +26,7 @@ import SearchBar from "../reusableComponents/SearchBar";
 import LoginIcon from "@mui/icons-material/Login";
 import useLanguages from "../../hooks/useLanguages";
 
-export default function Header({ isMainPage }) {
+export default function Header({ isMainPage, specialFields }) {
   const { innerWidth } = useWindowSize();
   const LABELS = useLanguages() || {};
   const [isMobile, setIsMobile] = useState(false);
@@ -148,7 +148,11 @@ export default function Header({ isMainPage }) {
               }
               middleContent={
                 <div style={{ height: "35px", marginTop: "15px" }}>
-                  <SearchBar setIsLoadingFullPage={setIsLoadingFullPage} />
+                  {!isLoading &&
+                    specialFields &&
+                    specialFields?.is_search_bar_active && (
+                      <SearchBar setIsLoadingFullPage={setIsLoadingFullPage} />
+                    )}
                 </div>
               }
               rightContent={

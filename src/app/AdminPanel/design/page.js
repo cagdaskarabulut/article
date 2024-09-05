@@ -190,6 +190,8 @@ const AdminPanel = () => {
   return (
     <>
       <Header />
+      {/* <Header specialFields={specialFields} /> */}
+
       <>
         {isAuthorizedUser && (
           <>

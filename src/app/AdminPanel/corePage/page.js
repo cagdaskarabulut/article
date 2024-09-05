@@ -413,6 +413,8 @@ const AdminPanel = () => {
   return (
     <div className={styles.AdminPanelContainerStyle}>
       <Header />
+      {/* <Header specialFields={specialFields} /> */}
+
       <>
         {isAuthorizedUser && (
           <>

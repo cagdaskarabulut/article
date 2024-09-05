@@ -96,7 +96,9 @@ const ArticlePagePanel = ({ article }) => {
     <>
       <div className={styles.ContainerPageContainerStyle}>
         <div className={styles.HeaderStyle}>
-          <Header />
+          {/* <Header /> */}
+          <Header specialFields={specialFields} />
+
           {specialFields?.is_top_menu_active && (
             <>
               <Navbar />

@@ -57,7 +57,7 @@ const FixedHeaderMenu = () => {
       >
         <ListItemText primary="E-Sınav Deneme" />
       </ListItem>
-      <ListItem button component="a" href="#">
+      <ListItem button component="a" href="hakkimizda">
         <ListItemText primary="Hakkımızda" />
       </ListItem>
       <ListItem button component="a" href="#">
@@ -107,7 +107,7 @@ const FixedHeaderMenu = () => {
               </a>
             </li>
             <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
+              <a href="hakkimizda" className={styles.navLink}>
                 Hakkımızda
               </a>
             </li>

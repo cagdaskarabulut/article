@@ -138,7 +138,7 @@ export default async function Home({ searchParams }) {
         <>
           <div className={styles.ContainerPageContainerStyle}>
             <div className={styles.HeaderStyle}>
-              <Header isMainPage={true} />
+              <Header isMainPage={true} specialFields={specialFields} />
               {specialFields?.is_top_menu_active && <Navbar />}
             </div>
             <div style={{ height: "300px" }}>
