@@ -19,9 +19,33 @@ import { LABELS as LABELS_tr } from "./enums/lang/tr";
 import FixedHeaderMenu from "../components/pageComponents/FixedHeaderMenu";
 import FullScreenVideo from "../components/pageComponents/FullScreenVideo";
 import FloatingButtons from "../components/pageComponents/FloatingButtons";
+import { Metadata, ResolvingMetadata } from "next";
 
 export const dynamicParams = true;
-export const revalidate = 86400; // 1 hour
+export const revalidate = 86400;
+
+export async function generateMetadata(
+  { params, searchParams }: any,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const metatags = await fetch(
+    process.env.URL + "/api/article/article_project_metatags"
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data?.metatags?.rows[0] || undefined;
+    });
+
+  return {
+    title: metatags?.title,
+    applicationName: metatags?.name,
+    description: metatags?.description,
+    keywords: metatags?.keywords,
+    publisher: metatags?.publisher,
+    creator: metatags?.creator,
+    icons: metatags?.icon,
+  };
+}
 
 export default async function Home({ searchParams }) {
   const specialFields = await fetch(
