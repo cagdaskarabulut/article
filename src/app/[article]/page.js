@@ -32,7 +32,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
   let articleData = await getArticle(article);
   let activeArticle = articleData?.article_list?.rows[0] || null;
   let metaData = await getMetatags();
-  let metaTags = metaData?.metatags?.rows[0] || null;
+  let metatags = metaData?.metatags?.rows[0] || null;
   let siteName = process.env.PROJECT_SITE_NAME;
   let siteUrl = process.env.URL;
   let imagePath = `https://karabulut-storage.s3.amazonaws.com/${siteName}/favicon.ico`;
@@ -51,10 +51,10 @@ export async function generateMetadata({ params, searchParams }, parent) {
   return {
     title: activeArticle?.title || metatags?.title,
     description: activeArticle?.description || metatags?.description,
-    keywords: activeArticle?.meta_keys || metaTags.keywords,
+    keywords: activeArticle?.meta_keys || metatags.keywords,
     applicationName: siteName || "Varsayılan Uygulama",
-    publisher: metaTags?.publisher || "Varsayılan Yayıncı",
-    creator: metaTags?.creator || "Varsayılan Yaratıcı",
+    publisher: metatags?.publisher || "Varsayılan Yayıncı",
+    creator: metatags?.creator || "Varsayılan Yaratıcı",
     icons: {
       icon: imagePath || metatags?.icon,
     },
