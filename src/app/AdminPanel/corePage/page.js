@@ -60,6 +60,7 @@ const AdminPanel = () => {
   const [isManuelPage, setIsManuelPage] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [description, setDescription] = useState("");
+  const [videoPath, setVideoPath] = useState("");
   const [metaKeys, setMetaKeys] = useState("");
   const [generateImageByRobotText, setGenerateImageByRobotText] = useState("");
   const [attributes, setAttributes] = useState();
@@ -314,6 +315,7 @@ const AdminPanel = () => {
     setIsActive(true);
     setIsShowInMenu(false);
     setPageName("");
+    setVideoPath("");
     setIsShowInBanner(false);
     setIsBannerFitStyle(false);
     setIsBannerStretchStyle(false);
@@ -331,6 +333,7 @@ const AdminPanel = () => {
     setIsActive(myCorePage.is_active);
     setIsShowInMenu(myCorePage.is_show_in_menu);
     setPageName(myCorePage.page_name);
+    setVideoPath(myCorePage.video_path);
     setIsShowInBanner(myCorePage.is_show_in_banner);
     setIsBannerFitStyle(myCorePage.is_banner_fit_style);
     setIsBannerStretchStyle(myCorePage.is_banner_stretch_style);
@@ -365,6 +368,7 @@ const AdminPanel = () => {
               is_banner_stretch_style: isBannerStretchStyle,
               is_show_in_menu: isShowInMenu,
               page_name: pageName,
+              video_path: videoPath,
               is_core_page: true,
             }),
           })
@@ -392,6 +396,7 @@ const AdminPanel = () => {
               is_banner_stretch_style: isBannerStretchStyle,
               is_show_in_menu: isShowInMenu,
               page_name: pageName,
+              video_path: videoPath,
               is_core_page: true,
             }),
           })
@@ -789,6 +794,32 @@ const AdminPanel = () => {
                       : { display: "none" }
                   }
                 />
+
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                >
+                  <TextField
+                    className={styles.TextFieldStyle}
+                    label={LABELS.YOUTUBE_VIDEO_PATH}
+                    value={videoPath}
+                    onChange={(event) => setVideoPath(event.target.value)}
+                  />
+                </Grid>
+                <Divider
+                  className={styles.DividerStyle}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                />
                 <Grid
                   item
                   xs={12}
@@ -896,6 +927,7 @@ const AdminPanel = () => {
                       : { display: "none" }
                   }
                 />
+
                 <Container
                   // style={{
                   //   paddingTop: "20px",

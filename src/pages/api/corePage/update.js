@@ -9,6 +9,7 @@ export default async function handler(request, response) {
       request.body.topics,
       new Date().toLocaleString() + "",
       request.body.title_image,
+      request.body.video_path,
       request.body.body,
       request.body.is_manuel_page,
       request.body.description,
@@ -26,16 +27,17 @@ export default async function handler(request, response) {
     topics=$2,
     create_date=$3,
     title_image=$4,
-    body=$5,
-    is_manuel_page=$6,
-    description=$7,
-    meta_keys=$8,
-    is_active=$9,
-    is_show_in_menu=$10,
-    page_name=$11,
-    is_core_page=$12
-    where url=$13
-    and project=$14;`;
+    video_path=$5,
+    body=$6,
+    is_manuel_page=$7,
+    description=$8,
+    meta_keys=$9,
+    is_active=$10,
+    is_show_in_menu=$11,
+    page_name=$12,
+    is_core_page=$13
+    where url=$14
+    and project=$15;`;
 
     let data = await sql.query(script, values);
 

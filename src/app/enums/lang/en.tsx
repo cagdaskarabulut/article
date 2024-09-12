@@ -106,4 +106,5 @@ export enum LABELS {
   IS_MAIN_TOPIC = "Is Main Topic",
   BANNER_ORDER_NUMBER = "Banner Order Number",
   FILTER_TOPICS = "Filter Topics",
+  YOUTUBE_VIDEO_PATH = "Youtube Video Path",
 }

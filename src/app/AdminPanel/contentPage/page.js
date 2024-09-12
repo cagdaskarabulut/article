@@ -58,6 +58,7 @@ const AdminPanel = () => {
   const [isManuelPage, setIsManuelPage] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [description, setDescription] = useState("");
+  const [videoPath, setVideoPath] = useState("");
   const [metaKeys, setMetaKeys] = useState("");
   const [generateImageByRobotText, setGenerateImageByRobotText] = useState("");
   const [attributes, setAttributes] = useState();
@@ -302,6 +303,7 @@ const AdminPanel = () => {
     setGenerateImageByRobotText("");
     setImagePath("");
     setTitleImageUrl("");
+    setVideoPath("");
     setIsLoading(false);
     setIsActive(true);
     setIsShowInBanner(false);
@@ -313,6 +315,7 @@ const AdminPanel = () => {
     setUrl(myArticle.url);
     setTitle(myArticle.title);
     setTitleImageUrl(myArticle.title_image);
+    setVideoPath(myArticle.video_path);
 
     const topicsArray = getListFromStringWithCommaSeperated(
       myArticle.topics
@@ -353,6 +356,7 @@ const AdminPanel = () => {
               topics: getStringWithCommaSeperatedFromList(topicList),
               create_date: new Date(),
               title_image: titleImageUrl,
+              video_path: videoPath,
               body: quill.container.firstChild.innerHTML,
               is_manuel_page: isManuelPage,
               description: description,
@@ -383,6 +387,7 @@ const AdminPanel = () => {
               topics: getStringWithCommaSeperatedFromList(topicList),
               create_date: new Date(),
               title_image: titleImageUrl,
+              video_path: videoPath,
               body: quill.container.firstChild.innerHTML,
               is_manuel_page: isManuelPage,
               description: description,
@@ -761,6 +766,33 @@ const AdminPanel = () => {
                   <span style={{ color: "red" }}>
                     {LABELS.THE_IMAGE_PRODUCED_BY_THE_ROBOT}
                   </span>
+                </Grid>
+
+                <Divider
+                  className={styles.DividerStyle}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                />
+
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                >
+                  <TextField
+                    className={styles.TextFieldStyle}
+                    label={LABELS.YOUTUBE_VIDEO_PATH}
+                    value={videoPath}
+                    onChange={(event) => setVideoPath(event.target.value)}
+                  />
                 </Grid>
 
                 <Divider

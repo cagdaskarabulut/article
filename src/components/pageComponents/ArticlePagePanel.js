@@ -58,16 +58,27 @@ const ArticlePagePanel = ({ article }) => {
               <ArticleHeader article={article} />
               <br />
 
-              {article?.title_image && (
-                <div className={styles.ArticleImageContainerStyle}>
+              <div className={styles.ArticleImageContainerStyle}>
+                {article?.video_path && (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={article?.video_path}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                )}
+                {!article?.video_path && article?.title_image && (
                   <Image
                     src={article?.title_image}
                     alt={"img_" + article?.url}
                     fill={true}
                     objectFit="contain"
                   />
-                </div>
-              )}
+                )}
+              </div>
 
               <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
             </div>

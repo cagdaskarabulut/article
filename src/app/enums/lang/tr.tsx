@@ -105,4 +105,5 @@ export enum LABELS {
   IS_MAIN_TOPIC = "Ana Konu mu",
   BANNER_ORDER_NUMBER = "Banner Sıra Numarası",
   FILTER_TOPICS = "Başlıkları Filtrele",
+  YOUTUBE_VIDEO_PATH = "Youtube Video Adresi",
 }

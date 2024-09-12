@@ -9,6 +9,7 @@ export default async function handler(request, response) {
       request.body.topics,
       new Date().toLocaleString() + "",
       request.body.title_image,
+      request.body.video_path,
       request.body.body,
       request.body.is_manuel_page,
       request.body.description,
@@ -20,7 +21,7 @@ export default async function handler(request, response) {
       projectName,
     ];
 
-    const script = `INSERT INTO article (url, title, topics, create_date, title_image, body, is_manuel_page, description, meta_keys, is_active, is_show_in_menu, page_name, is_core_page, project) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);`;
+    const script = `INSERT INTO article (url, title, topics, create_date, title_image, video_path, body, is_manuel_page, description, meta_keys, is_active, is_show_in_menu, page_name, is_core_page, project) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);`;
 
     let data = await sql.query(script, values);
     return response.status(200).json("successfully saved");
