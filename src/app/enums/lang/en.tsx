@@ -105,4 +105,5 @@ export enum LABELS {
   ORDER_NUMBER = "Order Number",
   IS_MAIN_TOPIC = "Is Main Topic",
   BANNER_ORDER_NUMBER = "Banner Order Number",
+  FILTER_TOPICS = "Filter Topics",
 }

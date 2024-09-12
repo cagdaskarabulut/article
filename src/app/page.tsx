@@ -36,6 +36,8 @@ export async function generateMetadata(
       return data?.metatags?.rows[0] || undefined;
     });
 
+  console.log(metatags?.icon);
+
   return {
     title: metatags?.title,
     applicationName: metatags?.name,

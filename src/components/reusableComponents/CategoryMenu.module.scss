@@ -1,6 +1,9 @@
 @import "../../styles/colors.scss";
 @import "../../styles/mixins.scss";
 
+.MainContainerStyle {
+  margin-top: 5px !important;
+}
 
 .ListContainerStyle {
   flex-direction: column;
@@ -9,6 +12,7 @@
   overflow-y: auto;
   /* İçerik yüksekliği sınırları aşarsa dikey kaydırma çubuğu ekle */
   max-width: 100% !important;
+
 
   @include tablet-or-less {
     flex-direction: row !important; // flex-wrap: nowrap !important;
@@ -54,4 +58,22 @@
   }
 
   z-index: 1;
+}
+
+.FilterTextboxStyle {
+  :global {
+
+    .MuiInputBase-root {
+      // height: 36px; // Yüksekliği burada ayarlıyoruz
+      font-size: 0.875rem; // Font boyutunu küçültüyoruz
+    }
+
+    .MuiInputLabel-root {
+      font-size: 0.75rem; // Etiketin font boyutunu küçültüyoruz
+    }
+
+    .MuiOutlinedInput-input {
+      padding: 8px 12px; // İç paddingi küçülterek içerik hizalamasını koruyoruz
+    }
+  }
 }

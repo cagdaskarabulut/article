@@ -6,6 +6,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  TextField,
 } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -16,6 +17,7 @@ const CategoryMenu = ({ activePageName }) => {
   const LABELS = useLanguages();
   const router = useRouter();
   const [menuList, setMenuList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch(`/api/topic/menu_list`)
@@ -46,8 +48,23 @@ const CategoryMenu = ({ activePageName }) => {
     }
   };
 
+  // Dinamik filtreleme fonksiyonu
+  const filteredMenuList = menuList?.filter((object) =>
+    object.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <>
+    <div className={styles.MainContainerStyle}>
+      {/* Arama kutusu */}
+      <TextField
+        className={styles.FilterTextboxStyle}
+        label={LABELS.FILTER_TOPICS}
+        variant="outlined"
+        fullWidth
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Arama terimi güncelleniyor
+      />
+
       <List className={styles.ListContainerStyle}>
         <ListItem key={"All"} disablePadding style={{ maxWidth: "100%" }}>
           <ListItemButton
@@ -61,7 +78,8 @@ const CategoryMenu = ({ activePageName }) => {
           </ListItemButton>
         </ListItem>
 
-        {menuList?.map((object, index) => (
+        {/* Filtrelenen menü listesi */}
+        {filteredMenuList?.map((object) => (
           <ListItem
             key={object.id}
             disablePadding
@@ -91,7 +109,7 @@ const CategoryMenu = ({ activePageName }) => {
           </ListItem>
         ))}
       </List>
-    </>
+    </div>
   );
 };
 
