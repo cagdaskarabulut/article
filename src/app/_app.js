@@ -58,8 +58,8 @@ const App = ({ Component, pageProps }) => {
         <style jsx global>{`
           body,
           html {
-            margin: 0;
-            padding: 0;
+            margin: 0px !important;
+            padding: 0 !important;
             overflow-x: hidden;
             width: 100%;
           }
