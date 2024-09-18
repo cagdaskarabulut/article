@@ -58,8 +58,8 @@ const ArticlePagePanel = ({ article }) => {
               <ArticleHeader article={article} />
               <br />
 
-              <div className={styles.ArticleImageContainerStyle}>
-                {article?.video_path && (
+              {article?.video_path && (
+                <div className={styles.ArticleImageContainerStyle}>
                   <iframe
                     width="100%"
                     height="100%"
@@ -69,16 +69,18 @@ const ArticlePagePanel = ({ article }) => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   ></iframe>
-                )}
-                {!article?.video_path && article?.title_image && (
+                </div>
+              )}
+              {!article?.video_path && article?.title_image && (
+                <div className={styles.ArticleImageContainerStyle}>
                   <Image
                     src={article?.title_image}
                     alt={"img_" + article?.url}
                     fill={true}
                     objectFit="contain"
                   />
-                )}
-              </div>
+                </div>
+              )}
 
               <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
             </div>
