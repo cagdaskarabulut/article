@@ -3,7 +3,7 @@ import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopBu
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 
 export const dynamicParams = true; // true | false,
-export const revalidate = 3600; // 1 hour
+export const revalidate = 21600; // 1 hour
 
 async function getArticle(article) {
   let res = await fetch(process.env.URL + "/api/article/" + article);
@@ -23,7 +23,7 @@ export async function generateStaticParams() {
   );
   return articleUrlList?.article_url_list?.rows.map((p) => ({
     article: p.url,
-    revalidate: 3600, // 24 hours
+    revalidate: 21600, // 24 hours
   }));
 }
 

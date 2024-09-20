@@ -2,7 +2,7 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 export const dynamicParams = true;
-export const revalidate = 3600;
+export const revalidate = 21600;
 
 export async function GET() {
   const projectName = process.env.PROJECT_SITE_NAME;
