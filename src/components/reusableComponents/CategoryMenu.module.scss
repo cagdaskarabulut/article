@@ -29,6 +29,8 @@
   overflow: hidden;
   cursor: pointer;
   transition: color 0.3s;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   &:before {
     content: '';
