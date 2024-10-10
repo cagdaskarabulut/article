@@ -104,11 +104,19 @@ export default async function Home({ searchParams }) {
   return (
     <>
       {specialFields?.project == "newszipped" && (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: `<!-- verify-admitad: "859033ea2a" -->`,
-          }}
-        />
+        <>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `<!-- Impact-Site-Verification: f2803669-7160-4f9f-a29a-939a5fd656ef -->`,
+            }}
+          />
+
+          <div
+            dangerouslySetInnerHTML={{
+              __html: `<!-- verify-admitad: "859033ea2a" -->`,
+            }}
+          />
+        </>
       )}
       {/* MODERN TYPE PAGE */}
       {specialFields?.is_project_type_modern && (
