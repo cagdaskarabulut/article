@@ -5,6 +5,7 @@ import styles from "./page.module.scss";
 import Header from "../components/mainComponents/Header";
 import MyGrid from "../components/toolComponents/MyGrid";
 import FooterPanel from "../components/mainComponents/FooterPanel";
+import Ads from "../components/mainComponents/Ads";
 import { Analytics } from "@vercel/analytics/react";
 import { Container, Divider, Grid } from "@mui/material";
 import Navbar from "../../src/pages/components/Navbar";
@@ -101,6 +102,18 @@ export default async function Home({ searchParams }) {
     return result;
   }
 
+  const AdSpace = ({ position }) => (
+    <div
+      className={`w-1/6 p-4 bg-gray-100 ${
+        position === "left" ? "order-first" : "order-last"
+      }`}
+    >
+      <div className="h-full flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg">
+        <p className="text-gray-500">Ad Space ({position})</p>
+      </div>
+    </div>
+  );
+
   return (
     <>
       {specialFields?.project == "newszipped" && (
@@ -185,6 +198,9 @@ export default async function Home({ searchParams }) {
             <div style={{ height: "300px" }}>
               <MyCarousel />
             </div>
+
+            <Ads />
+
             <FocusContent>
               <Container
                 className={styles.ContentStyle}

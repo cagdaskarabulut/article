@@ -46,9 +46,9 @@ const ScrollToTopButton = ({ showBelow }) => {
 
 const useStyles = makeStyles((theme) => ({
   toTop: {
-    zIndex: 2,
+    zIndex: 9999,
     position: "fixed",
-    bottom: "2vh",
+    bottom: "8vh",
     backgroundColor: "black",
     color: "#F1F1F1",
     "&:hover, &.Mui-focusVisible": {
