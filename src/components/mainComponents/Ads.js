@@ -19,7 +19,7 @@ export default function Ads() {
     }
   }, [innerWidth]);
 
-  if (specialFields?.project == "newszipped") {
+  if (process.env.PROJECT_SITE_NAME === "newszipped") {
     return (
       <>
         {!isSmallScreen && commercials.length > 0 && (
