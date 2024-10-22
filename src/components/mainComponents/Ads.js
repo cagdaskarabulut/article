@@ -18,30 +18,40 @@ export default function Ads() {
       setIsSmallScreen(innerWidth < BIG_SCREEN_SIZE);
     }
   }, [innerWidth]);
-  return (
-    <>
-      {console.log(commercials)}
-      {!isSmallScreen && commercials.length > 0 && (
-        <>
-          <div className={styles.leftAdSpace}>
-            <Link href={commercials[0].link} passHref target="_blank">
-              <img src={commercials[0].mobileImage} alt={commercials[0].alt} />
-            </Link>
-          </div>
-          <div className={styles.rightAdSpace}>
+
+  if (specialFields?.project == "newszipped") {
+    return (
+      <>
+        {!isSmallScreen && commercials.length > 0 && (
+          <>
+            <div className={styles.leftAdSpace}>
+              <Link href={commercials[0].link} passHref target="_blank">
+                <img
+                  src={commercials[0].mobileImage}
+                  alt={commercials[0].alt}
+                />
+              </Link>
+            </div>
+            <div className={styles.rightAdSpace}>
+              <Link href={commercials[1].link} passHref target="_blank">
+                <img
+                  src={commercials[1].mobileImage}
+                  alt={commercials[1].alt}
+                />
+              </Link>
+            </div>
+          </>
+        )}
+        {isSmallScreen && (
+          <div className={styles.bottomAdSpace}>
             <Link href={commercials[1].link} passHref target="_blank">
               <img src={commercials[1].mobileImage} alt={commercials[1].alt} />
             </Link>
           </div>
-        </>
-      )}
-      {isSmallScreen && (
-        <div className={styles.bottomAdSpace}>
-          <Link href={commercials[1].link} passHref target="_blank">
-            <img src={commercials[1].mobileImage} alt={commercials[1].alt} />
-          </Link>
-        </div>
-      )}
-    </>
-  );
+        )}
+      </>
+    );
+  } else {
+    return <></>;
+  }
 }
