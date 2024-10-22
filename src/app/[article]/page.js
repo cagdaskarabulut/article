@@ -1,6 +1,7 @@
 import ArticlePagePanel from "../../components/pageComponents/ArticlePagePanel";
 import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopButton";
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
+import Ads from "../../components/mainComponents/Ads";
 
 export const dynamicParams = true; // true | false,
 export const revalidate = 86400; // 1 hour
@@ -96,6 +97,7 @@ export default async function ArticlePage({ params }) {
           imagePath={imagePath}
           imageAlt={activeArticle?.url}
         /> */}
+        <Ads />
         <ArticlePagePanel article={activeArticle} />
         <ScrollToTopButton showBelow={250} />
       </>
