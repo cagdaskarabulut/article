@@ -25,28 +25,55 @@ export default function Ads() {
         {!isSmallScreen && commercials.length > 0 && (
           <>
             <div className={styles.leftAdSpace}>
-              <Link href={commercials[0].link} passHref target="_blank">
+              {/* <Link href={commercials[0].link} passHref target="_blank">
                 <img
                   src={commercials[0].mobileImage}
                   alt={commercials[0].alt}
                 />
-              </Link>
+              </Link> */}
+              <a target="_blank" rel="nofollow" href="https://ali.ski/-7Dr8A">
+                <img
+                  width="120"
+                  height="600"
+                  border="0"
+                  src="https://ad.admitad.com/b/63q05eehoe859033ea2a16525dc3e8/"
+                  alt="AliExpress WW"
+                />
+              </a>
             </div>
             <div className={styles.rightAdSpace}>
-              <Link href={commercials[1].link} passHref target="_blank">
+              {/* <Link href={commercials[1].link} passHref target="_blank">
                 <img
                   src={commercials[1].mobileImage}
                   alt={commercials[1].alt}
                 />
-              </Link>
+              </Link> */}
+              <a target="_blank" rel="nofollow" href="https://ali.ski/-7Dr8A">
+                <img
+                  width="120"
+                  height="600"
+                  border="0"
+                  src="https://ad.admitad.com/b/63q05eehoe859033ea2a16525dc3e8/"
+                  alt="AliExpress WW"
+                />
+              </a>
             </div>
           </>
         )}
         {isSmallScreen && (
           <div className={styles.bottomAdSpace}>
-            <Link href={commercials[1].link} passHref target="_blank">
+            {/* <Link href={commercials[1].link} passHref target="_blank">
               <img src={commercials[1].mobileImage} alt={commercials[1].alt} />
-            </Link>
+            </Link> */}
+            <a target="_blank" rel="nofollow" href="https://ali.ski/-7Dr8A">
+              <img
+                width="320"
+                height="100"
+                border="0"
+                src="https://ad.admitad.com/b/e1z3ho64gc859033ea2a16525dc3e8/"
+                alt="AliExpress WW"
+              />
+            </a>
           </div>
         )}
       </>
