@@ -4,12 +4,26 @@ import { BIG_SCREEN_SIZE } from "../../constants/GeneralConstants";
 import useWindowSize from "@rooks/use-window-size";
 import styles from "./Ads.module.scss";
 import useCommercials from "../../hooks/useCommercials";
-import Link from "next/link";
+import useAdClick from "../../hooks/useAdClick";
 
 export default function Ads() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { innerWidth } = useWindowSize();
   const { commercials, isMobile } = useCommercials();
+
+  const handleAdClick = () => {
+    // add_click API çağrısı yap
+    fetch("/api/commercial/add_click", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ad: "AliExpress WW" }), // İsterseniz ek veri gönderebilirsiniz
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("API response:", data))
+      .catch((error) => console.error("API error:", error));
+  };
 
   useEffect(() => {
     if (innerWidth === null) {
@@ -25,13 +39,12 @@ export default function Ads() {
         {!isSmallScreen && commercials.length > 0 && (
           <>
             <div className={styles.leftAdSpace}>
-              {/* <Link href={commercials[0].link} passHref target="_blank">
-                <img
-                  src={commercials[0].mobileImage}
-                  alt={commercials[0].alt}
-                />
-              </Link> */}
-              <a target="_blank" rel="nofollow" href="https://ali.ski/-7Dr8A">
+              <a
+                target="_blank"
+                rel="nofollow"
+                href="https://ali.ski/-7Dr8A"
+                onClick={handleAdClick}
+              >
                 <img
                   width="120"
                   height="600"
@@ -48,7 +61,12 @@ export default function Ads() {
                   alt={commercials[1].alt}
                 />
               </Link> */}
-              <a target="_blank" rel="nofollow" href="https://ali.ski/-7Dr8A">
+              <a
+                target="_blank"
+                rel="nofollow"
+                href="https://ali.ski/-7Dr8A"
+                onClick={handleAdClick}
+              >
                 <img
                   width="120"
                   height="600"
@@ -65,7 +83,12 @@ export default function Ads() {
             {/* <Link href={commercials[1].link} passHref target="_blank">
               <img src={commercials[1].mobileImage} alt={commercials[1].alt} />
             </Link> */}
-            <a target="_blank" rel="nofollow" href="https://ali.ski/-7Dr8A">
+            <a
+              target="_blank"
+              rel="nofollow"
+              href="https://ali.ski/-7Dr8A"
+              onClick={handleAdClick}
+            >
               <img
                 width="320"
                 height="100"
