@@ -2,7 +2,7 @@
 @import "../../styles/colors.scss";
 @import "../../styles/common.scss";
 
-.SearchBoxStyle{
+.SearchBoxStyle {
   :global {
     .MuiOutlinedInput-notchedOutline {
       border-color: $searchBarColor !important;
@@ -21,7 +21,7 @@
     .MuiInputLabel-root {
       color: $fontColor !important;
       font-family: inherit !important;
-      
+
     }
 
     .MuiAutocomplete-input {

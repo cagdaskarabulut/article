@@ -12,12 +12,14 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./CategoryMenu.module.scss";
 import useLanguages from "../../hooks/useLanguages";
+import useCommercials from "../../hooks/useCommercials";
 
 const CategoryMenu = ({ activePageName }) => {
   const LABELS = useLanguages();
   const router = useRouter();
   const [menuList, setMenuList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const { commercials, isMobile } = useCommercials();
 
   useEffect(() => {
     fetch(`/api/topic/menu_list`)
@@ -56,14 +58,21 @@ const CategoryMenu = ({ activePageName }) => {
   return (
     <div className={styles.MainContainerStyle}>
       {/* Arama kutusu */}
-      <TextField
-        className={styles.FilterTextboxStyle}
-        label={LABELS.FILTER_TOPICS}
-        variant="outlined"
-        fullWidth
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Arama terimi güncelleniyor
-      />
+      {isMobile && (
+        // Genel Filtre
+        <></>
+      )}
+
+      {!isMobile && (
+        <TextField
+          className={styles.FilterTextboxStyle}
+          label={LABELS.FILTER_TOPICS}
+          variant="outlined"
+          fullWidth
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)} // Arama terimi güncelleniyor
+        />
+      )}
 
       <List className={styles.ListContainerStyle}>
         <ListItem key={"All"} disablePadding style={{ maxWidth: "100%" }}>

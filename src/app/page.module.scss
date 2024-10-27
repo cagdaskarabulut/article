@@ -28,11 +28,7 @@
     color: $fontColor !important;
   }
 
-  .HeaderStyle {
-    @include tablet-or-less {
-      min-height: 65px !important;
-    }
-  }
+
 }
 
 .HomePageInfoStyle {
@@ -82,4 +78,14 @@
   }
 
   // 
+}
+
+.HeaderStyle {
+  @include tablet-or-less {
+    // min-height: 65px !important;
+    position: sticky !important;
+    top: 0;
+    z-index: 9999;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 }

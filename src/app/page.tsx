@@ -193,8 +193,8 @@ export default async function Home({ searchParams }) {
           <div className={styles.ContainerPageContainerStyle}>
             <div className={styles.HeaderStyle}>
               <Header isMainPage={true} specialFields={specialFields} />
-              {specialFields?.is_top_menu_active && <Navbar />}
             </div>
+            {specialFields?.is_top_menu_active && <Navbar />}
             <div style={{ height: "300px" }}>
               <MyCarousel />
             </div>
