@@ -10,21 +10,7 @@ export default function Ads() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const { innerWidth } = useWindowSize();
   const { commercials, isMobile } = useCommercials();
-
-  const handleAdClick = () => {
-    // add_click API çağrısı yap
-    fetch("/api/commercial/add_click", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ad: "AliExpress WW" }), // İsterseniz ek veri gönderebilirsiniz
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("API response:", data))
-      .catch((error) => console.error("API error:", error));
-  };
-
+  const handleAdClick = useAdClick();
   useEffect(() => {
     if (innerWidth === null) {
       setIsSmallScreen(false);
