@@ -30,6 +30,8 @@ export default function Header({ isMainPage, specialFields }) {
   const { innerWidth } = useWindowSize();
   const LABELS = useLanguages() || {};
   const [isMobile, setIsMobile] = useState(false);
+  const [logoWidth, setLogoWidth] = useState(64);
+  const [logoHeight, setLogoHeight] = useState(64);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthChecked, setIsAuthChecked] = useState(false);
@@ -105,10 +107,32 @@ export default function Header({ isMainPage, specialFields }) {
   }, []);
 
   useEffect(() => {
+    let mobilMi = false;
     if (innerWidth === null) {
-      setIsMobile(false);
+      mobilMi = false;
     } else {
-      setIsMobile(innerWidth < MOBILE_SCREEN_SIZE);
+      mobilMi = innerWidth < MOBILE_SCREEN_SIZE;
+    }
+    setIsMobile(mobilMi);
+
+    if (mobilMi) {
+      if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+        setLogoWidth(70);
+        setLogoHeight(35);
+      } else {
+        setLogoWidth(48);
+        setLogoHeight(48);
+      }
+
+      setLogoHeight(48);
+    } else {
+      if (process.env.PROJECT_SITE_NAME === "cnmautoparts") {
+        setLogoWidth(180);
+        setLogoHeight(90);
+      } else {
+        setLogoWidth(64);
+        setLogoHeight(64);
+      }
     }
   }, [innerWidth]);
 
@@ -138,8 +162,8 @@ export default function Header({ isMainPage, specialFields }) {
                   <h1 className={styles.LogoStyle} style={{ marginTop: "5px" }}>
                     <Image
                       src={iconHref}
-                      width={isMobile ? 48 : 64}
-                      height={isMobile ? 48 : 64}
+                      width={logoWidth}
+                      height={logoHeight}
                       onClick={() => goHomePage()}
                       alt={process.env.PROJECT_SITE_NAME + "-logo"}
                     />
