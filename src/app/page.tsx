@@ -23,7 +23,7 @@ import FloatingButtons from "../components/pageComponents/FloatingButtons";
 import { Metadata, ResolvingMetadata } from "next";
 
 export const dynamicParams = true;
-export const revalidate = 60;
+export const revalidate = 86400;
 
 export async function generateMetadata(
   { params, searchParams }: any,
