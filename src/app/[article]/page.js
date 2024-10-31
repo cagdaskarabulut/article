@@ -4,7 +4,7 @@ import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 import Ads from "../../components/mainComponents/Ads";
 
 export const dynamicParams = true; // true | false,
-export const revalidate = 86400;
+export const revalidate = 60;
 
 async function getArticle(article) {
   let res = await fetch(process.env.URL + "/api/article/" + article);
