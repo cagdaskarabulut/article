@@ -4,7 +4,7 @@ import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 import Ads from "../../components/mainComponents/Ads";
 
 export const dynamicParams = true; // true | false,
-export const revalidate = 86400; // 1 hour
+export const revalidate = 86400;
 
 async function getArticle(article) {
   let res = await fetch(process.env.URL + "/api/article/" + article);
@@ -24,7 +24,7 @@ export async function generateStaticParams() {
   );
   return articleUrlList?.article_url_list?.rows.map((p) => ({
     article: p.url,
-    revalidate: 21600, // 24 hours
+    // revalidate: 21600,
   }));
 }
 

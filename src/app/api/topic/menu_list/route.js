@@ -1,8 +1,8 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
-export const dynamicParams = true; // true | false,
-export const revalidate = 86400;
+// export const dynamicParams = true; // true | false,
+// export const revalidate = 86400;
 
 export async function GET() {
   const projectName = process.env.PROJECT_SITE_NAME;
