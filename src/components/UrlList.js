@@ -42,9 +42,10 @@ const UrlList = ({
   }
 
   const handleChange = async (newValue) => {
-    setSelectedUrl(newValue);
-    let article = await getArticle(newValue.url);
-    setArticle(article?.article_list?.rows[0]);
+    if (!newValue || !newValue.url) return; // Eğer geçerli bir değer yoksa işlem yapma
+    setSelectedUrl(newValue.url); // Seçilen URL'yi state'e kaydet
+    let article = await getArticle(newValue.url); // Seçilen URL'ye göre makaleyi getir
+    setArticle(article?.article_list?.rows[0]); // Makale state'ini güncelle
   };
 
   const handleSelectChange = async (event) => {
@@ -56,21 +57,30 @@ const UrlList = ({
   return (
     <div>
       {isDisabled && (
-        <Select
-          id="demo-simple-select"
-          value={selectedUrl}
-          onChange={handleSelectChange}
+        <Autocomplete
+          id="filterable-autocomplete"
+          options={allUrlList} // Tüm URL listesini burada veriyoruz
+          getOptionLabel={(option) => option?.url || ""} // URL'leri gösteriyoruz
+          onChange={(event, newValue) => {
+            if (newValue) {
+              handleChange(newValue); // Seçim yapıldığında `handleChange` çalışır
+            }
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search or Select" // Kullanıcı için label
+              variant="outlined"
+            />
+          )}
           style={{ width: "100%" }}
-        >
-          <MenuItem value="" key="emptySelect_id">
-            Select
-          </MenuItem>
-          {allUrlList?.map((urlItem) => (
-            <MenuItem value={urlItem.url} key={urlItem.url + "_id"}>
-              {urlItem.url}
-            </MenuItem>
-          ))}
-        </Select>
+          ListboxProps={{
+            style: {
+              maxHeight: "300px", // Liste yüksekliği
+              overflowY: "auto", // Kaydırma
+            },
+          }}
+        />
       )}
 
       {!isDisabled && isSingleSelection && (
