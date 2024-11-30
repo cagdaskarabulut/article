@@ -1,8 +1,69 @@
+// .MyCarouselContainer {
+//   :global {
+//     .carousel .thumbs-wrapper {
+//       display: none;
+//     }
+//   }
+
+// }
+
+
 .MyCarouselContainer {
-  :global {
-    .carousel .thumbs-wrapper {
-      display: none;
-    }
+  position: relative;
+
+  .carousel .control-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    /* Şeffaf arka plan */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0.7;
+    transition: all 0.3s ease-in-out;
+    /* Animasyon */
+    color: white;
+    /* Ok renkleri */
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* Hafif dış hat */
+  }
+
+  .carousel .control-arrow:hover {
+    background: rgba(255, 255, 255, 0.8);
+    /* Hover ile arka plan değişimi */
+    color: black;
+    /* Hover ile ok rengi */
+    transform: scale(1.2);
+    /* Hover ile büyüme */
+    border-color: rgba(0, 0, 0, 0.5);
+    /* Daha belirgin sınır */
+  }
+
+  .carousel .control-prev.control-arrow {
+    left: 10px;
+  }
+
+  .carousel .control-next.control-arrow {
+    right: 10px;
+  }
+
+  /* Küçük dikdörtgenleri gizleme */
+  .carousel .thumbs-wrapper {
+    display: none !important;
+    /* Gereksiz alanları tamamen gizler */
+  }
+
+  /* Geçiş animasyonları */
+  .carousel .slide {
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel .control-arrow:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    /* Hafif bir parlama */
   }
 
 }
