@@ -162,6 +162,19 @@ const ArticleHeader = ({ article }) => {
               }
             />
           )}
+          {isMobile && (
+            <>
+              <span className={styles.CardHeaderDateStyle}>
+                {article?.create_date &&
+                  format(article?.create_date, "dd/MM/yyyy")}
+              </span>
+              {isLoadedLike && isLoadedWatch ? (
+                memoizedRightContentField
+              ) : (
+                <LinearProgress color="success" />
+              )}
+            </>
+          )}
         </div>
         <Divider />
       </div>
