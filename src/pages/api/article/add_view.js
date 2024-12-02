@@ -7,8 +7,7 @@ export default async function handler(request, response) {
   const fullOrigin =
     request.headers.origin ||
     request.headers.referer ||
-    `${request.headers["x-forwarded-proto"]}://${request.headers["x-forwarded-host"]}` ||
-    "http://localhost:3000"; // Varsayılan değer
+    `${request.headers["x-forwarded-proto"]}://${request.headers["x-forwarded-host"]}`;
 
   // Ana URL'yi almak için URL API'sini kullanıyoruz
   let origin;
@@ -19,13 +18,11 @@ export default async function handler(request, response) {
     return response.status(400).json({ error: "Invalid origin header" });
   }
 
-  console.log("Detected Origin:", origin);
+  console.log("Origin:", origin);
+  console.log("localAddress:", localAddress);
+  console.log("websiteAddress:", websiteAddress);
 
-  const isDevelopment = process.env.NODE_ENV === "development";
-  if (
-    !isDevelopment &&
-    (!origin || (origin !== localAddress && origin !== websiteAddress))
-  ) {
+  if (origin !== localAddress && origin !== websiteAddress) {
     return response.status(403).json({ error: "Unauthorized origin" });
   }
 
