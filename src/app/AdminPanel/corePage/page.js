@@ -41,6 +41,7 @@ import NavbarAdminPanel from "../../../pages/components/NavbarAdminPanel";
 import MyAlert from "../../../components/reusableComponents/MyAlert";
 import useLanguages from "../../../hooks/useLanguages";
 import { useRouter } from "next/navigation";
+import { checkAuthorizationClient } from "../../../utils/AuthUtils";
 
 const AdminPanel = () => {
   const LABELS = useLanguages();
@@ -92,34 +93,18 @@ const AdminPanel = () => {
     }
   };
 
-  function isEmailInList(email, emailListString) {
-    // E-posta listesini virgül ile ayır ve diziye dönüştür
-    const emailArray = emailListString.split(",");
-
-    // E-posta adresinin listede olup olmadığını kontrol et
-    return emailArray.includes(email);
-  }
-
   const handleClose = () => {
     setOpenDialog(false);
   };
 
   useEffect(() => {
-    fetch("/api/auth/whoAmI/email")
-      .then((res) => res.json())
-      .then((data) => {
-        if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
-          setIsSuperAuthorizedUser(true);
-          setIsAuthorizedUser(true);
-        } else if (isEmailInList(data.email, process.env.PROJECT_ADMIN_USER)) {
-          setIsAuthorizedUser(true);
-          setIsSuperAuthorizedUser(false);
-        } else {
-          setIsAuthorizedUser(false);
-          setIsSuperAuthorizedUser(false);
-          router.push("/api/auth/signin", { scroll: false });
-        }
-      });
+    async function authorize() {
+      const { isAuthorized, isSuperAuthorizedUser } =
+        await checkAuthorizationClient(router);
+      setIsAuthorizedUser(isAuthorized);
+      setIsSuperAuthorizedUser(isSuperAuthorizedUser);
+    }
+    authorize();
   }, []);
 
   useEffect(() => {

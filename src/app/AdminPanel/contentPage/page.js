@@ -82,14 +82,6 @@ const AdminPanel = () => {
   const [isBannerFitStyle, setIsBannerFitStyle] = useState(false);
   const [isBannerStretchStyle, setIsBannerStretchStyle] = useState(false);
 
-  function isEmailInList(email, emailListString) {
-    // E-posta listesini virgül ile ayır ve diziye dönüştür
-    const emailArray = emailListString.split(",");
-
-    // E-posta adresinin listede olup olmadığını kontrol et
-    return emailArray.includes(email);
-  }
-
   const isNewOrReadyToUpdate = () => {
     if (
       isNewOrUpdate === "new" ||
@@ -104,6 +96,7 @@ const AdminPanel = () => {
   const handleClose = () => {
     setOpenDialog(false);
   };
+
   useEffect(() => {
     async function authorize() {
       const { isAuthorized, isSuperAuthorizedUser } =

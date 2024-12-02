@@ -21,6 +21,7 @@ import TagList from "../../../components/TagList";
 import Image from "next/image";
 import styles from "../../AdminPanel/AdminPanel.module.scss";
 import { set } from "date-fns";
+import { checkAuthorizationClient } from "../../../utils/AuthUtils";
 
 const AdminPanel = () => {
   const router = useRouter();
@@ -39,30 +40,14 @@ const AdminPanel = () => {
   const [name, setName] = useState("");
   const [tagImageUrl, setTagImageUrl] = useState("");
 
-  function isEmailInList(email, emailListString) {
-    // E-posta listesini virgül ile ayır ve diziye dönüştür
-    const emailArray = emailListString.split(",");
-
-    // E-posta adresinin listede olup olmadığını kontrol et
-    return emailArray.includes(email);
-  }
-
   useEffect(() => {
-    fetch("/api/auth/whoAmI/email")
-      .then((res) => res.json())
-      .then((data) => {
-        if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
-          setIsSuperAuthorizedUser(true);
-          setIsAuthorizedUser(true);
-        } else if (isEmailInList(data.email, process.env.PROJECT_ADMIN_USER)) {
-          setIsAuthorizedUser(true);
-          setIsSuperAuthorizedUser(false);
-        } else {
-          setIsAuthorizedUser(false);
-          setIsSuperAuthorizedUser(false);
-          router.push("/api/auth/signin", { scroll: false });
-        }
-      });
+    async function authorize() {
+      const { isAuthorized, isSuperAuthorizedUser } =
+        await checkAuthorizationClient(router);
+      setIsAuthorizedUser(isAuthorized);
+      setIsSuperAuthorizedUser(isSuperAuthorizedUser);
+    }
+    authorize();
   }, []);
 
   useEffect(() => {

@@ -30,6 +30,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import MessageIcon from "@mui/icons-material/Message";
 import LinearProgress from "@mui/material/LinearProgress";
 import LoadingFullPage from "../../components/reusableComponents/LoadingFullPage";
+import { checkAuthorizationClient } from "../../../utils/AuthUtils";
 
 const ArticleHeader = ({ article }) => {
   const router = useRouter();
@@ -46,26 +47,13 @@ const ArticleHeader = ({ article }) => {
 
   useEffect(() => {
     setIsAuthChecked(false);
-    fetch("/api/auth/whoAmI/email")
-      .then((res) => res.json())
-      .then((data) => {
-        setUserEmail(data.email);
-        setIsAuthChecked(true);
-        fetch(
-          "/api/article/article_likeCountByUser/" +
-            article?.url +
-            "/likeCountByUser/" +
-            data?.email
-        )
-          .then((res2) => res2.json())
-          .then((data2) => {
-            let likeCount = parseInt(data2.likeCount.rows[0].count, 10);
-            setLike_number(likeCount);
-            let result = likeCount > 0;
-            setIsLiked(result);
-            setIsLoadedLike(true);
-          });
-      });
+    async function authorize() {
+      const { isAuthorized, isSuperAuthorizedUser } =
+        await checkAuthorizationClient(router);
+      setIsAuthorizedUser(isAuthorized);
+      setIsSuperAuthorizedUser(isSuperAuthorizedUser);
+    }
+    authorize();
 
     fetch("/api/article/article_watchCountByUrl/" + article?.url)
       .then((res2) => res2.json())
