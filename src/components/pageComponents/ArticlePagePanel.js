@@ -97,6 +97,7 @@ const ArticlePagePanel = ({ article }) => {
         style={{ paddingBottom: "20vh" }}
       >
         <Container maxWidth="lg">
+          <Divider />
           <div className={styles.HomePageInfoStyle}>
             <Comments article={article} />
           </div>

@@ -42,6 +42,7 @@ import Header from "../../../components/mainComponents/Header";
 import FooterPanel from "../../../components/mainComponents/FooterPanel";
 import NavbarAdminPanel from "../../../pages/components/NavbarAdminPanel";
 import MyAlert from "../../../components/reusableComponents/MyAlert";
+import { checkAuthorizationClient } from "../../../utils/AuthUtils";
 
 const AdminPanel = () => {
   const LABELS = useLanguages();
@@ -104,21 +105,13 @@ const AdminPanel = () => {
     setOpenDialog(false);
   };
   useEffect(() => {
-    fetch("/api/auth/whoAmI/email")
-      .then((res) => res.json())
-      .then((data) => {
-        if (isEmailInList(data.email, process.env.PROJECT_SUPER_ADMIN_USER)) {
-          setIsSuperAuthorizedUser(true);
-          setIsAuthorizedUser(true);
-        } else if (isEmailInList(data.email, process.env.PROJECT_ADMIN_USER)) {
-          setIsAuthorizedUser(true);
-          setIsSuperAuthorizedUser(false);
-        } else {
-          setIsAuthorizedUser(false);
-          setIsSuperAuthorizedUser(false);
-          router.push("/api/auth/signin", { scroll: false });
-        }
-      });
+    async function authorize() {
+      const { isAuthorized, isSuperAuthorizedUser } =
+        await checkAuthorizationClient(router);
+      setIsAuthorizedUser(isAuthorized);
+      setIsSuperAuthorizedUser(isSuperAuthorizedUser);
+    }
+    authorize();
   }, []);
 
   useEffect(() => {
@@ -194,6 +187,45 @@ const AdminPanel = () => {
 
   function handleBannerOrderNumberChange(value) {
     setBannerOrderNumber(value);
+  }
+
+  async function handleDelete() {
+    setIsLoading(true); // Silme işlemi başladığında yüklenme durumunu aktif yap
+    if (!selectedUrl) {
+      setShowError(true);
+      setErrorMessage(LABELS.URL_IS_REQUIRED); // URL seçilmediyse hata mesajı göster
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/article/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: selectedUrl }), // Silinecek URL'yi gönder
+      });
+
+      if (!response.ok) {
+        throw new Error(LABELS.AN_ERROR_OCCURED_WHILE_DELETING); // API isteği başarısızsa hata fırlat
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        clearAllFields(); // Başarıyla silindikten sonra alanları temizle
+        setIsMessageOpen(true); // Başarılı mesajını göster
+        setErrorMessage(LABELS.RECORD_DELETED_SUCCESSFULLY);
+      } else {
+        throw new Error(data.message || LABELS.AN_ERROR_OCCURED_WHILE_DELETING);
+      }
+    } catch (error) {
+      setShowError(true);
+      setErrorMessage(error.message || LABELS.AN_ERROR_OCCURED_WHILE_DELETING); // Hata mesajını ayarla
+    } finally {
+      setIsLoading(false); // İşlem tamamlandıktan sonra yüklenme durumunu kapat
+      setIsRefreshingUrlList(true);
+    }
   }
 
   async function handleGenerateTextFieldsWithRobot() {
@@ -415,6 +447,8 @@ const AdminPanel = () => {
     }
   };
 
+  if (!isAuthorizedUser) return <div>Redirecting...</div>;
+
   return (
     <div className={styles.AdminPanelContainerStyle}>
       <Header />
@@ -480,8 +514,8 @@ const AdminPanel = () => {
                 {isSuperAuthorizedUser && (
                   <Grid
                     item
-                    xs={12}
-                    sm={6}
+                    xs={6}
+                    sm={3}
                     style={
                       isNewOrReadyToUpdate()
                         ? { display: "" }
@@ -495,6 +529,19 @@ const AdminPanel = () => {
                       disabled={process.env.IS_LOCAL == "false"}
                     >
                       {LABELS.FILL_TEXT_FIELDS_WITH_ROBOT}
+                    </Button>
+                  </Grid>
+                )}
+                {isNewOrUpdate == "update" && selectedUrl?.length > 0 && (
+                  <Grid item xs={6} sm={3}>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      color="error"
+                      onClick={async () => handleDelete()}
+                      disabled={process.env.IS_LOCAL == "false"}
+                    >
+                      {LABELS.DELETE}
                     </Button>
                   </Grid>
                 )}

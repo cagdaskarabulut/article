@@ -29,8 +29,6 @@ export async function fetchArticle(
 
     const dataSize = await responseSize.json();
     let listSize = dataSize?.article_list_size?.rows[0]?.count;
-    // console.log("listSize: " + listSize);
-    // console.log("pageSize: " + pageSize);
 
     if (listSize >= pageSize) {
       response = await fetch(

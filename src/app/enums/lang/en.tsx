@@ -1,5 +1,6 @@
 export enum LABELS {
   HELLO = "HELLO",
+  DELETE = "Delete",
   RESULTS_FOR = "Results for",
   ALL_RESULTS = "All results are listed",
   ORDER_BY_LATEST = "ordered by latest",

@@ -1,5 +1,6 @@
 export enum LABELS {
   HELLO = "SELAM",
+  DELETE = "Sil",
   RESULTS_FOR = "Arama sonucu",
   ALL_RESULTS = "Tüm sonuçlar listelenmiş",
   ORDER_BY_LATEST = "eklenme tarihine göre sıralanmıştır",

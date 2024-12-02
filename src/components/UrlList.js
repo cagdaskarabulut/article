@@ -69,7 +69,7 @@ const UrlList = ({
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Search or Select" // Kullanıcı için label
+              label="Search" // Kullanıcı için label
               variant="outlined"
             />
           )}

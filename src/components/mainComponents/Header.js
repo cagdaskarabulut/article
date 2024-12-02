@@ -159,7 +159,10 @@ export default function Header({ isMainPage, specialFields }) {
               forHeader={true}
               leftContent={
                 <>
-                  <h1 className={styles.LogoStyle} style={{ marginTop: "5px" }}>
+                  <div
+                    className={styles.LogoStyle}
+                    style={{ marginTop: "5px" }}
+                  >
                     <Image
                       src={iconHref}
                       width={logoWidth}
@@ -167,7 +170,7 @@ export default function Header({ isMainPage, specialFields }) {
                       onClick={() => goHomePage()}
                       alt={process.env.PROJECT_SITE_NAME + "-logo"}
                     />
-                  </h1>
+                  </div>
                 </>
               }
               middleContent={

@@ -34,7 +34,6 @@ export default function SearchBar({ setIsLoadingFullPage }) {
 
   return (
     <div className={styles.SearchBoxStyle}>
-      {/* <h1> Test </h1> */}
       <TextField
         value={searchValue}
         // onChange={(path, value) => handleInputChange(path, value)}

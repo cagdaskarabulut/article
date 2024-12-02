@@ -22,8 +22,10 @@ import FullScreenVideo from "../components/pageComponents/FullScreenVideo";
 import FloatingButtons from "../components/pageComponents/FloatingButtons";
 import { Metadata, ResolvingMetadata } from "next";
 
-export const dynamicParams = true;
-export const revalidate = 86400;
+// export const dynamicParams = true;
+// export const revalidate = 86400; // 1 gün
+export const dynamicParams = false;
+export const revalidate = 3600; // 1 saat
 
 export async function generateMetadata(
   { params, searchParams }: any,
