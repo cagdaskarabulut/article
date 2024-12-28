@@ -107,4 +107,5 @@ export enum LABELS {
   BANNER_ORDER_NUMBER = "Banner Sıra Numarası",
   FILTER_TOPICS = "Başlıkları Filtrele",
   YOUTUBE_VIDEO_PATH = "Youtube Video Adresi",
+  IS_COMMENT_FIELDS_ACTIVE = "Yorum Alanları Aktif mi",
 }

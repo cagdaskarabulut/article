@@ -47,7 +47,7 @@ const RightContentField = ({
   );
 };
 
-const ArticleHeader = ({ article }) => {
+const ArticleHeader = ({ article, specialFields }) => {
   const router = useRouter();
   const { innerWidth } = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
@@ -62,35 +62,37 @@ const ArticleHeader = ({ article }) => {
   useEffect(() => {
     // Fetch user email and like count
     setIsLoading(true);
-    fetch("/api/auth/whoAmI/email")
-      .then((res) => res.json())
-      .then((data) => {
-        setUserEmail(data.email);
-        return fetch(
-          `/api/article/article_likeCountByUser/${article?.url}/likeCountByUser/${data.email}`
-        );
-      })
-      .then((res) => res.json())
-      .then((data) => {
-        const likeCount = parseInt(data.likeCount.rows[0].count, 10);
-        setLike_number(likeCount);
-        setIsLiked(likeCount > 0);
-        setIsLoadedLike(true);
-      })
-      .catch(console.error);
 
-    // Fetch watch count
-    fetch(`/api/article/article_watchCountByUrl/${article?.url}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const watchCount = parseInt(data?.watchCount?.rows[0]?.count, 10);
-        setWatch_number(watchCount);
-        setIsLoadedWatch(true);
-      })
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
+    if (specialFields.is_comment_fields_active) {
+      fetch("/api/auth/whoAmI/email")
+        .then((res) => res.json())
+        .then((data) => {
+          setUserEmail(data.email);
+          return fetch(
+            `/api/article/article_likeCountByUser/${article?.url}/likeCountByUser/${data.email}`
+          );
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          const likeCount = parseInt(data.likeCount.rows[0].count, 10);
+          setLike_number(likeCount);
+          setIsLiked(likeCount > 0);
+          setIsLoadedLike(true);
+        })
+        .catch(console.error);
+
+      // Fetch watch count
+      fetch(`/api/article/article_watchCountByUrl/${article?.url}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const watchCount = parseInt(data?.watchCount?.rows[0]?.count, 10);
+          setWatch_number(watchCount);
+          setIsLoadedWatch(true);
+        })
+        .catch(console.error)
+        .finally(() => setIsLoading(false));
+    }
   }, []);
-  // }, [article?.url]);
 
   useEffect(() => {
     // Update isMobile state on window resize
@@ -144,38 +146,66 @@ const ArticleHeader = ({ article }) => {
       <div className={styles.HomePageInfoStyle}>
         <h1 style={{ marginTop: "0px" }}>{article?.title}</h1>
         <Divider />
-        <div className={styles.HeaderActionsContainerStyle}>
-          {!isMobile && (
-            <MyGrid
-              leftContent={
+
+        {!specialFields?.is_comment_fields_active && (
+          <div className={styles.HeaderActionsContainerStyle}>
+            {!isMobile && (
+              <MyGrid
+                leftContent={
+                  <span className={styles.CardHeaderDateStyle}>
+                    {article?.create_date &&
+                      format(article?.create_date, "dd/MM/yyyy")}
+                  </span>
+                }
+                rightContent={<></>}
+              />
+            )}
+            {isMobile && (
+              <>
                 <span className={styles.CardHeaderDateStyle}>
                   {article?.create_date &&
                     format(article?.create_date, "dd/MM/yyyy")}
                 </span>
-              }
-              rightContent={
-                isLoadedLike && isLoadedWatch ? (
+              </>
+            )}
+          </div>
+        )}
+
+        {specialFields?.is_comment_fields_active && (
+          <div className={styles.HeaderActionsContainerStyle}>
+            {!isMobile && (
+              <MyGrid
+                leftContent={
+                  <span className={styles.CardHeaderDateStyle}>
+                    {article?.create_date &&
+                      format(article?.create_date, "dd/MM/yyyy")}
+                  </span>
+                }
+                rightContent={
+                  isLoadedLike && isLoadedWatch ? (
+                    memoizedRightContentField
+                  ) : (
+                    <LinearProgress color="success" />
+                  )
+                }
+              />
+            )}
+            {isMobile && (
+              <>
+                <span className={styles.CardHeaderDateStyle}>
+                  {article?.create_date &&
+                    format(article?.create_date, "dd/MM/yyyy")}
+                </span>
+                {isLoadedLike && isLoadedWatch ? (
                   memoizedRightContentField
                 ) : (
                   <LinearProgress color="success" />
-                )
-              }
-            />
-          )}
-          {isMobile && (
-            <>
-              <span className={styles.CardHeaderDateStyle}>
-                {article?.create_date &&
-                  format(article?.create_date, "dd/MM/yyyy")}
-              </span>
-              {isLoadedLike && isLoadedWatch ? (
-                memoizedRightContentField
-              ) : (
-                <LinearProgress color="success" />
-              )}
-            </>
-          )}
-        </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
+
         <Divider />
       </div>
     );

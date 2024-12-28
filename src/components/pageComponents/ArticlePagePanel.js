@@ -21,23 +21,25 @@ const ArticlePagePanel = ({ article }) => {
   const specialFields = useProjectSpecialFields();
 
   useEffect(() => {
-    fetch("/api/article/add_view", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        url: article?.url,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        fetch("/api/article/increase_view_number", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            url: article?.url,
-          }),
-        }).then((res) => res.json());
-      });
+    if (specialFields.is_comment_fields_active) {
+      fetch("/api/article/add_view", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          url: article?.url,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          fetch("/api/article/increase_view_number", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              url: article?.url,
+            }),
+          }).then((res) => res.json());
+        });
+    }
   }, []);
 
   //_ Update when page resolution change
@@ -55,7 +57,7 @@ const ArticlePagePanel = ({ article }) => {
         <div className={styles.PanelContainerStyle}>
           <Container maxWidth="lg">
             <div className={styles.HomePageInfoStyle}>
-              <ArticleHeader article={article} />
+              <ArticleHeader article={article} specialFields={specialFields} />
               <br />
 
               {article?.video_path && (
@@ -128,7 +130,7 @@ const ArticlePagePanel = ({ article }) => {
             isOneFullContent
             isHideWhileLoading
           />
-          {!article.is_core_page && (
+          {!article.is_core_page && specialFields?.is_comment_fields_active && (
             <MyGrid
               leftContent={<CommentField />}
               isOneFullContent

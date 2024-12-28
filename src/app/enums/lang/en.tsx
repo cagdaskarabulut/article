@@ -108,4 +108,5 @@ export enum LABELS {
   BANNER_ORDER_NUMBER = "Banner Order Number",
   FILTER_TOPICS = "Filter Topics",
   YOUTUBE_VIDEO_PATH = "Youtube Video Path",
+  IS_COMMENT_FIELDS_ACTIVE = "Is Comment Fields Active",
 }

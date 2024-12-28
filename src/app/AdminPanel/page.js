@@ -33,6 +33,7 @@ const AdminPanel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
   const [isProjectProductDesign, setIsProjectProductDesign] = useState(false);
+  const [isCommentFieldsActive, setIsCommentFieldsActive] = useState(false);
   const [isCardDesignWithBigImage, setIsCardDesignWithBigImage] =
     useState(false);
   const [isOrderbyMenuActive, setIsOrderbyMenuActive] = useState(false);
@@ -100,6 +101,9 @@ const AdminPanel = () => {
         setIsProjectProductDesign(
           data?.fields?.rows[0]?.is_project_type_product
         );
+        setIsCommentFieldsActive(
+          data?.fields?.rows[0]?.is_comment_fields_active
+        );
         setIsOrderbyMenuActive(data?.fields?.rows[0]?.is_order_by_menu_active);
         setIsTopMenuActive(data?.fields?.rows[0]?.is_top_menu_active);
         setMainPageName(data?.fields?.rows[0]?.main_page_name);
@@ -116,6 +120,10 @@ const AdminPanel = () => {
 
   const handleIsProjectProductDesign = (event) => {
     setIsProjectProductDesign(event?.target?.checked);
+  };
+
+  const handleIsCommentFieldsActive = (event) => {
+    setIsCommentFieldsActive(event?.target?.checked);
   };
 
   const handleIsCardDesignWithBigImage = (event) => {
@@ -147,6 +155,7 @@ const AdminPanel = () => {
         main_page_name: mainPageName,
         is_card_design_with_big_image: isCardDesignWithBigImage,
         default_language: defaultLanguage,
+        is_comment_fields_active: isCommentFieldsActive,
       }),
     }).then((res) => res.json());
     setIsMessageOpen(true);
@@ -179,6 +188,17 @@ const AdminPanel = () => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Stack direction="row" spacing={1} alignItems="center">
+                    <span>{LABELS.IS_COMMENT_FIELDS_ACTIVE}</span>
+                    <AntSwitch
+                      defaultChecked
+                      inputProps={{ "aria-label": "ant design" }}
+                      checked={isCommentFieldsActive}
+                      onChange={handleIsCommentFieldsActive}
+                    />
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Stack direction="row" spacing={1} alignItems="center">
                     {/* <Typography>Kart tasarımı bol içerikli olsun</Typography> */}
                     <span>{LABELS.MAKE_CARD_DESIGN_AS_BIG_IMAGES}</span>
                     <AntSwitch
@@ -190,8 +210,9 @@ const AdminPanel = () => {
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <span>{LABELS.IS_DISPLAY_ORDER_BY_MENU}</span>
-                  <FormControlLabel
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <span>{LABELS.IS_DISPLAY_ORDER_BY_MENU}</span>
+                    {/* <FormControlLabel
                     control={
                       <Switch
                         checked={isOrderbyMenuActive}
@@ -200,20 +221,26 @@ const AdminPanel = () => {
                       />
                     }
                     label=""
-                  />
+                  /> */}
+
+                    <AntSwitch
+                      defaultChecked
+                      inputProps={{ "aria-label": "ant design" }}
+                      checked={isOrderbyMenuActive}
+                      onChange={handleIsOrderbyMenuActive}
+                    />
+                  </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <span>{LABELS.IS_DISPLAY_MAIN_MENU}</span>
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={isTopMenuActive}
-                        onChange={handleIsTopMenuActive}
-                        inputProps={{ "aria-label": "controlled" }}
-                      />
-                    }
-                    label=""
-                  />
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    <span>{LABELS.IS_DISPLAY_MAIN_MENU}</span>
+                    <AntSwitch
+                      defaultChecked
+                      inputProps={{ "aria-label": "ant design" }}
+                      checked={isTopMenuActive}
+                      onChange={handleIsTopMenuActive}
+                    />
+                  </Stack>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <TextField

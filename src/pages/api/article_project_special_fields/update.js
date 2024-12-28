@@ -12,6 +12,7 @@ export default async function handler(request, response) {
       request.body.is_card_design_with_big_image,
       request.body.default_language,
       request.body.main_page_name,
+      request.body.is_comment_fields_active,
       projectName,
     ];
     const script = `UPDATE article_project_special_fields set  
@@ -21,8 +22,9 @@ export default async function handler(request, response) {
       is_top_menu_active=$4,
       is_card_design_with_big_image=$5,
       default_language=$6,
-      main_page_name=$7
-      where project=$8;`;
+      main_page_name=$7,
+      is_comment_fields_active=$8
+      where project=$9;`;
     let data = await sql.query(script, values);
     return response.status(200).json("successfully saved");
   } catch (error) {
