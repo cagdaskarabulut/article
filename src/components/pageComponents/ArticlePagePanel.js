@@ -21,7 +21,7 @@ const ArticlePagePanel = ({ article }) => {
   const specialFields = useProjectSpecialFields();
 
   useEffect(() => {
-    if (specialFields.is_comment_fields_active) {
+    if (specialFields?.is_comment_fields_active) {
       fetch("/api/article/add_view", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

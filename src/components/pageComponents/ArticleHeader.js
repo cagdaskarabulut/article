@@ -63,7 +63,7 @@ const ArticleHeader = ({ article, specialFields }) => {
     // Fetch user email and like count
     setIsLoading(true);
 
-    if (specialFields.is_comment_fields_active) {
+    if (specialFields?.is_comment_fields_active) {
       fetch("/api/auth/whoAmI/email")
         .then((res) => res.json())
         .then((data) => {
