@@ -22,7 +22,7 @@ import FullScreenVideo from "../components/pageComponents/FullScreenVideo";
 import FloatingButtons from "../components/pageComponents/FloatingButtons";
 import { Metadata, ResolvingMetadata } from "next";
 
-//export const revalidate = 86400; // 24 saat
+export const revalidate = 86400; // 24 saat
 
 export async function generateMetadata(
   { params, searchParams }: any,
