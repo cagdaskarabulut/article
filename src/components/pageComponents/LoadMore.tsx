@@ -33,8 +33,6 @@ function LoadMore({
   }, [orderType, search]);
 
   useEffect(() => {
-    // console.log("useEffect geldi ");
-
     if (inView && !isFinished) {
       // console.log("inView geldi ");
       setIsLoading(true);
