@@ -23,7 +23,6 @@ const TopicList = ({
   activeInputStyle,
 }) => {
   const [allTopicList, setAllTopicList] = useState([]);
-  // const timestamp = Date.now(); // This would be the timestamp you want to format
 
   useEffect(() => {
     fetch("/api/topic/list")
