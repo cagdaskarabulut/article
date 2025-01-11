@@ -49,7 +49,8 @@ export async function generateMetadata(
 
 export default async function Home({ searchParams }) {
   const specialFields = await fetch(
-    `${process.env.URL}/api/article/article_project_special_fields`
+    `${process.env.URL}/api/article/article_project_special_fields`,
+    { cache: "no-store" }
   )
     .then((res) => res.json())
     .then((data) => {
@@ -63,17 +64,23 @@ export default async function Home({ searchParams }) {
   let orderType = searchParams.orderby || "create_date"; // order by boş gelirse default değer atanır
   let search = searchParams.search || "";
   let isSmallCards = specialFields?.is_project_type_product ? true : false;
+
   let mainData = await fetchArticle(
     1,
     pageSize,
     orderType,
     search,
-    isSmallCards
+    isSmallCards,
+    { cache: "no-store" } // Dinamik veri çekmek için önbelleği devre dışı bırakıyoruz
   );
 
-  let mainDataSize = await fetchArticleSize(1, pageSize, orderType, search);
+  let mainDataSize = await fetchArticleSize(1, pageSize, orderType, search, {
+    cache: "no-store",
+  });
   let mostLikedData = specialFields?.is_project_type_article
-    ? await fetchArticle(1, pageSize, "like_number", "", isSmallCards)
+    ? await fetchArticle(1, pageSize, "like_number", "", isSmallCards, {
+        cache: "no-store",
+      })
     : [];
 
   function findTitleByUrl() {

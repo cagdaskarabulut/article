@@ -15,7 +15,8 @@ export async function fetchArticle(
   size: number,
   orderby: string,
   search: string,
-  isSmallCards: boolean
+  isSmallCards: boolean,
+  p0: { cache: string }
 ) {
   let response;
   let responseSize;

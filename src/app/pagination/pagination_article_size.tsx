@@ -13,7 +13,8 @@ export async function fetchArticleSize(
   page: number,
   size: number,
   orderby: string,
-  search: string
+  search: string,
+  p0: { cache: string }
 ) {
   let responseSize;
   const pageSize = page * size;
