@@ -42,19 +42,19 @@ function LoadMore({
           setIsFinished(true);
         }
 
-        fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
-          (res) => {
-            if (res) {
-              // console.log("res geldi ");
-              setData([...data, ...res]);
-              page++;
-            } else {
-              // console.log("res null geldi ");
-              setIsFinished(true);
-            }
-            setIsLoading(false);
+        fetchArticle(page, rowForPage, orderType, search, isSmallCards, {
+          cache: "no-store",
+        }).then((res) => {
+          if (res) {
+            // console.log("res geldi ");
+            setData([...data, ...res]);
+            page++;
+          } else {
+            // console.log("res null geldi ");
+            setIsFinished(true);
           }
-        );
+          setIsLoading(false);
+        });
 
         // if (totalListSize < page * rowForPage) {
         //   // const remainingList = totalListSize - (page - 1) * rowForPage;
