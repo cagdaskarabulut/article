@@ -6,15 +6,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (path === "homepage") {
-      console.log("Ana sayfa yeniden oluşturuluyor...");
-      await res.revalidate(`/`);
-      console.log("Ana sayfa başarıyla yeniden oluşturuldu.");
-    } else {
-      // Diğer sayfalar için yeniden oluşturma
-      await res.revalidate(`/${decodeURIComponent(path)}`);
-    }
-
+    // Path'i yeniden oluştur
+    // curl -X GET "https://www.cnmautoparts.com/api/revalidate?path=i%CC%87leti%C5%9Fim"
+    // curl -X GET "https://www.cnmautoparts.com/api/revalidate?path=isuzu-disli-kutu-kapak-conta-4jj1-4jk1-939686063360"
+    await res.revalidate(`/${decodeURIComponent(path)}`); // Path'i çözerek ISR'yi tetikle
     return res.json({ revalidated: true });
   } catch (err) {
     console.error("Yeniden oluşturma hatası:", err);
