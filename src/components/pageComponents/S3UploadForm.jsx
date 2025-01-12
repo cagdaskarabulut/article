@@ -6,8 +6,9 @@ import { Input } from "@mui/material";
 import styles from "./S3UploadForm.module.scss";
 
 const UploadForm = ({
-  titleImageUrl,
-  setTitleImageUrl,
+  label,
+  imageUrl,
+  setImageUrl,
   setIsLoading,
   folderPath,
 }) => {
@@ -37,7 +38,7 @@ const UploadForm = ({
       const data = await response.json();
       setUploading(false);
       setIsLoading(false);
-      setTitleImageUrl(
+      setImageUrl(
         "https://karabulut-storage.s3.amazonaws.com/" +
           process.env.PROJECT_SITE_NAME +
           "/" +
@@ -53,6 +54,7 @@ const UploadForm = ({
 
   return (
     <>
+      <span>{label}</span>
       <form onSubmit={handleSubmit}>
         <Input
           name="file"
@@ -71,16 +73,16 @@ const UploadForm = ({
           {uploading ? "Uploading..." : "Upload"}
         </Button>
       </form>
-      {titleImageUrl && (
+      {imageUrl && (
         <>
           <br />
           <h3 className={styles.subTitleStyle}>Yüklenen Resim</h3>
           <div className={styles.ArticleImageContainerStyle}>
             <Image
-              src={titleImageUrl}
+              src={imageUrl}
               fill={true}
               objectFit="contain"
-              alt={"img_" + titleImageUrl}
+              alt={"img_" + imageUrl}
             />
           </div>
         </>

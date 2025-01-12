@@ -14,25 +14,14 @@ export async function fetchArticleSize(
   size: number,
   orderby: string,
   search: string,
-  p0: { cache: string }
+  options?: { next?: { revalidate: number } }
 ) {
-  let responseSize;
-  const pageSize = page * size;
-  let listSize = 0;
-
-  if (search) {
-    responseSize = await fetch(
-      `${process.env.URL}/api/article/list_filter_size?&search=${search}`
-    );
-    const dataSize = await responseSize.json();
-    listSize = dataSize?.article_list_size?.rows[0]?.count;
-  } else {
-    responseSize = await fetch(
-      `${process.env.URL}/api/article/list_filter_size?&order=${orderby}`
-    );
-    const dataSize = await responseSize.json();
-    listSize = dataSize?.article_list_size?.rows[0].count;
-  }
-
-  return listSize;
+  const responseSize = await fetch(
+    search
+      ? `${process.env.URL}/api/article/list_filter_size?search=${search}`
+      : `${process.env.URL}/api/article/list_filter_size?order=${orderby}`,
+    options
+  );
+  const dataSize = await responseSize.json();
+  return dataSize?.article_list_size?.rows[0]?.count || 0;
 }

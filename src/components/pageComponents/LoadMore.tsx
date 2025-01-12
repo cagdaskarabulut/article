@@ -55,41 +55,6 @@ function LoadMore({
           }
           setIsLoading(false);
         });
-
-        // if (totalListSize < page * rowForPage) {
-        //   // const remainingList = totalListSize - (page - 1) * rowForPage;
-        //   fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
-        //     (res) => {
-        //       if (res) {
-        //         console.log("res geldi ");
-        //         setData([...data, ...res]);
-        //         page++;
-        //       } else {
-        //         console.log("res null geldi ");
-        //         setIsFinished(true);
-        //       }
-        //       setIsLoading(false);
-        //     }
-        //   );
-        //   setIsFinished(true);
-        // } else {
-        //   console.log(
-        //     "else e geldi => totalListSize >= page * rowForPage geldi "
-        //   );
-        //   fetchArticle(page, rowForPage, orderType, search, isSmallCards).then(
-        //     (res) => {
-        //       if (res) {
-        //         console.log("res geldi ");
-        //         setData([...data, ...res]);
-        //         page++;
-        //       } else {
-        //         console.log("res null geldi ");
-        //         setIsFinished(true);
-        //       }
-        //       setIsLoading(false);
-        //     }
-        //   );
-        // }
       }, delay);
       // Clear the timeout if the component is unmounted or inView becomes false
       return () => clearTimeout(timeoutId);

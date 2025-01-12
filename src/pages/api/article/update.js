@@ -9,6 +9,7 @@ export default async function handler(request, response) {
       request.body.topics,
       new Date().toLocaleString() + "",
       request.body.title_image,
+      request.body.content_image,
       request.body.video_path,
       request.body.body,
       request.body.is_manuel_page,
@@ -33,22 +34,23 @@ export default async function handler(request, response) {
     topics=$2,
     create_date=$3,
     title_image=$4,
-    video_path=$5,
-    body=$6,
-    is_manuel_page=$7,
-    description=$8,
-    meta_keys=$9,
-    is_active=$10,
-    is_show_in_menu=$11,
-    page_name=$12,
-    is_core_page=$13,
-    is_show_in_banner=$14,
-    is_banner_fit_style=$15,
-    is_banner_stretch_style=$16,
-    banner_order_number=$17,
-    project=$18
-    where url=$19
-    and project=$20 ;`;
+    content_image=$5,
+    video_path=$6,
+    body=$7,
+    is_manuel_page=$8,
+    description=$9,
+    meta_keys=$10,
+    is_active=$11,
+    is_show_in_menu=$12,
+    page_name=$13,
+    is_core_page=$14,
+    is_show_in_banner=$15,
+    is_banner_fit_style=$16,
+    is_banner_stretch_style=$17,
+    banner_order_number=$18,
+    project=$19
+    where url=$20
+    and project=$21 ;`;
 
     let data = await sql.query(script, values);
     return response.status(200).json("successfully saved");

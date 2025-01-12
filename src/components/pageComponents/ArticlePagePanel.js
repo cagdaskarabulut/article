@@ -84,6 +84,20 @@ const ArticlePagePanel = ({ article }) => {
                 </div>
               )}
 
+              {article?.content_image && (
+                <div
+                  className={styles.ArticleImageContainerStyle}
+                  style={{ marginTop: "16px" }}
+                >
+                  <Image
+                    src={article?.content_image}
+                    alt={"img_content_" + article?.url}
+                    fill={true}
+                    objectFit="contain"
+                  />
+                </div>
+              )}
+
               <div dangerouslySetInnerHTML={{ __html: article?.body }}></div>
             </div>
           </Container>

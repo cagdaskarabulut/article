@@ -55,6 +55,7 @@ const AdminPanel = () => {
   const [bannerOrderNumber, setBannerOrderNumber] = useState(0);
   const [url, setUrl] = useState("");
   const [titleImageUrl, setTitleImageUrl] = useState("");
+  const [contentImageUrl, setContentImageUrl] = useState("");
   const { quill, quillRef } = useQuill();
   const [isManuelPage, setIsManuelPage] = useState(false);
   const [isActive, setIsActive] = useState(true);
@@ -328,6 +329,7 @@ const AdminPanel = () => {
     setGenerateImageByRobotText("");
     setImagePath("");
     setTitleImageUrl("");
+    setContentImageUrl("");
     setVideoPath("");
     setIsLoading(false);
     setIsActive(true);
@@ -340,6 +342,7 @@ const AdminPanel = () => {
     setUrl(myArticle.url);
     setTitle(myArticle.title);
     setTitleImageUrl(myArticle.title_image);
+    setContentImageUrl(myArticle.content_image);
     setVideoPath(myArticle.video_path);
 
     const topicsArray = getListFromStringWithCommaSeperated(
@@ -381,6 +384,7 @@ const AdminPanel = () => {
               topics: getStringWithCommaSeperatedFromList(topicList),
               create_date: new Date(),
               title_image: titleImageUrl,
+              content_image: contentImageUrl,
               video_path: videoPath,
               body: quill.container.firstChild.innerHTML,
               is_manuel_page: isManuelPage,
@@ -412,6 +416,7 @@ const AdminPanel = () => {
               topics: getStringWithCommaSeperatedFromList(topicList),
               create_date: new Date(),
               title_image: titleImageUrl,
+              content_image: contentImageUrl,
               video_path: videoPath,
               body: quill.container.firstChild.innerHTML,
               is_manuel_page: isManuelPage,
@@ -787,8 +792,27 @@ const AdminPanel = () => {
                   }
                 >
                   <S3UploadForm
-                    titleImageUrl={titleImageUrl}
-                    setTitleImageUrl={setTitleImageUrl}
+                    label="Title Image"
+                    imageUrl={titleImageUrl}
+                    setImageUrl={setTitleImageUrl}
+                    setIsLoading={setIsLoading}
+                    folderPath=""
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  style={
+                    isNewOrReadyToUpdate()
+                      ? { display: "" }
+                      : { display: "none" }
+                  }
+                >
+                  <S3UploadForm
+                    label="Content Image"
+                    imageUrl={contentImageUrl}
+                    setImageUrl={setContentImageUrl}
                     setIsLoading={setIsLoading}
                     folderPath=""
                   />
