@@ -43,7 +43,7 @@ function LoadMore({
         }
 
         fetchArticle(page, rowForPage, orderType, search, isSmallCards, {
-          cache: "no-store",
+          next: { revalidate: 0 },
         }).then((res) => {
           if (res) {
             // console.log("res geldi ");
