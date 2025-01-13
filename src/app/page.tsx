@@ -22,7 +22,8 @@ import FullScreenVideo from "../components/pageComponents/FullScreenVideo";
 import FloatingButtons from "../components/pageComponents/FloatingButtons";
 import { Metadata, ResolvingMetadata } from "next";
 
-const revalidateTimeForCache = 86400;
+const revalidateTimeForCache = 0;
+const revalidateTimeForCacheSlow = 86400;
 
 export async function generateMetadata(
   { params, searchParams }: any,
@@ -77,7 +78,7 @@ export default async function Home({ searchParams }) {
   });
   const mostLikedData = specialFields?.is_project_type_article
     ? await fetchArticle(1, pageSize, "like_number", "", isSmallCards, {
-        next: { revalidate: revalidateTimeForCache },
+        next: { revalidate: revalidateTimeForCacheSlow },
       })
     : [];
 
