@@ -89,7 +89,6 @@ export default async function Home({ searchParams }) {
     } else {
       result = LABELS.ALL_RESULTS;
     }
-
     if (!search && specialFields?.is_order_by_menu_active) {
       if (orderType === "create_date") {
         result += ", " + LABELS.ORDER_BY_LATEST;
