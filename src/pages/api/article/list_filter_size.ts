@@ -2,29 +2,74 @@
 import { sql } from "@vercel/postgres";
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+// Önbellek yapısı
+interface CacheItem {
+  data: any;
+  timestamp: number;
+}
+
+// Parametrelere göre önbellek
+const cache: Record<string, CacheItem> = {};
+const CACHE_DURATION = 3600 * 1000; // 1 saat (milisaniye cinsinden)
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { order, search } = req?.query;
-  let orderVal = order?.toString();
   let searchVal = search?.toString();
-  let article_list_size;
   const projectName = process.env.PROJECT_SITE_NAME;
 
-  const values = [projectName];
+  // Önbellek anahtarı oluştur
+  const cacheKey = `list_filter_size_${projectName}_${order || 'default'}_${searchVal || 'no-search'}`;
+  const now = Date.now();
+  const cachedItem = cache[cacheKey];
 
-  let searchPart = searchVal ? (` and 
-    (unaccent(LOWER(a.topics))) ilike unaccent(LOWER('%${searchVal}%')) or unaccent(LOWER(a.title)) ilike unaccent(LOWER('%${searchVal}%')) or unaccent(LOWER(a.description)) ilike unaccent(LOWER('%${searchVal}%')) or unaccent(LOWER(a.meta_keys)) ilike unaccent(LOWER('%${searchVal}%')) or
-    (unaccent(UPPER(a.topics))) ilike unaccent(UPPER('%${searchVal}%')) or unaccent(UPPER(a.title)) ilike unaccent(UPPER('%${searchVal}%')) or unaccent(UPPER(a.description)) ilike unaccent(UPPER('%${searchVal}%')) or unaccent(UPPER(a.meta_keys)) ilike unaccent(UPPER('%${searchVal}%')) `) : "";
+  // Önbellekten veri döndür
+  if (cachedItem && now - cachedItem.timestamp < CACHE_DURATION) {
+    return res.status(200).json(cachedItem.data);
+  }
 
   try {
-    const script = `SELECT count(a.id) FROM public.article a where a.project=$1 and (a.is_core_page is null or a.is_core_page=false) and a.is_active=true ${searchPart};`;
+    let script;
+    let values;
 
-    // console.log("script: " + script);
-    // console.log("values: " + values);
+    if (searchVal) {
+      const searchPattern = `%${searchVal}%`;
+      script = `
+        SELECT COUNT(a.id) 
+        FROM public.article a 
+        WHERE a.project = $1 
+          AND (a.is_core_page IS NULL OR a.is_core_page = false) 
+          AND a.is_active = true 
+          AND (
+            unaccent(LOWER(a.topics)) ILIKE unaccent(LOWER($2)) OR 
+            unaccent(LOWER(a.title)) ILIKE unaccent(LOWER($2)) OR 
+            unaccent(LOWER(a.description)) ILIKE unaccent(LOWER($2)) OR 
+            unaccent(LOWER(a.meta_keys)) ILIKE unaccent(LOWER($2))
+          )
+      `;
+      values = [projectName, searchPattern];
+    } else {
+      script = `
+        SELECT COUNT(a.id) 
+        FROM public.article a 
+        WHERE a.project = $1 
+          AND (a.is_core_page IS NULL OR a.is_core_page = false) 
+          AND a.is_active = true
+      `;
+      values = [projectName];
+    }
 
-    article_list_size = await sql.query(script, values);
+    const article_list_size = await sql.query(script, values);
+
+    // Sonucu önbelleğe al
+    const responseData = { article_list_size };
+    cache[cacheKey] = {
+      data: responseData,
+      timestamp: now
+    };
+
+    return res.status(200).json(responseData);
   } catch (e) {
-    article_list_size = "";
-    console.log("hata: " + e);
+    console.error("Liste sayısı getirme hatası:", e);
+    return res.status(500).json({ error: "Veritabanı sorgusu sırasında bir hata oluştu." });
   }
-  return res.status(200).json({ article_list_size });
 }
