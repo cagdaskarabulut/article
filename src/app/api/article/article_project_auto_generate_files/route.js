@@ -6,7 +6,7 @@ export const revalidate = 86400; // 24 saat
 // Global önbellek değişkeni ve son yenilenme zamanı
 let cachedFiles = null;
 let lastCacheTime = 0;
-const CACHE_DURATION = 86400 * 1000; // 24 saat (milisaniye cinsinden)
+const CACHE_DURATION = 604800 * 1000; // 1 hafta (milisaniye cinsinden)
 
 export async function GET() {
   const currentTime = Date.now();

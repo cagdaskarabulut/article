@@ -9,7 +9,7 @@ interface CacheItem {
 
 // URL'ye göre önbellek - key: url, value: {data, timestamp}
 const cache: Record<string, CacheItem> = {};
-const CACHE_DURATION = 3600 * 1000; // 1 saat (milisaniye cinsinden)
+const CACHE_DURATION = 3600 * 24 * 1000; // 1 gün (milisaniye cinsinden)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   let { url } = req?.query;
