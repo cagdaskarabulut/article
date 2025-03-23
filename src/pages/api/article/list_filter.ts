@@ -10,7 +10,7 @@ interface CacheItem {
 
 // Tüm sorgu parametrelerine göre önbellek
 const cache: Record<string, CacheItem> = {};
-const CACHE_DURATION = 3600 * 24 * 1000; // 1 gün (milisaniye cinsinden)
+const CACHE_DURATION = 3600 * 24000; // 1 gün (milisaniye cinsinden)
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { page, size, order, search, lastPageSize } = req?.query;
