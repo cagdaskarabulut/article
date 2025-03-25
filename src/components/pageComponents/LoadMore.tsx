@@ -132,20 +132,30 @@ export default function LoadMore({
             ref={ref}
             style={{ width: "100%", display: "flex", justifyContent: "center" }}
           >
-            {inView && isLoading && hasMore && (
-              <>
-                <Image
-                  src="/images/loading.gif"
-                  alt="Loading"
-                  width={50}
-                  height={50}
-                  style={{ margin: "20px" }}
-                />
-              </>
-            )}
+            {inView && isLoading && hasMore && <div className="spinner"></div>}
           </div>
         </section>
       </div>
+      <style jsx>{`
+        .spinner {
+          width: 40px;
+          height: 40px;
+          margin: 20px;
+          border: 4px solid #f3f3f3;
+          border-top: 4px solid #3498db;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
       <style jsx global>{`
         body {
           background-color: #f2f2f2;
