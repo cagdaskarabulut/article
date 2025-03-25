@@ -25,6 +25,10 @@ import { Metadata, ResolvingMetadata } from "next";
 const revalidateTimeForCache = 0;
 const revalidateTimeForCacheSlow = 86400;
 
+// Global önbellek değişkenleri
+let cachedData = new Map();
+const CACHE_DURATION = 86400 * 1000; // 1 gün (milisaniye cinsinden)
+
 export async function generateMetadata(
   { params, searchParams }: any,
   parent: ResolvingMetadata
@@ -50,6 +54,7 @@ export async function generateMetadata(
 }
 
 export default async function Home({ searchParams }) {
+  const currentTime = Date.now();
   const specialFields = await fetch(
     `${process.env.URL}/api/article/article_project_special_fields`,
     { cache: "force-cache" }
@@ -65,22 +70,81 @@ export default async function Home({ searchParams }) {
   const search = searchParams?.search || "";
   const isSmallCards = specialFields?.is_project_type_product || false;
 
-  const mainData = await fetchArticle(
-    1,
-    pageSize,
+  // Önbellek anahtarı oluştur
+  const cacheKey = `${orderType}-${search}-${isSmallCards}`;
+
+  // Önbellek kontrolü
+  let mainData, mainDataSize, mostLikedData;
+
+  if (
+    cachedData.has(cacheKey) &&
+    currentTime - cachedData.get(cacheKey).timestamp < CACHE_DURATION
+  ) {
+    console.log(
+      `[Cache Hit] Veriler önbellekten alındı. Cache Key: ${cacheKey}`
+    );
+    const cached = cachedData.get(cacheKey);
+    mainData = cached.mainData;
+    mainDataSize = cached.mainDataSize;
+    mostLikedData = cached.mostLikedData;
+  } else {
+    console.log(
+      `[Cache Miss] Veriler veritabanından çekiliyor. Cache Key: ${cacheKey}`
+    );
+    mainData = await fetchArticle(
+      1,
+      pageSize,
+      orderType,
+      search,
+      isSmallCards,
+      { next: { revalidate: revalidateTimeForCache } }
+    );
+    mainDataSize = await fetchArticleSize(1, pageSize, orderType, search, {
+      next: { revalidate: revalidateTimeForCache },
+    });
+    mostLikedData = specialFields?.is_project_type_article
+      ? await fetchArticle(1, pageSize, "like_number", "", isSmallCards, {
+          next: { revalidate: revalidateTimeForCacheSlow },
+        })
+      : [];
+
+    // Verileri önbelleğe al
+    cachedData.set(cacheKey, {
+      mainData,
+      mainDataSize,
+      mostLikedData,
+      timestamp: currentTime,
+      pageSize,
+      orderType,
+      search,
+      isSmallCards,
+    });
+    console.log(
+      `[Cache Update] Yeni veriler önbelleğe kaydedildi. Cache Key: ${cacheKey}`
+    );
+  }
+
+  // Önbellek temizliği (isteğe bağlı)
+  // 100'den fazla önbellek varsa en eski olanları temizle
+  if (cachedData.size > 100) {
+    const oldestKey = Array.from(cachedData.entries()).sort(
+      ([, a], [, b]) => a.timestamp - b.timestamp
+    )[0][0];
+    cachedData.delete(oldestKey);
+    console.log(
+      `[Cache Cleanup] En eski önbellek temizlendi. Silinen Key: ${oldestKey}`
+    );
+  }
+
+  // LoadMore bileşeni için gerekli props'ları hazırla
+  const loadMoreProps = {
     orderType,
     search,
+    totalListSize: mainDataSize,
+    pageSize,
     isSmallCards,
-    { next: { revalidate: revalidateTimeForCache } }
-  );
-  const mainDataSize = await fetchArticleSize(1, pageSize, orderType, search, {
-    next: { revalidate: revalidateTimeForCache },
-  });
-  const mostLikedData = specialFields?.is_project_type_article
-    ? await fetchArticle(1, pageSize, "like_number", "", isSmallCards, {
-        next: { revalidate: revalidateTimeForCacheSlow },
-      })
-    : [];
+    cacheKey,
+  };
 
   function findTitleByUrl() {
     let result = "";
@@ -165,13 +229,7 @@ export default async function Home({ searchParams }) {
                             {findTitleByUrl()}
                           </h4>
                           {mainData}
-                          <LoadMore
-                            orderType={orderType}
-                            search={search}
-                            totalListSize={mainDataSize}
-                            pageSize={pageSize}
-                            isSmallCards={isSmallCards}
-                          />
+                          <LoadMore {...loadMoreProps} />
                         </div>
                       }
                       rightContent={
@@ -244,13 +302,7 @@ export default async function Home({ searchParams }) {
                         }}
                       >
                         {mainData}
-                        <LoadMore
-                          orderType={orderType}
-                          search={search}
-                          totalListSize={mainDataSize}
-                          pageSize={pageSize}
-                          isSmallCards={isSmallCards}
-                        />
+                        <LoadMore {...loadMoreProps} />
                       </div>
                     </>
                   }
