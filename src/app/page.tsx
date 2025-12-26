@@ -23,11 +23,13 @@ import FloatingButtons from "../components/pageComponents/FloatingButtons";
 import { Metadata, ResolvingMetadata } from "next";
 
 const revalidateTimeForCache = 0;
-const revalidateTimeForCacheSlow = 86400;
+// const revalidateTimeForCacheSlow = 86400;
+const revalidateTimeForCacheSlow = 604800; // 7 gün (86400 * 7)
 
 // Global önbellek değişkenleri
 let cachedData = new Map();
-const CACHE_DURATION = 86400 * 1000; // 1 gün (milisaniye cinsinden)
+// const CACHE_DURATION = 86400 * 1000; // 1 gün (milisaniye cinsinden)
+const CACHE_DURATION = 7 * 86400 * 1000; // 7 gün (milisaniye cinsinden)
 
 export async function generateMetadata(
   { params, searchParams }: any,
@@ -126,7 +128,7 @@ export default async function Home({ searchParams }) {
 
   // Önbellek temizliği (isteğe bağlı)
   // 100'den fazla önbellek varsa en eski olanları temizle
-  if (cachedData.size > 100) {
+  if (cachedData.size > 500) {
     const oldestKey = Array.from(cachedData.entries()).sort(
       ([, a], [, b]) => a.timestamp - b.timestamp
     )[0][0];
