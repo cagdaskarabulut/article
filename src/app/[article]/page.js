@@ -3,11 +3,8 @@ import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopBu
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 import Ads from "../../components/mainComponents/Ads";
 
-// ✅ DEĞIŞIKLIK 1: Cache süresini uzat
+//export const revalidate = 86400; // ISR için 24 saat
 export const revalidate = 604800; // 7 gün (86400 yerine)
-
-// ✅ DEĞIŞIKLIK 2: Yeni URL'ler için fallback aktif
-export const dynamicParams = true;
 
 // API'den makale verisi çeken yardımcı fonksiyon
 async function getArticle(article) {
@@ -23,41 +20,32 @@ async function getArticle(article) {
   }
 }
 
-// ✅ DEĞIŞIKLIK 3: Bu fonksiyonu tamamen değiştir
-// API'den popüler makale URL'lerini çeken yardımcı fonksiyon
-async function getPopularArticles() {
+// API'den tüm makale URL'lerini çeken yardımcı fonksiyon
+async function getAllArticles() {
   try {
-    // Eğer böyle bir endpoint yoksa, sadece boş array döndür
-    const res = await fetch(
-      `${process.env.URL}/api/article/popular_articles?limit=50`
-    );
+    const res = await fetch(`${process.env.URL}/api/article/list_all_url`);
     if (!res.ok) {
-      console.log(
-        "Popüler makaleler API'si bulunamadı, boş array döndürülüyor"
-      );
-      return [];
+      throw new Error(`API Hatası: ${res.statusText}`);
     }
     const data = await res.json();
-    return data.articles.map((row) => ({ article: row.url }));
+    return data.article_url_list.rows.map((row) => ({ article: row.url }));
   } catch (error) {
-    console.error("getPopularArticles Hatası:", error);
-    return []; // ✅ Hata olursa boş array döndür
+    console.error("getAllArticles Hatası:", error);
+    return [];
   }
 }
 
-// ✅ DEĞIŞIKLIK 4: generateStaticParams'ı güvenli hale getir
 export async function generateStaticParams() {
   try {
-    const articles = await getPopularArticles();
-    console.log(`Build'de ${articles.length} makale oluşturulacak`);
-    return articles;
+    const articles = await getAllArticles();
+    return articles; // Örneğin: [{ article: "slug1" }, { article: "slug2" }]
   } catch (error) {
     console.error("Build hatası:", error);
     return []; // ✅ Hata olursa boş array, deploy başarısız olmasın
   }
 }
 
-// Metadata oluşturma (AYNI KALDI)
+// Metadata oluşturma
 export async function generateMetadata({ params }) {
   const { article } = params;
   try {
@@ -123,7 +111,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-// Sayfa bileşeni (AYNI KALDI)
+// Sayfa bileşeni
 export default async function ArticlePage({ params }) {
   const { article } = params;
 
