@@ -24,11 +24,15 @@ async function getArticle(article) {
 async function getAllArticles() {
   try {
     const res = await fetch(`${process.env.URL}/api/article/list_all_url`);
-    if (!res.ok) {
-      throw new Error(`API Hatası: ${res.statusText}`);
-    }
+    if (!res.ok) throw new Error(`API Hatası: ${res.statusText}`);
+
     const data = await res.json();
-    return data.article_url_list.rows.map((row) => ({ article: row.url }));
+
+    return (
+      data?.article_url_list?.rows?.map((row) => ({
+        article: row.url,
+      })) ?? []
+    );
   } catch (error) {
     console.error("getAllArticles Hatası:", error);
     return [];
