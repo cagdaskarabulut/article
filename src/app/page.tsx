@@ -22,13 +22,11 @@ import FullScreenVideo from "../components/pageComponents/FullScreenVideo";
 import FloatingButtons from "../components/pageComponents/FloatingButtons";
 import { Metadata, ResolvingMetadata } from "next";
 
-const revalidateTimeForCache = 0;
-// const revalidateTimeForCacheSlow = 86400;
+const revalidateTimeForCache = 3600; // 1 saat
 const revalidateTimeForCacheSlow = 604800; // 7 gün (86400 * 7)
 
 // Global önbellek değişkenleri
 let cachedData = new Map();
-// const CACHE_DURATION = 86400 * 1000; // 1 gün (milisaniye cinsinden)
 const CACHE_DURATION = 7 * 86400 * 1000; // 7 gün (milisaniye cinsinden)
 
 export async function generateMetadata(
