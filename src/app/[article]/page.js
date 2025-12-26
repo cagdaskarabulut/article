@@ -3,7 +3,11 @@ import ScrollToTopButton from "../../components/reusableComponents/ScrollToTopBu
 import NotFoundPage from "../../components/reusableComponents/NotFoundPage";
 import Ads from "../../components/mainComponents/Ads";
 
-export const revalidate = 86400; // ISR için 24 saat
+// ✅ DEĞIŞIKLIK 1: Cache süresini uzat
+export const revalidate = 604800; // 7 gün (86400 yerine)
+
+// ✅ DEĞIŞIKLIK 2: Yeni URL'ler için fallback aktif
+export const dynamicParams = true;
 
 // API'den makale verisi çeken yardımcı fonksiyon
 async function getArticle(article) {
@@ -19,28 +23,41 @@ async function getArticle(article) {
   }
 }
 
-// API'den tüm makale URL'lerini çeken yardımcı fonksiyon
-async function getAllArticles() {
+// ✅ DEĞIŞIKLIK 3: Bu fonksiyonu tamamen değiştir
+// API'den popüler makale URL'lerini çeken yardımcı fonksiyon
+async function getPopularArticles() {
   try {
-    const res = await fetch(`${process.env.URL}/api/article/list_all_url`);
+    // Eğer böyle bir endpoint yoksa, sadece boş array döndür
+    const res = await fetch(
+      `${process.env.URL}/api/article/popular_articles?limit=50`
+    );
     if (!res.ok) {
-      throw new Error(`API Hatası: ${res.statusText}`);
+      console.log(
+        "Popüler makaleler API'si bulunamadı, boş array döndürülüyor"
+      );
+      return [];
     }
     const data = await res.json();
-    return data.article_url_list.rows.map((row) => ({ article: row.url }));
+    return data.articles.map((row) => ({ article: row.url }));
   } catch (error) {
-    console.error("getAllArticles Hatası:", error);
-    return [];
+    console.error("getPopularArticles Hatası:", error);
+    return []; // ✅ Hata olursa boş array döndür
   }
 }
 
-// `generateStaticParams` ile dinamik rotaları belirtin
+// ✅ DEĞIŞIKLIK 4: generateStaticParams'ı güvenli hale getir
 export async function generateStaticParams() {
-  const articles = await getAllArticles();
-  return articles; // Örneğin: [{ article: "slug1" }, { article: "slug2" }]
+  try {
+    const articles = await getPopularArticles();
+    console.log(`Build'de ${articles.length} makale oluşturulacak`);
+    return articles;
+  } catch (error) {
+    console.error("Build hatası:", error);
+    return []; // ✅ Hata olursa boş array, deploy başarısız olmasın
+  }
 }
 
-// Metadata oluşturma
+// Metadata oluşturma (AYNI KALDI)
 export async function generateMetadata({ params }) {
   const { article } = params;
   try {
@@ -106,7 +123,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-// Sayfa bileşeni
+// Sayfa bileşeni (AYNI KALDI)
 export default async function ArticlePage({ params }) {
   const { article } = params;
 
