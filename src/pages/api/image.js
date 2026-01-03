@@ -4,7 +4,7 @@ const OpenAI = require("openai");
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const config = {
-  maxDuration: 200,
+  maxDuration: 60, // Vercel hobby plan limit
 };
 
 export default async function handler(req, res) {
